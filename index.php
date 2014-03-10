@@ -1,6 +1,7 @@
+
 <?php
 /**
- * 
+ * Coucou ça marche
  * Page d'index de Diapazen
  * 
  * @package     Diapazen
