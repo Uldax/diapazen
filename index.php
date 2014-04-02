@@ -3,6 +3,7 @@
 /**
  * Coucou ça marche
  * Page d'index de Diapazen
+ * Lancement du projet
  * 
  * @package     Diapazen
  * @copyright   Copyright (c) 2013, ISEN-Toulon

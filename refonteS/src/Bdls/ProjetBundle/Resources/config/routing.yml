@@ -1,0 +1,15 @@
+bdls_projet_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: BdlsProjetBundle:Default:index }
+    
+bdls_projet_index:
+    pattern: /home
+    defaults: { _controller: BdlsProjetBundle:Index:index }
+
+bdls_projet_dashboard:
+    pattern: /dash
+    defaults: { _controller: BdlsProjetBundle:Dashboard:index }
+    
+bdls_projet_about:
+    pattern: /about
+    defaults: { _controller: BdlsProjetBundle:About:index }
