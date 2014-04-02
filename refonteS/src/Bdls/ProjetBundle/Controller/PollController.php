@@ -45,7 +45,7 @@ class PollController extends Controller
     * @param type $params null par défaut
     *
     */
-	public function index($params = null)
+	public function indexAction($params = null)
 	{
 		$this->create($params);
 	}

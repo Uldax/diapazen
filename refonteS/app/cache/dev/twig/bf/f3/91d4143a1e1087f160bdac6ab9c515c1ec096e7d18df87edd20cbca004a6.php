@@ -20,7 +20,7 @@ class __TwigTemplate_bff391d4143a1e1087f160bdac6ab9c515c1ec096e7d18df87edd20cbca
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<?php
+        echo "<!--<?php
 /**
  * Page d'accueil du site
  * 
@@ -55,7 +55,7 @@ class __TwigTemplate_bff391d4143a1e1087f160bdac6ab9c515c1ec096e7d18df87edd20cbca
 ?>
         
 
-<?php \$this->getFooter(); ?>
+<?php \$this->getFooter(); ?>-->
 
 <!DOCTYPE html>
 <html>
@@ -124,10 +124,10 @@ class __TwigTemplate_bff391d4143a1e1087f160bdac6ab9c515c1ec096e7d18df87edd20cbca
 
 \t\t\t\t<article class=\"use_description\" >
 \t\t\t\t\t<div class=\"icon_article\" id=\"img_un\">
-\t\t\t\t\t\t<!--<img class=\"img_un\" src=\"";
+\t\t\t\t\t\t<img class=\"img_un\" src=\"";
         // line 58
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/images/pictures/sprites_140x140.png"), "html", null, true);
-        echo "\" alt=\"1\">-->
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/images/pictures/1_140x140.png"), "html", null, true);
+        echo "\" alt=\"1\">
 \t\t\t\t\t</div>
 
 \t\t\t\t\t<div class=\"text_article\">
@@ -137,7 +137,10 @@ class __TwigTemplate_bff391d4143a1e1087f160bdac6ab9c515c1ec096e7d18df87edd20cbca
 \t\t\t\t</article>
 \t\t\t\t<article class=\"use_description\">
 \t\t\t\t\t<div class=\"icon_article\" id=\"img_deux\">
-\t\t\t\t\t\t<!-- <img class=\"img_deux\" src=\"../media/pictures/sprites_140x140.png\" alt=\"2\"> -->
+\t\t\t\t\t\t<img class=\"img_deux\" src=\"";
+        // line 68
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/images/pictures/2_140x140.png"), "html", null, true);
+        echo "\" alt=\"2\">
 \t\t\t\t\t</div>
 \t\t\t\t\t<div class=\"text_article\">
 \t\t\t\t\t\t<h2 class=\"big_title\">Ajoutez des propositions</h2>
@@ -147,7 +150,10 @@ class __TwigTemplate_bff391d4143a1e1087f160bdac6ab9c515c1ec096e7d18df87edd20cbca
 \t\t\t\t\t<a id=\"create_survey\" class=\"orange_big_button\" href=\"poll/create\">C'est parti !</a>
 \t\t\t\t<article class=\"use_description\">
 \t\t\t\t\t<div class=\"icon_article\" id=\"img_trois\">
-\t\t\t\t\t\t<!-- <img class=\"img_trois\" src=\"../media/pictures/sprites_140x140.png\" alt=\"3\"> -->
+\t\t\t\t\t\t<img class=\"img_trois\" src=\"";
+        // line 78
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/images/pictures/3_140x140.png"), "html", null, true);
+        echo "\" alt=\"3\">
 \t\t\t\t\t</div>
 \t\t\t\t\t<div class=\"text_article\">
 \t\t\t\t\t\t<h2 class=\"big_title\">Partagez-le !</h2>
@@ -177,6 +183,6 @@ class __TwigTemplate_bff391d4143a1e1087f160bdac6ab9c515c1ec096e7d18df87edd20cbca
 
     public function getDebugInfo()
     {
-        return array (  164 => 89,  129 => 58,  123 => 54,  120 => 53,  114 => 47,  110 => 46,  106 => 45,  101 => 44,  98 => 43,  92 => 42,  85 => 90,  82 => 89,  80 => 53,  72 => 49,  70 => 43,  66 => 42,  23 => 1,);
+        return array (  170 => 89,  155 => 78,  142 => 68,  129 => 58,  123 => 54,  120 => 53,  114 => 47,  110 => 46,  106 => 45,  101 => 44,  98 => 43,  92 => 42,  85 => 90,  82 => 89,  80 => 53,  72 => 49,  70 => 43,  66 => 42,  23 => 1,);
     }
 }

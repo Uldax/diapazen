@@ -10,6 +10,10 @@ class __TwigTemplate_9052727938a8eabf9d77ac541c71be824789df60d893761babb13bfff70
         $this->parent = false;
 
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
+            'stylesheets' => array($this, 'block_stylesheets'),
+            'body' => array($this, 'block_body'),
+            'javascripts' => array($this, 'block_javascripts'),
         );
     }
 
@@ -47,8 +51,74 @@ class __TwigTemplate_9052727938a8eabf9d77ac541c71be824789df60d893761babb13bfff70
 ?>
 
 <?php \$this->getHeader(); ?>
+<!DOCTYPE html>
+<html>
+\t<head>
+\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />
+\t\t<title>";
+        // line 36
+        $this->displayBlock('title', $context, $blocks);
+        echo "</title>
+\t\t";
+        // line 37
+        $this->displayBlock('stylesheets', $context, $blocks);
+        // line 43
+        echo "\t\t<!--<link rel=\"shortcut icon\" href=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("favicon.ico"), "html", null, true);
+        echo "\" />-->
+\t</head>
+\t
+\t<body>
+\t\t";
+        // line 47
+        $this->displayBlock('body', $context, $blocks);
+        // line 111
+        echo "\t\t";
+        $this->displayBlock('javascripts', $context, $blocks);
+        // line 112
+        echo "\t</body>
+\t
+</html>        
         
-        <div id=\"content\" class=\"about\">
+
+
+<?php \$this->getFooter(); ?>
+";
+    }
+
+    // line 36
+    public function block_title($context, array $blocks = array())
+    {
+        echo twig_escape_filter($this->env, $this->getContext($context, "title"), "html", null, true);
+    }
+
+    // line 37
+    public function block_stylesheets($context, array $blocks = array())
+    {
+        // line 38
+        echo "\t\t\t<link rel=\"stylesheet\" href=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/css/style.css"), "html", null, true);
+        echo "\" type=\"text/css\" media=\"all\" />
+\t\t\t<link rel=\"stylesheet\" href=\"";
+        // line 39
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/css/Aristo.css"), "html", null, true);
+        echo "\" type=\"text/css\" media=\"all\" />
+\t\t\t<link rel=\"stylesheet\" href=\"";
+        // line 40
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/css/diapazen.css"), "html", null, true);
+        echo "\" type=\"text/css\" media=\"all\" />
+\t\t\t<link rel=\"stylesheet\" href=\"";
+        // line 41
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/css/orangeSoberKit.css"), "html", null, true);
+        echo "\" type=\"text/css\" media=\"all\" />
+\t\t";
+    }
+
+    // line 47
+    public function block_body($context, array $blocks = array())
+    {
+        // line 48
+        echo "\t\t\t<div id=\"content\" class=\"about\">
          
             <p class=\"big_title\">À propos de Diapazen</p>
             <br>
@@ -110,10 +180,12 @@ class __TwigTemplate_9052727938a8eabf9d77ac541c71be824789df60d893761babb13bfff70
             </p>
         
         </div>
+\t\t";
+    }
 
-
-<?php \$this->getFooter(); ?>
-";
+    // line 111
+    public function block_javascripts($context, array $blocks = array())
+    {
     }
 
     public function getTemplateName()
@@ -121,8 +193,13 @@ class __TwigTemplate_9052727938a8eabf9d77ac541c71be824789df60d893761babb13bfff70
         return "BdlsProjetBundle:Default:about.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  19 => 1,);
+        return array (  187 => 111,  121 => 48,  118 => 47,  112 => 41,  108 => 40,  104 => 39,  99 => 38,  96 => 37,  90 => 36,  79 => 112,  76 => 111,  74 => 47,  66 => 43,  64 => 37,  60 => 36,  23 => 1,);
     }
 }

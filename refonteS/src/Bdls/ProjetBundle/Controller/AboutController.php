@@ -51,9 +51,9 @@ class AboutController extends Controller
 	{
 		// Titre de la page
 		//$this->set('title', 'À propos | Diapazen');
-		
+		$title='Accueil | Diapazen';
 		// Rendu
-		return $this->render('BdlsProjetBundle:Default:about.html.twig');
+		return $this->render('BdlsProjetBundle:Default:about.html.twig', array('title'=>$title));
 		//$this->render('about');
 		
 	}

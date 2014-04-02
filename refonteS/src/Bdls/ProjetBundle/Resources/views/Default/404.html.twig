@@ -30,15 +30,37 @@
 ?>
 
 <?php $this->getHeader(); ?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}{{ title }}{% endblock %}</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/style.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/Aristo.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/diapazen.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/orangeSoberKit.css') }}" type="text/css" media="all" />
+		{% endblock %}
+		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
+	</head>
+	
+	<body>
+		{% block body %}
+			<div id="content">
+				<img class="img_un" src="" alt="1">
+				<img id="broken_diapason" src="{{ asset('bundles/projet/images/pictures/diapason_broken.png') }}" alt="diapason broken" >
+				<div id="text_404">
+					<p class="big_title" >Erreur 404</p>
+					<p class="title" >La page demandée n'existe pas.</p>
+					<!--<a class="link" href="<?php $this->getHomeUrl(); ?>">Retour à la page d'accueil</a>-->
+				</div>
+			</div>
+		{% endblock %}
+		{% block javascripts %}{% endblock %}
+	</body>
+	
+</html>        
         
-        <div id="content">
-            <img id="broken_diapason" src="<?php $this->getPath('media/pictures/diapason_broken.png'); ?>" alt="diapason broken" >
-            <div id="text_404">
-            	<p class="big_title" >Erreur 404</p>
-            	<p class="title" >La page demandée n'existe pas.</p>
-            	<a class="link" href="<?php $this->getHomeUrl(); ?>">Retour à la page d'accueil</a>
-            </div>
-        </div>
 
 <?php $this->getFooter(); ?>
         

@@ -29,8 +29,23 @@
 ?>
 
 <?php $this->getHeader(); ?>
-        
-        <div id="content" class="about">
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}{{ title }}{% endblock %}</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/style.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/Aristo.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/diapazen.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/orangeSoberKit.css') }}" type="text/css" media="all" />
+		{% endblock %}
+		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
+	</head>
+	
+	<body>
+		{% block body %}
+			<div id="content" class="about">
          
             <p class="big_title">À propos de Diapazen</p>
             <br>
@@ -92,6 +107,12 @@
             </p>
         
         </div>
+		{% endblock %}
+		{% block javascripts %}{% endblock %}
+	</body>
+	
+</html>        
+        
 
 
 <?php $this->getFooter(); ?>
