@@ -23,9 +23,9 @@
  *
  */
 
-require_once 'system/Controller.class.php';
-require_once 'util/MailUtil.class.php';
-require_once 'util/TestForm.class.php';
+namespace Bdls\ProjetBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * PollController
@@ -45,6 +45,16 @@ class PollController extends Controller
     * @param type $params null par défaut
     *
     */
+	public function isUserConnected()
+	{
+		return (isset($_SESSION['connected']) && $_SESSION['connected'] == true) ? true : false;
+	}
+	
+	protected function set($key, $value)
+	{
+		$this->mVars[$key] = $value;
+	}
+	
 	public function indexAction($params = null)
 	{
 		$this->create($params);
@@ -83,9 +93,9 @@ class PollController extends Controller
 		}
 		
 		/* temporaire, ensuite on mettra le titre de la page*/
-		$this->set('title', 'Création d\'un sondage | Diapazen');
+		$title='Création d\'un sondage | Diapazen';
 		// On fait le rendu
-		$this->render('pollCreation');
+		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title));
 	}
 
 

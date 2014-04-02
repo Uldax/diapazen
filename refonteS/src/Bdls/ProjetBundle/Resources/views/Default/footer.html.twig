@@ -1,4 +1,4 @@
-<?php
+<!--<?php
 /**
  * Footer des pages du site
  * 
@@ -26,17 +26,17 @@
 	// fixe un bug de la documentation
 	namespace ns;
 	// fixe un bug de la documentation
-?>
+?>-->
 
 		</div>
 		<footer>
 		    <ul>
-		        <li><a class="link" href="<?php $this->getHomeUrl(); ?>">Accueil</a></li>
-		        <li><a class="link" href="<?php $this->getHomeUrl(); ?>/about">À propos</a></li>
+		        <li><a class="link" href="{{ path('bdls_projet_index') }}">Accueil</a></li>
+				<li><a class="link" href="{{ path('bdls_projet_about') }}">À propos</a></li>
 		        <!-- <li><a class="link" href="#">Contact</a></li> -->
 		    </ul>
-		    <p class="text">© <?php echo date('Y'); ?> Diapazen</p>
-		    <img id="logo_isen" src="<?php $this->getPath('media/pictures/logo_isen.png'); ?>" alt="ISEN Toulon">
+		    <!--<p class="text">© <?php echo date('Y'); ?> Diapazen</p>
+		    <img id="logo_isen" src="<?php $this->getPath('media/pictures/logo_isen.png'); ?>" alt="ISEN Toulon">-->
 		</footer>
 
     </body>

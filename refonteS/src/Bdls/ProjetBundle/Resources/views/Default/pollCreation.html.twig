@@ -1,4 +1,4 @@
-<?php
+<!--<?php
 /**
  * Page de création d'un sondage
  * 
@@ -26,10 +26,8 @@
     // fixe un bug de la documentation
     namespace ns;
     // fixe un bug de la documentation
-?>
-
-<?php $this->getHeader(); ?>
-
+?>-->
+{% include 'BdlsProjetBundle:Default:header.html.twig' %}
         <div id="content">
             <?php $this->getAriadneThread(); ?>
             <form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
@@ -67,5 +65,5 @@
         <script src="<?php $this->getPath('js/jquery-ui-1.10.3.custom.js'); ?>"></script>
         <script>datepickerLoader();</script>
          
-<?php $this->getFooter(); ?>
+{% include 'BdlsProjetBundle:Default:footer.html.twig' %}
 

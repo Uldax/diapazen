@@ -1,4 +1,4 @@
-<?php
+<!--<?php
 /**
  * Page de récupération du mot de passe
  * 
@@ -26,9 +26,8 @@
     // fixe un bug de la documentation
     namespace ns;
     // fixe un bug de la documentation
-?>
-
-<?php $this->getHeader(); ?>
+?>-->
+{% include 'BdlsProjetBundle:Default:header.html.twig' %}
         
         <div id="content">
             <?php
@@ -53,4 +52,4 @@
             </form>
         </div>
 
-<?php $this->getFooter(); ?>
+{% include 'BdlsProjetBundle:Default:footer.html.twig' %}

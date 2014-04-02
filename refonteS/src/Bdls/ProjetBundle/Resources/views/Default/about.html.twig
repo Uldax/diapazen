@@ -1,4 +1,4 @@
-<?php
+<!--<?php
 /**
  * Page À propos
  * 
@@ -26,24 +26,10 @@
 	// fixe un bug de la documentation
 	namespace ns;
 	// fixe un bug de la documentation
-?>
+?>-->
 
-<?php $this->getHeader(); ?>
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>{% block title %}{{ title }}{% endblock %}</title>
-		{% block stylesheets %}
-			<link rel="stylesheet" href="{{ asset('bundles/projet/css/style.css') }}" type="text/css" media="all" />
-			<link rel="stylesheet" href="{{ asset('bundles/projet/css/Aristo.css') }}" type="text/css" media="all" />
-			<link rel="stylesheet" href="{{ asset('bundles/projet/css/diapazen.css') }}" type="text/css" media="all" />
-			<link rel="stylesheet" href="{{ asset('bundles/projet/css/orangeSoberKit.css') }}" type="text/css" media="all" />
-		{% endblock %}
-		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
-	</head>
-	
-	<body>
+	{% include 'BdlsProjetBundle:Default:header.html.twig' %}
 		{% block body %}
 			<div id="content" class="about">
          
@@ -109,10 +95,5 @@
         </div>
 		{% endblock %}
 		{% block javascripts %}{% endblock %}
-	</body>
-	
-</html>        
+	{% include 'BdlsProjetBundle:Default:footer.html.twig' %}       
         
-
-
-<?php $this->getFooter(); ?>

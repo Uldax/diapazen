@@ -36,7 +36,12 @@ class IndexController extends Controller
 			return $this->render('BdlsProjetBundle:Default:home.html.twig', array('title'=>$title));
 			//$this->render('home');
 		}
-		
+	}
+	
+	public function forgotAction()
+	{
+		$title='Accueil | Diapazen';
+		return $this->render('BdlsProjetBundle:Default:forgot.html.twig', array('title'=>$title));
 	}
 }
 

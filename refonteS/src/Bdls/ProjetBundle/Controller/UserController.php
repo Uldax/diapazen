@@ -22,7 +22,9 @@
  *
  */
 
-require_once 'system/Controller.class.php';
+namespace Bdls\ProjetBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * UserController

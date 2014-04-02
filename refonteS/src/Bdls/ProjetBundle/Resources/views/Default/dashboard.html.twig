@@ -27,9 +27,7 @@
     namespace ns;
     // fixe un bug de la documentation
 ?>
-
-<?php $this->getHeader(); ?>
-
+{% include 'BdlsProjetBundle:Default:header.html.twig' %}
         <div id="content">
             
                 <a href="<?php $this->getHomeUrl(); ?>/poll/create" id="new_poll" class="orange_button">Créer un nouvel évènement</a>
@@ -116,5 +114,4 @@
             </div>
         </div>
         
-
-<?php $this->getFooter(); ?>
+{% include 'BdlsProjetBundle:Default:footer.html.twig' %}
