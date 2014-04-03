@@ -35,8 +35,7 @@
 
 <?php $this->getFooter(); ?>-->
 
-<!DOCTYPE html>	
-	{% include 'BdlsProjetBundle:Default:header.html.twig' %}
+{% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
 		{% block body %}
 			<div id="content">
 
@@ -71,7 +70,5 @@
 				</article>
 
 				<!-- <p id="asterisk" class="bold">*Créer un sondage nécessite une inscription, celle-ci peut se faire en même temps que la création de votre sondage</p> -->
-
 		{% endblock %}
-{% include 'BdlsProjetBundle:Default:footer.html.twig' %}
 

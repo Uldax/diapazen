@@ -13,3 +13,15 @@ bdls_projet_dashboard:
 bdls_projet_about:
     pattern: /about
     defaults: { _controller: BdlsProjetBundle:About:index }
+    
+bdls_projet_forgot:
+    pattern: /forgot
+    defaults: { _controller: BdlsProjetBundle:Index:forgot }
+    
+bdls_projet_creation:
+    pattern: /creation
+    defaults: { _controller: BdlsProjetBundle:Poll:create }
+    
+bdls_projet_login:
+    pattern: /log
+    defaults: { _controller: BdlsProjetBundle:User:login }

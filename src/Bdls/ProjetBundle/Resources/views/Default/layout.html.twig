@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}{{ title }}{% endblock %}</title>
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/style.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/Aristo.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/diapazen.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/orangeSoberKit.css') }}" type="text/css" media="all" />
+		{% endblock %}
+		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
+	</head>
+        <!-- jQuery 1.9-->
+		{% block javascripts %}
+        <script src="<?php $this->getPath('js/jquery.js'); ?>"> </script>
+        <script src="<?php $this->getPath('js/formCheck.js'); ?>"> </script>
+		{% endblock %}
+    <body>
+
+		<header>
+			<div id="header_content">
+				<!--<a href="{{ path('bdls_projet_index') }}>-->
+			    	<img id="logo" src="{{ asset('bundles/projet/images/pictures/diapazen_v2.png') }}" alt="Diapazen">
+				<!--</a>-->
+
+				<!--<?php if (!$this->isUserConnected()){ ?>-->
+					<div id="connect_box" >
+				    	<form action="{{ path('bdls_projet_login') }}" method="post">
+				        	<input id="mail_connect" name="email" class="small_text_edit" type="mail" placeholder="E-mail">
+				        	<input id="password_connect" name="password" class="small_text_edit" type="password" placeholder="Mot de passe">
+				        	<input class ="orange_small_button" type="submit" value="Connexion">
+						</form>
+						<a class="small_link" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a> 
+					</div>
+				<!--<?php } else { ?>
+						<div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="<?php $this->getHomeUrl();?>/user/profile"><span class="orange_text"><?php echo $this->getUserInfo('firstname').' '.$this->getUserInfo('lastname').' '; ?></span></a></p><a class="link" href="<?php $this->getHomeUrl(); ?>/user/logout">Se déconnecter</a></div>
+				<?php } ?>-->
+				
+			</div>
+		</header>
+		{% block body %}
+		{% endblock %}
+		<!--<div class="white_bg">-->
+		{% block footer %}
+		<footer>
+		    <ul>
+		        <li><a class="link" href="{{ path('bdls_projet_index') }}">Accueil</a></li>
+				<li><a class="link" href="{{ path('bdls_projet_about') }}">À propos</a></li>
+		        <!-- <li><a class="link" href="#">Contact</a></li> -->
+		    </ul>
+		    <!--<p class="text">© <?php echo date('Y'); ?> Diapazen</p>
+		    <img id="logo_isen" src="<?php $this->getPath('media/pictures/logo_isen.png'); ?>" alt="ISEN Toulon">-->
+		</footer>
+		{% endblock %}
+    </body>
+
+</html>

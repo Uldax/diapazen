@@ -138,7 +138,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         if (0 === strpos($pathinfo, '/h')) {
             // bdls_projet_homepage
             if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bdls_projet_homepage')), array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\DefaultController::indexAction',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bdls_projet_homepage')), array (  '_controller' => 'BdlsProjetBundle:Default:index',));
             }
 
             // bdls_projet_index
@@ -156,6 +156,21 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // bdls_projet_about
         if ($pathinfo === '/about') {
             return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\AboutController::indexAction',  '_route' => 'bdls_projet_about',);
+        }
+
+        // bdls_projet_forgot
+        if ($pathinfo === '/forgot') {
+            return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\IndexController::forgotAction',  '_route' => 'bdls_projet_forgot',);
+        }
+
+        // bdls_projet_creation
+        if ($pathinfo === '/creation') {
+            return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\PollController::createAction',  '_route' => 'bdls_projet_creation',);
+        }
+
+        // bdls_projet_login
+        if ($pathinfo === '/log') {
+            return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\UserController::loginAction',  '_route' => 'bdls_projet_login',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
