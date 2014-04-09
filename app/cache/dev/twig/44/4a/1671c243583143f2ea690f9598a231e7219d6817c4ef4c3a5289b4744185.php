@@ -12,9 +12,9 @@ class __TwigTemplate_444a1671c243583143f2ea690f9598a231e7219d6817c4ef4c3a5289b47
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'stylesheets' => array($this, 'block_stylesheets'),
-            'javascripts' => array($this, 'block_javascripts'),
             'body' => array($this, 'block_body'),
             'footer' => array($this, 'block_footer'),
+            'javascripts' => array($this, 'block_javascripts'),
         );
     }
 
@@ -37,21 +37,16 @@ class __TwigTemplate_444a1671c243583143f2ea690f9598a231e7219d6817c4ef4c3a5289b47
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("favicon.ico"), "html", null, true);
         echo "\" />-->
 \t</head>
-        <!-- jQuery 1.9-->
-\t\t";
-        // line 15
-        $this->displayBlock('javascripts', $context, $blocks);
-        // line 19
-        echo "    <body>
+    <body>
 
 \t\t<header>
 \t\t\t<div id=\"header_content\">
 \t\t\t\t<!--<a href=\"";
-        // line 23
+        // line 18
         echo $this->env->getExtension('routing')->getPath("bdls_projet_index");
         echo ">-->
 \t\t\t    \t<img id=\"logo\" src=\"";
-        // line 24
+        // line 19
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/images/pictures/diapazen_v2.png"), "html", null, true);
         echo "\" alt=\"Diapazen\">
 \t\t\t\t<!--</a>-->
@@ -59,7 +54,7 @@ class __TwigTemplate_444a1671c243583143f2ea690f9598a231e7219d6817c4ef4c3a5289b47
 \t\t\t\t<!--<?php if (!\$this->isUserConnected()){ ?>-->
 \t\t\t\t\t<div id=\"connect_box\" >
 \t\t\t\t    \t<form action=\"";
-        // line 29
+        // line 24
         echo $this->env->getExtension('routing')->getPath("bdls_projet_login");
         echo "\" method=\"post\">
 \t\t\t\t        \t<input id=\"mail_connect\" name=\"email\" class=\"small_text_edit\" type=\"mail\" placeholder=\"E-mail\">
@@ -67,7 +62,7 @@ class __TwigTemplate_444a1671c243583143f2ea690f9598a231e7219d6817c4ef4c3a5289b47
 \t\t\t\t        \t<input class =\"orange_small_button\" type=\"submit\" value=\"Connexion\">
 \t\t\t\t\t\t</form>
 \t\t\t\t\t\t<a class=\"small_link\" href=\"";
-        // line 34
+        // line 29
         echo $this->env->getExtension('routing')->getPath("bdls_projet_forgot");
         echo "\" >Mot de passe oublié ?</a> 
 \t\t\t\t\t</div>
@@ -78,14 +73,17 @@ class __TwigTemplate_444a1671c243583143f2ea690f9598a231e7219d6817c4ef4c3a5289b47
 \t\t\t</div>
 \t\t</header>
 \t\t";
-        // line 42
+        // line 37
         $this->displayBlock('body', $context, $blocks);
-        // line 44
+        // line 39
         echo "\t\t<!--<div class=\"white_bg\">-->
 \t\t";
-        // line 45
+        // line 40
         $this->displayBlock('footer', $context, $blocks);
-        // line 56
+        // line 51
+        echo "\t\t";
+        $this->displayBlock('javascripts', $context, $blocks);
+        // line 55
         echo "    </body>
 
 </html>";
@@ -119,34 +117,25 @@ class __TwigTemplate_444a1671c243583143f2ea690f9598a231e7219d6817c4ef4c3a5289b47
 \t\t";
     }
 
-    // line 15
-    public function block_javascripts($context, array $blocks = array())
-    {
-        // line 16
-        echo "        <script src=\"<?php \$this->getPath('js/jquery.js'); ?>\"> </script>
-        <script src=\"<?php \$this->getPath('js/formCheck.js'); ?>\"> </script>
-\t\t";
-    }
-
-    // line 42
+    // line 37
     public function block_body($context, array $blocks = array())
     {
-        // line 43
+        // line 38
         echo "\t\t";
     }
 
-    // line 45
+    // line 40
     public function block_footer($context, array $blocks = array())
     {
-        // line 46
+        // line 41
         echo "\t\t<footer>
 \t\t    <ul>
 \t\t        <li><a class=\"link\" href=\"";
-        // line 48
+        // line 43
         echo $this->env->getExtension('routing')->getPath("bdls_projet_index");
         echo "\">Accueil</a></li>
 \t\t\t\t<li><a class=\"link\" href=\"";
-        // line 49
+        // line 44
         echo $this->env->getExtension('routing')->getPath("bdls_projet_about");
         echo "\">À propos</a></li>
 \t\t        <!-- <li><a class=\"link\" href=\"#\">Contact</a></li> -->
@@ -154,6 +143,20 @@ class __TwigTemplate_444a1671c243583143f2ea690f9598a231e7219d6817c4ef4c3a5289b47
 \t\t    <!--<p class=\"text\">© <?php echo date('Y'); ?> Diapazen</p>
 \t\t    <img id=\"logo_isen\" src=\"<?php \$this->getPath('media/pictures/logo_isen.png'); ?>\" alt=\"ISEN Toulon\">-->
 \t\t</footer>
+\t\t";
+    }
+
+    // line 51
+    public function block_javascripts($context, array $blocks = array())
+    {
+        // line 52
+        echo "            <script src=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/script.js"), "html", null, true);
+        echo "\" type=\"text/javascript\"></script>
+\t\t\t<script src=\"";
+        // line 53
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/jquery-ui-1.10.3.custom.js"), "html", null, true);
+        echo "\" type=\"text/javascript\"></script>
 \t\t";
     }
 
@@ -169,6 +172,6 @@ class __TwigTemplate_444a1671c243583143f2ea690f9598a231e7219d6817c4ef4c3a5289b47
 
     public function getDebugInfo()
     {
-        return array (  150 => 49,  146 => 48,  142 => 46,  139 => 45,  135 => 43,  132 => 42,  126 => 16,  123 => 15,  117 => 10,  113 => 9,  109 => 8,  104 => 7,  101 => 6,  95 => 5,  89 => 56,  87 => 45,  84 => 44,  82 => 42,  71 => 34,  63 => 29,  55 => 24,  51 => 23,  45 => 19,  43 => 15,  36 => 12,  34 => 6,  30 => 5,  24 => 1,);
+        return array (  158 => 53,  153 => 52,  150 => 51,  139 => 44,  135 => 43,  131 => 41,  128 => 40,  124 => 38,  121 => 37,  115 => 10,  111 => 9,  107 => 8,  102 => 7,  99 => 6,  93 => 5,  87 => 55,  84 => 51,  82 => 40,  79 => 39,  77 => 37,  66 => 29,  58 => 24,  50 => 19,  46 => 18,  36 => 12,  34 => 6,  30 => 5,  24 => 1,);
     }
 }

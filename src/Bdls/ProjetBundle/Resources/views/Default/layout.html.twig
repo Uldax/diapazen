@@ -11,11 +11,6 @@
 		{% endblock %}
 		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
 	</head>
-        <!-- jQuery 1.9-->
-		{% block javascripts %}
-        <script src="<?php $this->getPath('js/jquery.js'); ?>"> </script>
-        <script src="<?php $this->getPath('js/formCheck.js'); ?>"> </script>
-		{% endblock %}
     <body>
 
 		<header>
@@ -52,6 +47,10 @@
 		    <!--<p class="text">© <?php echo date('Y'); ?> Diapazen</p>
 		    <img id="logo_isen" src="<?php $this->getPath('media/pictures/logo_isen.png'); ?>" alt="ISEN Toulon">-->
 		</footer>
+		{% endblock %}
+		{% block javascripts %}
+            <script src="{{ asset('bundles/projet/js/script.js') }}" type="text/javascript"></script>
+			<script src="{{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js') }}" type="text/javascript"></script>
 		{% endblock %}
     </body>
 

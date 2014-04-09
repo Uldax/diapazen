@@ -29,69 +29,69 @@ class __TwigTemplate_9052727938a8eabf9d77ac541c71be824789df60d893761babb13bfff70
     public function block_body($context, array $blocks = array())
     {
         // line 4
-        echo "\t\t\t<div id=\"content\" class=\"about\">
-         
-            <p class=\"big_title\">À propos de Diapazen</p>
-            <br>
-            <p class=\"title\">Présentation</p>
-            <br>
-            <p class=\"text\">
-                Diapazen permet de planifier rapidement des événements avec ses collaborateurs.<br>
-            </p>
-            <p class=\"text\">C'est un service libre et gratuit réalisé par des étudiants de l'<a class=\"link\" target=\"_blank\" href=\"http://www.isen.fr/toulon.asp\">ISEN-Toulon</a>. Le code source est disponible sur <a class=\"link\" target=\"_blank\" href=\"http://github.com/diapazen/diapazen\">github.com/diapazen</a>.</p>
-            <br>
-            <p class=\"text\">
-                Diapazen utilise les technologies suivantes:<br>
-            </p>
-            <br>
-            <p class=\"text\">
-                <ul class=\"text\">
-                    <li>
-                        - PHP 5
-                    </li>
-                    <li>
-                        - MySQL
-                    </li>
-                    <li>
-                        - HTML5 / CSS3
-                    </li>
-                    <li>
-                        - jQuery 1.9.1
-                    </li>
-                </ul>
-            </p>
-            <br>
-            <br>
-            <p class=\"title\">Prérequis</p>
-            <br>
-            <p class=\"text\">
-                Un serveur web avec PHP 5.2 Recommandé: Apache2
-                Le module mod_rewrite de Apache, installé et activé
-                Une base de données MySQL avec phpMyAdmin
-            </p>
-            <br>
-            <p class=\"title\">Installation</p>
-            <br>
-            <p class=\"text\">
-                Importer le fichier diapazen.sql dans MySQL. La base de données sera créé automatiquement.
+        echo "\t<div id=\"content\" class=\"about\">
 
-                Ouvrir le fichier de configuration de Diapazen Config.class.php dans le dossier config
+\t<p class=\"big_title\">À propos de Diapazen</p>
+\t<br>
+\t<p class=\"title\">Présentation</p>
+\t<br>
+\t<p class=\"text\">
+\t\tDiapazen permet de planifier rapidement des événements avec ses collaborateurs.<br>
+\t</p>
+\t<p class=\"text\">C'est un service libre et gratuit réalisé par des étudiants de l'<a class=\"link\" target=\"_blank\" href=\"http://www.isen.fr/toulon.asp\">ISEN-Toulon</a>. Le code source est disponible sur <a class=\"link\" target=\"_blank\" href=\"http://github.com/diapazen/diapazen\">github.com/diapazen</a>.</p>
+\t<br>
+\t<p class=\"text\">
+\t\tDiapazen utilise les technologies suivantes:<br>
+\t</p>
+\t<br>
+\t<p class=\"text\">
+\t\t<ul class=\"text\">
+\t\t\t<li>
+\t\t\t\t- PHP 5
+\t\t\t</li>
+\t\t\t<li>
+\t\t\t\t- MySQL
+\t\t\t</li>
+\t\t\t<li>
+\t\t\t\t- HTML5 / CSS3
+\t\t\t</li>
+\t\t\t<li>
+\t\t\t\t- jQuery 1.9.1
+\t\t\t</li>
+\t\t</ul>
+\t</p>
+\t<br>
+\t<br>
+\t<p class=\"title\">Prérequis</p>
+\t<br>
+\t<p class=\"text\">
+\t\tUn serveur web avec PHP 5.2 Recommandé: Apache2
+\t\tLe module mod_rewrite de Apache, installé et activé
+\t\tUne base de données MySQL avec phpMyAdmin
+\t</p>
+\t<br>
+\t<p class=\"title\">Installation</p>
+\t<br>
+\t<p class=\"text\">
+\t\tImporter le fichier diapazen.sql dans MySQL. La base de données sera créé automatiquement.
 
-                Modifier les paramètres de connexion à la base de données
+\t\tOuvrir le fichier de configuration de Diapazen Config.class.php dans le dossier config
 
-                Configurer le serveur SMTP pour l'envoi d'emails
+\t\tModifier les paramètres de connexion à la base de données
 
-                Et c'est tout ! Créez un sondage pour commencer à utiliser Diapazen.
-            </p>
-            <br>
-            <p class=\"title\">Documentation</p>
-            <br>
-            <p class=\"text\">
-                La documentation technique est incluse dans le code source. Pour générer la documentation, vous devez installer phpDocumentator.
-            </p>
-        
-        </div>
-\t\t";
+\t\tConfigurer le serveur SMTP pour l'envoi d'emails
+
+\t\tEt c'est tout ! Créez un sondage pour commencer à utiliser Diapazen.
+\t</p>
+\t<br>
+\t<p class=\"title\">Documentation</p>
+\t<br>
+\t<p class=\"text\">
+\t\tLa documentation technique est incluse dans le code source. Pour générer la documentation, vous devez installer phpDocumentator.
+\t</p>
+
+</div>
+";
     }
 
     // line 67

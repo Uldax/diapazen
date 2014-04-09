@@ -86,7 +86,7 @@
   'BdlsProjetBundle:Default:forgot.html.twig' => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views/Default/forgot.html.twig',
   'BdlsProjetBundle:Default:header.html.twig' => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views/Default/header.html.twig',
   'BdlsProjetBundle:Default:home.html.twig' => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views/Default/home.html.twig',
-  'BdlsProjetBundle:Default:index.html.twig' => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views/Default/index.html.twig',
+  'BdlsProjetBundle:Default:layout.html.twig' => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views/Default/layout.html.twig',
   'BdlsProjetBundle:Default:login.html.twig' => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views/Default/login.html.twig',
   'BdlsProjetBundle:Default:personalData.html.twig' => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views/Default/personalData.html.twig',
   'BdlsProjetBundle:Default:pollConnection.html.twig' => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views/Default/pollConnection.html.twig',

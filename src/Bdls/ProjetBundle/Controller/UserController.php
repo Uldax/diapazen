@@ -62,6 +62,32 @@ class UserController extends Controller
 	 *
 	 * @param type $params null par défaut
 	 **/
+	public function isUserConnected()
+	{
+		return (isset($_SESSION['connected']) && $_SESSION['connected'] == true) ? true : false;
+	}
+	
+	protected function set($key, $value)
+	{
+		$this->mVars[$key] = $value;
+	}
+	public function setUserConnected($userInfos)
+	{
+		$_SESSION['connected'] = true;
+		$_SESSION['user_infos'] = $userInfos;
+	}
+
+	/**
+	 * Déconnecte l'utilisateur
+	 *
+	 * @return	void	Rien
+	 */
+	public function setUserDisconnected()
+	{
+		$_SESSION['connected'] = false;
+		$_SESSION['user_infos'] = array();
+	}
+	
 	public function loginAction($params = null)
 	{
 		// quand on se connecte
@@ -103,7 +129,7 @@ class UserController extends Controller
 				$this->setUserDisconnected();
 
 				// On affiche un formulaire de connexion
-				$this->render('login');
+				return $this->render('BdlsProjetBundle:Default:login.html.twig');
 			}
 			else
 			{
@@ -112,6 +138,7 @@ class UserController extends Controller
 
 				// On redirige vers la dashboard
 				header('Location: ' . BASE_URL. '/dashboard');
+				return $this->render('BdlsProjetBundle:Default:dashboard.html.twig');
 
 			}
 		}
@@ -119,7 +146,7 @@ class UserController extends Controller
 		{
 			// On affiche un formulaire de connexion
 			$this->set('title', 'Connexion | Diapazen');
-			$this->render('login');
+			return $this->render('BdlsProjetBundle:Default:login.html.twig');
 		}
 
 	}
