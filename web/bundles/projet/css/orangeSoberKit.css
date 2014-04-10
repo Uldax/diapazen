@@ -322,14 +322,15 @@ tipomatika@gmail.com*/
 
 .orange_ariadne span:first-child
 {
-    background: url('../media/pictures/ariadne_back.png') no-repeat;
+    background: url('../images/pictures/ariadne_back.png') no-repeat;
     height: 40px;
     width: 19px;
 }
 
 .orange_ariadne span:nth-child(2)
 {
-    background: url('../media/pictures/ariadne_middle.png') repeat-x;
+	
+    background: url('../images/pictures/ariadne_middle.png') repeat-x;//ariadne_middle.png
     height: 40px;
     width: 217px;
     text-align: center;
@@ -339,7 +340,7 @@ tipomatika@gmail.com*/
 
 .orange_ariadne span:last-child
 {
-    background: url('../media/pictures/ariadne_front.png') no-repeat;
+    background: url('../images/pictures/ariadne_front.png') no-repeat;
     height: 40px;
     width: 24px;
     float: right;
@@ -347,14 +348,14 @@ tipomatika@gmail.com*/
 
 .grey_ariadne span:first-child
 {
-    background: url('../media/pictures/ariadne2_back.png') no-repeat;
+    background: url('../images/pictures/ariadne2_back.png') no-repeat;
     height: 40px;
     width: 19px;
 }
 
 .grey_ariadne span:nth-child(2)
 {
-    background: url('../media/pictures/ariadne2_middle.png') repeat-x;
+    background: url('../images/pictures/ariadne2_middle.png') repeat-x;
     height: 40px;
     width: 217px;
     text-align: center;
@@ -364,7 +365,7 @@ tipomatika@gmail.com*/
 
 .grey_ariadne span:last-child
 {
-    background: url('../media/pictures/ariadne2_front.png') no-repeat;
+    background: url('../images/pictures/ariadne2_front.png') no-repeat;
     height: 40px;
     width: 24px;
     float: right;

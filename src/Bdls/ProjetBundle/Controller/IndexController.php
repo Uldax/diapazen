@@ -20,6 +20,7 @@ class IndexController extends Controller
 	{
 		// On set la variable Ã  afficher sur dans la vue
 		$title='Accueil | Diapazen';
+		$year=date('Y');
 		//$this->set('title', 'Accueil | Diapazen');
 
 
@@ -33,7 +34,7 @@ class IndexController extends Controller
 		else//*/
 		{
 			// On fait de rendu de la vue home.php
-			return $this->render('BdlsProjetBundle:Default:home.html.twig', array('title'=>$title));
+			return $this->render('BdlsProjetBundle:Default:home.html.twig', array('title'=>$title, 'year'=>$year));
 			//$this->render('home');
 		}
 	}
@@ -41,7 +42,8 @@ class IndexController extends Controller
 	public function forgotAction()
 	{
 		$title='Accueil | Diapazen';
-		return $this->render('BdlsProjetBundle:Default:forgot.html.twig', array('title'=>$title));
+		$year=date('Y');
+		return $this->render('BdlsProjetBundle:Default:forgot.html.twig', array('title'=>$title, 'year'=>$year));
 	}
 }
 

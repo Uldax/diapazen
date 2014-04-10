@@ -94,8 +94,9 @@ class PollController extends Controller
 		
 		/* temporaire, ensuite on mettra le titre de la page*/
 		$title='Création d\'un sondage | Diapazen';
+		$year=date('Y');
 		// On fait le rendu
-		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title));
+		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title, 'year'=>$year));
 	}
 
 

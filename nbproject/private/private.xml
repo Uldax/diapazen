@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/src/Bdls/ProjetBundle/Controller/UserController.php</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/web/bundles/projet/js/script.js</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/src/Bdls/ProjetBundle/Resources/views/Default/ariadneThread.html.twig</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/src/Bdls/ProjetBundle/Resources/views/Default/pollCreation.html.twig</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/src/Bdls/ProjetBundle/Controller/AboutController.php</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/src/Bdls/ProjetBundle/Resources/views/Default/pollConnection.html.twig</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/web/bundles/projet/js/jquery-ui-1.10.3.custom.js</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/web/bundles/projet/js/formCheck.js</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/refonteS/src/Bdls/ProjetBundle/Resources/views/Default/layout.html.twig</file>
+            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/web/bundles/projet/css/diapazen.css</file>
+            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Resources/views/Default/layout.html.twig</file>
+            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Resources/views/Default/home.html.twig</file>
+            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Resources/views/Default/pollCreation.html.twig</file>
         </group>
     </open-files>
 </project-private>

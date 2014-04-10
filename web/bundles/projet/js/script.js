@@ -47,7 +47,7 @@ function manageChoices(input)
 		case 'orange_button':			
 
 			// Ajout d'un champ de choix
-
+			
 			choices = document.getElementById("choices");
 
 			choice = document.createElement("div");
@@ -63,8 +63,8 @@ function manageChoices(input)
 		case 'grey_button':
 
 			// Suppression du champ de choix
-
-			if($('#choices .choice').length > 1)
+			
+			if(document.getElementsByName("choices[]").length > 2)
 			{
 				choices = input.parentNode.parentNode;
 				choices.removeChild(input.parentNode);
@@ -89,13 +89,13 @@ function manageChoices(input)
 	   input_choice.item(i-1).setAttribute('id', 'choix'+i);
 	}
 
-	if($('#choices .choice').length == 1)
+	if(document.getElementsByName("choices[]").length === 2)
 	{
-		$('#choices .choice:first .grey_button').css('cursor', 'no-drop');
+		document.getElementsByName("choices[]").css('cursor', 'no-drop');
 	}
 	else
 	{
-	   $('#choices .choice:first .grey_button').css('cursor', 'pointer');
+	   document.getElementsByName("choices[]").css('cursor', 'pointer');
 	}
 
 

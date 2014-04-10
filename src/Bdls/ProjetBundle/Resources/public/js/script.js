@@ -47,7 +47,7 @@ function manageChoices(input)
 		case 'orange_button':			
 
 			// Ajout d'un champ de choix
-
+			
 			choices = document.getElementById("choices");
 
 			choice = document.createElement("div");
@@ -63,7 +63,7 @@ function manageChoices(input)
 		case 'grey_button':
 
 			// Suppression du champ de choix
-
+			
 			if($('#choices .choice').length > 1)
 			{
 				choices = input.parentNode.parentNode;
