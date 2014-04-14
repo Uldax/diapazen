@@ -72,7 +72,8 @@ class __TwigTemplate_d59ffc49410e021f135bf2026f0436a072eb2437b46da1782cee263124f
 \t\t\t\t\t</div>
 \t\t\t\t</article>
 
-\t\t\t\t<!-- <p id=\"asterisk\" class=\"bold\">*Créer un sondage nécessite une inscription, celle-ci peut se faire en même temps que la création de votre sondage</p> -->
+\t\t\t\t<p id=\"asterisk\" class=\"bold\">*Créer un sondage nécessite une inscription, celle-ci peut se faire en même temps que la création de votre sondage</p>
+                        </div>
 \t\t";
     }
 
