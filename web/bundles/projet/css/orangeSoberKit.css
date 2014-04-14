@@ -169,30 +169,31 @@ tipomatika@gmail.com*/
 {
     text-decoration: none;
     font-family: candela_book;
-    border-bottom: 1px solid #919191;
+    /*border-bottom: 1px solid #919191;*/
     color: #919191;
-    cursor: pointer;
+    cursor: pointer;  
+    padding: 0px 0px;
 }
 
 .link:hover, .small_link:hover, .big_link:hover
 {
     color: #FF4820;
-    border-bottom: 1px solid #FF4820;
+    /*border-bottom: 1px solid #FF4820;*/
 }
 
 .link
 {
-    font-size: 1em;
+    font-size: 1.1em;
 }
 
 .small_link
 {
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 .big_link
 {
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 /*-----------CHAMP DE TEXTE------------*/
@@ -229,24 +230,25 @@ tipomatika@gmail.com*/
 .orange_button, .orange_small_button, .orange_big_button, 
 .grey_button, .grey_small_button, .grey_big_button
 {
-    padding: 0px;
+    /*padding: 0px;
     padding-left: 12px;
     padding-right: 12px;
     padding-top: 3px;
     padding-bottom: 3px;
-    border-radius: 2px;
+    border-radius: 2px;*/
     color: #FFFFFF;
-    font-family: candela_book;
+    /*font-family: candela_book;
     text-decoration: none;
     text-align: center;
     -webkit-appearance: none;
-    -webkit-border-radius: 0;
+    -webkit-border-radius: 0;*/
     cursor: pointer;
 }
 
 .orange_button, .orange_small_button, .orange_big_button
 {
-    border: 1px solid #ED2C00;
+    //border: 1px solid #ED2C00;
+    border: 1px solid #FF4820;
     background-color: #FF4820;
     box-shadow: 2px 2px 2px #ED2C00;
 }
@@ -280,7 +282,10 @@ tipomatika@gmail.com*/
 .orange_button:hover, .orange_small_button:hover, .orange_big_button:hover, 
 .grey_button:hover, .grey_small_button:hover, .grey_big_button:hover
 {
-    opacity: 0.95;
+    opacity: 0.75;
+    color: #FFFFFF;
+    background-color: #FF3E13;
+    border-color: #FF3E13;
 }
 
 .orange_button:active, .orange_small_button:active, .orange_big_button:active, 

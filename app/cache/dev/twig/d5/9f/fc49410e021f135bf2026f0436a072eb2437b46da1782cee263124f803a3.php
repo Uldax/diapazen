@@ -55,7 +55,7 @@ class __TwigTemplate_d59ffc49410e021f135bf2026f0436a072eb2437b46da1782cee263124f
 \t\t\t\t\t\t<p class=\"big_text\">Votre sondage peut comporter le nombre de propositions que vous souhaitez, ajoutez-en ou supprimez-en dynamiquement.</p>
 \t\t\t\t\t</div>
 \t\t\t\t</article>
-\t\t\t\t\t<a id=\"create_survey\" class=\"orange_big_button\" href=\"";
+\t\t\t\t\t<a id=\"create_survey\" class=\"btn btn-default orange_button\" href=\"";
         // line 24
         echo $this->env->getExtension('routing')->getPath("bdls_projet_creation");
         echo "\">C'est parti !</a>
