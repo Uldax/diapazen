@@ -12,13 +12,14 @@
 		{% endblock %}
 		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
 	</head>
-    <body>
+    
 
 		<header>
 			<div id="header_content">
-				<!--<a href="{{ path('bdls_projet_index') }}>-->
+				<a href="{{ path('bdls_projet_index') }}">
 			    	<img id="logo" src="{{ asset('bundles/projet/images/pictures/diapazen_v2.png') }}" alt="Diapazen" class="img-rounded">
-				<!--</a>-->
+				</a>
+
 
 				<!--<?php if (!$this->isUserConnected()){ ?>-->
 					<div id="connect_box" >
@@ -36,23 +37,27 @@
 			</div>
 		</header>
 		{% block body %}
+	<body>
+		
+	</body>
 		{% endblock %}
 		<!--<div class="white_bg">-->
-		{% block footer %}
+		
+		
+		{% block javascripts %}
+            <script src="{{ asset('bundles/projet/js/script.js') }}" type="text/javascript"></script>
+			<script src="{{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js') }}" type="text/javascript"></script>
+		{% endblock %}
+    
+	{% block footer %}
 		<footer>
 		    <ul>
 		        <li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_index') }}">Accueil</a></li>
 				<li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_about') }}">À propos</a></li>
 		        <!-- <li><a class="link" href="#">Contact</a></li> -->
 		    </ul>
-		    <!--<p class="text">© <?php echo date('Y'); ?> Diapazen</p>
-		    <img id="logo_isen" src="<?php $this->getPath('media/pictures/logo_isen.png'); ?>" alt="ISEN Toulon">-->
+		    <p class="text">© {{ year }} Diapazen</p>
+		    <img id="logo_isen" src="{{ asset('bundles/projet/images/pictures/logo_isen.png') }}">
 		</footer>
 		{% endblock %}
-		{% block javascripts %}
-            <script src="{{ asset('bundles/projet/js/script.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js') }}" type="text/javascript"></script>
-		{% endblock %}
-    </body>
-
 </html>

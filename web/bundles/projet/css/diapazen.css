@@ -117,10 +117,12 @@ header #password_connect
 
 footer
 {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #F1F1F1;
-    text-align: center;
+	background-color: #FFFFFF;
+    //position: fixed;
+    width: 100%;
+    z-index: 2;
+	text-align: center;
+	height: 62px;
 }
 
 footer .text, ul
