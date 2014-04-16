@@ -79,9 +79,9 @@
 }
 
 #create_survey {
-    float: right;
-    margin-top: 80px;
-    padding-left: 15px;
+   float: right;
+   //margin-top: 80px;
+    //padding-left: 15px;
     padding-right: 15px;
     padding-top: 12px;
     padding-bottom: 12px;

@@ -94,6 +94,7 @@ tipomatika@gmail.com*/
 .big_title
 {
     font-size: 2em;
+    font-weight: bold;
 }
 
 /*--------------TEXTE-----------------*/
@@ -165,7 +166,7 @@ tipomatika@gmail.com*/
 
 /*---------------LIEN-----------------*/
 
-.link, .small_link, .big_link
+.link, .small_link, .big_link, .link_underline
 {
     text-decoration: none;
     font-family: candela_book;
@@ -175,7 +176,7 @@ tipomatika@gmail.com*/
     padding: 0px 0px;
 }
 
-.link:hover, .small_link:hover, .big_link:hover
+.link:hover, .small_link:hover, .big_link:hover, .link_underline:hover
 {
     color: #FF4820;
     /*border-bottom: 1px solid #FF4820;*/
@@ -184,6 +185,12 @@ tipomatika@gmail.com*/
 .link
 {
     font-size: 1.1em;
+}
+
+.link_underline
+{
+    font-size: 1.1em;
+    text-decoration: underline;
 }
 
 .small_link
@@ -305,6 +312,88 @@ tipomatika@gmail.com*/
 {
     box-shadow: 1px 1px 2px #919191;
 } 
+
+.div_choix{
+  
+    //width: 800px;
+    //margin: auto auto;
+}
+
+.styled_select_div{
+    //float: right;
+    //margin-left: 25%;
+    display: inline-block;
+}
+
+.styled_select{
+    text-align: left;
+    font-size: 1.5em;
+    opacity: 0.75;
+    height : 50px;
+    width: 180px;
+    color:#000000;
+    background-color: #F1F1F1;
+    min-width: 135px;
+}
+
+.styled_select:hover{
+    opacity: 0.65;
+    border-bottom: 1.5px solid #FF3E13;
+    border-left: 1.5px solid #FF3E13;
+    border-top: 1px solid #FF3E13;
+    background-color: #F1F1F1;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px #FF9B81, 0 0 8px #FF9B81;
+          box-shadow: inset 0 1px 1px #FF9B81, 0 0 8px #FF9B81;
+}
+
+.styled_select_button{
+    font-size: 1.5em;
+    
+   color: #FFFFFF;
+   height : 50px;
+   border: 1.5px solid #FF4820;
+   background-color: #FF4820;
+   
+}
+
+.styled_select_button:hover{
+    opacity: 0.75;
+    color: #FFFFFF;
+    //color: #FFFFFF;
+    border: 1.5px solid #FF3E13;
+    background-color: #FF3E13;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px #FF9B81, 0 0 8px #FF9B81;
+          box-shadow: inset 0 1px 1px #FF9B81, 0 0 8px #FF9B81;
+}
+
+.list_select{
+    width: 205px;
+    background-color: #F1F1F1;
+    opacity:0.75;
+}
+
+.list_option{
+    height : 50px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 1.5em;
+    padding-left: 10px;
+    
+}
+
+.img_option{
+    padding-right: 15px;
+}
+
+.list_option:hover{
+    cursor: pointer;
+    //line-height: 1.3em;
+    // padding-left: 15px;
+    background-color: #C2C2C2;
+    border-left: 3px solid #FF4820
+}
 
 /*------------FIL D'ARIANE-----------*/
 

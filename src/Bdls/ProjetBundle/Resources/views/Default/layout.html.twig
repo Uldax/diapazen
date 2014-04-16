@@ -7,8 +7,10 @@
 			<link rel="stylesheet" href="{{ asset('bundles/projet/css/style.css') }}" type="text/css" media="all" />
 			<link rel="stylesheet" href="{{ asset('bundles/projet/css/Aristo.css') }}" type="text/css" media="all" />
 			<link rel="stylesheet" href="{{ asset('bundles/projet/css/diapazen.css') }}" type="text/css" media="all" />
+                        <link rel="stylesheet" href="{{ asset('bundles/projet/css/bootstrap.min.css') }}" type="text/css" media="all" />
                         <link rel="stylesheet" href="{{ asset('bundles/projet/css/bootstrap.css') }}" type="text/css" media="all" />
-			<link rel="stylesheet" href="{{ asset('bundles/projet/css/orangeSoberKit.css') }}" type="text/css" media="all" />
+			<link rel="stylesheet" href="{{ asset('bundles/projet/css/orangeSoberKit.css') }}" type="text/css" media="all" />    
+
 		{% endblock %}
 		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
 	</head>
@@ -45,8 +47,11 @@
 		
 		
 		{% block javascripts %}
-            <script src="{{ asset('bundles/projet/js/script.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js') }}" type="text/javascript"></script>
+                        <script src="{{ asset('bundles/projet/js/script.js') }}" type="text/javascript"></script>
+                        <script src="{{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js') }}" type="text/javascript"></script>
+			<script src="{{ asset('bundles/projet/js/jquery-2.0.2.js') }}" type="text/javascript"></script>
+                        <script src="{{ asset('bundles/projet/js/bootstrap.js') }}" type="text/javascript"></script>
+                        
 		{% endblock %}
     
 	{% block footer %}
@@ -57,7 +62,7 @@
 		        <!-- <li><a class="link" href="#">Contact</a></li> -->
 		    </ul>
 		    <p class="text">© {{ year }} Diapazen</p>
-		    <img id="logo_isen" src="{{ asset('bundles/projet/images/pictures/logo_isen.png') }}">
+		    <img id="logo_isen" src="{{ asset('bundles/projet/images/pictures/logo_isen.png') }}" class="img-rounded">
 		</footer>
 		{% endblock %}
 </html>
