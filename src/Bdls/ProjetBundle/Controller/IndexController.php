@@ -33,6 +33,7 @@ class IndexController extends Controller
 		}
 		else//*/
 		{
+			//$yolo=database_driver;
 			// On fait de rendu de la vue home.php
 			return $this->render('BdlsProjetBundle:Default:home.html.twig', array('title'=>$title, 'year'=>$year));
 			//$this->render('home');

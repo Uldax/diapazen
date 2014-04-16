@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <parameters>
+        <parameter key="DIRECTORY_SEPARATOR" type="constant">DS</parameter>
+		<parameter key="Je_suis_la_valeur_de_YOLO" type="constant">YOLO</parameter>
+        <!--<parameter key="my_class.constant.value" type="constant">My_Class::CONSTANT_NAME</parameter>-->
+    </parameters>
+</container>

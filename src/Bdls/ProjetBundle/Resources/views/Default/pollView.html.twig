@@ -38,9 +38,9 @@
                 <div id="poll_title_box" >
                     <h1 class="title" > <?php echo $eventTitle; ?> </h1>
                     <p class="text"><?php echo sprintf('Créé le %s | Par %s %s %s', $creationDate, $userFName, $userLName, $eventDate); ?></p>
+					{#<!--<p class="text">Créé le {{ date_de_creation }} | Par {{ userName, userLName, eventDate }}</p>-->#}
                 </div>
                 <p class="text" > <?php echo $eventDescription; ?> </p>
-                
                 <?php if (!$openedPoll) { ?>
                 <h1 class="big_title" id="result"><?php echo sprintf('Le choix ayant recueilli le plus de voix est: %s', $choiceList[0]["choiceName"]); ?></h1>
                 <?php } ?>
@@ -148,7 +148,6 @@
                     <input type="submit" class="orange_small_button" value="Voter" >
                     <?php } ?>
                     <?php 
-
                         if(isset($data_updated)) {
                             if($data_updated) { ?>
                                 <div style="float: right;" class="success_message message_personal_data">Votre vote a bien été pris en compte.</div>
