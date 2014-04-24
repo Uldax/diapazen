@@ -94,7 +94,6 @@ function manageChoices(input)
 			{
 				choices = input.parentNode.parentNode;
 				choices.removeChild(input.parentNode);
-				//seconde méthode
 				// var numero = input.parentNode.childNodes[1].getAttribute("id");
 				
 				var numero = input.parentNode.textContent.replace("Choix ","");

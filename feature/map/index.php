@@ -64,53 +64,6 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
 
-
-// fonction qui allie auto-complétion et ajout des marqueurs sur la carte
-
-
-// Fonction qui permet d'ajouter les marqueurs sur la carte en fonction de la zone de recherche avec l'auto-complétion
-
-
-
-// Sets the map on all markers in the array.
-// function setAllMap(map) {
-//   for (var i = 0; i < markers.length; i++) {
-//     markers[i].setMap(map);
-//   }
-// }
-
-// // Removes the markers from the map, but keeps them in the array.
-// function clearMarkers() {
-//   setAllMap(null);
-// }
-
-// // Deletes all markers in the array by removing references to them.
-// function deleteMarkers() {
-//   clearMarkers();
-//   markers = [];
-//   posmarkers = [];
-//   zonemarqueurs = new google.maps.LatLngBounds();
-//   initialize();
-// }
-
-// //Deletes the last entered marker in the array
-// function deleteLastMarker(){
-//   var j = markers.length;
-//   if(j>1){
-//     markers[j-1].setMap(null);
-//     markers.pop();
-//     posmarkers.pop();
-//     var zonemarqueurs = new google.maps.LatLngBounds();
-//     for (var i =0; i <markers.length;i++){
-//       zonemarqueurs.extend(markers[i].getPosition());
-//     }
-//     map.fitBounds(zonemarqueurs);
-//   }
-//   else{
-//     deleteMarkers();
-//   }
-// }
-
 //google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
