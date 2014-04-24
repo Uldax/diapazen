@@ -72,6 +72,7 @@ function initialize() {
   <body>
   <body onload="initialize()">
 
+
     <div id="choices">
       <div id="choice">
         <label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
