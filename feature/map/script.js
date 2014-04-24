@@ -94,13 +94,13 @@ function manageChoices(input)
 			{
 				choices = input.parentNode.parentNode;
 				choices.removeChild(input.parentNode);
-				// var numero = input.parentNode.childNodes[1].getAttribute("id");
+				var numero = input.parentNode.children[1].getAttribute("id");
 				
-				var numero = input.parentNode.textContent.replace("Choix ","");
+				/*var numero = input.parentNode.textContent.replace("Choix ","");
 				numero = numero.replace("*","");
 				numero = numero.replace("x","");
 				numero = numero.replace("V","");
-				numero = parseInt(numero);		
+				numero = parseInt(numero);	*/	
 				alert(numero);
 				deleteMarkers(numero);
 				// version map
