@@ -50,9 +50,11 @@ function initialize() {
      componentRestrictions: {country: 'fr'}
   };
   var input = document.getElementById('address');
-  autocomplete = new google.maps.places.Autocomplete(input, options);
 
+  //Création des éléments
+  autocomplete = new google.maps.places.Autocomplete(input, options);
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
 
   google.maps.event.addListener(autocomplete, 'place_changed', function() {
    var place = autocomplete.getPlace();
@@ -65,7 +67,6 @@ function initialize() {
 });
 
 }
-
 
 
 function codeAddress() {
