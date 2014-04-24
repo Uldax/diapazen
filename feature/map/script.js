@@ -193,8 +193,6 @@ function createAutocompletion(input){
 //fonction qui appelle l'ajout du marqueur en passant la recherche(autocomplétion) en paramètre et en gérant également le zoom
 function codeAddress(idAddress) {
  	var address = document.getElementById(idAddress.id).value;
-	// alert("valeur : "+address);
-   //var address = document.getElementById('address').value;
   geocoder.geocode( { 'address': address}, function(resultat, status) {
     if (status == google.maps.GeocoderStatus.OK) {
      addMarker(resultat);

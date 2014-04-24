@@ -71,12 +71,6 @@ function initialize() {
   </head>
   <body>
   <body onload="initialize()">
-  <!--   <div id="panel">
-      <input id="address" type="textbox" size="60" value="">
-      <input type="button" value="Ajouter" onclick="codeAddress()">
-      <input type="button" value="Supprimer tous les marqueurs" onclick="deleteMarkers()">
-      <input type="button" value="Supprimer le dernier marqueur" onclick="deleteLastMarker()">
-    </div> -->
 
     <div id="choices">
       <div id="choice">
