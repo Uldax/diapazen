@@ -4,7 +4,6 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Geocoding service</title>
-    <!-- à séparer ! -->
     <style>
       html, body,{
         height: 100%;
@@ -26,7 +25,6 @@
         width: 500px;
       }
     </style>
-    <!-- A séparer -->
     <!-- URL qui récupère la carte google map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNOpHpuGzB9PguOdh3naoMxPzBhOonyo4&v=3.exp&sensor=false"></script>
     <!-- Chargement de place API pour l'autocomplétion de l'input" -->
