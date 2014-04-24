@@ -32,12 +32,36 @@ class IndexController extends Controller
 			header('Location:' . BASE_URL .'/dashboard');
 		}
 		else//*/
+
+
+
+
+		//formulaire
+		$form = $this->createFormBuilder()
+			->add('Type', 'choice', array(
+		             'choices' => array('c1' => 'Choix1', 'c2' => 'Choix2','c3' => 'Choix3'),
+		             'multiple' => false))
+			->getForm();
+		// Récupération requête
+	    $request = $this->get('request');
+	    if ($request->getMethod() == 'POST') {
+	    	$form->bind($request);
+	      	if ($form->isValid()) {
+	      		$choixtype = $form->get('Type')->getData();
+	        	return $this->redirect($this->generateUrl('bdls_projet_creation', array('type' => $choixtype )));
+	      	}
+	    }
+
+
+
 		{
 			// On fait de rendu de la vue home.php
-			return $this->render('BdlsProjetBundle:Default:home.html.twig', array('title'=>$title, 'year'=>$year));
+			return $this->render('BdlsProjetBundle:Default:home.html.twig', array('title'=>$title, 'year'=>$year, 'form'=>$form->createView()
+				));
 			//$this->render('home');
 		}
 	}
+
 	
 	public function forgotAction()
 	{

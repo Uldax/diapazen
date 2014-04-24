@@ -55,9 +55,10 @@ class PollController extends Controller
 		$this->mVars[$key] = $value;
 	}
 	
-	public function indexAction($params = null)
+	public function indexAction($params)
 	{
 		$this->create($params);
+
 	}
 
 	/**
@@ -71,7 +72,7 @@ class PollController extends Controller
     * @param type $params null par défaut
     *
     */
-	public function createAction($params = null)
+	public function createAction($params=null)
 	{
 		//si l'utilisateur est deja connecter alors on affiche pas le le bouton connexion dans le fil d'arianne
 		$_SESSION['show_ariadne'] = $this->isUserConnected() ? false : true;
@@ -95,8 +96,14 @@ class PollController extends Controller
 		/* temporaire, ensuite on mettra le titre de la page*/
 		$title='Création d\'un sondage | Diapazen';
 		$year=date('Y');
+		//récupèration variable get
+		$type = $this->getRequest()->query->get('type') ;
+		if($type == null) $type = 'blblblblbblblblmbpegzbiopfozpog';
+		// $type = $this->getRequest()->request->get('type');
+
+		
 		// On fait le rendu
-		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title, 'year'=>$year));
+		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title, 'year'=>$year, 'type'=>$type));
 	}
 
 

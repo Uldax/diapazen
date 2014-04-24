@@ -265,7 +265,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAnnotationReaderService()
     {
-        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/annotations', true);
+        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/annotations', true);
     }
 
     /**
@@ -278,9 +278,9 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_AssetManagerService()
     {
-        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic.asset_factory'), array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig')), new \Assetic\Cache\ConfigCache('C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/assetic/config'), true)));
+        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic.asset_factory'), array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig')), new \Assetic\Cache\ConfigCache('D:/Mes Documents/GitHub/diapazen/app/cache/dev/assetic/config'), true)));
 
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($this->get('templating.loader'), '', 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/Resources/views', '/\\.[^.]+\\.twig$/'), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($this->get('templating.loader'), '', 'D:/Mes Documents/GitHub/diapazen/app/Resources/views', '/\\.[^.]+\\.twig$/'), 'twig');
 
         return $instance;
     }
@@ -366,7 +366,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('kernel');
         $b = $this->get('templating.filename_parser');
 
-        $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/Resources');
+        $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, 'D:/Mes Documents/GitHub/diapazen/app/Resources');
 
         return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, $this->get('templating.locator')), 1 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 2 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 3 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c), 4 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine'))));
     }
@@ -588,13 +588,13 @@ class appDevDebugProjectContainer extends Container
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
         $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_f95fa6d37e1d262b44b420a3f206a70b873c43fe87829338725340b8f11bd110');
+        $a->setNamespace('sf2orm_default_253cf09e0945a088929cc268eb6a329c42a2c4b5f7e9b7894adc8cbb52a4b174');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
-        $b->setNamespace('sf2orm_default_f95fa6d37e1d262b44b420a3f206a70b873c43fe87829338725340b8f11bd110');
+        $b->setNamespace('sf2orm_default_253cf09e0945a088929cc268eb6a329c42a2c4b5f7e9b7894adc8cbb52a4b174');
 
         $c = new \Doctrine\Common\Cache\ArrayCache();
-        $c->setNamespace('sf2orm_default_f95fa6d37e1d262b44b420a3f206a70b873c43fe87829338725340b8f11bd110');
+        $c->setNamespace('sf2orm_default_253cf09e0945a088929cc268eb6a329c42a2c4b5f7e9b7894adc8cbb52a4b174');
 
         $d = new \Doctrine\ORM\Configuration();
         $d->setEntityNamespaces(array());
@@ -602,7 +602,7 @@ class appDevDebugProjectContainer extends Container
         $d->setQueryCacheImpl($b);
         $d->setResultCacheImpl($c);
         $d->setMetadataDriverImpl(new \Doctrine\ORM\Mapping\Driver\DriverChain());
-        $d->setProxyDir('C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/doctrine/orm/Proxies');
+        $d->setProxyDir('D:/Mes Documents/GitHub/diapazen/app/cache/dev/doctrine/orm/Proxies');
         $d->setProxyNamespace('Proxies');
         $d->setAutoGenerateProxyClasses(true);
         $d->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
@@ -665,7 +665,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getFileLocatorService()
     {
-        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/Resources');
+        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), 'D:/Mes Documents/GitHub/diapazen/app/Resources');
     }
 
     /**
@@ -1417,7 +1417,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getMonolog_Handler_MainService()
     {
-        return $this->services['monolog.handler.main'] = new \Monolog\Handler\StreamHandler('C:/wamp/www/Webdev_CIR3/TP/refonteS/app/logs/dev.log', 100, true);
+        return $this->services['monolog.handler.main'] = new \Monolog\Handler\StreamHandler('D:/Mes Documents/GitHub/diapazen/app/logs/dev.log', 100, true);
     }
 
     /**
@@ -1612,7 +1612,7 @@ class appDevDebugProjectContainer extends Container
         $d = new \Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector($this->get('doctrine'));
         $d->addLogger('default', $this->get('doctrine.dbal.logger.profiling.default'));
 
-        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/profiler', '', '', 86400), $a);
+        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:D:/Mes Documents/GitHub/diapazen/app/cache/dev/profiler', '', '', 86400), $a);
 
         $instance->add($c);
         $instance->add($this->get('data_collector.request'));
@@ -1710,7 +1710,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getRouterService()
     {
-        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/assetic/routing.yml', array('cache_dir' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'appDevUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'appDevUrlMatcher', 'strict_requirements' => true), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('monolog.logger.router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/assetic/routing.yml', array('cache_dir' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'appDevUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'appDevUrlMatcher', 'strict_requirements' => true), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('monolog.logger.router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1884,7 +1884,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_SecureRandomService()
     {
-        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/secure_random.seed', $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('D:/Mes Documents/GitHub/diapazen/app/cache/dev/secure_random.seed', $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1910,7 +1910,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSensioDistribution_WebconfiguratorService()
     {
-        return $this->services['sensio_distribution.webconfigurator'] = new \Sensio\Bundle\DistributionBundle\Configurator\Configurator('C:/wamp/www/Webdev_CIR3/TP/refonteS/app');
+        return $this->services['sensio_distribution.webconfigurator'] = new \Sensio\Bundle\DistributionBundle\Configurator\Configurator('D:/Mes Documents/GitHub/diapazen/app');
     }
 
     /**
@@ -2071,7 +2071,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSession_Storage_FilesystemService()
     {
-        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
+        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('D:/Mes Documents/GitHub/diapazen/app/cache/dev/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
     }
 
     /**
@@ -2317,7 +2317,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTemplating_Helper_CodeService()
     {
-        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(NULL, 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app', 'UTF-8');
+        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(NULL, 'D:/Mes Documents/GitHub/diapazen/app', 'UTF-8');
     }
 
     /**
@@ -2850,7 +2850,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTranslator_DefaultService()
     {
-        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/translations', 'debug' => true));
+        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/translations', 'debug' => true));
     }
 
     /**
@@ -2863,14 +2863,14 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTwigService()
     {
-        $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'strict_variables' => true, 'exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/twig', 'charset' => 'UTF-8', 'paths' => array()));
+        $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'strict_variables' => true, 'exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/twig', 'charset' => 'UTF-8', 'paths' => array()));
 
         $instance->addExtension(new \Symfony\Bundle\SecurityBundle\Twig\Extension\LogoutUrlExtension($this->get('templating.helper.logout_url')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\SecurityExtension($this->get('security.context', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator')));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\AssetsExtension($this));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\ActionsExtension($this));
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app', 'UTF-8'));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, 'D:/Mes Documents/GitHub/diapazen/app', 'UTF-8'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\RoutingExtension($this->get('router')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\YamlExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\StopwatchExtension($this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
@@ -2923,16 +2923,16 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['twig.loader'] = $instance = new \Symfony\Bundle\TwigBundle\Loader\FilesystemLoader($this->get('templating.locator'), $this->get('templating.name_parser'));
 
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\SecurityBundle/Resources/views', 'Security');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\symfony\\swiftmailer-bundle\\Symfony\\Bundle\\SwiftmailerBundle/Resources/views', 'Swiftmailer');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\doctrine\\doctrine-bundle\\Doctrine\\Bundle\\DoctrineBundle/Resources/views', 'Doctrine');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\src\\Bdls\\ProjetBundle/Resources/views', 'BdlsProjet');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\sensio\\distribution-bundle\\Sensio\\Bundle\\DistributionBundle/Resources/views', 'SensioDistribution');
-        $instance->addPath('C:/wamp/www/Webdev_CIR3/TP/refonteS/app/Resources/views');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\SecurityBundle/Resources/views', 'Security');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\vendor\\symfony\\swiftmailer-bundle\\Symfony\\Bundle\\SwiftmailerBundle/Resources/views', 'Swiftmailer');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\vendor\\doctrine\\doctrine-bundle\\Doctrine\\Bundle\\DoctrineBundle/Resources/views', 'Doctrine');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\src\\Bdls\\ProjetBundle/Resources/views', 'BdlsProjet');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\vendor\\sensio\\distribution-bundle\\Sensio\\Bundle\\DistributionBundle/Resources/views', 'SensioDistribution');
+        $instance->addPath('D:/Mes Documents/GitHub/diapazen/app/Resources/views');
+        $instance->addPath('D:\\Mes Documents\\GitHub\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
 
         return $instance;
     }
@@ -3055,7 +3055,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_AssetFactoryService()
     {
-        $this->services['assetic.asset_factory'] = $instance = new \Symfony\Bundle\AsseticBundle\Factory\AssetFactory($this->get('kernel'), $this, $this->getParameterBag(), 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/../web', true);
+        $this->services['assetic.asset_factory'] = $instance = new \Symfony\Bundle\AsseticBundle\Factory\AssetFactory($this->get('kernel'), $this, $this->getParameterBag(), 'D:/Mes Documents/GitHub/diapazen/app/../web', true);
 
         $instance->addWorker(new \Symfony\Bundle\AsseticBundle\Factory\Worker\UseControllerWorker());
 
@@ -3076,7 +3076,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_CacheService()
     {
-        return $this->services['assetic.cache'] = new \Assetic\Cache\FilesystemCache('C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/assetic/assets');
+        return $this->services['assetic.cache'] = new \Assetic\Cache\FilesystemCache('D:/Mes Documents/GitHub/diapazen/app/cache/dev/assetic/assets');
     }
 
     /**
@@ -3292,7 +3292,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTemplating_LocatorService()
     {
-        return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev');
+        return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), 'D:/Mes Documents/GitHub/diapazen/app/cache/dev');
     }
 
     /**
@@ -3326,7 +3326,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getValidator_Mapping_ClassMetadataFactoryService()
     {
-        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
+        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => 'D:\\Mes Documents\\GitHub\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
     }
 
     /**
@@ -3380,12 +3380,12 @@ class appDevDebugProjectContainer extends Container
     protected function getDefaultParameters()
     {
         return array(
-            'kernel.root_dir' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app',
+            'kernel.root_dir' => 'D:/Mes Documents/GitHub/diapazen/app',
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
-            'kernel.name' => 'app',
-            'kernel.cache_dir' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev',
-            'kernel.logs_dir' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/logs',
+            'kernel.name' => 'ap_',
+            'kernel.cache_dir' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev',
+            'kernel.logs_dir' => 'D:/Mes Documents/GitHub/diapazen/app/logs',
             'kernel.bundles' => array(
                 'FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle',
                 'SecurityBundle' => 'Symfony\\Bundle\\SecurityBundle\\SecurityBundle',
@@ -3465,7 +3465,7 @@ class appDevDebugProjectContainer extends Container
             'debug.errors_logger_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ErrorsLoggerListener',
             'debug.event_dispatcher.class' => 'Symfony\\Component\\HttpKernel\\Debug\\TraceableEventDispatcher',
             'debug.stopwatch.class' => 'Symfony\\Component\\Stopwatch\\Stopwatch',
-            'debug.container.dump' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/appDevDebugProjectContainer.xml',
+            'debug.container.dump' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/appDevDebugProjectContainer.xml',
             'debug.controller_resolver.class' => 'Symfony\\Component\\HttpKernel\\Controller\\TraceableControllerResolver',
             'kernel.secret' => 'ThisTokenIsNotSoSecretChangeIt',
             'kernel.http_method_override' => true,
@@ -3490,7 +3490,7 @@ class appDevDebugProjectContainer extends Container
             'session.storage.options' => array(
 
             ),
-            'session.save_path' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/sessions',
+            'session.save_path' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/sessions',
             'session.metadata.update_threshold' => '0',
             'security.secure_random.class' => 'Symfony\\Component\\Security\\Core\\Util\\SecureRandom',
             'form.resolved_type_factory.class' => 'Symfony\\Component\\Form\\ResolvedFormTypeFactory',
@@ -3549,7 +3549,7 @@ class appDevDebugProjectContainer extends Container
             'validator.mapping.loader.yaml_files_loader.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\YamlFilesLoader',
             'validator.validator_factory.class' => 'Symfony\\Bundle\\FrameworkBundle\\Validator\\ConstraintValidatorFactory',
             'validator.mapping.loader.xml_files_loader.mapping_files' => array(
-                0 => 'C:\\wamp\\www\\Webdev_CIR3\\TP\\refonteS\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml',
+                0 => 'D:\\Mes Documents\\GitHub\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml',
             ),
             'validator.mapping.loader.yaml_files_loader.mapping_files' => array(
 
@@ -3573,7 +3573,7 @@ class appDevDebugProjectContainer extends Container
             'data_collector.form.extractor.class' => 'Symfony\\Component\\Form\\Extension\\DataCollector\\FormDataExtractor',
             'profiler_listener.only_exceptions' => false,
             'profiler_listener.only_master_requests' => false,
-            'profiler.storage.dsn' => 'file:C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/profiler',
+            'profiler.storage.dsn' => 'file:D:/Mes Documents/GitHub/diapazen/app/cache/dev/profiler',
             'profiler.storage.username' => '',
             'profiler.storage.password' => '',
             'profiler.storage.lifetime' => 86400,
@@ -3597,7 +3597,7 @@ class appDevDebugProjectContainer extends Container
             'router.request_context.host' => 'localhost',
             'router.request_context.scheme' => 'http',
             'router.request_context.base_url' => '',
-            'router.resource' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/assetic/routing.yml',
+            'router.resource' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/assetic/routing.yml',
             'router.cache_class_prefix' => 'appDev',
             'request_listener.http_port' => 80,
             'request_listener.https_port' => 443,
@@ -3718,7 +3718,7 @@ class appDevDebugProjectContainer extends Container
                 'exception_controller' => 'twig.controller.exception:showAction',
                 'autoescape_service' => NULL,
                 'autoescape_service_method' => NULL,
-                'cache' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/twig',
+                'cache' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/twig',
                 'charset' => 'UTF-8',
                 'paths' => array(
 
@@ -3779,7 +3779,7 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.mailer.default.transport.smtp.auth_mode' => NULL,
             'swiftmailer.mailer.default.transport.smtp.timeout' => 30,
             'swiftmailer.mailer.default.transport.smtp.source_ip' => NULL,
-            'swiftmailer.spool.default.memory.path' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/swiftmailer/spool/default',
+            'swiftmailer.spool.default.memory.path' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/swiftmailer/spool/default',
             'swiftmailer.mailer.default.spool.enabled' => true,
             'swiftmailer.mailer.default.single_address' => NULL,
             'swiftmailer.spool.enabled' => true,
@@ -3804,7 +3804,7 @@ class appDevDebugProjectContainer extends Container
             'assetic.node.paths' => array(
 
             ),
-            'assetic.cache_dir' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/assetic',
+            'assetic.cache_dir' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/assetic',
             'assetic.bundles' => array(
 
             ),
@@ -3816,8 +3816,8 @@ class appDevDebugProjectContainer extends Container
             'assetic.debug' => true,
             'assetic.use_controller' => true,
             'assetic.enable_profiler' => false,
-            'assetic.read_from' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/../web',
-            'assetic.write_to' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/../web',
+            'assetic.read_from' => 'D:/Mes Documents/GitHub/diapazen/app/../web',
+            'assetic.write_to' => 'D:/Mes Documents/GitHub/diapazen/app/../web',
             'assetic.variables' => array(
 
             ),
@@ -3890,7 +3890,7 @@ class appDevDebugProjectContainer extends Container
             'doctrine.orm.naming_strategy.default.class' => 'Doctrine\\ORM\\Mapping\\DefaultNamingStrategy',
             'doctrine.orm.naming_strategy.underscore.class' => 'Doctrine\\ORM\\Mapping\\UnderscoreNamingStrategy',
             'doctrine.orm.auto_generate_proxy_classes' => true,
-            'doctrine.orm.proxy_dir' => 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/cache/dev/doctrine/orm/Proxies',
+            'doctrine.orm.proxy_dir' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev/doctrine/orm/Proxies',
             'doctrine.orm.proxy_namespace' => 'Proxies',
             'sensio_framework_extra.view.guesser.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Templating\\TemplateGuesser',
             'sensio_framework_extra.controller.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\ControllerListener',
