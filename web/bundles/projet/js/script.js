@@ -37,7 +37,7 @@ function datepickerLoader() {
  *Fonction d'ajout ou suppression de choix lors 
  *de la création d'un sondage
  */
-function manageChoices(input)
+function manageChoices(input,type)
 {
 
 
@@ -52,9 +52,28 @@ function manageChoices(input)
 
 			choice = document.createElement("div");
 			choice.className = 'choice';
-			choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" /> '
-							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>';
+			switch(type){
+				case 'c1':
+					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
+								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="Lieux" /> '
+							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
+					break;
+				case 'c2':
+					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
+								+' <input class="text_edit input_choice" id="" type="date" name="choices[]" /> '
+							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
+					break;
+				case 'c3':
+					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
+								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="Autres" /> '
+							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
+					break;
+				default:
+					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
+								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="????" /> '
+							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
+					break;
+			}
 			
 			choices.appendChild(choice);
 			

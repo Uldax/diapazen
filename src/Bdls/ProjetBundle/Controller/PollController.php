@@ -102,16 +102,21 @@ class PollController extends Controller
 		switch ($type) {
 			case 'c1':
 				$nametype = 'lieux';
-				return $this->render('BdlsProjetBundle:Default:pollCreation.lieu.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype));
+				return $this->render('BdlsProjetBundle:Default:pollCreation.lieu.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
 				break;
 			case 'c2':
 				$nametype = 'dates';
-				return $this->render('BdlsProjetBundle:Default:pollCreation.date.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype));
+				return $this->render('BdlsProjetBundle:Default:pollCreation.date.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				break;
+			case 'c3':
+				$nametype = 'dates';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
 				break;
 			
 			default:
 				$nametype = 'default';
-				return $this->render('BdlsProjetBundle:Default:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype));
+				$type = 'c3';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
 				break;
 		}
 		
