@@ -98,12 +98,23 @@ class PollController extends Controller
 		$year=date('Y');
 		//récupèration variable get
 		$type = $this->getRequest()->query->get('type') ;
-		if($type == null) $type = 'blblblblbblblblmbpegzbiopfozpog';
-		// $type = $this->getRequest()->request->get('type');
 
+		switch ($type) {
+			case 'c1':
+				$nametype = 'lieux';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.lieu.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype));
+				break;
+			case 'c2':
+				$nametype = 'dates';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.date.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype));
+				break;
+			
+			default:
+				$nametype = 'default';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype));
+				break;
+		}
 		
-		// On fait le rendu
-		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title, 'year'=>$year, 'type'=>$type));
 	}
 
 
