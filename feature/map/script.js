@@ -52,7 +52,7 @@ function manageChoices(input)
 
 			choice = document.createElement("div");
 
-			//Créaion de l'input
+			//Création de l'input
 			var input=document.createElement("input");
 			input.setAttribute("id","");
 			input.className = "text_edit input_choice";
@@ -118,9 +118,7 @@ function manageChoices(input)
 	{
 	   lbl_choice.item(i-1).innerHTML = "Choix "+i+'<span class="asterisc"> * </span>';
 	   lbl_choice.item(i-1).setAttribute('for', 'choix'+i);
-
 	   input_choice.item(i-1).setAttribute('id', 'choix'+i);
-	   //Affectation de la fonction à appeler 
 	   valid_choice.item(i-1).setAttribute("onclick","codeAddress(choix"+i+");");
 	}
 
@@ -168,10 +166,9 @@ function manageConnectionForm(radio) {
 
 	}
 }
-
+//fonction qui permet la completion du champ de texte
 function createAutocompletion(input){
-	autocomplete = new google.maps.places.Autocomplete(input, options);
- 	
+	autocomplete = new google.maps.places.Autocomplete(input, options); 	
   	google.maps.event.addListener(autocomplete, 'place_changed', function() {
    	var place = autocomplete.getPlace();
    	if (place.geometry.viewport) {
@@ -188,7 +185,7 @@ function codeAddress(idAddress) {
  	var address = document.getElementById(idAddress.id).value;
   geocoder.geocode( { 'address': address}, function(resultat, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-     addMarker(resultat);
+     addMarker(resultat,address);
      map.fitBounds(zonemarqueurs);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -196,43 +193,70 @@ function codeAddress(idAddress) {
   });
 }
 
-// ajoute le marqueur
-function addMarker(resultat){	
+// ajoute le marqueur et l'infobulle sur chaque marqueur
+function addMarker(resultat,adresse){	
 	for(var j = 0;j<markers.length;j++){
 		if(markers[j].position.A == resultat[0].geometry.location.A && markers[j].position.k == resultat[0].geometry.location.k )
 			boolMarker = true;
 	}
 	if(boolMarker == false){
+		infowindow = new google.maps.InfoWindow({
+      		content: adresse + '<br />' + resultat[0].geometry.location.A + ',' + resultat[0].geometry.location.k
+  		});
  	 	var marker = new google.maps.Marker({
     		position: resultat[0].geometry.location,
     		map: map,
-    		draggable:true,
     		animation: google.maps.Animation.DROP
-  		});
+  		});  		
   		markers.push(marker);
   		posmarkers.push(marker.getPosition());
-  		zonemarqueurs.extend(marker.getPosition());  
+  		zonemarqueurs.extend(marker.getPosition()); 
+  		infowindowarray.push(infowindow); 
+  		for(var i =0;i<infowindowarray.length;i++){
+			marker = markers[i];
+			google.maps.event.addListener(marker, 'click', function(marker,i) {
+				return function(){
+					infowindowarray[i].open(map,marker);
+				}	
+			}(markers[i],i));
+		}
   	}
-  	boolMarker = false;
+   	boolMarker = false;
 }
 
-
+// Fonction qui supprime les marqueurs de la carte, ainsi que les infowindows
 function deleteMarkers(numero){	  
    
     if(markers.length > 0 ){
     	markers[numero-1].setMap(null);
 		markers.splice(numero-1,1);
 		posmarkers.splice(numero-1,1);
-		var zonemarqueurs = new google.maps.LatLngBounds();
+		infowindowarray.splice(numero-1,1);
+		zonemarqueurs = new google.maps.LatLngBounds();
+		for(var i =0;i<infowindowarray.length;i++){
+			marker = markers[i];
+			google.maps.event.clearListeners(marker,'click',function(marker,i) {
+				return function(){
+					infowindowarray[i].open(map,marker);
+				}	
+			}(marker,i));
+			google.maps.event.addListener(marker, 'click', function(marker,i) {
+				return function(){
+					infowindowarray[i].open(map,marker);
+				}	
+			}(marker,i));
+		}
     	for (var i =0; i <markers.length;i++){
       		zonemarqueurs.extend(markers[i].getPosition());
     	}
     	map.fitBounds(zonemarqueurs);
+
     	if(markers.length == 0 ){
     		markers = [];
   			posmarkers = [];
+  			infowindowarray = [];
   			zonemarqueurs = new google.maps.LatLngBounds();
     		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    	}  
+       	}  
     }
 }

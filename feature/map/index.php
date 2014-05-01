@@ -35,12 +35,13 @@ var geocoder;
 var map;
 var markers=[];
 var posmarkers = [];
+var infowindowarray = [];
 var boolMarker = false; // booleen qui définit si un marqueur est déjà placé à la même position (true si déjà placé)
 var zonemarqueurs = new google.maps.LatLngBounds();
-
+var infowindow;
 function initialize() {
   geocoder = new google.maps.Geocoder();
-
+  
   //faire la geoloc à ++++++ce niveau (Centre sur la france par defaut)
   latlng = new google.maps.LatLng(46.3333,  2.6);
    mapOptions = {
