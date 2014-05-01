@@ -94,6 +94,9 @@ function manageChoices(input)
 			{
 				choices = input.parentNode.parentNode;
 				choices.removeChild(input.parentNode);
+				//Correction d'un bug mineur : children au lieu de childNote 
+				var numero = input.parentNode.children[1].getAttribute("id");
+				alert(numero);
 				var numero = input.parentNode.children[1].getAttribute("id");				
 				numero = numero.replace("choix","");
 				numero = parseInt(numero);
@@ -139,8 +142,7 @@ function manageChoices(input)
 /*
  *Fonction de gestion de la connexion
  *Lors de la création d'un sondage et que le créateur
- *ne se soit pas connecté, ou n'ait pas de compte
- */
+ *ne se soit pas connecté, ou n'ait pas de compte */
 function manageConnectionForm(radio) {
 
 	switch(radio.id) {
