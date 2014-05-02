@@ -41,7 +41,8 @@ END:VCALENDAR";
 
 //set correct content-type-header
 header('Content-type: text/calendar; charset=utf-8');
-header('Content-Disposition: inline; filename=calendar.ics');
+//Here we can change the name of the file 
+header('Content-Disposition: inline; filename=event_diapazen.ics');
 echo $ical;
 exit;
  ?>
