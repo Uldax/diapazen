@@ -4,7 +4,7 @@
     <parameter key="kernel.root_dir">D:/Mes Documents/GitHub/diapazen/app</parameter>
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.name">ap_</parameter>
+    <parameter key="kernel.name">app</parameter>
     <parameter key="kernel.cache_dir">D:/Mes Documents/GitHub/diapazen/app/cache/dev</parameter>
     <parameter key="kernel.logs_dir">D:/Mes Documents/GitHub/diapazen/app/logs</parameter>
     <parameter key="kernel.bundles" type="collection">

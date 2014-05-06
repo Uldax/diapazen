@@ -3383,7 +3383,7 @@ class appDevDebugProjectContainer extends Container
             'kernel.root_dir' => 'D:/Mes Documents/GitHub/diapazen/app',
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
-            'kernel.name' => 'ap_',
+            'kernel.name' => 'app',
             'kernel.cache_dir' => 'D:/Mes Documents/GitHub/diapazen/app/cache/dev',
             'kernel.logs_dir' => 'D:/Mes Documents/GitHub/diapazen/app/logs',
             'kernel.bundles' => array(
