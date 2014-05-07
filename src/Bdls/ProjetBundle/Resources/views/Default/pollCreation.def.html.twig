@@ -1,0 +1,50 @@
+{#{% include 'BdlsProjetBundle:Default:ariadneThread.html.twig' %}#}
+{% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
+	{% block body %}
+	<div id="content">
+		<div style="width: 2000px;" id="ariadne_thread"> 
+		<span class="orange_ariadne" ><span></span><span>Création</span><span></span></span>
+		{#{% if show_ariadne is defined %}
+			{% if show_ariadne == true %}#}
+			<span class="grey_ariadne" ><span></span><span>Connexion</span><span></span></span>
+			{#{% endif %}
+		{% endif %}#}
+		<span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
+		</div>
+		
+		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
+			<h1 class="small_title">Votre sondage</h1>
+			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
+			<input class="text_edit" id="id_title_input" name="title_input" type="text" value="">
+			<label for="datepicker" class="text">Date limite</label>
+			<input class="text_edit" name="date_input" id="datepicker" readonly/>
+			<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
+			<textarea class="small_text_edit" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
+			<h1 class="small_title">Propositions</h1>
+			<div id="choices">
+				<div class="choice">
+					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice" id="choix1" type="text" name="choices[]" value="" />
+					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
+				</div>
+				<div class="choice">
+					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice" id="choix2" type="text" name="choices[]" value="" />
+					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
+				</div>
+				<div class="choice">
+					<label for="choix3" class="text lbl_choice">Choix 3<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice" id="choix3" type="text" name="choices[]" value="" />
+					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
+				</div>
+			</div>
+			<input class="orange_button" type="submit" value="Étape suivante" />
+			<a class="orange_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
+		</form>
+	</div>
+
+	<!--<script src="<?php $this->getPath('js/script.js'); ?>"> </script>
+	<script src="<?php $this->getPath('js/jquery-ui-1.10.3.custom.js'); ?>"></script>-->
+	
+    {% endblock %}     
+

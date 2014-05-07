@@ -56,9 +56,10 @@ class PollController extends Controller
 		$this->mVars[$key] = $value;
 	}
 	
-	public function indexAction($params = null)
+	public function indexAction($params)
 	{
 		$this->create($params);
+
 	}
 
 	/**
@@ -72,7 +73,7 @@ class PollController extends Controller
     * @param type $params null par défaut
     *
     */
-	public function createAction($params = null)
+	public function createAction($params=null)
 	{
 		//si l'utilisateur est deja connecter alors on affiche pas le le bouton connexion dans le fil d'arianne
 		$_SESSION['show_ariadne'] = $this->isUserConnected() ? false : true;
@@ -95,8 +96,32 @@ class PollController extends Controller
 		
 		/* temporaire, ensuite on mettra le titre de la page*/
 		$title='Création d\'un sondage | Diapazen';
-		// On fait le rendu
-		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title, 'last_username'));
+
+		$year=date('Y');
+		//récupèration variable get
+		$type = $this->getRequest()->query->get('type') ;
+
+		switch ($type) {
+			case 'c1':
+				$nametype = 'lieux';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.lieu.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				break;
+			case 'c2':
+				$nametype = 'dates';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.date.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				break;
+			case 'c3':
+				$nametype = 'dates';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				break;
+			
+			default:
+				$nametype = 'default';
+				$type = 'c3';
+				return $this->render('BdlsProjetBundle:Default:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				break;
+		}
+
 	}
 
 

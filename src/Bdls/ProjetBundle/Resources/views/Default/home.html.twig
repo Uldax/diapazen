@@ -4,30 +4,43 @@
 
 				<article class="use_description" >
 					<div class="icon_article" id="img_un">
-						<img class="img_un" src="{{ asset('bundles/projet/images/pictures/1_140x140.png') }}" alt="1">
+						<img class="img_un" src="{{ asset('bundles/projet/media/pictures/1_140x140.png') }}" alt="1">
 					</div>
 					<div class="text_article">
 						<h2 class="big_title">Créez votre sondage</h2>
 						<p class="big_text">Un dîner entre amis à organiser ? Un avis à demander ? Créez votre sondage en un rien de temps selon vos envies.</p>
 					</div>
 				</article>
+
 				<article class="use_description">
 					<div class="icon_article" id="img_deux">
-						<img class="img_deux" src="{{ asset('bundles/projet/images/pictures/2_140x140.png') }}" alt="2">
+						<img class="img_deux" src="{{ asset('bundles/projet/media/pictures/2_140x140.png') }}" alt="2">
 					</div>
 					<div class="text_article">
 						<h2 class="big_title">Ajoutez des propositions</h2>
 						<p class="big_text">Votre sondage peut comporter le nombre de propositions que vous souhaitez, ajoutez-en ou supprimez-en dynamiquement.</p>
 					</div>
 				</article>
-					<a id="create_survey" class="btn btn-default orange_button" href="{{ path('bdls_projet_creation') }}">C'est parti !</a>
 				<article class="use_description">
 					<div class="icon_article" id="img_trois">
-						<img class="img_trois" src="{{ asset('bundles/projet/images/pictures/3_140x140.png') }}" alt="3">
+						<img class="img_trois" src="{{ asset('bundles/projet/media/pictures/3_140x140.png') }}" alt="3">
 					</div>
 					<div class="text_article">
 						<h2 class="big_title">Partagez-le !</h2>
 						<p class="big_text">Invitez les personnes susceptibles de venir répondre à votre sondage. Après votre inscription, un mail leur sera envoyé pour qu'ils puissent venir faire leur choix.</p>
+					</div>
+				</article>
+				
+				<article class="use_description">
+					<div class="icon_article" id="img_quatre">
+						<img class="img_quatre" src="{{ asset('bundles/projet/media/pictures/3_140x140.png') }}" alt="3">
+					</div>
+					<div class="text_article">
+						<h2 class="big_title">Choix du type : </h2>
+						<form action="" method="post" {{ form_enctype(form) }}>
+						    {{ form_widget(form) }}
+						    <input type="submit" class="orange_big_button" value="C'est parti !" />
+						</form>
 					</div>
 				</article>
 
