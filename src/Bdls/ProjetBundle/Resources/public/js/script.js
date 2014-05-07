@@ -47,7 +47,7 @@ function manageChoices(input)
 		case 'orange_button':			
 
 			// Ajout d'un champ de choix
-			
+			alert('before');
 			choices = document.getElementById("choices");
 
 			choice = document.createElement("div");
@@ -61,7 +61,7 @@ function manageChoices(input)
 		break;
 
 		case 'grey_button':
-
+			alert('before');
 			// Suppression du champ de choix
 			
 			if($('#choices .choice').length > 1)
@@ -109,11 +109,12 @@ function manageChoices(input)
  *ne se soit pas connecté, ou n'ait pas de compte
  */
 function manageConnectionForm(radio) {
-
+	alert('before');
 	switch(radio.id) {
 		
 		//Si possède déjà un compte
 		case 'registered':
+			alert(registred);
 			$('.infos_user').css({display:'none'});
 			$('#pwd_user').css({display:'inline-block'});
 			document.getElementById('pwd_user').previousSibling.previousSibling.style.display = 'inline-block';
@@ -121,6 +122,7 @@ function manageConnectionForm(radio) {
 		
 		//Si première utilisation
 		case 'not_registered':
+			alert(not_registred);
 			$('.infos_user').css({display:'inline-block'});
 			$('.info_box').css({display:'block'});
 			$("#pwd_user").css({display:'none'});

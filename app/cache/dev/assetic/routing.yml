@@ -2,4 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-    resource: 'C:/wamp/www/Webdev_CIR3/TP/refonteS/app/config/routing_dev.yml'
+    resource: 'C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/app/config/routing_dev.yml'

@@ -91,7 +91,7 @@ function manageChoices(input)
 
 	if(document.getElementsByName("choices[]").length === 2)
 	{
-		document.getElementsByName("choices[]").css('cursor', 'no-drop');
+		document.getElementsByName("choices[]").style.cursor =no-drop;
 	}
 	else
 	{

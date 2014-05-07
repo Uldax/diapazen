@@ -35,6 +35,8 @@ class IndexController extends Controller
 		{
 			//$yolo=database_driver;
 			// On fait de rendu de la vue home.php
+			$request = $this->getRequest();
+			$session = $request->getSession();
 			return $this->render('BdlsProjetBundle:Default:home.html.twig', array('title'=>$title, 'year'=>$year));
 			//$this->render('home');
 		}
@@ -44,7 +46,7 @@ class IndexController extends Controller
 	{
 		$title='Accueil | Diapazen';
 		$year=date('Y');
-		return $this->render('BdlsProjetBundle:Default:forgot.html.twig', array('title'=>$title, 'year'=>$year));
+		return $this->render('BdlsProjetBundle:Default:forgot.html.twig', array('title'=>$title, 'year'=>$year, 'last_username'));
 	}
 }
 

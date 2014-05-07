@@ -136,9 +136,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/h')) {
-            // bdls_projet_homepage
-            if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'bdls_projet_homepage')), array (  '_controller' => 'BdlsProjetBundle:Default:index',));
+            if (0 === strpos($pathinfo, '/hello')) {
+                // user_homepage
+                if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'user_homepage')), array (  '_controller' => 'Bdls\\userBundle\\Controller\\DefaultController::indexAction',));
+                }
+
+                // bdls_projet_homepage
+                if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'bdls_projet_homepage')), array (  '_controller' => 'BdlsProjetBundle:Default:index',));
+                }
+
             }
 
             // bdls_projet_index
@@ -171,6 +179,37 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // bdls_projet_login
         if ($pathinfo === '/log') {
             return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\UserController::loginAction',  '_route' => 'bdls_projet_login',);
+        }
+
+        // bdls_projet_connect
+        if ($pathinfo === '/connect') {
+            return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\PollController::connectAction',  '_route' => 'bdls_projet_connect',);
+        }
+
+        // bdls_projet_share
+        if ($pathinfo === '/share') {
+            return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\PollController::shareAction',  '_route' => 'bdls_projet_share',);
+        }
+
+        if (0 === strpos($pathinfo, '/log')) {
+            if (0 === strpos($pathinfo, '/login')) {
+                // login
+                if ($pathinfo === '/login') {
+                    return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
+                }
+
+                // login_check
+                if ($pathinfo === '/login_check') {
+                    return array('_route' => 'login_check');
+                }
+
+            }
+
+            // logout
+            if ($pathinfo === '/logout') {
+                return array('_route' => 'logout');
+            }
+
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

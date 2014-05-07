@@ -2,6 +2,16 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+#login:
+#    pattern: /login
+#    defaults: { _controller: BdlsProjetBundle:Security:login }
+#    
+#login_check:
+#    pattern: /login_check
+#    
+#logout:
+#    pattern: /logout
+
 framework:
     #esi:             ~
     #translator:      { fallback: "%locale%" }
@@ -28,8 +38,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    globals:
-        yolo: %yolo%
+
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
@@ -68,3 +77,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+parameters:
+    BASE_URL: ""
+    

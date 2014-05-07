@@ -1,4 +1,6 @@
 <?php
+namespace Bdls\ProjetBundle\Controller;
+
 /**
  * 
  * Contrôleur de la page d'un sondage
@@ -23,7 +25,6 @@
  *
  */
 
-namespace Bdls\ProjetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -94,9 +95,8 @@ class PollController extends Controller
 		
 		/* temporaire, ensuite on mettra le titre de la page*/
 		$title='Création d\'un sondage | Diapazen';
-		$year=date('Y');
 		// On fait le rendu
-		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title, 'year'=>$year));
+		return $this->render('BdlsProjetBundle:Default:pollCreation.html.twig', array('title'=>$title, 'last_username'));
 	}
 
 
@@ -131,11 +131,12 @@ class PollController extends Controller
 		}
 		else
 		{
-			// renvoyer a Poll create ces variable devrais etre initialisées
-			header('Location: ' . BASE_URL. '/poll/create');
+			// renvoyer À Poll create Ses variableS devraiENT etre initialisées
+			//surement utiliser path ? pour empreinter une route adéquate dans le fichier de route.
+			header('Location: /poll/create');
 		}
 
-		// test si le formulaire de creation de sondage est existant
+		// testE si le formulaire de crÉation de sondage est existant
 		if (isset($_POST['title_input']) && isset($_POST['description_input']) && isset($_POST['choices']))
 		{
 			$_SESSION['poll_title'] = $_POST['title_input'];
@@ -143,24 +144,27 @@ class PollController extends Controller
 			$_SESSION['poll_choices'] = $_POST['choices'];
 			
 
-			if(isset($_POST['date_input']) && TestForm::testRegexp('expirationDate', $_POST['date_input']))
+			/*if(isset($_POST['date_input']) && TestForm::testRegexp('expirationDate', $_POST['date_input']))
 			{
 				$_SESSION['poll_date'] = $_POST['date_input'];
 			}
 			else
 			{
 				$_SESSION['poll_date'] = null;
-			}
+			}*/
 
 		}
 
 		// Si l'utilisateur est déja connecté, on le redirige vers le partage
 		if ($this->isUserConnected())
+		{	// path ou render ??
 			header('Location: ' . BASE_URL. '/poll/share');
+		}
 
 		try
 		{
 			//test si un choix a été fait entre la connection et l'inscription et qu'il y a un email
+			//l'adresse mail n'est elle pas obligatoire ???
 			if (isset($_POST['account']) && isset($_POST['email']))
 			{
 				$mail = $_POST['email'];
@@ -176,7 +180,7 @@ class PollController extends Controller
 					$pwd = $_POST['password'];
 
 					// on vérifie les infos avec la bdd
-					$this->loadModel('user');
+					$this->loadModel('user'); //charge User.Model.php
 					$connectStatus = $this->getModel()->connectionToApp($mail, $pwd, $ip_addr);
 
 				} //si on a choisi l'inscription et qu'il y a le nom et prenom on l'inscrit
@@ -189,6 +193,7 @@ class PollController extends Controller
 					$firstname = $_POST['firstNameUser'];
 					$lastname = $_POST['lastNameUser'];
 					// On crée le mot de passe
+					// Comment faire pour loadModel...
 					$this->loadModel('user');
 					$pwd = $this->getModel()->generatorPsw();
 
@@ -249,8 +254,9 @@ class PollController extends Controller
 					break;
 			}
 		}
-
-		$this->render('pollConnection');
+        $title = 'Connexion | Diapazen';
+		$error='pas d\'erreur.';
+		return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'last_username'));
 
 		
 	}
@@ -271,7 +277,7 @@ class PollController extends Controller
     */
 	public function shareAction($params = null)
 	{
-		if (isset($_SESSION['show_ariadne']) && isset($_SESSION['width_ariadne']))
+		/*if (isset($_SESSION['show_ariadne']) && isset($_SESSION['width_ariadne']))
 		{
 			$this->set('show_ariadne', $_SESSION['show_ariadne']);
 			$this->set('width_ariadne', $_SESSION['width_ariadne']);
@@ -287,54 +293,91 @@ class PollController extends Controller
 		$this->set('class_create', 'grey');
 		$this->set('class_connect', 'orange');
 		$this->set('class_share', 'grey');
-
+		*/
 		try
 		{
 			
 
 			// Lorsque l'utilisateur est connecté
-			if ($this->isUserConnected())
+			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
 			{
-				if (isset($_SESSION['poll_title']) && isset($_SESSION['poll_description']) && isset($_SESSION['poll_choices']))
-				{
-					// On créé le sondage
-					$this->loadModel('poll');
-					$this->getModel()->addPoll($_SESSION['user_infos']['id'], $_SESSION['poll_title'], $_SESSION['poll_description'], $_SESSION['poll_date'].' 23:59:59');
-					$pollId = $this->getModel()->getPollId();
+				// On créé le sondage
+//					$this->loadModel('poll');
+//					$this->getModel()->addPoll($_SESSION['user_infos']['id'], $_SESSION['poll_title'], $_SESSION['poll_description'], $_SESSION['poll_date'].' 23:59:59');
+//					$pollId = $this->getModel()->getPollId();
 
-					$_SESSION['poll_url'] = $this->getModel()->getPollUrl();
-					$_SESSION['poll_tittle'] = $this->getModel()->getPollTitle();
-
-					$this->set('pollUrl', $_SESSION['poll_url']);
+//					$_SESSION['poll_url'] = $this->getModel()->getPollUrl();
+//					$_SESSION['poll_tittle'] = $this->getModel()->getPollTitle();
+//
+//					$this->set('pollUrl', $_SESSION['poll_url']);
 
 					// Insertion des choix
-					$this->loadModel('choice');
-					foreach ($_SESSION['poll_choices'] as $choice) {
-						if(!empty($choice))
-						$this->getModel()->addChoice($choice, $pollId);
-					}
-
-					unset($_SESSION['poll_title']);
-					unset($_SESSION['poll_description']);
-					unset($_SESSION['poll_choices']);
-					unset($_SESSION['poll_date']);
-					
-					// On choisit le rendu
-					$this->set('class_connect', 'grey');
-					$this->set('class_share', 'orange');
-					$this->render('pollShare');
-				}
-				else
-				{
-					// renvoyer a Poll create avec un message disant champs inexistants
-					header('Location: ' . BASE_URL. '/poll/create');
-				}
+//					$this->loadModel('choice');
+//					foreach ($_SESSION['poll_choices'] as $choice) {
+//						if(!empty($choice))
+//						$this->getModel()->addChoice($choice, $pollId);
+//					}
+//
+//					unset($_SESSION['poll_title']);
+//					unset($_SESSION['poll_description']);
+//					unset($_SESSION['poll_choices']);
+//					unset($_SESSION['poll_date']);
+//
+//					// On choisit le rendu
+//					$this->set('class_connect', 'grey');
+//					$this->set('class_share', 'orange');
+					$title = 'Connexion | Diapazen';
+					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title, 'last_username'));
 			}
-
+			else
+			{
+				$title = 'Connexion | Diapazen';
+				$error = 'err';
+				return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'last_username'));
+			}
+//			if ($this->isUserConnected())
+//			{
+//				if (isset($_SESSION['poll_title']) && isset($_SESSION['poll_description']) && isset($_SESSION['poll_choices']))
+//				{
+//					// On créé le sondage
+//					$this->loadModel('poll');
+//					$this->getModel()->addPoll($_SESSION['user_infos']['id'], $_SESSION['poll_title'], $_SESSION['poll_description'], $_SESSION['poll_date'].' 23:59:59');
+//					$pollId = $this->getModel()->getPollId();
+//
+//					$_SESSION['poll_url'] = $this->getModel()->getPollUrl();
+//					$_SESSION['poll_tittle'] = $this->getModel()->getPollTitle();
+//
+//					$this->set('pollUrl', $_SESSION['poll_url']);
+//
+//					// Insertion des choix
+//					$this->loadModel('choice');
+//					foreach ($_SESSION['poll_choices'] as $choice) {
+//						if(!empty($choice))
+//						$this->getModel()->addChoice($choice, $pollId);
+//					}
+//
+//					unset($_SESSION['poll_title']);
+//					unset($_SESSION['poll_description']);
+//					unset($_SESSION['poll_choices']);
+//					unset($_SESSION['poll_date']);
+//					
+//					// On choisit le rendu
+//					$this->set('class_connect', 'grey');
+//					$this->set('class_share', 'orange');
+//					$title = 'Connexion | Diapazen';
+//					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title));
+//				}
+//				else
+//				{
+//					// renvoyer a Poll create avec un message disant champs inexistants
+//					header('Location: ' . BASE_URL. '/poll/create');
+//				}
+//			}
 		}
 		catch(Exception $e)
 		{
-			$this->render('dbError');
+			$title = 'Connexion | Diapazen';
+			return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'last_username'));
 		}
 
 	}

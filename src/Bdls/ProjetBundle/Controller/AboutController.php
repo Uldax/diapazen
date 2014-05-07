@@ -54,7 +54,7 @@ class AboutController extends Controller
 		$title='Accueil | Diapazen';
 		$year=date('Y');
 		// Rendu
-		return $this->render('BdlsProjetBundle:Default:about.html.twig', array('title'=>$title, 'year'=>$year));
+		return $this->render('BdlsProjetBundle:Default:about.html.twig', array('title'=>$title, 'year'=>$year, 'last_username'));
 		//$this->render('about');
 		
 	}
