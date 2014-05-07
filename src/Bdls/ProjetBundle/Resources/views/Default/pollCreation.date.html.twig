@@ -12,7 +12,28 @@
 		<span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
 		</div>
 		
-		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
+			{# source alexis bug a la création #}
+			<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
+			<h1 class="small_title">Propositions</h1>
+			<div id="choices">
+				<div class="choice">
+					<label for="datepicker1" class="datepick">Date limite 1<span class="asterisc"> *</span></label>
+					<input class="datepicker" name="choices[]" readonly="true"/>
+					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+				</div>
+				<div class="choice">
+					<label for="datepicker2" class="datepick">Date limite 2<span class="asterisc"> *</span></label>
+					<input class="datepicker" name="choices[]" readonly="true" />
+					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+				</div>
+			</div>
+			<input class="orange_button" type="submit" value="Étape suivante" />
+			<a class="orange_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this);">+</a>
+		</form>
+		
+		
+		{# remplacement du type d'input  #}
+		{# <form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
 			<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
 			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
 			<input class="text_edit" id="id_title_input" name="title_input" type="text" value="">
@@ -23,27 +44,31 @@
 			<h1 class="small_title">Propositions de {{ nametype }}</h1>
 			<div id="choices">
 				<div class="choice">
-					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix1" type="date" name="choices[]" value="" />
+					<label for="choix1" class="text lbl_choice datepick">Choix 1<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice datepicker" id="choix1"  name="choices[]" value=""  readonly="true" />
 					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
 				</div>
 				<div class="choice">
-					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix2" type="date" name="choices[]" value="" />
+					<label for="choix2" class="text lbl_choice datepick">Choix 2<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice datepicker" id="choix2"  name="choices[]" value=""  readonly="true" />
 					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
 				</div>
 				<div class="choice">
-					<label for="choix3" class="text lbl_choice">Choix 3<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix3" type="date" name="choices[]" value="" />
+					<label for="choix3" class="text lbl_choice datepick">Choix 3<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice datepicker" id="choix3"  name="choices[]" value=""  readonly="true" />
 					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
 				</div>
 			</div>
 			<input class="orange_button" type="submit" value="Étape suivante" />
 			<a class="orange_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
-		</form>
+		</form> #}
 	</div>
 
-	<!--<script src="<?php $this->getPath('js/script.js'); ?>"> </script>
-	<script src="<?php $this->getPath('js/jquery-ui-1.10.3.custom.js'); ?>"></script>-->
+    <!-- Création des input date en jquerry -->
+    <script src={{ asset('bundles/projet/js/script-date.js') }}> </script>
+	<script type="text/javascript" src={{ asset('bundles/projet/js/jquery.js')}}></script>
+	<script src={{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js')}}></script>
+	<script>datepickerLoader();</script>
+
     {% endblock %}     
 

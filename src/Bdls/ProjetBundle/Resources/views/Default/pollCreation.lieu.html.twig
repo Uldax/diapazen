@@ -11,6 +11,7 @@
 		{% endif %}#}
 		<span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
 		</div>
+
 		
 		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
 			<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
@@ -40,7 +41,7 @@
 			</div>
 			<input class="orange_button" type="submit" value="Étape suivante" />
 			<a class="orange_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
-		</form>
+		</form> 
 	</div>
 
 	<!--<script src="<?php $this->getPath('js/script.js'); ?>"> </script>
