@@ -17,26 +17,31 @@
     
 
 		<header>
-			<div id="header_content">
-				<a href="{{ path('bdls_projet_index') }}">
-			    	<img id="logo" src="{{ asset('bundles/projet/images/pictures/diapazen_v2.png') }}" alt="Diapazen" class="img-rounded">
-				</a>
+                    <div id="header_content row">
+                        <div class="col-lg-3 col-md-1"></div>
+                        <div class="col-lg-4 col-md-6 col-sm-5 col-xs-8 div_connect">
+                            <a href="{{ path('bdls_projet_index') }}">
+                            <img id="logo" src="{{ asset('bundles/projet/images/pictures/diapazen_v2.png') }}" alt="Diapazen" class="img-rounded">
+                            </a>
+                        </div>
 
-
-				<!--<?php if (!$this->isUserConnected()){ ?>-->
-					<div id="connect_box" >
-				    	<form action="{{ path('bdls_projet_login') }}" method="post" class="form-inline">
-				        	<input id="mail_connect" name="email" class= "form-control" type="mail" placeholder="E-mail">
-				        	<input id="password_connect" name="password" class="form-control" type="password" placeholder="Mot de passe">
-                                                <input class="btn btn-default orange_small_button" type="submit" value="Connexion">
-                                        </form>
-                                                <a class="btn btn-link small_link" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a> 
-					</div>
-				<!--<?php } else { ?>
-						<div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="<?php $this->getHomeUrl();?>/user/profile"><span class="orange_text"><?php echo $this->getUserInfo('firstname').' '.$this->getUserInfo('lastname').' '; ?></span></a></p><a class="link" href="<?php $this->getHomeUrl(); ?>/user/logout">Se déconnecter</a></div>
-				<?php } ?>-->
-				
-			</div>
+                            <!--<?php if (!$this->isUserConnected()){ ?>-->
+                         <div class="col-lg-4 col-md-5 col-sm-7 col-xs-4 div_connect">
+                                <div id="connect_box" >
+                                <form action="{{ path('bdls_projet_login') }}" method="post" class="form-inline">
+                                        <input id="mail_connect" name="email" class= "form-control hidden-xs" type="mail" placeholder="E-mail">
+                                        <input id="password_connect" name="password" class="form-control hidden-xs" type="password" placeholder="Mot de passe">
+                                        <input class="btn btn-default orange_small_button hidden-xs" type="submit" value="Connexion">
+                                        <input class="btn btn-default orange_small_button orange_small_button-xs visible-xs" type="submit" value="Connexion">
+                                </form>
+                                </div>
+                                <a class="btn btn-link small_link hidden-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a> 
+                         </div>
+                         <div class="col-lg-1"></div>
+                            <!--<?php } else { ?>
+                                            <div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="<?php $this->getHomeUrl();?>/user/profile"><span class="orange_text"><?php echo $this->getUserInfo('firstname').' '.$this->getUserInfo('lastname').' '; ?></span></a></p><a class="link" href="<?php $this->getHomeUrl(); ?>/user/logout">Se déconnecter</a></div>
+                            <?php } ?>-->
+                    </div>
 		</header>
 		{% block body %}
 	<body>
@@ -55,7 +60,18 @@
 		{% endblock %}
     
 	{% block footer %}
-		<footer>
+		<footer class="hidden-xs">
+		    <ul>
+		        <li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_index') }}">Accueil</a></li>
+				<li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_about') }}">À propos</a></li>
+		        <!-- <li><a class="link" href="#">Contact</a></li> -->
+		    </ul>
+		    <p class="text">© {{ year }} Diapazen</p>
+		    <img id="logo_isen" src="{{ asset('bundles/projet/images/pictures/logo_isen.png') }}" class="img-rounded">
+		</footer>
+                        
+                <!-- Footer mobile -->        
+                <footer class="visible-xs footer-xs">
 		    <ul>
 		        <li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_index') }}">Accueil</a></li>
 				<li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_about') }}">À propos</a></li>

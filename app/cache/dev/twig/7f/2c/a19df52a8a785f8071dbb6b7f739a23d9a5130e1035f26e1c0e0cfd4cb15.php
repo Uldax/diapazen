@@ -40,55 +40,60 @@ class __TwigTemplate_7f2ca19df52a8a785f8071dbb6b7f739a23d9a5130e1035f26e1c0e0cfd
     
 
 \t\t<header>
-\t\t\t<div id=\"header_content\">
-\t\t\t\t<a href=\"";
-        // line 21
+                    <div id=\"header_content row\">
+                        <div class=\"col-lg-3 col-md-1\"></div>
+                        <div class=\"col-lg-4 col-md-6 col-sm-5 col-xs-8 div_connect\">
+                            <a href=\"";
+        // line 23
         echo $this->env->getExtension('routing')->getPath("bdls_projet_index");
         echo "\">
-\t\t\t    \t<img id=\"logo\" src=\"";
-        // line 22
+                            <img id=\"logo\" src=\"";
+        // line 24
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/images/pictures/diapazen_v2.png"), "html", null, true);
         echo "\" alt=\"Diapazen\" class=\"img-rounded\">
-\t\t\t\t</a>
+                            </a>
+                        </div>
 
-
-\t\t\t\t<!--<?php if (!\$this->isUserConnected()){ ?>-->
-\t\t\t\t\t<div id=\"connect_box\" >
-\t\t\t\t    \t<form action=\"";
-        // line 28
+                            <!--<?php if (!\$this->isUserConnected()){ ?>-->
+                         <div class=\"col-lg-4 col-md-5 col-sm-7 col-xs-4 div_connect\">
+                                <div id=\"connect_box\" >
+                                <form action=\"";
+        // line 31
         echo $this->env->getExtension('routing')->getPath("bdls_projet_login");
         echo "\" method=\"post\" class=\"form-inline\">
-\t\t\t\t        \t<input id=\"mail_connect\" name=\"email\" class= \"form-control\" type=\"mail\" placeholder=\"E-mail\">
-\t\t\t\t        \t<input id=\"password_connect\" name=\"password\" class=\"form-control\" type=\"password\" placeholder=\"Mot de passe\">
-                                                <input class=\"btn btn-default orange_small_button\" type=\"submit\" value=\"Connexion\">
-                                        </form>
-                                                <a class=\"btn btn-link small_link\" href=\"";
-        // line 33
+                                        <input id=\"mail_connect\" name=\"email\" class= \"form-control hidden-xs\" type=\"mail\" placeholder=\"E-mail\">
+                                        <input id=\"password_connect\" name=\"password\" class=\"form-control hidden-xs\" type=\"password\" placeholder=\"Mot de passe\">
+                                        <input class=\"btn btn-default orange_small_button hidden-xs\" type=\"submit\" value=\"Connexion\">
+                                        <input class=\"btn btn-default orange_small_button orange_small_button-xs visible-xs\" type=\"submit\" value=\"Connexion\">
+                                </form>
+                                </div>
+                                <a class=\"btn btn-link small_link hidden-xs\" href=\"";
+        // line 38
         echo $this->env->getExtension('routing')->getPath("bdls_projet_forgot");
         echo "\" >Mot de passe oublié ?</a> 
-\t\t\t\t\t</div>
-\t\t\t\t<!--<?php } else { ?>
-\t\t\t\t\t\t<div id=\"connected_box\" ><p class=\"text\" >Bonjour <a class=\"orangelink\" href=\"<?php \$this->getHomeUrl();?>/user/profile\"><span class=\"orange_text\"><?php echo \$this->getUserInfo('firstname').' '.\$this->getUserInfo('lastname').' '; ?></span></a></p><a class=\"link\" href=\"<?php \$this->getHomeUrl(); ?>/user/logout\">Se déconnecter</a></div>
-\t\t\t\t<?php } ?>-->
-\t\t\t\t
-\t\t\t</div>
+                         </div>
+                         <div class=\"col-lg-1\"></div>
+                            <!--<?php } else { ?>
+                                            <div id=\"connected_box\" ><p class=\"text\" >Bonjour <a class=\"orangelink\" href=\"<?php \$this->getHomeUrl();?>/user/profile\"><span class=\"orange_text\"><?php echo \$this->getUserInfo('firstname').' '.\$this->getUserInfo('lastname').' '; ?></span></a></p><a class=\"link\" href=\"<?php \$this->getHomeUrl(); ?>/user/logout\">Se déconnecter</a></div>
+                            <?php } ?>-->
+                    </div>
 \t\t</header>
 \t\t";
-        // line 41
-        $this->displayBlock('body', $context, $blocks);
         // line 46
+        $this->displayBlock('body', $context, $blocks);
+        // line 51
         echo "\t\t<!--<div class=\"white_bg\">-->
 \t\t
 \t\t
 \t\t";
-        // line 49
+        // line 54
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 56
+        // line 61
         echo "    
 \t";
-        // line 57
+        // line 62
         $this->displayBlock('footer', $context, $blocks);
-        // line 68
+        // line 84
         echo "</html>";
     }
 
@@ -129,61 +134,84 @@ class __TwigTemplate_7f2ca19df52a8a785f8071dbb6b7f739a23d9a5130e1035f26e1c0e0cfd
 \t\t";
     }
 
-    // line 41
+    // line 46
     public function block_body($context, array $blocks = array())
     {
-        // line 42
+        // line 47
         echo "\t<body>
 \t\t
 \t</body>
 \t\t";
     }
 
-    // line 49
+    // line 54
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 50
+        // line 55
         echo "                        <script src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/script.js"), "html", null, true);
         echo "\" type=\"text/javascript\"></script>
                         <script src=\"";
-        // line 51
+        // line 56
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/jquery-ui-1.10.3.custom.js"), "html", null, true);
         echo "\" type=\"text/javascript\"></script>
 \t\t\t<script src=\"";
-        // line 52
+        // line 57
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/jquery-2.0.2.js"), "html", null, true);
         echo "\" type=\"text/javascript\"></script>
                         <script src=\"";
-        // line 53
+        // line 58
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/bootstrap.js"), "html", null, true);
         echo "\" type=\"text/javascript\"></script>
                         
 \t\t";
     }
 
-    // line 57
+    // line 62
     public function block_footer($context, array $blocks = array())
     {
-        // line 58
-        echo "\t\t<footer>
+        // line 63
+        echo "\t\t<footer class=\"hidden-xs\">
 \t\t    <ul>
 \t\t        <li><a class=\"btn btn-link btn-lg link\" href=\"";
-        // line 60
+        // line 65
         echo $this->env->getExtension('routing')->getPath("bdls_projet_index");
         echo "\">Accueil</a></li>
 \t\t\t\t<li><a class=\"btn btn-link btn-lg link\" href=\"";
-        // line 61
+        // line 66
         echo $this->env->getExtension('routing')->getPath("bdls_projet_about");
         echo "\">À propos</a></li>
 \t\t        <!-- <li><a class=\"link\" href=\"#\">Contact</a></li> -->
 \t\t    </ul>
 \t\t    <p class=\"text\">© ";
-        // line 64
+        // line 69
         echo twig_escape_filter($this->env, (isset($context["year"]) ? $context["year"] : $this->getContext($context, "year")), "html", null, true);
         echo " Diapazen</p>
 \t\t    <img id=\"logo_isen\" src=\"";
-        // line 65
+        // line 70
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/images/pictures/logo_isen.png"), "html", null, true);
+        echo "\" class=\"img-rounded\">
+\t\t</footer>
+                        
+                <!-- Footer mobile -->        
+                <footer class=\"visible-xs footer-xs\">
+\t\t    <ul>
+\t\t        <li><a class=\"btn btn-link btn-lg link\" href=\"";
+        // line 76
+        echo $this->env->getExtension('routing')->getPath("bdls_projet_index");
+        echo "\">Accueil</a></li>
+\t\t\t\t<li><a class=\"btn btn-link btn-lg link\" href=\"";
+        // line 77
+        echo $this->env->getExtension('routing')->getPath("bdls_projet_about");
+        echo "\">À propos</a></li>
+\t\t        <!-- <li><a class=\"link\" href=\"#\">Contact</a></li> -->
+\t\t    </ul>
+\t\t    <p class=\"text\">© ";
+        // line 80
+        echo twig_escape_filter($this->env, (isset($context["year"]) ? $context["year"] : $this->getContext($context, "year")), "html", null, true);
+        echo " Diapazen</p>
+\t\t    <img id=\"logo_isen\" src=\"";
+        // line 81
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/images/pictures/logo_isen.png"), "html", null, true);
         echo "\" class=\"img-rounded\">
 \t\t</footer>
@@ -202,6 +230,6 @@ class __TwigTemplate_7f2ca19df52a8a785f8071dbb6b7f739a23d9a5130e1035f26e1c0e0cfd
 
     public function getDebugInfo()
     {
-        return array (  187 => 65,  183 => 64,  177 => 61,  173 => 60,  169 => 58,  166 => 57,  159 => 53,  155 => 52,  151 => 51,  146 => 50,  143 => 49,  136 => 42,  133 => 41,  126 => 12,  122 => 11,  118 => 10,  114 => 9,  110 => 8,  105 => 7,  102 => 6,  96 => 5,  92 => 68,  90 => 57,  87 => 56,  85 => 49,  80 => 46,  78 => 41,  67 => 33,  59 => 28,  50 => 22,  46 => 21,  36 => 15,  34 => 6,  30 => 5,  24 => 1,);
+        return array (  215 => 81,  211 => 80,  205 => 77,  201 => 76,  192 => 70,  188 => 69,  182 => 66,  178 => 65,  174 => 63,  171 => 62,  164 => 58,  160 => 57,  156 => 56,  151 => 55,  148 => 54,  141 => 47,  138 => 46,  131 => 12,  127 => 11,  123 => 10,  119 => 9,  115 => 8,  110 => 7,  107 => 6,  101 => 5,  97 => 84,  95 => 62,  92 => 61,  90 => 54,  85 => 51,  83 => 46,  72 => 38,  62 => 31,  52 => 24,  48 => 23,  36 => 15,  34 => 6,  30 => 5,  24 => 1,);
     }
 }

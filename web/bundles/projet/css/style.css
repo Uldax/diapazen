@@ -155,6 +155,13 @@
 	margin-bottom: 20px;
 }
 
+#ariadne_thread-xs
+{
+	width: 370px;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
 #share_form textarea
 {
 	min-width: 300px;
@@ -478,24 +485,75 @@ h1#result
 	width: 540px;
 }
 
+#poll_creation_form .choice-xs{
+	width: 400px;
+}
+
 #poll_creation_form .choice input[type="text"]
 {
 	width:300px;
 	display:inline-block;
 }
 
-#poll_creation_form #datepicker
+#poll_creation_form .choice-xs input[type="text"]
+{
+	width:225px;
+	display:inline-block;
+}
+
+/*#poll_creation_form #datepicker
+{
+	width: 350px;
+	margin-bottom: 15px;
+}*/
+
+#poll_creation_form .datepicker
 {
 	width: 350px;
 	margin-bottom: 15px;
 }
 
-#poll_creation_form .choice .grey_button, #poll_creation_form #add_choice_button
+#poll_creation_form .datepicker-xs
+{
+	width: 270px;
+	margin-bottom: 15px;
+}
+
+.div_add_choice_button
+{
+    padding-right: 5px;
+}
+
+#poll_creation_form .choice .grey_button, #poll_creation_form .add_choice_button
 {
 	margin-left: 7px;
+        margin-top: -5px;
+}
+
+#poll_creation_form .add_choice_button-xs
+{
+	margin-left: 7px;
+        margin-top: -15px;
+}
+
+#poll_creation_form .next_step-xs
+{
+        margin-left: 112px;
+	width: 225px;
+}
+
+#poll_creation_form .next_step
+{
+	width: 300px;
+}
+
+/*
+#poll_creation_form input[type="submit"]
+{
+	width: 300px;
 }
 
 #poll_creation_form input[type="submit"]
 {
-	width: 305px;
-}
+	width: 250px;
+}*/
