@@ -39,20 +39,19 @@
 			<link rel="stylesheet" href="{{ asset('bundles/projet/css/Aristo.css') }}" type="text/css" media="all" />
 			<link rel="stylesheet" href="{{ asset('bundles/projet/css/diapazen.css') }}" type="text/css" media="all" />
 			<link rel="stylesheet" href="{{ asset('bundles/projet/css/orangeSoberKit.css') }}" type="text/css" media="all" />
+                        <link rel="stylesheet" href="{{ asset('bundles/projet/css/bootstrap.css') }}" type="text/css" media="all" />
 		{% endblock %}
 		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
 	</head>
         <!-- jQuery 1.9-->
 		{% block javascripts %}
         <script src={{ asset('bundles/projet/js/jquery.js') }}> </script>
-        <script src="<?php $this->getPath('js/formCheck.js'); ?>"> </script>
 		{% endblock %}
     <body>
-
 		<header>
 			<div id="header_content">
 				<!--<a href="{{ path('bdls_projet_index') }}>-->
-			    	<img id="logo" src="{{ asset('bundles/projet/images/pictures/diapazen_v2.png') }}" alt="Diapazen">
+			    	<img id="logo" src="{{ asset('bundles/projet/media/pictures/diapazen_v2.png') }}" alt="Diapazen">
 				<!--</a>-->
 
 				<!--<?php if (!$this->isUserConnected()){ ?>-->

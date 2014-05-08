@@ -75,7 +75,7 @@ tipomatika@gmail.com*/
 
 /*----------------TITRE---------------*/
 
-.title, .small_title, .big_title
+.title, .small_title, .big_title, .big_title_xs
 {
     font-family: candela_bold;
     color: #FF4820;   
@@ -94,7 +94,23 @@ tipomatika@gmail.com*/
 .big_title
 {
     font-size: 2em;
+    font-weight: bold;
 }
+
+.big_title_xs
+{
+    padding-top: 40px; 
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.big_title_xss
+{
+    padding-top: 60px; 
+    font-size: 2em;
+    font-weight: bold;
+}
+
 
 /*--------------TEXTE-----------------*/
 
@@ -153,6 +169,12 @@ tipomatika@gmail.com*/
     font-size: 1em;
 }
 
+.bold-xs
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .small_bold
 {
     font-size: 0.8em;
@@ -165,34 +187,41 @@ tipomatika@gmail.com*/
 
 /*---------------LIEN-----------------*/
 
-.link, .small_link, .big_link
+.link, .small_link, .big_link, .link_underline
 {
     text-decoration: none;
     font-family: candela_book;
-    border-bottom: 1px solid #919191;
+    /*border-bottom: 1px solid #919191;*/
     color: #919191;
-    cursor: pointer;
+    cursor: pointer;  
+    padding: 0px 0px;
 }
 
-.link:hover, .small_link:hover, .big_link:hover
+.link:hover, .small_link:hover, .big_link:hover, .link_underline:hover
 {
     color: #FF4820;
-    border-bottom: 1px solid #FF4820;
+    /*border-bottom: 1px solid #FF4820;*/
 }
 
 .link
 {
-    font-size: 1em;
+    font-size: 1.1em;
+}
+
+.link_underline
+{
+    font-size: 1.1em;
+    text-decoration: underline;
 }
 
 .small_link
 {
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 .big_link
 {
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 /*-----------CHAMP DE TEXTE------------*/
@@ -229,24 +258,25 @@ tipomatika@gmail.com*/
 .orange_button, .orange_small_button, .orange_big_button, 
 .grey_button, .grey_small_button, .grey_big_button
 {
-    padding: 0px;
+    /*padding: 0px;
     padding-left: 12px;
     padding-right: 12px;
     padding-top: 3px;
     padding-bottom: 3px;
-    border-radius: 2px;
+    border-radius: 2px;*/
     color: #FFFFFF;
-    font-family: candela_book;
+    /*font-family: candela_book;
     text-decoration: none;
     text-align: center;
     -webkit-appearance: none;
-    -webkit-border-radius: 0;
+    -webkit-border-radius: 0;*/
     cursor: pointer;
 }
 
 .orange_button, .orange_small_button, .orange_big_button
 {
-    border: 1px solid #ED2C00;
+    /*border: 1px solid #ED2C00;*/
+    border: 1px solid #FF4820;
     background-color: #FF4820;
     box-shadow: 2px 2px 2px #ED2C00;
 }
@@ -280,7 +310,10 @@ tipomatika@gmail.com*/
 .orange_button:hover, .orange_small_button:hover, .orange_big_button:hover, 
 .grey_button:hover, .grey_small_button:hover, .grey_big_button:hover
 {
-    opacity: 0.95;
+    opacity: 0.75;
+    color: #FFFFFF;
+    background-color: #FF3E13;
+    border-color: #FF3E13;
 }
 
 .orange_button:active, .orange_small_button:active, .orange_big_button:active, 
@@ -299,7 +332,139 @@ tipomatika@gmail.com*/
 .grey_button:active, .grey_small_button:active, .grey_big_button:active
 {
     box-shadow: 1px 1px 2px #919191;
-} 
+}
+
+.long_text-xs{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.text-xs{
+    padding-top: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.big_text-xs{
+    padding-top: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.div_connect{
+    display: inline-block;
+    /*width: 800px;*/
+    margin-top: 10px;
+}
+
+.styled_select_div{
+    /*float: right;
+    margin-left: 25%;*/
+    margin-top: 3px;
+    margin-left: 520px;
+    display: inline-block;
+}
+
+.styled_select_div_xs{
+    /*float: right;
+    margin-left: 25%;*/
+    margin-top: 3px;
+    display: inline-block;
+}
+
+.styled_a_div{
+    display: inline-block;
+}
+
+.styled_select{
+    padding-top: 10px;
+    padding-left: 40px;
+    text-align: left;
+    font-size: 1.5em;
+    opacity: 0.75;
+    height : 55px;
+    width: 180px;
+    color:#000000;
+    background-color: #F1F1F1;
+    min-width: 135px;
+}
+
+.styled_select:hover{
+    opacity: 0.65;
+    border-bottom: 1.5px solid #FF3E13;
+    border-left: 1.5px solid #FF3E13;
+    border-top: 1px solid #FF3E13;
+    background-color: #F1F1F1;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px #FF9B81, 0 0 8px #FF9B81;
+          box-shadow: inset 0 1px 1px #FF9B81, 0 0 8px #FF9B81;
+}
+
+.open .dropdown-toggle.styled_select_button{
+    opacity: 0.85;
+    color:#FFFFFF;
+    background-color: #FF5520;
+}
+
+.styled_select_button, .styled_select_button:focus{
+   font-size: 1.5em;
+   color: #FFFFFF;
+   height : 55px;
+   border: 1.5px solid #FF4820;
+   background-color: #FF4820;
+   
+}
+
+.styled_select_button:active{
+    background-color: #FF7E5C;
+}
+
+.styled_select_button:hover{
+    opacity: 0.75;
+    color: #FFFFFF;
+    border: 1.5px solid #FF3E13;
+    background-color: #FF3E13;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px #FF9B81, 0 0 8px #FF9B81;
+          box-shadow: inset 0 1px 1px #FF9B81, 0 0 8px #FF9B81;
+}
+
+.list_select{
+    width: 205px;
+    background-color: #F1F1F1;
+    opacity:0.75;
+}
+
+.list_option{
+    height : 50px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 1.5em;
+    padding-left: 10px;
+    
+}
+
+.img_option{
+    padding-right: 15px;
+}
+
+.list_option:hover{
+    cursor: pointer;
+    /*line-height: 1.3em;*/
+    padding-left: 20px;
+    background-color: #C2C2C2;
+    border-left: 3px solid #FF4820
+}
+
+.orange_small_button-xs{
+    margin-top: 7px;
+}
+
+.div_choix-xs{
+    float: right;
+    width: 380px;
+    padding: 7px 7px;
+}
 
 /*------------FIL D'ARIANE-----------*/
 
@@ -309,6 +474,19 @@ tipomatika@gmail.com*/
     display: inline-block;
     height: 40px;
     width: 260px;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #FFFFFF;
+    font-family: candela_book;
+}
+
+.orange_ariadne-xs, .grey_ariadne-xs
+{
+    /*padding-left: 15px;*/
+    padding-top: 10px;
+    display: inline-block;
+    height: 40px;
+    width: 120px;
     text-decoration: none;
     font-size: 1.2em;
     color: #FFFFFF;
@@ -330,9 +508,20 @@ tipomatika@gmail.com*/
 .orange_ariadne span:nth-child(2)
 {
 	
-    background: url('../images/pictures/ariadne_middle.png') repeat-x;//ariadne_middle.png
+    background: url('../media/pictures/ariadne_middle.png') repeat-x;
     height: 40px;
     width: 217px;
+    text-align: center;
+    line-height: 40px;
+    position: absolute;
+}
+
+.orange_ariadne-xs span:nth-child(2)
+{
+    padding-left: 5px;
+    background: url('../media/pictures/ariadne_middle.png') repeat-x;
+    height: 40px;
+    width: 77px;
     text-align: center;
     line-height: 40px;
     position: absolute;
@@ -340,7 +529,7 @@ tipomatika@gmail.com*/
 
 .orange_ariadne span:last-child
 {
-    background: url('../images/pictures/ariadne_front.png') no-repeat;
+    background: url('../media/pictures/ariadne_front.png') no-repeat;
     height: 40px;
     width: 24px;
     float: right;
@@ -348,14 +537,14 @@ tipomatika@gmail.com*/
 
 .grey_ariadne span:first-child
 {
-    background: url('../images/pictures/ariadne2_back.png') no-repeat;
+    background: url('../media/pictures/ariadne2_back.png') no-repeat;
     height: 40px;
     width: 19px;
 }
 
 .grey_ariadne span:nth-child(2)
 {
-    background: url('../images/pictures/ariadne2_middle.png') repeat-x;
+    background: url('../media/pictures/ariadne2_middle.png') repeat-x;
     height: 40px;
     width: 217px;
     text-align: center;
@@ -363,9 +552,20 @@ tipomatika@gmail.com*/
     position: absolute;
 }
 
+.grey_ariadne-xs span:nth-child(2)
+{
+    padding-left: 5px;
+    background: url('../media/pictures/ariadne2_middle.png') repeat-x;
+    height: 40px;
+    width: 77px;
+    text-align: center;
+    line-height: 40px;
+    position: absolute;
+}
+
 .grey_ariadne span:last-child
 {
-    background: url('../images/pictures/ariadne2_front.png') no-repeat;
+    background: url('../media/pictures/ariadne2_front.png') no-repeat;
     height: 40px;
     width: 24px;
     float: right;
