@@ -1,40 +1,3 @@
-function datepickerLoader() {
-    $('.datepicker').datepicker({
-        dateFormat: 'yy-mm-dd',
-        minDate: 0,
-        regional: 'fr'
-    });
-
-
-    /* French initialisation for the jQuery UI date picker plugin. */
-    /* Written by Keith Wood (kbwood{at}iinet.com.au),
-              Stéphane Nahmani (sholby@sholby.net),
-              Stéphane Raimbault <stephane.raimbault@gmail.com> */
-
-    $.datepicker.regional['fr'] = {
-        closeText: 'Fermer',
-        prevText: 'Précédent',
-        nextText: 'Suivant',
-        currentText: 'Aujourd\'hui',
-        monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-            'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
-        ],
-        monthNamesShort: ['Janv.', 'Fév.', 'Mars', 'Avril', 'Mai', 'Juin',
-            'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'
-        ],
-        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-        weekHeader: 'Sem.',
-        dateFormat: 'dd/mm/yy',
-        firstDay: 1,
-        isRTL: false,
-        showMonthAfterYear: false,
-        yearSuffix: ''
-    };
-    $.datepicker.setDefaults($.datepicker.regional['fr']);
-}
-
 /*
  *Fonction d'ajout ou suppression de choix lors
  *de la création d'un sondage
@@ -54,24 +17,22 @@ function manageChoices(input) {
 
             //Création de l'input
             var input = document.createElement("input");
-            input.className = "text_edit input_choice datepicker hasDatepicker";
+            input.className = " text_edit input_choice datepicker";
             input.setAttribute("readonly", "true");
             input.setAttribute("name", "choices[]");
 
-
             var label = document.createElement("label");
             label.setAttribute("for", "");
-            label.className = "text lbl_choice datepick";
+            label.className = " text lbl_choice datepick";
 
             var a = document.createElement("a");
-            a.className = "grey_button"
+            a.className = "grey_button";
             a.setAttribute("title", "Supprimer");
             a.setAttribute("type", "button");
             a.setAttribute("onclick", "manageChoices(this);");
-            a.innerText = " x ";
+            a.innerText = "x";
 
             //Création du bouton
-
             choice.className = 'choice';
             choice.appendChild(label);
             choice.appendChild(input);
@@ -82,7 +43,7 @@ function manageChoices(input) {
             break;
 
         case 'grey_button':
-
+        
             // Suppression du champ de choix
             if (document.getElementsByName("choices[]").length > 2) {
                 choices = input.parentNode.parentNode;
@@ -97,24 +58,13 @@ function manageChoices(input) {
     }
 
 
-
-
     // Reset des label
     datepick = document.getElementsByClassName('datepick');
     input_choice = document.getElementsByClassName('datepicker');
     for (i = 1; i <= datepick.length; i++) {
-        datepick.item(i - 1).innerHTML = "Date limite " + i + '<span class="asterisc"> * </span>';
+        datepick.item(i - 1).innerHTML = "Date limite " + i + '<span class="asterisc"> *</span>';
         datepick.item(i - 1).setAttribute('for', 'datepicker' + i);
     }
-
-    // if (document.getElementsByName("choices[]").length === 2) {
-    //     document.getElementsByName("choices[]").css('cursor', 'no-drop');
-    // } else {
-    //     document.getElementsByName("choices[]").css('cursor', 'pointer');
-    // }
-
-
-    // initBlur();
     datepickerLoader();
 }
 
@@ -153,7 +103,5 @@ function manageConnectionForm(radio) {
 
         default:
             alert('Erreur');
-
-
     }
 }

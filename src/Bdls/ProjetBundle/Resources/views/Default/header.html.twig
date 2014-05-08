@@ -44,7 +44,7 @@
 	</head>
         <!-- jQuery 1.9-->
 		{% block javascripts %}
-        <script src="<?php $this->getPath('js/jquery.js'); ?>"> </script>
+        <script src={{ asset('bundles/projet/js/jquery.js') }}> </script>
         <script src="<?php $this->getPath('js/formCheck.js'); ?>"> </script>
 		{% endblock %}
     <body>
