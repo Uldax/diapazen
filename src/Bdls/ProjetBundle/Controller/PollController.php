@@ -280,8 +280,9 @@ class PollController extends Controller
 			}
 		}
         $title = 'Connexion | Diapazen';
+		$year=date('Y');
 		$error='pas d\'erreur.';
-		return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'last_username'));
+		return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
 
 		
 	}
@@ -351,14 +352,16 @@ class PollController extends Controller
 //					// On choisit le rendu
 //					$this->set('class_connect', 'grey');
 //					$this->set('class_share', 'orange');
+					$year=date('Y');
 					$title = 'Connexion | Diapazen';
-					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title, 'last_username'));
+					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title, 'year'=>$year));
 			}
 			else
 			{
+				$year=date('Y');
 				$title = 'Connexion | Diapazen';
 				$error = 'err';
-				return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'last_username'));
+				return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
 			}
 //			if ($this->isUserConnected())
 //			{
@@ -615,12 +618,16 @@ class PollController extends Controller
 					$this->set('title', $res['title'] .' | Diapazen');
 					
 					// On fait le rendu
-					$this->render('pollView');
+					$title='Accueil | Diapazen';
+					$year=date('Y');
+					return $this->render('BdlsProjetBundle:Default:pollView.html.twig', array('title'=>$title, 'year'=>$year));
 				}
 			}
 			catch(Exception $e)
 			{
-				die($this->render('dbError'));
+				$title='Accueil | Diapazen';
+				$year=date('Y');
+				return $this->render('BdlsProjetBundle:Default:dbError.html.twig', array('title'=>$title, 'year'=>$year));
 			}
 		}
 	}

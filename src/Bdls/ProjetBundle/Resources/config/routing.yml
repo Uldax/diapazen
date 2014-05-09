@@ -28,11 +28,19 @@ bdls_projet_login:
 
 bdls_projet_connect:
     pattern: /connect
-    defaults: {_controller: BdlsProjetBundle:Poll:connect }
+    defaults: { _controller: BdlsProjetBundle:Poll:connect }
 
 bdls_projet_share:
     pattern: /share
-    defaults: {_controller: BdlsProjetBundle:Poll:share }
+    defaults: { _controller: BdlsProjetBundle:Poll:share }
+
+bdls_projet_sent:
+    pattern: /sent
+    defaults: { _controller: BdlsProjetBundle:Poll:sent }
+    
+bdls_projet_view:
+    pattern: /view
+    defaults: {_controller: BdlsProjetBundle:Poll:view }
 
 login:
     pattern: /login
