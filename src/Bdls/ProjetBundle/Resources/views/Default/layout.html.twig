@@ -32,7 +32,7 @@
 			{#					<div><p class="text" >Bonjour</p></div>#}
 								{% else %}
                                 <div id="connect_box" >
-                                    <form action="{{ path('bdls_projet_login') }}" method="post" class="form-inline">
+                                    <form action="{{ path('login_check') }}" method="post" class="form-inline">
 											<input type="text" id="username" class="small_text_edit form-control hidden-xs" placeholder="E-mail" name="_username" />
 											<input type="password" class="small_text_edit form-control hidden-xs" id="password" placeholder="Mot de passe" name="_password" />
                                            <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
