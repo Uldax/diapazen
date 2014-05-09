@@ -11,13 +11,14 @@
 		{% endif %}#}
 		<span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
 		</div>
+
 		
 		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
 			<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
 			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
 			<input class="text_edit" id="id_title_input" name="title_input" type="text" value="">
-			<label for="datepicker" class="text">Date limite</label>
-			<input class="text_edit" name="date_input" id="datepicker" readonly/>
+			<label for="datepicker" class="text ">Date limite</label>
+			<input class="text_edit datepicker" name="date_input" id="datepicker" readonly/>
 			<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
 			<textarea class="small_text_edit" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
 			<h1 class="small_title">Propositions de {{ nametype }}</h1>
@@ -25,25 +26,35 @@
 				<div class="choice">
 					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
 					<input class="text_edit input_choice" id="choix1" type="text" name="choices[]" value="" />
-					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
+					<input type="button" value="V" class="valid" onClick="codeAddress(choix1);">
+                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
 				</div>
 				<div class="choice">
 					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
 					<input class="text_edit input_choice" id="choix2" type="text" name="choices[]" value="" />
-					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
+					 <input type="button" value="V" class="valid" onClick="codeAddress(choix2);">
+                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
 				</div>
 				<div class="choice">
 					<label for="choix3" class="text lbl_choice">Choix 3<span class="asterisc"> *</span></label>
 					<input class="text_edit input_choice" id="choix3" type="text" name="choices[]" value="" />
-					<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,'{{ type }}');">x</a>
+					<input type="button" value="V" class="valid" onClick="codeAddress(choix3);">
+                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
 				</div>
 			</div>
 			<input class="orange_button" type="submit" value="Étape suivante" />
 			<a class="orange_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
-		</form>
+		
+                    <!-- Map google -->
+                   <div id="map-canvas"></div>
+                </form> 
+                
 	</div>
 
-	<!--<script src="<?php $this->getPath('js/script.js'); ?>"> </script>
-	<script src="<?php $this->getPath('js/jquery-ui-1.10.3.custom.js'); ?>"></script>-->
+    <!-- Chargement de l'API google map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNOpHpuGzB9PguOdh3naoMxPzBhOonyo4&v=3.exp&sensor=false"></script>
+    <!-- Chargement de place API pour l'autocomplétion de l'input" -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
+    <script src={{ asset('bundles/projet/js/sondage_map.js') }}> </script>
     {% endblock %}     
 
