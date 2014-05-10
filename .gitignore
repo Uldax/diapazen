@@ -1,0 +1,4 @@
+app/cache/
+app/logs/
+app/logs/dev.log
+nbproject/private/

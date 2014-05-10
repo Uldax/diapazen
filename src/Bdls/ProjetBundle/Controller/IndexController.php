@@ -33,14 +33,9 @@ class IndexController extends Controller
 		}
 		else//*/
 
-
-
-
 		//formulaire
 		$form = $this->createFormBuilder()
-			->add('Type', 'choice', array(
-		             'choices' => array('c1' => 'Lieux', 'c2' => 'Dates','c3' => 'Autres'),
-		             'multiple' => false))
+			->add('Type', 'hidden')
 			->getForm();
 		// Récupération requête
 	    $request = $this->get('request');
