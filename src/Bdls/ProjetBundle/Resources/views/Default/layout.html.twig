@@ -28,7 +28,7 @@
                             <!--<?php if (!$this->isUserConnected()){ ?>-->
                          <div class="col-lg-4 col-md-5 col-sm-7 col-xs-4 div_connect">
 							 {% if is_granted('ROLE_USER') %}
-								<div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="{{ path('bdls_projet_index') }}"><span class="orange_text">{{ app.user.username }}</span></a></p><a class="link" href="{{ path('logout') }}">Se déconnecter</a></div>
+								<div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="{{ path('bdls_projet_dashboard') }}"><span class="orange_text">{{ app.user.username }}</span></a></p><a class="link" href="{{ path('logout') }}">Se déconnecter</a></div>
 			{#					<div><p class="text" >Bonjour</p></div>#}
 								{% else %}
                                 <div id="connect_box" >

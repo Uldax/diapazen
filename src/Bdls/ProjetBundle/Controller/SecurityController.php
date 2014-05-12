@@ -52,4 +52,53 @@ class SecurityController extends Controller
 		'title'			=> $title,
 	  ));
 	}
+
+	public function profilAction()
+	{
+		$title = 'Profil | Diapazen';
+		$year=date('Y');
+
+		
+
+
+		// Si le visiteur n'est identifié, on le redirige vers l'accueil
+		if (! $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
+		{
+			return $this->redirect($this->generateUrl('bdls_projet_index'));
+		}
+
+	  	$request = $this->getRequest();
+	  	$session = $request->getSession();
+	  
+	  	// On vérifie s'il y a des erreurs d'une précédente soumission du formulaire
+		if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) 
+		{
+			$error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+		} 
+		else 
+		{
+			$error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+			$session->remove(SecurityContext::AUTHENTICATION_ERROR);
+		}
+
+
+
+		//test en cas d'update
+		//$data_updated = true;
+
+		//info user
+		$lastname_user = $session->get(SecurityContext::LAST_USERNAME);
+		$firstname_user = "??";
+		$mail_user = "???";
+
+
+		return $this->render('BdlsProjetBundle:Default:personalData.html.twig', array(
+		// Valeur du précédent nom d'utilisateur entré par l'internaute
+		'title'			=> $title,
+		'year'			=> $year,
+		'lastname_user' => $lastname_user,
+		'firstname_user' => $firstname_user,
+		'mail_user' => $mail_user
+	  ));
+	}
 }

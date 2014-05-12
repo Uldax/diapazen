@@ -45,6 +45,10 @@ bdls_projet_view:
 login:
     pattern: /login
     defaults: { _controller: BdlsProjetBundle:Security:login }
+
+bdls_projet_profil:
+    pattern: /profil
+    defaults: { _controller: BdlsProjetBundle:Security:profil }
     
 login_check:
     pattern: /login_check

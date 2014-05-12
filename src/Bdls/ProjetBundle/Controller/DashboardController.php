@@ -61,10 +61,12 @@ class DashboardController extends Controller
     */
 	public function indexAction($params = null)
 	{
-		/*
-		// Titre de la page
-		$this->set('title', 'Tableau de bord | Diapazen');
+		// ATTENTION vérifier la connection avant d'afficher
 		
+		// Titre de la page
+		$title='Tableau de bord | Diapazen';
+		$year=date('Y');
+		/*
 		// on charge le model
 		$this->loadModel('poll');
 		//*/
@@ -120,8 +122,28 @@ class DashboardController extends Controller
 			else
 			 
 			 //*/
-			return $this->render('BdlsProjetBundle:Default:dbError.html.twig');
-				header('Location:' . BASE_URL);
+
+			$table = array(
+					array(
+						'open' => true,
+						'date' => date('d/m/Y'),
+						'title' => 'blabla open',
+						'description' => 'euhhh',
+						'POLL_ID' => 24),
+					array(
+						'open' => false,
+						'date' => date('d/m/Y'),
+						'title' => 'blabla close',
+						'description' => 'nope',
+						'POLL_ID' => 28)
+				);
+
+			return $this->render('BdlsProjetBundle:Default:dashboard.html.twig',array(
+				'title'=>$title, 
+				'year'=>$year,
+				'data_updated' => null,
+				'pollList' => $table
+			));
 		}
 		catch(Exception $e)
 		{
