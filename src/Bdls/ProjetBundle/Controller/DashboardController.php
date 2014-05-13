@@ -62,16 +62,30 @@ class DashboardController extends Controller
 	public function indexAction($params = null)
 	{
 		// ATTENTION vérifier la connection avant d'afficher
+		if (! $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
+		{
+			return $this->redirect($this->generateUrl('bdls_projet_index'));
+		}
 		
 		// Titre de la page
 		$title='Tableau de bord | Diapazen';
 		$year=date('Y');
+		$data_updated = null;
+
+
 		/*
 		// on charge le model
 		$this->loadModel('poll');
 		//*/
 		try
 		{
+			//traitement en cas de réponse
+			$request = $this->get('request');
+		    if ($request->getMethod() == 'POST') {
+		    	$id_closa = $request->get("close");
+		    	$data_updated = false;
+		    }
+
 			//si on a fermé un sondage
 			/*if (isset($_POST['close']) && !empty($_POST['close']))
 			{
@@ -123,6 +137,7 @@ class DashboardController extends Controller
 			 
 			 //*/
 
+			// donné de test
 			$table = array(
 					array(
 						'open' => true,
@@ -138,10 +153,14 @@ class DashboardController extends Controller
 						'POLL_ID' => 28)
 				);
 
+
+
+
+
 			return $this->render('BdlsProjetBundle:Default:dashboard.html.twig',array(
 				'title'=>$title, 
 				'year'=>$year,
-				'data_updated' => null,
+				'data_updated' => $data_updated,
 				'pollList' => $table
 			));
 		}
