@@ -25,3 +25,29 @@ bdls_projet_creation:
 bdls_projet_login:
     pattern: /log
     defaults: { _controller: BdlsProjetBundle:User:login }
+
+bdls_projet_connect:
+    pattern: /connect
+    defaults: { _controller: BdlsProjetBundle:Poll:connect }
+
+bdls_projet_share:
+    pattern: /share
+    defaults: { _controller: BdlsProjetBundle:Poll:share }
+
+bdls_projet_sent:
+    pattern: /sent
+    defaults: { _controller: BdlsProjetBundle:Poll:sent }
+    
+bdls_projet_view:
+    pattern: /view
+    defaults: {_controller: BdlsProjetBundle:Poll:view }
+
+login:
+    pattern: /login
+    defaults: { _controller: BdlsProjetBundle:Security:login }
+    
+login_check:
+    pattern: /login_check
+    
+logout:
+    pattern: /logout

@@ -4,11 +4,11 @@
 			<img class="img_un" src="" alt="1">
 			<img id="broken_diapason" src="{{ asset('bundles/projet/images/pictures/diapason_broken.png') }}" alt="diapason broken" >
 			<div id="text_404">
-                            <dl>
-				<dt class="big_title" >Erreur 404</dt>
-				<dd class="title" >La page demandée n'existe pas.</dd>
-				<!--<a class="link" href="<?php $this->getHomeUrl(); ?>">Retour à la page d'accueil</a>-->
-                            </dl>
+
+				<p class="big_title" >Erreur 404</p>
+				<p class="title" >La page demandée n'existe pas.</p>
+				<a class="link" href="{{ path('bdls_projet_index') }}">Retour à la page d'accueil</a>
+
 			</div>
 		</div>
 	{% endblock %}

@@ -124,7 +124,7 @@ header #password_connect
     padding-bottom: 170px;
 }
 
-#long_content-xs
+#content_mobile
 {
     z-index: 1;
     min-height: 700px;
@@ -136,7 +136,7 @@ header #password_connect
 footer
 {
     background-color: #F1F1F1;
-    position: fixed;
+    /*position: fixed;*/
     bottom: 0px;
     width: 100%;
     z-index: 2;
@@ -148,7 +148,7 @@ footer
 .footer-xs
 {
     background-color: #F1F1F1;
-    position: fixed;
+    /*position: fixed;*/
     bottom: 0px;
     width: 100%;
     z-index: 2;
@@ -156,6 +156,7 @@ footer
 	height: 62px;
     padding : 10px 10px;
     padding-bottom: 75px;
+
 }
 
 footer .text, ul
@@ -277,7 +278,7 @@ footer #logo_isen
 
 .default_form-xs
 {
-    width: 400px;
+    width: 380px;
     margin: auto;
 }
 
@@ -290,7 +291,7 @@ footer #logo_isen
 .default_form-xs input[type="submit"], .default_form-xs input[type="text"], .default_form-xs textarea, .default_form-xs input[type="password"], .default_form-xs input[type="mail"]
 {
     display: inline-block;
-    width: 270px;
+    width: 260px;
     margin-bottom: 15px;
 }
 

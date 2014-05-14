@@ -14,50 +14,52 @@
 		{% endblock %}
 		<!--<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />-->
 	</head>
-    
+    <body>
 
 		<header>
                     <div id="header_content row">
                         <div class="col-lg-3 col-md-1"></div>
                         <div class="col-lg-4 col-md-6 col-sm-5 col-xs-8 div_connect">
                             <a href="{{ path('bdls_projet_index') }}">
-                            <img id="logo" src="{{ asset('bundles/projet/images/pictures/diapazen_v2.png') }}" alt="Diapazen" class="img-rounded">
+                            <img id="logo" src="{{ asset('bundles/projet/media/pictures/diapazen_v2.png') }}" alt="Diapazen" class="img-rounded">
                             </a>
                         </div>
 
                             <!--<?php if (!$this->isUserConnected()){ ?>-->
                          <div class="col-lg-4 col-md-5 col-sm-7 col-xs-4 div_connect">
+							 {% if is_granted('ROLE_USER') %}
+								<div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="{{ path('bdls_projet_index') }}"><span class="orange_text">{{ app.user.username }}</span></a></p><a class="link" href="{{ path('logout') }}">Se déconnecter</a></div>
+			{#					<div><p class="text" >Bonjour</p></div>#}
+								{% else %}
                                 <div id="connect_box" >
-                                <form action="{{ path('bdls_projet_login') }}" method="post" class="form-inline">
-                                        <input id="mail_connect" name="email" class= "form-control hidden-xs" type="mail" placeholder="E-mail">
-                                        <input id="password_connect" name="password" class="form-control hidden-xs" type="password" placeholder="Mot de passe">
-                                        <input class="btn btn-default orange_small_button hidden-xs" type="submit" value="Connexion">
-                                        <input class="btn btn-default orange_small_button orange_small_button-xs visible-xs" type="submit" value="Connexion">
-                                </form>
+                                    <form action="{{ path('login_check') }}" method="post" class="form-inline">
+											<input type="text" id="username" class="small_text_edit form-control hidden-xs" placeholder="E-mail" name="_username" />
+											<input type="password" class="small_text_edit form-control hidden-xs" id="password" placeholder="Mot de passe" name="_password" />
+                                           <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
+                                            <input class="btn btn-default orange_small_button hidden-xs" type="submit" value="Connexion">
+                                            <input class="btn btn-default orange_small_button orange_small_button-xs visible-xs" type="submit" value="Connexion">
+                                    </form>
                                 </div>
                                 <a class="btn btn-link small_link hidden-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a> 
                          </div>
                          <div class="col-lg-1"></div>
-                            <!--<?php } else { ?>
-                                            <div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="<?php $this->getHomeUrl();?>/user/profile"><span class="orange_text"><?php echo $this->getUserInfo('firstname').' '.$this->getUserInfo('lastname').' '; ?></span></a></p><a class="link" href="<?php $this->getHomeUrl(); ?>/user/logout">Se déconnecter</a></div>
-                            <?php } ?>-->
+                       {% endif %}
+				
                     </div>
 		</header>
 		{% block body %}
-	<body>
-		
-	</body>
 		{% endblock %}
 		<!--<div class="white_bg">-->
-		
-		
 		{% block javascripts %}
-                        <script src="{{ asset('bundles/projet/js/script.js') }}" type="text/javascript"></script>
-                        <script src="{{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('bundles/projet/js/jquery-2.0.2.js') }}" type="text/javascript"></script>
-                        <script src="{{ asset('bundles/projet/js/bootstrap.js') }}" type="text/javascript"></script>
-                        
-		{% endblock %}
+                    <!-- Création des input date en jquerry necessaire pour tout les sondages -->
+                    <script src="{{ asset('bundles/projet/js/jquery.js') }}" type="text/javascript"></script>
+                    <script src="{{ asset('bundles/projet/js/jquery-2.0.2.js') }}" type="text/javascript"></script>
+                    <!--Inutilisé il me semble  -->
+                     <script src="{{ asset('bundles/projet/js/bootstrap.js') }}" type="text/javascript"></script>
+                    <script src={{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js')}}></script>
+                    <script>datepickerLoader();</script>
+               {% endblock %}
+
     
 	{% block footer %}
 		<footer class="hidden-xs">
@@ -67,7 +69,7 @@
 		        <!-- <li><a class="link" href="#">Contact</a></li> -->
 		    </ul>
 		    <p class="text">© {{ year }} Diapazen</p>
-		    <img id="logo_isen" src="{{ asset('bundles/projet/images/pictures/logo_isen.png') }}" class="img-rounded">
+		    <img id="logo_isen" src="{{ asset('bundles/projet/media/pictures/logo_isen.png') }}" class="img-rounded">
 		</footer>
                         
                 <!-- Footer mobile -->        
@@ -78,7 +80,11 @@
 		        <!-- <li><a class="link" href="#">Contact</a></li> -->
 		    </ul>
 		    <p class="text">© {{ year }} Diapazen</p>
-		    <img id="logo_isen" src="{{ asset('bundles/projet/images/pictures/logo_isen.png') }}" class="img-rounded">
+		    <img id="logo_isen" src="{{ asset('bundles/projet/media/pictures/logo_isen.png') }}">
+
 		</footer>
 		{% endblock %}
+		
+    </body>
+
 </html>
