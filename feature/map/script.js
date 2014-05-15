@@ -59,6 +59,7 @@ function manageChoices(input) {
             input.className = "text_edit input_choice";
             input.setAttribute("type", "text");
             input.setAttribute("name", "choices[]");
+            input.setAttribute("required", "required");
 
             var label = document.createElement("label");
             label.setAttribute("for", "");
@@ -206,7 +207,7 @@ function addMarker(resultat, adresse) {
     }
     if (boolMarker == false) {
         infowindow = new google.maps.InfoWindow({
-            content: adresse + '<br />' + resultat[0].geometry.location.A + ';' + resultat[0].geometry.location.k
+            content: resultat[0].formatted_address + '<br />' + resultat[0].geometry.location.A + ';' + resultat[0].geometry.location.k
         });
         var marker = new google.maps.Marker({
             position: resultat[0].geometry.location,
@@ -224,6 +225,7 @@ function addMarker(resultat, adresse) {
                     infowindowarray[i].open(map, marker);
                 }
             }(markers[i], i));
+            alert(posmarkers[i]);
         }
     }
     boolMarker = false;

@@ -67,13 +67,13 @@
       <div id="choices">
         <div id="choice">
           <label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
-          <input class="text_edit input_choice" id="choix1" type="text" name="choices[]" value="" />
+          <input class="text_edit input_choice" id="choix1" type="text" name="choices[]" value="" required="required" />
           <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
           <input type="button" value="V" class="valid" onClick="codeAddress(choix1);">
         </div>
         <div class="choice">
           <label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
-          <input class="text_edit input_choice" id="choix2" type="text" name="choices[]" value="" />
+          <input class="text_edit input_choice" id="choix2" type="text" name="choices[]" value="" required="required" />
           <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
           <input type="button" value="V" class="valid" onClick="codeAddress(choix2);">
         </div>
