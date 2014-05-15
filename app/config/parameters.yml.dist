@@ -6,10 +6,14 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
+    transport:  smtp
+	port:       587
+    host:       in.mailjet.com
+	encryption: ssl
+	auth_mode:  login
+    user:       ~
+    password:   ~
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+

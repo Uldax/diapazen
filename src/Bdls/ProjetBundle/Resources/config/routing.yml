@@ -41,6 +41,10 @@ bdls_projet_sent:
 bdls_projet_view:
     pattern: /view
     defaults: {_controller: BdlsProjetBundle:Poll:view }
+    
+bdls_projet_mail:
+    pattern: /mail
+    defaults: {_controller: BdlsProjetBundle:Index:mail }
 
 login:
     pattern: /login
