@@ -61,15 +61,31 @@ class DashboardController extends Controller
     */
 	public function indexAction($params = null)
 	{
-		/*
-		// Titre de la page
-		$this->set('title', 'Tableau de bord | Diapazen');
+		// ATTENTION vérifier la connection avant d'afficher
+		if (! $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
+		{
+			return $this->redirect($this->generateUrl('bdls_projet_index'));
+		}
 		
+		// Titre de la page
+		$title='Tableau de bord | Diapazen';
+		$year=date('Y');
+		$data_updated = null;
+
+
+		/*
 		// on charge le model
 		$this->loadModel('poll');
 		//*/
 		try
 		{
+			//traitement en cas de réponse
+			$request = $this->get('request');
+		    if ($request->getMethod() == 'POST') {
+		    	$id_closa = $request->get("close");
+		    	$data_updated = false;
+		    }
+
 			//si on a fermé un sondage
 			/*if (isset($_POST['close']) && !empty($_POST['close']))
 			{
@@ -120,8 +136,33 @@ class DashboardController extends Controller
 			else
 			 
 			 //*/
-			return $this->render('BdlsProjetBundle:Default:dbError.html.twig');
-				header('Location:' . BASE_URL);
+
+			// donné de test
+			$table = array(
+					array(
+						'open' => true,
+						'date' => date('d/m/Y'),
+						'title' => 'blabla open',
+						'description' => 'euhhh',
+						'POLL_ID' => 24),
+					array(
+						'open' => false,
+						'date' => date('d/m/Y'),
+						'title' => 'blabla close',
+						'description' => 'nope',
+						'POLL_ID' => 28)
+				);
+
+
+
+
+
+			return $this->render('BdlsProjetBundle:Default:dashboard.html.twig',array(
+				'title'=>$title, 
+				'year'=>$year,
+				'data_updated' => $data_updated,
+				'pollList' => $table
+			));
 		}
 		catch(Exception $e)
 		{
