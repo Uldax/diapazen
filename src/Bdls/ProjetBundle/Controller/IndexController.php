@@ -92,6 +92,7 @@ class IndexController extends Controller
 		if ($request->getMethod() == 'POST') 
 		{
 		  	$mails = $request->get("mails");
+			$tabMails = $this->sharePoll($mails);
 		}
 			
 		$name = "Neo";
@@ -101,7 +102,10 @@ class IndexController extends Controller
 		$message = \Swift_Message::newInstance();
         $message->setSubject("Objet");
         $message->setFrom('contact.diapazen@gmail.com');
-        $message->setTo($mails);
+		foreach($tabMails as $mail)
+		{
+			$message->setTo($mail);
+		}
         // pour envoyer le message en HTML
         //$message->setBody($this->renderView('BdlsProjetBundle:Default:eMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year)));
         $message->setBody('Paul.');
@@ -111,6 +115,33 @@ class IndexController extends Controller
 		$this->get('mailer')->send($message);
 
 		return $this->render('BdlsProjetBundle:Default:shareMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year));
+	}
+	
+	public function sharePoll($texteareaContent)
+	{
+
+		$emails = preg_split("/[\r\n\t,; ]+/", $texteareaContent, -1, PREG_SPLIT_NO_EMPTY);
+
+		$emails = array_unique($emails);
+
+		$regexMail = '#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#';
+		foreach($emails as $current)
+		{
+			// Evite les failles XSS
+			$current = htmlspecialchars($current);
+			
+			if(!preg_match($regexMail, $current))
+			{
+				unset($emails[array_search($current, $emails)]);
+			}
+		}
+
+		if (!isset($emails))
+		{
+			return null;
+		}
+
+		return $emails;
 	}
 	
 	public function forgotAction()

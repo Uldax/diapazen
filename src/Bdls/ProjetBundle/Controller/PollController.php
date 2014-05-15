@@ -147,7 +147,28 @@ class PollController extends Controller
 		$this->set('class_create', 'grey');
 		$this->set('class_connect', 'orange');
 		$this->set('class_share', 'grey');
-
+		
+		$request = $this->get('request');
+		if ($request->getMethod() == 'POST') 
+		{
+			$type = $request->get("type");
+		}
+		switch($type)
+		{
+			case "c1":
+				$pool = new PoolLieuxModelController($request);
+				break;
+			case "c2":
+				$pool = new PoolDateModelController($request);
+				break;
+			case "c3":
+				$pool = new PoolTextModelController($request);
+				break;
+			default:
+				$pool = new PoolTextModelController($request);
+				break;
+		}
+		$_SESSION['pool'] = $pool;
 		//récupération des valeurs du fil d'arianne
 		if (isset($_SESSION['show_ariadne']) && isset($_SESSION['width_ariadne']))
 		{
@@ -352,9 +373,10 @@ class PollController extends Controller
 //					// On choisit le rendu
 //					$this->set('class_connect', 'grey');
 //					$this->set('class_share', 'orange');
+					$titre = $_SESSION['pool']->getPollUrl();
 					$year=date('Y');
 					$title = 'Connexion | Diapazen';
-					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title, 'year'=>$year));
+					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$titre, 'year'=>$year));
 			}
 			else
 			{
