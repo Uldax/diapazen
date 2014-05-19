@@ -6,6 +6,5 @@ app/cache/**/*
 app/logs/**/*
 app/logs/dev.log
 nbproject/private/
-src/Bdls/ProjetBundle/Entity/
 web/bundles/bdlsprojet/
 id
