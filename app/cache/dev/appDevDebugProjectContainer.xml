@@ -362,9 +362,13 @@
     <parameter key="monolog.handler.cube.class">Monolog\Handler\CubeHandler</parameter>
     <parameter key="monolog.handler.amqp.class">Monolog\Handler\AmqpHandler</parameter>
     <parameter key="monolog.handler.error_log.class">Monolog\Handler\ErrorLogHandler</parameter>
+    <parameter key="monolog.handler.loggly.class">Monolog\Handler\LogglyHandler</parameter>
     <parameter key="monolog.activation_strategy.not_found.class">Symfony\Bundle\MonologBundle\NotFoundActivationStrategy</parameter>
     <parameter key="monolog.handler.fingers_crossed.class">Monolog\Handler\FingersCrossedHandler</parameter>
     <parameter key="monolog.handler.fingers_crossed.error_level_activation_strategy.class">Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy</parameter>
+    <parameter key="monolog.handler.mongo.class">Monolog\Handler\MongoDBHandler</parameter>
+    <parameter key="monolog.mongo.client.class">MongoClient</parameter>
+    <parameter key="monolog.swift_mailer.handlers" type="collection"/>
     <parameter key="monolog.handlers_to_channels" type="collection">
       <parameter key="monolog.handler.console">null</parameter>
       <parameter key="monolog.handler.main">null</parameter>
@@ -394,6 +398,7 @@
     <parameter key="swiftmailer.mailer.default.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.source_ip">null</parameter>
     <parameter key="swiftmailer.mailer.default.spool.enabled">false</parameter>
+    <parameter key="swiftmailer.mailer.default.plugin.impersonate">null</parameter>
     <parameter key="swiftmailer.mailer.default.single_address">null</parameter>
     <parameter key="swiftmailer.spool.enabled">false</parameter>
     <parameter key="swiftmailer.delivery.enabled">true</parameter>
@@ -1653,7 +1658,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>537476ea45685</argument>
+            <argument>5374d602da228</argument>
           </service>
         </argument>
       </argument>
@@ -1954,12 +1959,13 @@
             </argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
+            <argument>null</argument>
           </service>
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>537476ea45685</argument>
+            <argument>5374d602da228</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2332,7 +2338,9 @@
       <argument type="service">
         <service class="Doctrine\ORM\Configuration" public="false">
           <call method="setEntityNamespaces">
-            <argument type="collection"/>
+            <argument type="collection">
+              <argument key="BdlsProjetBundle">Bdls\ProjetBundle\Entity</argument>
+            </argument>
           </call>
           <call method="setMetadataCacheImpl">
             <argument type="service">
@@ -2363,7 +2371,19 @@
           </call>
           <call method="setMetadataDriverImpl">
             <argument type="service">
-              <service class="Doctrine\ORM\Mapping\Driver\DriverChain" public="false"/>
+              <service class="Doctrine\ORM\Mapping\Driver\DriverChain" public="false">
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>C:\wamp\www\Webdev_CIR3\TP\diapaClone\diapazen\src\Bdls\ProjetBundle\Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>Bdls\ProjetBundle\Entity</argument>
+                </call>
+              </service>
             </argument>
           </call>
           <call method="setProxyDir">
@@ -2639,6 +2659,9 @@
       <argument type="service" id="templating.loader"/>
       <argument type="service" id="debug.stopwatch"/>
       <argument type="service" id="templating.globals"/>
+      <call method="setCharset">
+        <argument>UTF-8</argument>
+      </call>
       <call method="setHelpers">
         <argument type="collection">
           <argument key="slots">templating.helper.slots</argument>
@@ -2662,7 +2685,6 @@
       <argument type="service" id="templating.name_parser"/>
       <argument type="service" id="templating.locator"/>
       <argument type="service" id="debug.stopwatch"/>
-      <argument type="service" id="templating.globals"/>
       <call method="setDefaultEscapingStrategy">
         <argument type="collection">
           <argument type="service" id="templating"/>
@@ -2788,6 +2810,15 @@
                 <service class="Swift_Transport_Esmtp_Auth_PlainAuthenticator" public="false"/>
               </argument>
             </argument>
+            <call method="setUsername">
+              <argument>119ed70332fb8739bcd460e01b052a1a</argument>
+            </call>
+            <call method="setPassword">
+              <argument>fd286a54665a84519db2b6f37fa317f7</argument>
+            </call>
+            <call method="setAuthMode">
+              <argument>login</argument>
+            </call>
           </service>
         </argument>
       </argument>
@@ -2802,15 +2833,6 @@
       </call>
       <call method="setEncryption">
         <argument>ssl</argument>
-      </call>
-      <call method="setUsername">
-        <argument>119ed70332fb8739bcd460e01b052a1a</argument>
-      </call>
-      <call method="setPassword">
-        <argument>fd286a54665a84519db2b6f37fa317f7</argument>
-      </call>
-      <call method="setAuthMode">
-        <argument>login</argument>
       </call>
       <call method="setTimeout">
         <argument>30</argument>

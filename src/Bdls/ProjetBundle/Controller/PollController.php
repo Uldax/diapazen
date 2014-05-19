@@ -1,6 +1,7 @@
 <?php
 namespace Bdls\ProjetBundle\Controller;
 
+use Bdls\ProjetBundle\Classe;
 /**
  * 
  * Contrôleur de la page d'un sondage
@@ -156,16 +157,16 @@ class PollController extends Controller
 		switch($type)
 		{
 			case "c1":
-				$pool = new PoolLieuxModelController($request);
+				$pool = new PoolLieux($request);
 				break;
 			case "c2":
-				$pool = new PoolDateModelController($request);
+				$pool = new PoolDates($request);
 				break;
 			case "c3":
-				$pool = new PoolTextModelController($request);
+				$pool = new PoolText($request);
 				break;
 			default:
-				$pool = new PoolTextModelController($request);
+				$pool = new PoolText($request);
 				break;
 		}
 		$_SESSION['pool'] = $pool;
@@ -373,7 +374,7 @@ class PollController extends Controller
 //					// On choisit le rendu
 //					$this->set('class_connect', 'grey');
 //					$this->set('class_share', 'orange');
-					$titre = $_SESSION['pool']->getPollUrl();
+					$titre = $_SESSION['pool']->getPoll_type();
 					$year=date('Y');
 					$title = 'Connexion | Diapazen';
 					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$titre, 'year'=>$year));
