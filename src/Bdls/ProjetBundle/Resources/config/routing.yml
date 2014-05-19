@@ -26,9 +26,9 @@ bdls_projet_login:
     pattern: /log
     defaults: { _controller: BdlsProjetBundle:User:login }
 
-bdls_projet_connect:
-    pattern: /connect
-    defaults: { _controller: BdlsProjetBundle:Poll:connect }
+#bdls_projet_connect:
+    #pattern: /connect
+    #defaults: { _controller: BdlsProjetBundle:Poll:connect }
 
 bdls_projet_share:
     pattern: /share
@@ -46,16 +46,16 @@ bdls_projet_mail:
     pattern: /mail
     defaults: {_controller: BdlsProjetBundle:Index:mail }
 
-login:
-    pattern: /login
-    defaults: { _controller: BdlsProjetBundle:Security:login }
+#login:
+    #pattern: /login
+    #defaults: { _controller: BdlsProjetBundle:Security:login }
 
-bdls_projet_profil:
-    pattern: /profil
-    defaults: { _controller: BdlsProjetBundle:Security:profil }
+#bdls_projet_profil:
+   # pattern: /profil
+   # defaults: { _controller: BdlsProjetBundle:Security:profil }
     
-login_check:
-    pattern: /login_check
+#login_check:
+    #pattern: /login_check
     
-logout:
-    pattern: /logout
+#logout:
+   # pattern: /logout

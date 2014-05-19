@@ -152,7 +152,7 @@ class PollController extends Controller
 		if ($request->getMethod() == 'POST') 
 		{
 			$type = $request->get("type");
-		}
+		
 		switch($type)
 		{
 			case "c1":
@@ -169,6 +169,7 @@ class PollController extends Controller
 				break;
 		}
 		$_SESSION['pool'] = $pool;
+                }
 		//récupération des valeurs du fil d'arianne
 		if (isset($_SESSION['show_ariadne']) && isset($_SESSION['width_ariadne']))
 		{

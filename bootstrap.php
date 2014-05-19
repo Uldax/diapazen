@@ -14,7 +14,7 @@ $dbParams = array(
     'driver'   => 'pdo_mysql',
     'user'     => 'root',
     'password' => '',
-    'dbname'   => 'symfony',
+    'dbname'   => 'diapazen',
 );
 
 $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);

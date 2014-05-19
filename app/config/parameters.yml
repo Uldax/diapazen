@@ -3,13 +3,19 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: symfony
+    database_name: diapazen
     database_user: root
     database_password: null
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
-    yolo: ThisIsTheValeurOfYolo
+    transport: smtp
+    port: 587
+    host: in.mailjet.com
+    encryption: ssl
+    auth_mode: login
+    user: null
+    password: null
+    facebook_client_id: '359610224180052'
+    facebook_client_secret: 56f4d32675c0fd39a2986e5a1ac514e9
+    google_client_id: 330767389348-acuj6f53cs45k4ge789jce27go8naoi9.apps.googleusercontent.com
+    google_client_secret: rIV9URsXROGewOrSbuynMYOS

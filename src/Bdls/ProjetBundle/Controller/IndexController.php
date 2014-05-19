@@ -3,6 +3,8 @@
 namespace Bdls\ProjetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class IndexController extends Controller
 {
@@ -150,5 +152,12 @@ class IndexController extends Controller
 		$year=date('Y');
 		return $this->render('BdlsProjetBundle:Default:forgot.html.twig', array('title'=>$title, 'year'=>$year));
 	}
+        
+         //Pour obtenir le csrf (input hiden) dont a besoin fosUSERBUNDLE
+        public function getTokenAction()
+        {
+            return new Response($this->container->get('form.csrf_provider')
+                                    ->generateCsrfToken('authenticate'));
+        }
 }
 
