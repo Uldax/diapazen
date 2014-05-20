@@ -49,11 +49,11 @@ class __TwigTemplate_ab3bb350af57844552aea174e0a6a100da937bcb8c21f0074496ecf27ec
         echo twig_escape_filter($this->env, (isset($context["nametype"]) ? $context["nametype"] : $this->getContext($context, "nametype")), "html", null, true);
         echo "</h1>
 \t\t\t<label for=\"id_title_input\" class=\"text\">Titre<span class=\"asterisc\"> *</span></label>
-\t\t\t<input class=\"text_edit\" id=\"id_title_input\" name=\"title_input\" type=\"text\" value=\"\">
+\t\t\t<input class=\"text_edit form-control\" id=\"id_title_input\" name=\"title_input\" type=\"text\" value=\"\">
 \t\t\t<label for=\"datepicker\" class=\"text\">Date limite</label>
 \t\t\t<input class=\"text_edit datepicker\" name=\"date_input\" id=\"datepicker\" readonly=\"true\"/>
 \t\t\t<label for=\"id_description_input\" class=\"text lbl_textarea\">Description<span class=\"asterisc\"> *</span></label>
-\t\t\t<textarea class=\"small_text_edit\" id=\"id_description_input\" maxlength=\"1000\" placeholder=\"1000 carac. maximum.\" name=\"description_input\"></textarea>
+\t\t\t<textarea class=\"small_text_edit form-control\" id=\"id_description_input\" maxlength=\"1000\" placeholder=\"1000 carac. maximum.\" name=\"description_input\"></textarea>
 \t\t\t<h1 class=\"small_title\">Propositions de ";
         // line 26
         echo twig_escape_filter($this->env, (isset($context["nametype"]) ? $context["nametype"] : $this->getContext($context, "nametype")), "html", null, true);

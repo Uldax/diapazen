@@ -383,23 +383,28 @@ tipomatika@gmail.com*/
     margin-top: 10px;
 }
 
+.div_etape4{
+    width: 530px; 
+}
+
 .styled_select_div{
     /*float: right;
     margin-left: 25%;*/
-    margin-top: 3px;
-    margin-left: 520px;
+    //margin-left: 5px;
+    //margin-left: 520px;
     display: inline-block;
 }
 
 .styled_select_div_xs{
     /*float: right;
     margin-left: 25%;*/
-    margin-top: 3px;
+    //margin-left: 5px;
     display: inline-block;
 }
 
 .styled_a_div{
     display: inline-block;
+    float: right;
 }
 
 .styled_select{

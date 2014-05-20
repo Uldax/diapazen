@@ -543,6 +543,7 @@ h1#result
         margin-top: -15px;
 }
 
+
 #poll_creation_form .next_step-xs
 {
         margin-left: 112px;
@@ -557,6 +558,7 @@ h1#result
 
 #poll_creation_form .next_step
 {
+        //display: inline-block;
 	width: 300px;
 }
 
