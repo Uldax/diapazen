@@ -2,9 +2,8 @@
 
 namespace Bdls\ProjetBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-abstract class PoolModelController extends controller
+abstract class PoolModel
 {
 	/** 
 	 * Identifiant unique du sondage 

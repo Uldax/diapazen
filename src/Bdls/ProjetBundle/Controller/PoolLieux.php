@@ -1,8 +1,7 @@
 <?php
-
 namespace Bdls\ProjetBundle\Controller;
 
-class PoolDateModelController extends PoolModelController
+class PoolLieux extends PoolModel
 {
 	public function __construct($request)
 	{
@@ -20,7 +19,7 @@ class PoolDateModelController extends PoolModelController
 			$this->setPoll_expiration_date($date_fin);
 			$this->generatePollUrl();
 			$this->setPoll_etat(true);
-			$this->setPoll_type("c2");
+			$this->setPoll_type("c1");
 		}
 		catch (Exception $ex)
 		{

@@ -2,7 +2,7 @@
 
 namespace Bdls\ProjetBundle\Controller;
 
-class PoolTextModelController extends PoolModelController
+class PoolText extends PoolModel
 {
 	public function __construct($request)
 	{
