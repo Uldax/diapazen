@@ -1,13 +1,14 @@
 <?php
 
-
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * Place_Choice
+ * DateChoice
  */
-class Place_Choice
+class DateChoice
 {
     /**
      * @var integer
@@ -15,17 +16,12 @@ class Place_Choice
     private $id;
 
     /**
-     * @var float
+     * @var \DateTime
      */
-    private $latitude;
+    private $date;
 
     /**
-     * @var float
-     */
-    private $longitude;
-
-    /**
-     * @var \Place_Poll
+     * @var \Bdls\ProjetBundle\Entity\DatePoll
      */
     private $poll;
 
@@ -40,6 +36,7 @@ class Place_Choice
     public function __construct()
     {
         $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+		
     }
 
     /**
@@ -53,68 +50,45 @@ class Place_Choice
     }
 
     /**
-     * Set latitude
+     * Set date
      *
-     * @param float $latitude
-     * @return Place_Choice
+     * @param \DateTime $date
+     * @return DateChoice
      */
-    public function setLatitude($latitude)
+    public function setDate($date)
     {
-        $this->latitude = $latitude;
-
+        $this->date = $date;
+    
         return $this;
     }
 
     /**
-     * Get latitude
+     * Get date
      *
-     * @return float 
+     * @return \DateTime 
      */
-    public function getLatitude()
+    public function getDate()
     {
-        return $this->latitude;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param float $longitude
-     * @return Place_Choice
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return float 
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
+        return $this->date;
     }
 
     /**
      * Set poll
      *
-     * @param \Place_Poll $poll
-     * @return Place_Choice
+     * @param \Bdls\ProjetBundle\Entity\DatePoll $poll
+     * @return DateChoice
      */
-    public function setPoll(\Place_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\DatePoll $poll)
     {
         $this->poll = $poll;
-
+    
         return $this;
     }
 
     /**
      * Get poll
      *
-     * @return \Place_Poll 
+     * @return \Bdls\ProjetBundle\Entity\DatePoll 
      */
     public function getPoll()
     {
@@ -124,22 +98,22 @@ class Place_Choice
     /**
      * Add votes
      *
-     * @param \Place_Vote $votes
-     * @return Place_Choice
+     * @param \Bdls\ProjetBundle\Entity\DateVote $votes
+     * @return DateChoice
      */
-    public function addVote(\Place_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\DateVote $votes)
     {
         $this->votes[] = $votes;
-
+    
         return $this;
     }
 
     /**
      * Remove votes
      *
-     * @param \Place_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\DateVote $votes
      */
-    public function removeVote(\Place_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\DateVote $votes)
     {
         $this->votes->removeElement($votes);
     }

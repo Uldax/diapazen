@@ -1,3 +1,6 @@
+imports:
+   - { resource: "@userBundle/Resources/config/security.yml" }
+
 security:
     encoders:
 #        Bdls\ProjetBundle\Controller\UserClassController:
@@ -10,7 +13,8 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
+        
+        
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
@@ -20,53 +24,6 @@ security:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-
-    firewalls:
-          secure_area:
-            pattern: ^/
-            
-            #Gestion du Fos classique
-            form_login:
-              provider:               fos_userbundle
-              csrf_provider:          form.csrf_provider
-              login_path:             fos_user_security_login 
-              #cambouille de fos
-              check_path:             fos_user_security_check
-              #Redirection 
-              default_target_path:    /home 
-             
-              
-             #gestion du cookie remenber me
-            #remerber_me:
-             # key:  %secret%
-             # livetime: 300000
-             # path: /
-            #  domain: ~
-        
-            # OAuth provider
-            oauth:
-                failure_path: /connect
-                login_path: /connect
-                check_path: /connect
-                provider: fos_userbundle
-                resource_owners:
-                    github:           "/login/check-github"
-                    facebook:         "/login/check-facebook"                 
-                    google:           "/login/check-google"
-                # If you want to set it to your custom user provider you have to implement OAuthAwareUserProviderInterface.
-                oauth_user_provider:
-                    service: hwi_oauth.user.provider.fosub_bridge
-
-            anonymous:    true
-            logout:
-                path:           /logout
-                #where to go after logout
-                target:         /home  
-                #fix the bug de deconnexion 
-                #https://github.com/symfony/symfony/issues/5868
-               # invalidate_session: false           
-               
-         
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }

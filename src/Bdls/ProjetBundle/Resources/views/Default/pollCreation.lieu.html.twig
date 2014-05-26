@@ -1,8 +1,8 @@
 {#{% include 'BdlsProjetBundle:Default:ariadneThread.html.twig' %}#}
 {% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
 	{% block body %}
-	<div id="content">
-		<div style="width: 2000px;" id="ariadne_thread"> 
+	<div id="content" class="hidden-xs">
+		<div id="ariadne_thread"> 
 		<span class="orange_ariadne" ><span></span><span>Création</span><span></span></span>
 		{#{% if show_ariadne is defined %}
 			{% if show_ariadne == true %}#}
@@ -17,37 +17,88 @@
 			<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
 			<input name="type" type="hidden" value="c1">
 			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
-			<input class="text_edit" id="id_title_input" name="title_input" type="text" value="">
+			<input class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
 			<label for="datepicker" class="text ">Date limite</label>
 			<input class="text_edit datepicker" name="date_input" id="datepicker" readonly/>
 			<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
-			<textarea class="small_text_edit" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
+			<textarea class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
 			<h1 class="small_title">Propositions de {{ nametype }}</h1>
 			<div id="choices">
 				<div class="choice">
 					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix1" type="text" name="choices[]" value="" />
-					<input type="button" value="V" class="valid" onClick="codeAddress(choix1);">
-                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+					<input class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" required="required"/>
+					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix1);">
+                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
 				</div>
 				<div class="choice">
 					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix2" type="text" name="choices[]" value="" />
-					 <input type="button" value="V" class="valid" onClick="codeAddress(choix2);">
-                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+					<input class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" required="required" />
+					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix2);">
+                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
 				</div>
 				<div class="choice">
 					<label for="choix3" class="text lbl_choice">Choix 3<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix3" type="text" name="choices[]" value="" />
-					<input type="button" value="V" class="valid" onClick="codeAddress(choix3);">
-                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+					<input class="text_edit input_choice form-control" id="choix3" type="text" name="choices[]" value="" required="required" />
+					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix3);">
+                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
 				</div>
 			</div>
-			<input class="orange_button" type="submit" value="Étape suivante" />
-			<a class="orange_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
+			
 		
                     <!-- Map google -->
-                   <div id="map-canvas"></div>
+                   <div id="map-canvas" class="map"></div>
+                   
+                   <input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante" />
+                   <a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
+                </form> 
+                
+	</div>
+
+        <!-- Version Mobile -->
+        <div id="long_content-xs" class="visible-xs">
+		<div id="ariadne_thread-xs"> 
+		<span class="orange_ariadne orange_ariadne-xs" ><span></span><span>Création</span><span></span></span>
+		{#{% if show_ariadne is defined %}
+			{% if show_ariadne == true %}#}
+			<span class="grey_ariadne grey_ariadne-xs" ><span></span><span>Connexion</span><span></span></span>
+			{#{% endif %}
+		{% endif %}#}
+		<span class="grey_ariadne grey_ariadne-xs" ><span></span><span>Partage</span><span></span></span>
+		</div>
+
+		
+		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form default_form-xs" action="connect" method="post">
+			<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
+			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
+			<input class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
+			<label for="datepicker" class="text ">Date limite</label>
+			<input class="datepicker text_edit datepicker-xs" name="date_input" id="datepicker" readonly/>
+			<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
+			<textarea class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
+			<h1 class="small_title">Propositions de {{ nametype }}</h1>
+			<div id="choices" class="choice_map">
+				<div class="choice choice-xs choice_map-xs">
+					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" />
+					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix1);">
+                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+				</div>
+				<div class="choice choice-xs choice_map-xs">
+					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" />
+					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix2);">
+                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+				</div>
+				<div class="choice choice-xs choice_map-xs">
+					<label for="choix3" class="text lbl_choice">Choix 3<span class="asterisc"> *</span></label>
+					<input class="text_edit input_choice form-control" id="choix3" type="text" name="choices[]" value="" />
+					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix3);">
+                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+				</div>
+			</div>
+                   
+                   <input class="btn btn-default orange_button next_step_map-xs" type="submit" value="Étape suivante" />
+                   <a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
                 </form> 
                 
 	</div>

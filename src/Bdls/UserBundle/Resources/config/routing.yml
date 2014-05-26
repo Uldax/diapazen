@@ -1,3 +1,48 @@
-user_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: userBundle:Default:index }
+
+#Route pour fos 
+#secure_area en plus
+fos_user_security:
+    resource: "routingFOS/security.xml"
+    prefix: /
+
+fos_user_profile:
+    resource: "routingFOS/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "routingFOS/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "routingFOS/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "routingFOS/change_password.xml"
+    prefix: /profile
+
+
+#Configuration de hwi
+#hwi_github_login was also added which is same as the callback url given during creation of Github application. 
+#This is the url which will be intercepted by the firewall to check authentication.
+hwi_oauth_redirect:
+    resource: "routingHWI/redirect.xml"
+    prefix:   /connection
+
+hwi_oauth_login:
+    resource: "routingHWI/login.xml"
+    prefix:   /connection
+
+hwi_oauth_connect:
+    resource: "routingHWI/connect.xml"
+    prefix:   /connection
+
+#is same as the callback url given during creation of Github application. 
+#This is the url which will be intercepted by the firewall to check authentication.
+hwi_github_login:
+    pattern: /login/check-github
+hwi_google_login:
+    pattern: /login/check-google
+hwi_facebook_login:
+    pattern: /login/check-facebook
+    pattern: /login/check-facebook

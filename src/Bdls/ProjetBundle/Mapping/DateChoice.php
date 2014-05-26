@@ -1,9 +1,10 @@
 <?php
 
+namespace Bdls\ProjetBundle\Entity;
 
 /** @Entity
     @Table(name="dpz_datechoice") */
-class Date_Choice
+class DateChoice
 {
 	/** @Id @Column(type="integer") @GeneratedValue */
 	private $id;
@@ -11,12 +12,12 @@ class Date_Choice
 	/** @Column(type="datetime") */
 	private $date;
 
-	/** @ManyToOne(targetEntity="Date_Poll", inversedBy="choices")
+	/** @ManyToOne(targetEntity="DatePoll", inversedBy="choices")
 	    @JoinColumn(nullable=false)
 	 */
 	private $poll;
 
-	/** @OneToMany(targetEntity="Date_Vote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	/** @OneToMany(targetEntity="DateVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
 	private $votes;
 
 

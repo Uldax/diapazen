@@ -1,13 +1,12 @@
 <?php
-
-
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Text_Vote
+ * PlaceVote
  */
-class Text_Vote
+class PlaceVote
 {
     /**
      * @var integer
@@ -25,7 +24,7 @@ class Text_Vote
     private $issued_by;
 
     /**
-     * @var \Text_Choice
+     * @var \Bdls\ProjetBundle\Entity\PlaceChoice
      */
     private $choice;
 
@@ -44,12 +43,12 @@ class Text_Vote
      * Set issued_on
      *
      * @param \DateTime $issuedOn
-     * @return Text_Vote
+     * @return PlaceVote
      */
     public function setIssuedOn($issuedOn)
     {
         $this->issued_on = $issuedOn;
-
+    
         return $this;
     }
 
@@ -67,12 +66,12 @@ class Text_Vote
      * Set issued_by
      *
      * @param string $issuedBy
-     * @return Text_Vote
+     * @return PlaceVote
      */
     public function setIssuedBy($issuedBy)
     {
         $this->issued_by = $issuedBy;
-
+    
         return $this;
     }
 
@@ -89,20 +88,20 @@ class Text_Vote
     /**
      * Set choice
      *
-     * @param \Text_Choice $choice
-     * @return Text_Vote
+     * @param \Bdls\ProjetBundle\Entity\PlaceChoice $choice
+     * @return PlaceVote
      */
-    public function setChoice(\Text_Choice $choice)
+    public function setChoice(\Bdls\ProjetBundle\Entity\PlaceChoice $choice)
     {
         $this->choice = $choice;
-
+    
         return $this;
     }
 
     /**
      * Get choice
      *
-     * @return \Text_Choice 
+     * @return \Bdls\ProjetBundle\Entity\PlaceChoice 
      */
     public function getChoice()
     {

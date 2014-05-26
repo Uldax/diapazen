@@ -1,7 +1,7 @@
 {% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
 	{% block body %}
         <div id="content">
-            <div style="width: 2000px;" id="ariadne_thread"> 
+            <div id="ariadne_thread"> 
 			<span class="grey_ariadne" ><span></span><span>Création</span><span></span></span>
 			{#{% if show_ariadne is defined %}
 				{% if show_ariadne == true %}#}
@@ -10,7 +10,7 @@
 			{% endif %}#}
 			<span class="orange_ariadne" ><span></span><span>Partage</span><span></span></span>
 			</div>
-			{#{{ form_start(form, {'class': 'default_form', 'action': 'mail', 'attr': {'class': 'small_text_edit'}}) }}#}
+			
             <form onsubmit="return formCheck(this)" id="share_form" class="default_form" method="post" action="mail">
                 <h2 class="title">Votre sondage a bien été créé !</h2>
                 <h3 class="small_title">Lien du sondage</h3>

@@ -1,7 +1,4 @@
-bdls_projet_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BdlsProjetBundle:Default:index }
-    
+ 
 bdls_projet_index:
     pattern: /home
     defaults: { _controller: BdlsProjetBundle:Index:index }
@@ -26,9 +23,9 @@ bdls_projet_login:
     pattern: /log
     defaults: { _controller: BdlsProjetBundle:User:login }
 
-#bdls_projet_connect:
-    #pattern: /connect
-    #defaults: { _controller: BdlsProjetBundle:Poll:connect }
+bdls_projet_connect:
+    pattern: /connect
+    defaults: { _controller: BdlsProjetBundle:Poll:connect }
 
 bdls_projet_share:
     pattern: /share
@@ -59,3 +56,4 @@ bdls_projet_mail:
     
 #logout:
    # pattern: /logout
+

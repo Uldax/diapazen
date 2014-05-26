@@ -1,13 +1,13 @@
 <?php
-namespace Bdls\ProjetBundle\Controller;
+namespace Bdls\ProjetBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Place_Choice
+ * TextChoice
  */
-class Place_Choice
+class TextChoice
 {
     /**
      * @var integer
@@ -15,17 +15,12 @@ class Place_Choice
     private $id;
 
     /**
-     * @var float
+     * @var string
      */
-    private $latitude;
+    private $text;
 
     /**
-     * @var float
-     */
-    private $longitude;
-
-    /**
-     * @var \Place_Poll
+     * @var \Bdls\ProjetBundle\Entity\TextPoll
      */
     private $poll;
 
@@ -53,68 +48,45 @@ class Place_Choice
     }
 
     /**
-     * Set latitude
+     * Set text
      *
-     * @param float $latitude
-     * @return Place_Choice
+     * @param string $text
+     * @return TextChoice
      */
-    public function setLatitude($latitude)
+    public function setText($text)
     {
-        $this->latitude = $latitude;
-
+        $this->text = $text;
+    
         return $this;
     }
 
     /**
-     * Get latitude
+     * Get text
      *
-     * @return float 
+     * @return string 
      */
-    public function getLatitude()
+    public function getText()
     {
-        return $this->latitude;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param float $longitude
-     * @return Place_Choice
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return float 
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
+        return $this->text;
     }
 
     /**
      * Set poll
      *
-     * @param \Place_Poll $poll
-     * @return Place_Choice
+     * @param \Bdls\ProjetBundle\Entity\TextPoll $poll
+     * @return TextChoice
      */
-    public function setPoll(\Place_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\TextPoll $poll)
     {
         $this->poll = $poll;
-
+    
         return $this;
     }
 
     /**
      * Get poll
      *
-     * @return \Place_Poll 
+     * @return \Bdls\ProjetBundle\Entity\TextPoll 
      */
     public function getPoll()
     {
@@ -124,22 +96,22 @@ class Place_Choice
     /**
      * Add votes
      *
-     * @param \Place_Vote $votes
-     * @return Place_Choice
+     * @param \Bdls\ProjetBundle\Entity\TextVote $votes
+     * @return TextChoice
      */
-    public function addVote(\Place_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\TextVote $votes)
     {
         $this->votes[] = $votes;
-
+    
         return $this;
     }
 
     /**
      * Remove votes
      *
-     * @param \Place_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\TextVote $votes
      */
-    public function removeVote(\Place_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\TextVote $votes)
     {
         $this->votes->removeElement($votes);
     }

@@ -53,7 +53,7 @@ class SecurityController extends Controller
 	  ));
 	}
 
-	public function profilAction()
+        public function profilAction()
 	{
 		$title = 'Profil | Diapazen';
 		$year=date('Y');

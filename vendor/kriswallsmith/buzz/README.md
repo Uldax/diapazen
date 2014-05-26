@@ -10,12 +10,9 @@ $response = $browser->get('http://www.google.com');
 
 echo $browser->getLastRequest()."\n";
 echo $response;
-```
 
-You can also use the low-level HTTP classes directly.
+//You can also use the low-level HTTP classes directly.
 
-```php
-<?php
 
 $request = new Buzz\Message\Request('HEAD', '/', 'http://google.com');
 $response = new Buzz\Message\Response();
@@ -25,4 +22,4 @@ $client->send($request, $response);
 
 echo $request;
 echo $response;
-```
+

@@ -8,7 +8,8 @@ function manageChoices(input) {
 
     switch (input.className) {
 
-        case 'orange_button':
+        case 'btn btn-default orange_button add_choice_button':
+
 
             // Ajout d'un champ de choix
 
@@ -19,8 +20,9 @@ function manageChoices(input) {
             //Création de l'input
             var input = document.createElement("input");
             input.setAttribute("id", "");
-            input.className = "text_edit input_choice";
+            input.className = "text_edit input_choice form-control";
             input.setAttribute("type", "text");
+             input.setAttribute("required", "required");
             input.setAttribute("name", "choices[]");
 
             var label = document.createElement("label");
@@ -28,29 +30,30 @@ function manageChoices(input) {
             label.className = "text lbl_choice";
 
             var a = document.createElement("a");
-            a.className = "grey_button";
+            a.className = "btn btn-default grey_button";
             a.setAttribute("title", "Supprimer");
             a.setAttribute("type", "button");
             a.setAttribute("onclick", "manageChoices(this);");
-            a.innerText = " x ";
+            a.innerText = "x";
 
             //Création du bouton
             var button = document.createElement("button");
             button.innerText = "V";
-            button.className = "valid";
+            button.className = "valid btn btn-default green_button";
+
 
             choice.className = 'choice';
             choice.appendChild(label);
             choice.appendChild(input);
-            choice.appendChild(a);
             choice.appendChild(button);
+            choice.appendChild(a);
 
             choices.appendChild(choice);
             createAutocompletion(input);
 
             break;
 
-        case 'grey_button':
+        case 'btn btn-default grey_button':
 
             // Suppression du champ de choix
 
@@ -75,7 +78,7 @@ function manageChoices(input) {
     input_choice = document.getElementsByClassName('input_choice');
     valid_choice = document.getElementsByClassName('valid');
     for (i = 1; i <= lbl_choice.length; i++) {
-        lbl_choice.item(i - 1).innerHTML = "Choix " + i + '<span class="asterisc"> * </span>';
+        lbl_choice.item(i - 1).innerHTML = "Choix " + i + '<span class="asterisc"> *</span>';
         lbl_choice.item(i - 1).setAttribute('for', 'choix' + i);
         input_choice.item(i - 1).setAttribute('id', 'choix' + i);
         valid_choice.item(i - 1).setAttribute("onclick", "codeAddress(choix" + i + ");");

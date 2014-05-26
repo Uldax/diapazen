@@ -1,8 +1,10 @@
 <?php
 
+namespace Bdls\ProjetBundle\Entity;
+
 /** @Entity
     @Table(name="dpz_textchoice") */
-class Text_Choice
+class TextChoice
 {
 	/** @Id @Column(type="integer") @GeneratedValue */
 	private $id;
@@ -10,12 +12,12 @@ class Text_Choice
 	/** @Column(type="text") */
 	private $text;
 
-	/** @ManyToOne(targetEntity="Text_Poll", inversedBy="choices")
+	/** @ManyToOne(targetEntity="TextPoll", inversedBy="choices")
 	    @JoinColumn(nullable=false)
 	 */
 	private $poll;
 
-	/** @OneToMany(targetEntity="Text_Vote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	/** @OneToMany(targetEntity="TextVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
 	private $votes;
 
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace Bdls\ProjetBundle\Entity;
+
 /** @MappedSuperclass */
 class Vote
 {
@@ -16,10 +18,10 @@ class Vote
 /** @Entity
     @Table(name="dpz_textvote")
  */
-class Text_Vote extends Vote
+class TextVote extends Vote
 {
 	/**
-	  @ManyToOne(targetEntity="Text_Choice", inversedBy="votes")
+	  @ManyToOne(targetEntity="TextChoice", inversedBy="votes")
 	  @JoinColumn(nullable=false)
 	  */
 	private $choice;
@@ -34,10 +36,10 @@ class Text_Vote extends Vote
 /** @Entity
     @Table(name="dpz_datevote")
  */
-class Date_Vote extends Vote
+class DateVote extends Vote
 {
 	/**
-	  @ManyToOne(targetEntity="Date_Choice", inversedBy="votes")
+	  @ManyToOne(targetEntity="DateChoice", inversedBy="votes")
 	  @JoinColumn(nullable=false)
 	  */
 	private $choice;
@@ -52,10 +54,10 @@ class Date_Vote extends Vote
 /** @Entity
     @Table(name="dpz_placevote")
  */
-class Place_Vote extends Vote
+class PlaceVote extends Vote
 {
 	/**
-	  @ManyToOne(targetEntity="Place_Choice", inversedBy="votes")
+	  @ManyToOne(targetEntity="PlaceChoice", inversedBy="votes")
 	  @JoinColumn(nullable=false)
 	  */
 	private $choice;
