@@ -1,5 +1,7 @@
 <?php
 
+namespace Bdls\ProjetBundle\Entity;
+
 /** @MappedSuperclass */
 class Vote
 {

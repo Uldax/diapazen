@@ -1,5 +1,7 @@
 <?php
 
+namespace Bdls\ProjetBundle\Entity;
+
 /** @Entity
     @Table(name="dpz_textchoice") */
 class Text_Choice
