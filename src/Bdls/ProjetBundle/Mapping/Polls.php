@@ -1,6 +1,5 @@
 <?php
 
-use ORM\MappedSuperclass;
 use Bdls\ProjetBundle\Entity\User as User;
 
 namespace Bdls\ProjetBundle\Entity;
