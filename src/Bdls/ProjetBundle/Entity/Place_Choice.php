@@ -1,5 +1,5 @@
 <?php
-
+namespace Bdls\ProjetBundle\Controller;
 
 
 use Doctrine\ORM\Mapping as ORM;
