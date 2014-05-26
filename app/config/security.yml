@@ -1,5 +1,5 @@
 imports:
-    #- { resource: "@BdlsUserBundle/Resources/config/security.yml" }
+   - { resource: "@userBundle/Resources/config/security.yml" }
 
 security:
     encoders:

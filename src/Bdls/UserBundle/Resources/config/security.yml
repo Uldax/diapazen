@@ -1,5 +1,5 @@
 security:
-   firewalls:
+    firewalls:
           secure_area:
             pattern: ^/
             
@@ -26,6 +26,7 @@ security:
                 failure_path: /connect
                 login_path: /connect
                 check_path: /connect
+                default_target_path:    /home 
                 provider: fos_userbundle
                 resource_owners:
                     github:           "/login/check-github"

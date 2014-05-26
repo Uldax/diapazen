@@ -25,7 +25,7 @@
                             </a>
                         </div>
 
-                            <!--<?php if (!$this->isUserConnected()){ ?>-->
+              
                          <div class="col-lg-4 col-md-5 col-sm-7 col-xs-4 div_connect">
 							 {% if is_granted('ROLE_USER') %}
 								<div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="{{ path('bdls_projet_dashboard') }}"><span class="orange_text">{{ app.user.username }}</span></a></p><a class="link" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a></div>
@@ -43,8 +43,18 @@
                                     <input type="password" class="small_text_edit form-control hidden-xs"  id="password" name="_password" required="required" />
 
                              
-                                    <input type="submit" class="btn btn-default orange_small_button hidden-xs"  id="_submit" name="_submit" value="Connexion" />
+                                    <input type="submit" class="btn btn-default orange_small_button hidden-xs"  id="_submit" name="_submit" value="Connexion" />                                               
                                     </form>
+                                    
+                                   <!-- Connexion via les Api -->
+                                   {% block hwi_oauth_content %}
+                                        {% if error is defined %}
+                                            <span>{{ error }}</span>
+                                        {% endif %}
+                                        {% for owner in hwi_oauth_resource_owners() %}
+                                        <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br />
+                                        {% endfor %}
+                                    {% endblock hwi_oauth_content %}
                                     
                                     
                                     
