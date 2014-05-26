@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * Date_Choice
+ * DateChoice
  */
-class Date_Choice
+class DateChoice
 {
     /**
      * @var integer
@@ -21,7 +21,7 @@ class Date_Choice
     private $date;
 
     /**
-     * @var \Bdls\ProjetBundle\Entity\Date_Poll
+     * @var \Bdls\ProjetBundle\Entity\DatePoll
      */
     private $poll;
 
@@ -53,7 +53,7 @@ class Date_Choice
      * Set date
      *
      * @param \DateTime $date
-     * @return Date_Choice
+     * @return DateChoice
      */
     public function setDate($date)
     {
@@ -75,10 +75,10 @@ class Date_Choice
     /**
      * Set poll
      *
-     * @param \Bdls\ProjetBundle\Entity\Date_Poll $poll
-     * @return Date_Choice
+     * @param \Bdls\ProjetBundle\Entity\DatePoll $poll
+     * @return DateChoice
      */
-    public function setPoll(\Bdls\ProjetBundle\Entity\Date_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\DatePoll $poll)
     {
         $this->poll = $poll;
     
@@ -88,7 +88,7 @@ class Date_Choice
     /**
      * Get poll
      *
-     * @return \Bdls\ProjetBundle\Entity\Date_Poll 
+     * @return \Bdls\ProjetBundle\Entity\DatePoll 
      */
     public function getPoll()
     {
@@ -98,10 +98,10 @@ class Date_Choice
     /**
      * Add votes
      *
-     * @param \Bdls\ProjetBundle\Entity\Date_Vote $votes
-     * @return Date_Choice
+     * @param \Bdls\ProjetBundle\Entity\DateVote $votes
+     * @return DateChoice
      */
-    public function addVote(\Bdls\ProjetBundle\Entity\Date_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\DateVote $votes)
     {
         $this->votes[] = $votes;
     
@@ -111,9 +111,9 @@ class Date_Choice
     /**
      * Remove votes
      *
-     * @param \Bdls\ProjetBundle\Entity\Date_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\DateVote $votes
      */
-    public function removeVote(\Bdls\ProjetBundle\Entity\Date_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\DateVote $votes)
     {
         $this->votes->removeElement($votes);
     }

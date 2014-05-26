@@ -25,10 +25,10 @@ class Poll
 /** @Entity
     @Table(name="dpz_textpoll")
  */
-class Text_Poll extends Poll
+class TextPoll extends Poll
 {
 	/**
-	  @OneToMany(targetEntity="Text_Choice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
+	  @OneToMany(targetEntity="TextChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
 	  */
 	private $choices;
 
@@ -42,10 +42,10 @@ class Text_Poll extends Poll
 /** @Entity
     @Table(name="dpz_datepoll")
  */
-class Date_Poll extends Poll
+class DatePoll extends Poll
 {
 	/**
-	  @OneToMany(targetEntity="Date_Choice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
+	  @OneToMany(targetEntity="DateChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
 	  */
 	private $choices;
 
@@ -59,10 +59,10 @@ class Date_Poll extends Poll
 /** @Entity
     @Table(name="dpz_placepoll")
  */
-class Place_Poll extends Poll
+class PlacePoll extends Poll
 {
 	/**
-	  @OneToMany(targetEntity="Place_Choice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
+	  @OneToMany(targetEntity="PlaceChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
 	  */
 	private $choices;
 

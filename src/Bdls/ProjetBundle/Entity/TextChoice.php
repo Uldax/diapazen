@@ -5,9 +5,9 @@ namespace Bdls\ProjetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Text_Choice
+ * TextChoice
  */
-class Text_Choice
+class TextChoice
 {
     /**
      * @var integer
@@ -20,7 +20,7 @@ class Text_Choice
     private $text;
 
     /**
-     * @var \Bdls\ProjetBundle\Entity\Text_Poll
+     * @var \Bdls\ProjetBundle\Entity\TextPoll
      */
     private $poll;
 
@@ -51,7 +51,7 @@ class Text_Choice
      * Set text
      *
      * @param string $text
-     * @return Text_Choice
+     * @return TextChoice
      */
     public function setText($text)
     {
@@ -73,10 +73,10 @@ class Text_Choice
     /**
      * Set poll
      *
-     * @param \Bdls\ProjetBundle\Entity\Text_Poll $poll
-     * @return Text_Choice
+     * @param \Bdls\ProjetBundle\Entity\TextPoll $poll
+     * @return TextChoice
      */
-    public function setPoll(\Bdls\ProjetBundle\Entity\Text_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\TextPoll $poll)
     {
         $this->poll = $poll;
     
@@ -86,7 +86,7 @@ class Text_Choice
     /**
      * Get poll
      *
-     * @return \Bdls\ProjetBundle\Entity\Text_Poll 
+     * @return \Bdls\ProjetBundle\Entity\TextPoll 
      */
     public function getPoll()
     {
@@ -96,10 +96,10 @@ class Text_Choice
     /**
      * Add votes
      *
-     * @param \Bdls\ProjetBundle\Entity\Text_Vote $votes
-     * @return Text_Choice
+     * @param \Bdls\ProjetBundle\Entity\TextVote $votes
+     * @return TextChoice
      */
-    public function addVote(\Bdls\ProjetBundle\Entity\Text_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\TextVote $votes)
     {
         $this->votes[] = $votes;
     
@@ -109,9 +109,9 @@ class Text_Choice
     /**
      * Remove votes
      *
-     * @param \Bdls\ProjetBundle\Entity\Text_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\TextVote $votes
      */
-    public function removeVote(\Bdls\ProjetBundle\Entity\Text_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\TextVote $votes)
     {
         $this->votes->removeElement($votes);
     }

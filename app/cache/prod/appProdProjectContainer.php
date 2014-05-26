@@ -668,11 +668,7 @@ class appProdProjectContainer extends Container
         $f->addHandler(new \Symfony\Component\Security\Http\Logout\SessionLogoutHandler());
         $g = new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler($d, array('login_path' => '/login', 'always_use_default_target_path' => false, 'default_target_path' => '/', 'target_path_parameter' => '_target_path', 'use_referer' => false));
         $g->setProviderKey('main');
-<<<<<<< HEAD
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'main', $b, $c), 2 => $f, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($a, $this->get('security.authentication.manager'), new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $d, 'main', $g, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $d, array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $b), array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $b, $c), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '5369fd048ba12', $b), 5 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $d, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $d, '/login', false), NULL, NULL, $b));
-=======
         return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'main', $b, $c), 2 => $f, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($a, $this->get('security.authentication.manager'), new \Symfony\Component\Security\Http\Session\SessionAuthenticationStrategy('migrate'), $d, 'main', $g, new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($e, $d, array('login_path' => '/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $b), array('check_path' => '/login_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $b, $c), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '536c9b8a6ad28', $b), 5 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $d, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($e, $d, '/login', false), NULL, NULL, $b));
->>>>>>> origin/boot
     }
     protected function getSecurity_Rememberme_ResponseListenerService()
     {
@@ -1031,17 +1027,6 @@ class appProdProjectContainer extends Container
     protected function getTwig_LoaderService()
     {
         $this->services['twig.loader'] = $instance = new \Symfony\Bundle\TwigBundle\Loader\FilesystemLoader($this->get('templating.locator'), $this->get('templating.name_parser'));
-<<<<<<< HEAD
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\diapaClone\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\diapaClone\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\SecurityBundle/Resources/views', 'Security');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\diapaClone\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\diapaClone\\diapazen\\vendor\\symfony\\swiftmailer-bundle\\Symfony\\Bundle\\SwiftmailerBundle/Resources/views', 'Swiftmailer');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\diapaClone\\diapazen\\vendor\\doctrine\\doctrine-bundle\\Doctrine\\Bundle\\DoctrineBundle/Resources/views', 'Doctrine');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\diapaClone\\diapazen\\src\\Bdls\\ProjetBundle/Resources/views', 'BdlsProjet');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\diapaClone\\diapazen\\src\\Bdls\\UserBundle/Resources/views', 'user');
-        $instance->addPath('C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/app/Resources/views');
-        $instance->addPath('C:\\wamp\\www\\Webdev_CIR3\\TP\\diapaClone\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
-=======
         $instance->addPath('C:\\wamp\\www\\Projet\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
         $instance->addPath('C:\\wamp\\www\\Projet\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\SecurityBundle/Resources/views', 'Security');
         $instance->addPath('C:\\wamp\\www\\Projet\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
@@ -1051,7 +1036,7 @@ class appProdProjectContainer extends Container
         $instance->addPath('C:\\wamp\\www\\Projet\\diapazen\\src\\Bdls\\UserBundle/Resources/views', 'user');
         $instance->addPath('C:/wamp/www/Projet/diapazen/app/Resources/views');
         $instance->addPath('C:\\wamp\\www\\Projet\\diapazen\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
->>>>>>> origin/boot
+
         return $instance;
     }
     protected function getTwig_Translation_ExtractorService()

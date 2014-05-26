@@ -1,13 +1,12 @@
 <?php
+
 namespace Bdls\ProjetBundle\Entity;
-
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Text_Poll
+ * TextPoll
  */
-class Text_Poll
+class TextPoll
 {
     /**
      * @var integer
@@ -56,7 +55,7 @@ class Text_Poll
      * Set created_on
      *
      * @param \DateTime $createdOn
-     * @return Text_Poll
+     * @return TextPoll
      */
     public function setCreatedOn($createdOn)
     {
@@ -79,7 +78,7 @@ class Text_Poll
      * Set name
      *
      * @param string $name
-     * @return Text_Poll
+     * @return TextPoll
      */
     public function setName($name)
     {
@@ -101,10 +100,10 @@ class Text_Poll
     /**
      * Add choices
      *
-     * @param \Bdls\ProjetBundle\Entity\Text_Choice $choices
-     * @return Text_Poll
+     * @param \Bdls\ProjetBundle\Entity\TextChoice $choices
+     * @return TextPoll
      */
-    public function addChoice(\Bdls\ProjetBundle\Entity\Text_Choice $choices)
+    public function addChoice(\Bdls\ProjetBundle\Entity\TextChoice $choices)
     {
         $this->choices[] = $choices;
     
@@ -114,9 +113,9 @@ class Text_Poll
     /**
      * Remove choices
      *
-     * @param \Bdls\ProjetBundle\Entity\Text_Choice $choices
+     * @param \Bdls\ProjetBundle\Entity\TextChoice $choices
      */
-    public function removeChoice(\Bdls\ProjetBundle\Entity\Text_Choice $choices)
+    public function removeChoice(\Bdls\ProjetBundle\Entity\TextChoice $choices)
     {
         $this->choices->removeElement($choices);
     }
@@ -135,7 +134,7 @@ class Text_Poll
      * Set created_by
      *
      * @param \Bdls\ProjetBundle\Entity\User $createdBy
-     * @return Text_Poll
+     * @return TextPoll
      */
     public function setCreatedBy(\Bdls\ProjetBundle\Entity\User $createdBy)
     {

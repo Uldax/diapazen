@@ -5,9 +5,9 @@ namespace Bdls\ProjetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Date_Vote
+ * DateVote
  */
-class Date_Vote
+class DateVote
 {
     /**
      * @var integer
@@ -25,7 +25,7 @@ class Date_Vote
     private $issued_by;
 
     /**
-     * @var \Bdls\ProjetBundle\Entity\Date_Choice
+     * @var \Bdls\ProjetBundle\Entity\DateChoice
      */
     private $choice;
 
@@ -44,7 +44,7 @@ class Date_Vote
      * Set issued_on
      *
      * @param \DateTime $issuedOn
-     * @return Date_Vote
+     * @return DateVote
      */
     public function setIssuedOn($issuedOn)
     {
@@ -67,7 +67,7 @@ class Date_Vote
      * Set issued_by
      *
      * @param string $issuedBy
-     * @return Date_Vote
+     * @return DateVote
      */
     public function setIssuedBy($issuedBy)
     {
@@ -89,10 +89,10 @@ class Date_Vote
     /**
      * Set choice
      *
-     * @param \Bdls\ProjetBundle\Entity\Date_Choice $choice
-     * @return Date_Vote
+     * @param \Bdls\ProjetBundle\Entity\DateChoice $choice
+     * @return DateVote
      */
-    public function setChoice(\Bdls\ProjetBundle\Entity\Date_Choice $choice)
+    public function setChoice(\Bdls\ProjetBundle\Entity\DateChoice $choice)
     {
         $this->choice = $choice;
     
@@ -102,7 +102,7 @@ class Date_Vote
     /**
      * Get choice
      *
-     * @return \Bdls\ProjetBundle\Entity\Date_Choice 
+     * @return \Bdls\ProjetBundle\Entity\DateChoice 
      */
     public function getChoice()
     {

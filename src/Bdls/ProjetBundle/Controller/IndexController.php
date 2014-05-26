@@ -4,7 +4,7 @@ namespace Bdls\ProjetBundle\Controller;
 use Bdls\ProjetBundle\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
+use Bdls\ProjetBundle\Entity\TextPoll as TextPoll;
 
 class IndexController extends Controller
 {
@@ -20,6 +20,8 @@ class IndexController extends Controller
 	 */
 	public function indexAction()
 	{
+		$variableDeJulien = new TextPoll();
+		
 		// On set la variable Ã  afficher sur dans la vue
 		$title='Accueil | Diapazen';
 		$year=date('Y');

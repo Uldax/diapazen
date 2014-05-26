@@ -5,9 +5,9 @@ namespace Bdls\ProjetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Place_Choice
+ * PlaceChoice
  */
-class Place_Choice
+class PlaceChoice
 {
     /**
      * @var integer
@@ -25,7 +25,7 @@ class Place_Choice
     private $longitude;
 
     /**
-     * @var \Bdls\ProjetBundle\Entity\Place_Poll
+     * @var \Bdls\ProjetBundle\Entity\PlacePoll
      */
     private $poll;
 
@@ -56,7 +56,7 @@ class Place_Choice
      * Set latitude
      *
      * @param float $latitude
-     * @return Place_Choice
+     * @return PlaceChoice
      */
     public function setLatitude($latitude)
     {
@@ -79,7 +79,7 @@ class Place_Choice
      * Set longitude
      *
      * @param float $longitude
-     * @return Place_Choice
+     * @return PlaceChoice
      */
     public function setLongitude($longitude)
     {
@@ -101,10 +101,10 @@ class Place_Choice
     /**
      * Set poll
      *
-     * @param \Bdls\ProjetBundle\Entity\Place_Poll $poll
-     * @return Place_Choice
+     * @param \Bdls\ProjetBundle\Entity\PlacePoll $poll
+     * @return PlaceChoice
      */
-    public function setPoll(\Bdls\ProjetBundle\Entity\Place_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\PlacePoll $poll)
     {
         $this->poll = $poll;
     
@@ -114,7 +114,7 @@ class Place_Choice
     /**
      * Get poll
      *
-     * @return \Bdls\ProjetBundle\Entity\Place_Poll 
+     * @return \Bdls\ProjetBundle\Entity\PlacePoll 
      */
     public function getPoll()
     {
@@ -124,10 +124,10 @@ class Place_Choice
     /**
      * Add votes
      *
-     * @param \Bdls\ProjetBundle\Entity\Place_Vote $votes
-     * @return Place_Choice
+     * @param \Bdls\ProjetBundle\Entity\PlaceVote $votes
+     * @return PlaceChoice
      */
-    public function addVote(\Bdls\ProjetBundle\Entity\Place_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\PlaceVote $votes)
     {
         $this->votes[] = $votes;
     
@@ -137,9 +137,9 @@ class Place_Choice
     /**
      * Remove votes
      *
-     * @param \Bdls\ProjetBundle\Entity\Place_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\PlaceVote $votes
      */
-    public function removeVote(\Bdls\ProjetBundle\Entity\Place_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\PlaceVote $votes)
     {
         $this->votes->removeElement($votes);
     }
