@@ -4,6 +4,7 @@ namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Date_Choice
  */
@@ -35,6 +36,7 @@ class Date_Choice
     public function __construct()
     {
         $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+		
     }
 
     /**

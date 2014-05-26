@@ -59,32 +59,42 @@ class SecurityController extends Controller
 		$year=date('Y');
 		$data_updated = null;
 
+		// Authentification
+		// => à faire
+
+		// ATTENTION sans BDD
 		// Si le visiteur n'est identifié, on le redirige vers l'accueil
 		if (! $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
 		{
 			return $this->redirect($this->generateUrl('bdls_projet_index'));
 		}
 
-		//info user
-		$lastname_user = "?";
-		$firstname_user = "??";
-		$mail_user = "???";
-
-		//traitement pour le retour de formulaire
+		// Traitement pour le retour de formulaire
 		$request = $this->get('request');
 	    if ($request->getMethod() == 'POST') {
+	    	//Récupération donnée
 	    	$firstname_user = $request->get("firstNameUser");
 	    	$lastname_user = $request->get("lastNameUser");
 	    	$mail_user = $request->get("email");
 	    	$old_pass = $request->get("password");
 	    	$new_pass = $request->get("newPassword");
+
+	    	// Traitement modification password
+	    	if($new_pass == null){
+	    		// => à faire
+	    	}
+
 	    	$data_updated = false;
 	    }
 
+		// Récupération des information de l'utilisateur
+		// => à faire
+		$lastname_user = "?";
+		$firstname_user = "??";
+		$mail_user = "???";
 
 
 		return $this->render('BdlsProjetBundle:Default:personalData.html.twig', array(
-		// Valeur du précédent nom d'utilisateur entré par l'internaute
 		'title'			=> $title,
 		'year'			=> $year,
 		'lastname_user' => $lastname_user,
