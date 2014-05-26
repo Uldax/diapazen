@@ -205,9 +205,9 @@ class PollController extends Controller
 		}
 
 		// Si l'utilisateur est déja connecté, on le redirige vers le partage
-		if ($this->isUserConnected())
+		if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
 		{	// path ou render ??
-			header('Location: ' . BASE_URL. '/poll/share');
+			return $this->redirect($this->generateUrl('bdls_projet_share'));
 		}
 
 		try

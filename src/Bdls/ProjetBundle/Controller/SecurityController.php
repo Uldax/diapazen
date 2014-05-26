@@ -73,32 +73,32 @@ class SecurityController extends Controller
 		$request = $this->get('request');
 	    if ($request->getMethod() == 'POST') {
 	    	//Récupération donnée
-	    	$firstname_user = $request->get("firstNameUser");
-	    	$lastname_user = $request->get("lastNameUser");
-	    	$mail_user = $request->get("email");
+	    	$username_user = $request->get("UsernameUser");
 	    	$old_pass = $request->get("password");
 	    	$new_pass = $request->get("newPassword");
 
 	    	// Traitement modification password
-	    	if($new_pass == null){
+	    	if($new_pass != null){
 	    		// => à faire
+	    		$data_updated = true;
 	    	}
-
-	    	$data_updated = false;
+	    	else
+	    		$data_updated = false;
 	    }
 
 		// Récupération des information de l'utilisateur
-		// => à faire
-		$lastname_user = "?";
-		$firstname_user = "??";
+		$user = $this->get('security.context')->getToken()->getUser();
+
+		$username_user = $user->getUsername();
+		$compte_user = '??';
 		$mail_user = "???";
 
 
 		return $this->render('BdlsProjetBundle:Default:personalData.html.twig', array(
 		'title'			=> $title,
 		'year'			=> $year,
-		'lastname_user' => $lastname_user,
-		'firstname_user' => $firstname_user,
+		'username_user' => $username_user,
+		'compte_user' => $compte_user,
 		'mail_user' => $mail_user,
 		'data_updated' => $data_updated
 	  ));
