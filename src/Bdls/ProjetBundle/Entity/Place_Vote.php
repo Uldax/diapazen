@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,7 +25,7 @@ class Place_Vote
     private $issued_by;
 
     /**
-     * @var \Place_Choice
+     * @var \Bdls\ProjetBundle\Entity\Place_Choice
      */
     private $choice;
 
@@ -49,7 +49,7 @@ class Place_Vote
     public function setIssuedOn($issuedOn)
     {
         $this->issued_on = $issuedOn;
-
+    
         return $this;
     }
 
@@ -72,7 +72,7 @@ class Place_Vote
     public function setIssuedBy($issuedBy)
     {
         $this->issued_by = $issuedBy;
-
+    
         return $this;
     }
 
@@ -89,20 +89,20 @@ class Place_Vote
     /**
      * Set choice
      *
-     * @param \Place_Choice $choice
+     * @param \Bdls\ProjetBundle\Entity\Place_Choice $choice
      * @return Place_Vote
      */
-    public function setChoice(\Place_Choice $choice)
+    public function setChoice(\Bdls\ProjetBundle\Entity\Place_Choice $choice)
     {
         $this->choice = $choice;
-
+    
         return $this;
     }
 
     /**
      * Get choice
      *
-     * @return \Place_Choice 
+     * @return \Bdls\ProjetBundle\Entity\Place_Choice 
      */
     public function getChoice()
     {

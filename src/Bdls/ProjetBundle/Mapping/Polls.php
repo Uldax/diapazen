@@ -4,7 +4,7 @@ use Bdls\ProjetBundle\Entity\User as User;
 
 namespace Bdls\ProjetBundle\Entity;
 
-/** @ORM\MappedSuperclass */
+/** @MappedSuperclass */
 class Poll
 {
 	/** @Id @Column(type="integer") @GeneratedValue */

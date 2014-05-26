@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,7 +25,7 @@ class Place_Choice
     private $longitude;
 
     /**
-     * @var \Place_Poll
+     * @var \Bdls\ProjetBundle\Entity\Place_Poll
      */
     private $poll;
 
@@ -61,7 +61,7 @@ class Place_Choice
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
-
+    
         return $this;
     }
 
@@ -84,7 +84,7 @@ class Place_Choice
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
-
+    
         return $this;
     }
 
@@ -101,20 +101,20 @@ class Place_Choice
     /**
      * Set poll
      *
-     * @param \Place_Poll $poll
+     * @param \Bdls\ProjetBundle\Entity\Place_Poll $poll
      * @return Place_Choice
      */
-    public function setPoll(\Place_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\Place_Poll $poll)
     {
         $this->poll = $poll;
-
+    
         return $this;
     }
 
     /**
      * Get poll
      *
-     * @return \Place_Poll 
+     * @return \Bdls\ProjetBundle\Entity\Place_Poll 
      */
     public function getPoll()
     {
@@ -124,22 +124,22 @@ class Place_Choice
     /**
      * Add votes
      *
-     * @param \Place_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\Place_Vote $votes
      * @return Place_Choice
      */
-    public function addVote(\Place_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\Place_Vote $votes)
     {
         $this->votes[] = $votes;
-
+    
         return $this;
     }
 
     /**
      * Remove votes
      *
-     * @param \Place_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\Place_Vote $votes
      */
-    public function removeVote(\Place_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\Place_Vote $votes)
     {
         $this->votes->removeElement($votes);
     }

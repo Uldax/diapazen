@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,7 +20,7 @@ class Text_Choice
     private $text;
 
     /**
-     * @var \Text_Poll
+     * @var \Bdls\ProjetBundle\Entity\Text_Poll
      */
     private $poll;
 
@@ -56,7 +56,7 @@ class Text_Choice
     public function setText($text)
     {
         $this->text = $text;
-
+    
         return $this;
     }
 
@@ -73,20 +73,20 @@ class Text_Choice
     /**
      * Set poll
      *
-     * @param \Text_Poll $poll
+     * @param \Bdls\ProjetBundle\Entity\Text_Poll $poll
      * @return Text_Choice
      */
-    public function setPoll(\Text_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\Text_Poll $poll)
     {
         $this->poll = $poll;
-
+    
         return $this;
     }
 
     /**
      * Get poll
      *
-     * @return \Text_Poll 
+     * @return \Bdls\ProjetBundle\Entity\Text_Poll 
      */
     public function getPoll()
     {
@@ -96,22 +96,22 @@ class Text_Choice
     /**
      * Add votes
      *
-     * @param \Text_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\Text_Vote $votes
      * @return Text_Choice
      */
-    public function addVote(\Text_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\Text_Vote $votes)
     {
         $this->votes[] = $votes;
-
+    
         return $this;
     }
 
     /**
      * Remove votes
      *
-     * @param \Text_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\Text_Vote $votes
      */
-    public function removeVote(\Text_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\Text_Vote $votes)
     {
         $this->votes->removeElement($votes);
     }

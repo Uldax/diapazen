@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,7 +20,7 @@ class Date_Choice
     private $date;
 
     /**
-     * @var \Date_Poll
+     * @var \Bdls\ProjetBundle\Entity\Date_Poll
      */
     private $poll;
 
@@ -56,7 +56,7 @@ class Date_Choice
     public function setDate($date)
     {
         $this->date = $date;
-
+    
         return $this;
     }
 
@@ -73,20 +73,20 @@ class Date_Choice
     /**
      * Set poll
      *
-     * @param \Date_Poll $poll
+     * @param \Bdls\ProjetBundle\Entity\Date_Poll $poll
      * @return Date_Choice
      */
-    public function setPoll(\Date_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\Date_Poll $poll)
     {
         $this->poll = $poll;
-
+    
         return $this;
     }
 
     /**
      * Get poll
      *
-     * @return \Date_Poll 
+     * @return \Bdls\ProjetBundle\Entity\Date_Poll 
      */
     public function getPoll()
     {
@@ -96,22 +96,22 @@ class Date_Choice
     /**
      * Add votes
      *
-     * @param \Date_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\Date_Vote $votes
      * @return Date_Choice
      */
-    public function addVote(\Date_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\Date_Vote $votes)
     {
         $this->votes[] = $votes;
-
+    
         return $this;
     }
 
     /**
      * Remove votes
      *
-     * @param \Date_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\Date_Vote $votes
      */
-    public function removeVote(\Date_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\Date_Vote $votes)
     {
         $this->votes->removeElement($votes);
     }

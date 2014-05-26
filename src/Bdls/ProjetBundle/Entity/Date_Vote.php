@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,7 +25,7 @@ class Date_Vote
     private $issued_by;
 
     /**
-     * @var \Date_Choice
+     * @var \Bdls\ProjetBundle\Entity\Date_Choice
      */
     private $choice;
 
@@ -49,7 +49,7 @@ class Date_Vote
     public function setIssuedOn($issuedOn)
     {
         $this->issued_on = $issuedOn;
-
+    
         return $this;
     }
 
@@ -72,7 +72,7 @@ class Date_Vote
     public function setIssuedBy($issuedBy)
     {
         $this->issued_by = $issuedBy;
-
+    
         return $this;
     }
 
@@ -89,20 +89,20 @@ class Date_Vote
     /**
      * Set choice
      *
-     * @param \Date_Choice $choice
+     * @param \Bdls\ProjetBundle\Entity\Date_Choice $choice
      * @return Date_Vote
      */
-    public function setChoice(\Date_Choice $choice)
+    public function setChoice(\Bdls\ProjetBundle\Entity\Date_Choice $choice)
     {
         $this->choice = $choice;
-
+    
         return $this;
     }
 
     /**
      * Get choice
      *
-     * @return \Date_Choice 
+     * @return \Bdls\ProjetBundle\Entity\Date_Choice 
      */
     public function getChoice()
     {

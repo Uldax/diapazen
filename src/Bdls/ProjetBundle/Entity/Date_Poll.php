@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,6 +30,11 @@ class Date_Poll
     private $choices;
 
     /**
+     * @var \Bdls\ProjetBundle\Entity\User
+     */
+    private $created_by;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -56,7 +61,7 @@ class Date_Poll
     public function setCreatedOn($createdOn)
     {
         $this->created_on = $createdOn;
-
+    
         return $this;
     }
 
@@ -79,7 +84,7 @@ class Date_Poll
     public function setName($name)
     {
         $this->name = $name;
-
+    
         return $this;
     }
 
@@ -96,22 +101,22 @@ class Date_Poll
     /**
      * Add choices
      *
-     * @param \Date_Choice $choices
+     * @param \Bdls\ProjetBundle\Entity\Date_Choice $choices
      * @return Date_Poll
      */
-    public function addChoice(\Date_Choice $choices)
+    public function addChoice(\Bdls\ProjetBundle\Entity\Date_Choice $choices)
     {
         $this->choices[] = $choices;
-
+    
         return $this;
     }
 
     /**
      * Remove choices
      *
-     * @param \Date_Choice $choices
+     * @param \Bdls\ProjetBundle\Entity\Date_Choice $choices
      */
-    public function removeChoice(\Date_Choice $choices)
+    public function removeChoice(\Bdls\ProjetBundle\Entity\Date_Choice $choices)
     {
         $this->choices->removeElement($choices);
     }
@@ -125,19 +130,14 @@ class Date_Poll
     {
         return $this->choices;
     }
-    /**
-     * @var \User
-     */
-    private $created_by;
-
 
     /**
      * Set created_by
      *
-     * @param \User $createdBy
+     * @param \Bdls\ProjetBundle\Entity\User $createdBy
      * @return Date_Poll
      */
-    public function setCreatedBy(\User $createdBy)
+    public function setCreatedBy(\Bdls\ProjetBundle\Entity\User $createdBy)
     {
         $this->created_by = $createdBy;
     
@@ -147,7 +147,7 @@ class Date_Poll
     /**
      * Get created_by
      *
-     * @return \User 
+     * @return \Bdls\ProjetBundle\Entity\User 
      */
     public function getCreatedBy()
     {
