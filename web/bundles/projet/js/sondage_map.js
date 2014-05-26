@@ -22,6 +22,7 @@ function manageChoices(input) {
             input.setAttribute("id", "");
             input.className = "text_edit input_choice form-control";
             input.setAttribute("type", "text");
+             input.setAttribute("required", "required");
             input.setAttribute("name", "choices[]");
 
             var label = document.createElement("label");

@@ -55,7 +55,7 @@ function manageChoices(input,type)
 			switch(type){
 				case 'c1':
 					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="Lieux" /> '
+								+' <input class="text_edit input_choice" id="" required="required" type="text" name="choices[]" value="Lieux" /> '
 							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
 					break;
 				case 'c2':
@@ -116,8 +116,6 @@ function manageChoices(input,type)
 	{
 	   document.getElementsByName("choices[]").css('cursor', 'pointer');
 	}
-
-
 	initBlur();
 
 }
