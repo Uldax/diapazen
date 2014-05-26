@@ -24,7 +24,7 @@ class User extends BaseUser
      * @ORM\Column(name="github_id", type="string", nullable=true)
      */
     private $githubID;
-
+     
 
     public function __construct()
     {

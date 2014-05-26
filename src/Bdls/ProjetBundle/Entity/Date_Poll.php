@@ -125,4 +125,32 @@ class Date_Poll
     {
         return $this->choices;
     }
+    /**
+     * @var \User
+     */
+    private $created_by;
+
+
+    /**
+     * Set created_by
+     *
+     * @param \User $createdBy
+     * @return Date_Poll
+     */
+    public function setCreatedBy(\User $createdBy)
+    {
+        $this->created_by = $createdBy;
+    
+        return $this;
+    }
+
+    /**
+     * Get created_by
+     *
+     * @return \User 
+     */
+    public function getCreatedBy()
+    {
+        return $this->created_by;
+    }
 }

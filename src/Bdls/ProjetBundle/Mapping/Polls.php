@@ -1,6 +1,7 @@
 <?php
 
 use ORM\MappedSuperclass;
+use Bdls\ProjetBundle\Entity\User as User;
 
 
 /** @ORM\MappedSuperclass */
@@ -11,8 +12,13 @@ class Poll
 
 	/** @Column(type="datetime") */
 	protected $created_on;
+        
+        /** @ManyToOne(targetEntity="User")
+	    @JoinColumn(nullable=false) 
+         */
+	protected $created_by;
 
-	/** @Column(type="text")*/
+        /** @Column(type="text")*/
 	protected $name;
 }
 
