@@ -1,7 +1,7 @@
 <?php
 
 namespace Bdls\ProjetBundle\Controller;
-
+use Bdls\ProjetBundle\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class IndexController extends Controller
@@ -94,7 +94,7 @@ class IndexController extends Controller
 		  	$mails = $request->get("mails");
 			$tabMails = $this->sharePoll($mails);
 		}
-			
+		
 		$name = "Neo";
 		$title='E mail | Diapazen';
 		$year=date('Y');
@@ -102,15 +102,22 @@ class IndexController extends Controller
 		$message = \Swift_Message::newInstance();
         $message->setSubject("Objet");
         $message->setFrom('contact.diapazen@gmail.com');
-		foreach($tabMails as $mail)
-		{
-			$message->setTo($mail);
-		}
+		$message->setTo($tabMails);
+		
         // pour envoyer le message en HTML
         //$message->setBody($this->renderView('BdlsProjetBundle:Default:eMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year)));
-        $message->setBody('Paul.');
-		$message->setBody('Si tu reçoies cette e mail, c\'est que j\'ai réussis à faire fonctionné l\'envoie de mail avec une adresse rentré dans le formulaire.');
-		$message->setBody('Zoubi, Lucas.');
+		
+        $message->setBody(
+				'<html>' .
+					' <head></head>' .
+					' <body>' .
+						' <p> Bonjour, <br/>' .
+						' Un sondage a été créé et vous y êtes convié <br/>'.
+						' Lien du sondage </p>' .
+					' </body>' .
+				'</html>',
+				'text/html' // Mark the content-type as HTML
+				);
 		//envoi du message
 		$this->get('mailer')->send($message);
 
