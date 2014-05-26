@@ -50,7 +50,7 @@ class PollController extends Controller
     */
 	public function isUserConnected()
 	{
-		return (isset($_SESSION['connected']) && $_SESSION['connected'] == true) ? true : false;
+                return ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'));
 	}
 	
 	protected function set($key, $value)
