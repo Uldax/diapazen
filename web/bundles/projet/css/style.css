@@ -155,7 +155,7 @@
 	margin-bottom: 20px;
 }
 
-#ariadne_thread-xs
+#ariadne_thread_mobile
 {
 	width: 370px;
 	margin: auto;
@@ -319,7 +319,7 @@ h1#result
 {
 	text-align: center;
 }
-#personal_data_form .orange_button, #personal_data_form .grey_button
+#personal_data_form .orange_button, #personal_data_form .grey_button, #personal_data_form .green_button
 {
 	padding-left: 0;
 	padding-right: 0;
@@ -328,7 +328,7 @@ h1#result
 	display: inline-block;
 }
 
-#personal_data_form .grey_button
+#personal_data_form .grey_button, #personal_data_form .green_button
 {
 	margin-left: 184px;
 }
@@ -482,11 +482,12 @@ h1#result
 }
 
 #poll_creation_form .choice{
-	width: 540px;
+        padding-left: 70px;
+	width: 580px;
 }
 
 #poll_creation_form .choice-xs{
-	width: 400px;
+	width: auto;
 }
 
 #poll_creation_form .choice input[type="text"]
@@ -495,9 +496,15 @@ h1#result
 	display:inline-block;
 }
 
-#poll_creation_form .choice-xs input[type="text"]
+#poll_creation_form_mobile .choice-xs input[type="text"]
 {
-	width:225px;
+	width:215px;
+	display:inline-block;
+}
+
+#poll_creation_form .choice_map-xs input[type="text"]
+{
+	width:185px;
 	display:inline-block;
 }
 
@@ -515,7 +522,7 @@ h1#result
 
 #poll_creation_form .datepicker-xs
 {
-	width: 270px;
+	width: 260px;
 	margin-bottom: 15px;
 }
 
@@ -524,10 +531,10 @@ h1#result
     padding-right: 5px;
 }
 
-#poll_creation_form .choice .grey_button, #poll_creation_form .add_choice_button
+#poll_creation_form .choice .grey_button, #poll_creation_form .add_choice_button,#poll_creation_form .choice .green_button
 {
-	margin-left: 7px;
-        margin-top: -5px;
+	margin-left: 5px;
+        margin-top: -7px;
 }
 
 #poll_creation_form .add_choice_button-xs
@@ -536,14 +543,22 @@ h1#result
         margin-top: -15px;
 }
 
+
 #poll_creation_form .next_step-xs
 {
         margin-left: 112px;
-	width: 225px;
+	width: 215px;
+}
+
+#poll_creation_form .next_step_map-xs
+{
+        margin-left: 88px;
+	width: 205px;
 }
 
 #poll_creation_form .next_step
 {
+        display: inline-block;
 	width: 300px;
 }
 
@@ -567,9 +582,5 @@ h1#result
     background-color: #fff;
     padding: 5px;
     border: 1px solid #999;
-    }
-    #map-canvas{
-    height: 500px;
-    width: 500px;
     }
 

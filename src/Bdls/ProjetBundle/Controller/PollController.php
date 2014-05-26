@@ -2,6 +2,7 @@
 namespace Bdls\ProjetBundle\Controller;
 
 use Bdls\ProjetBundle\Classe;
+
 /**
  * 
  * Contrôleur de la page d'un sondage
@@ -326,6 +327,25 @@ class PollController extends Controller
     */
 	public function shareAction($params = null)
 	{
+
+		/*if (isset($_SESSION['show_ariadne']) && isset($_SESSION['width_ariadne']))
+		{
+			$this->set('show_ariadne', $_SESSION['show_ariadne']);
+			$this->set('width_ariadne', $_SESSION['width_ariadne']);
+		}
+		else
+		{
+			// renvoyer a Poll create ces variable devrais etre initialisées
+			header('Location: ' . BASE_URL. '/poll/create');
+		}
+
+		// On choisi le rendu par default
+		$this->set('title', 'Création d\'un sondage | Diapazen');
+		$this->set('class_create', 'grey');
+		$this->set('class_connect', 'orange');
+		$this->set('class_share', 'grey');
+		*/
+
 		try
 		{
 			

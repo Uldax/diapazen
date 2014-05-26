@@ -60,6 +60,7 @@ class IndexController extends Controller
 		}
 	}
 
+
 	public function mailAction()
 	{
 //		$name = "neo";
@@ -152,12 +153,12 @@ class IndexController extends Controller
 
 		return $emails;
 	}
-	
+
 	public function forgotAction()
 	{
 		$title='Accueil | Diapazen';
 		$year=date('Y');
-		return $this->render('BdlsProjetBundle:Default:forgot.html.twig', array('title'=>$title, 'year'=>$year));
+		return $this->render('BdlsProjetBundle:Default:forgot.html.twig', array('title'=>$title, 'year'=>$year, 'last_username'));
 	}
         
          //Pour obtenir le csrf (input hiden) dont a besoin fosUSERBUNDLE

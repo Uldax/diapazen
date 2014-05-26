@@ -5,3 +5,7 @@ user:
 bdls_projet:
     resource: "@BdlsProjetBundle/Resources/config/routing.yml"
     prefix:   /
+
+bdls_projet:
+    resource: "@BdlsProjetBundle/Resources/config/routing.yml"
+    prefix:   /

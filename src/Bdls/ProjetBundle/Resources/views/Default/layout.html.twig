@@ -23,25 +23,21 @@
                             <img id="logo" src="{{ asset('bundles/projet/media/pictures/diapazen_v2.png') }}" alt="Diapazen" class="img-rounded">
                             </a>
                         </div>
-
-              
+          
                          <div class="col-lg-4 col-md-5 col-sm-7 col-xs-4 div_connect">
-							 {% if is_granted('ROLE_USER') %}
-								<div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="{{ path('bdls_projet_dashboard') }}"><span class="orange_text">{{ app.user.username }}</span></a></p><a class="link" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a></div>
-			{#					<div><p class="text" >Bonjour</p></div>#}
-								{% else %}
+				{% if is_granted('ROLE_USER') %}
+                                 <div id="connected_box" ><p class="text" >Bonjour <a class="orangelink" href="{{ path('bdls_projet_dashboard') }}"><span class="orange_text">{{ app.user.username }}</span></a></p><a class="link" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a></div>
+                                    {#<div><p class="text" >Bonjour</p></div>#}
+				{% else %}
+                                 								
                                 <div id="connect_box" >
                                     
                                     
                                     <form action="{{ path("fos_user_security_check") }}" method="post" class="form-inline">
                                     <!-- _CSRF du fos user bundle contenu en variable global twig , sécurité des formulaires ) -->
-                                    <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
-
-                                   
+                                    <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />                                  
                                     <input  class="small_text_edit form-control hidden-xs" placeholder="E-mail"  type="text" id="username" name="_username" value="" required="required" />                        
-                                    <input type="password" class="small_text_edit form-control hidden-xs"  id="password" name="_password" required="required" />
-
-                             
+                                    <input type="password" class="small_text_edit form-control hidden-xs"  id="password" name="_password" required="required" />               
                                     <input type="submit" class="btn btn-default orange_small_button hidden-xs"  id="_submit" name="_submit" value="Connexion" />                                               
                                     </form>
                                     
@@ -55,15 +51,28 @@
                                         {% endfor %}
                                     {% endblock hwi_oauth_content %}
                                     
-                                    
-                                    
-                                   <form action="{{ path('fos_user_security_login') }}" method="post" class="form-inline">
-											<input type="text" id="username" class="small_text_edit form-control hidden-xs" placeholder="E-mail" name="_username" />
-											<input type="password" class="small_text_edit form-control hidden-xs" id="password" placeholder="Mot de passe" name="_password" />
-                                           <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
-                                            <input class="btn btn-default orange_small_button hidden-xs" type="submit" value="Connexion">
-                                            <input class="btn btn-default orange_small_button orange_small_button-xs visible-xs" type="submit" value="Connexion">
-                                    </form>
+                         <button class="btn btn-default orange_small_button orange_small_button-xs visible-xs" data-toggle="modal" data-target="#myModal">
+                               Connexion
+                         </button>
+                         <!-- Modal -->
+                            <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    ...
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>-->
+
                                 </div>
                                 <a class="btn btn-link small_link hidden-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a> 
                          </div>

@@ -78,9 +78,28 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\PollController::connectAction',  '_route' => 'bdls_projet_connect',);
         }
 
+<<<<<<< HEAD
         // bdls_projet_share
         if ($pathinfo === '/share') {
             return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\PollController::shareAction',  '_route' => 'bdls_projet_share',);
+=======
+        if (0 === strpos($pathinfo, '/s')) {
+            // bdls_projet_share
+            if ($pathinfo === '/share') {
+                return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\PollController::shareAction',  '_route' => 'bdls_projet_share',);
+            }
+
+            // bdls_projet_sent
+            if ($pathinfo === '/sent') {
+                return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\PollController::sentAction',  '_route' => 'bdls_projet_sent',);
+            }
+
+        }
+
+        // bdls_projet_view
+        if ($pathinfo === '/view') {
+            return array (  '_controller' => 'Bdls\\ProjetBundle\\Controller\\PollController::viewAction',  '_route' => 'bdls_projet_view',);
+>>>>>>> origin/boot
         }
 
         if (0 === strpos($pathinfo, '/log')) {

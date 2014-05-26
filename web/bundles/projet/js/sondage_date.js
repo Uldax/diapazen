@@ -7,7 +7,7 @@ function manageChoices(input) {
 
     switch (input.className) {
 
-        case 'orange_button':
+        case 'btn btn-default orange_button add_choice_button':
 
             // Ajout d'un champ de choix
 
@@ -26,7 +26,7 @@ function manageChoices(input) {
             label.className = " text lbl_choice datepick";
 
             var a = document.createElement("a");
-            a.className = "grey_button";
+            a.className = "btn btn-default grey_button";
             a.setAttribute("title", "Supprimer");
             a.setAttribute("type", "button");
             a.setAttribute("onclick", "manageChoices(this);");
@@ -41,8 +41,8 @@ function manageChoices(input) {
             choices.appendChild(choice);
 
             break;
+        case 'btn btn-default grey_button':
 
-        case 'grey_button':
         
             // Suppression du champ de choix
             if (document.getElementsByName("choices[]").length > 2) {
