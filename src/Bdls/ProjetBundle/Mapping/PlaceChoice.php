@@ -4,7 +4,7 @@ namespace Bdls\ProjetBundle\Entity;
 
 /** @Entity
     @Table(name="dpz_placechoice") */
-class Place_Choice
+class PlaceChoice
 {
 	/** @Id @Column(type="integer") @GeneratedValue */
 	private $id;
@@ -15,12 +15,12 @@ class Place_Choice
 	/** @Column(type="float") */
 	private $longitude;
 
-	/** @ManyToOne(targetEntity="Place_Poll", inversedBy="choices")
+	/** @ManyToOne(targetEntity="PlacePoll", inversedBy="choices")
 	    @JoinColumn(nullable=false)
 	 */
 	private $poll;
 
-	/** @OneToMany(targetEntity="Place_Vote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	/** @OneToMany(targetEntity="PlaceVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
 	private $votes;
 
 

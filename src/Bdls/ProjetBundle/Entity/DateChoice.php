@@ -5,9 +5,9 @@ namespace Bdls\ProjetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Text_Choice
+ * DateChoice
  */
-class Text_Choice
+class DateChoice
 {
     /**
      * @var integer
@@ -15,12 +15,12 @@ class Text_Choice
     private $id;
 
     /**
-     * @var string
+     * @var \DateTime
      */
-    private $text;
+    private $date;
 
     /**
-     * @var \Bdls\ProjetBundle\Entity\Text_Poll
+     * @var \Bdls\ProjetBundle\Entity\DatePoll
      */
     private $poll;
 
@@ -48,35 +48,35 @@ class Text_Choice
     }
 
     /**
-     * Set text
+     * Set date
      *
-     * @param string $text
-     * @return Text_Choice
+     * @param \DateTime $date
+     * @return DateChoice
      */
-    public function setText($text)
+    public function setDate($date)
     {
-        $this->text = $text;
+        $this->date = $date;
     
         return $this;
     }
 
     /**
-     * Get text
+     * Get date
      *
-     * @return string 
+     * @return \DateTime 
      */
-    public function getText()
+    public function getDate()
     {
-        return $this->text;
+        return $this->date;
     }
 
     /**
      * Set poll
      *
-     * @param \Bdls\ProjetBundle\Entity\Text_Poll $poll
-     * @return Text_Choice
+     * @param \Bdls\ProjetBundle\Entity\DatePoll $poll
+     * @return DateChoice
      */
-    public function setPoll(\Bdls\ProjetBundle\Entity\Text_Poll $poll)
+    public function setPoll(\Bdls\ProjetBundle\Entity\DatePoll $poll)
     {
         $this->poll = $poll;
     
@@ -86,7 +86,7 @@ class Text_Choice
     /**
      * Get poll
      *
-     * @return \Bdls\ProjetBundle\Entity\Text_Poll 
+     * @return \Bdls\ProjetBundle\Entity\DatePoll 
      */
     public function getPoll()
     {
@@ -96,10 +96,10 @@ class Text_Choice
     /**
      * Add votes
      *
-     * @param \Bdls\ProjetBundle\Entity\Text_Vote $votes
-     * @return Text_Choice
+     * @param \Bdls\ProjetBundle\Entity\DateVote $votes
+     * @return DateChoice
      */
-    public function addVote(\Bdls\ProjetBundle\Entity\Text_Vote $votes)
+    public function addVote(\Bdls\ProjetBundle\Entity\DateVote $votes)
     {
         $this->votes[] = $votes;
     
@@ -109,9 +109,9 @@ class Text_Choice
     /**
      * Remove votes
      *
-     * @param \Bdls\ProjetBundle\Entity\Text_Vote $votes
+     * @param \Bdls\ProjetBundle\Entity\DateVote $votes
      */
-    public function removeVote(\Bdls\ProjetBundle\Entity\Text_Vote $votes)
+    public function removeVote(\Bdls\ProjetBundle\Entity\DateVote $votes)
     {
         $this->votes->removeElement($votes);
     }

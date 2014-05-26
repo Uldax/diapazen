@@ -5,9 +5,9 @@ namespace Bdls\ProjetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Date_Poll
+ * DatePoll
  */
-class Date_Poll
+class DatePoll
 {
     /**
      * @var integer
@@ -56,7 +56,7 @@ class Date_Poll
      * Set created_on
      *
      * @param \DateTime $createdOn
-     * @return Date_Poll
+     * @return DatePoll
      */
     public function setCreatedOn($createdOn)
     {
@@ -79,7 +79,7 @@ class Date_Poll
      * Set name
      *
      * @param string $name
-     * @return Date_Poll
+     * @return DatePoll
      */
     public function setName($name)
     {
@@ -101,10 +101,10 @@ class Date_Poll
     /**
      * Add choices
      *
-     * @param \Bdls\ProjetBundle\Entity\Date_Choice $choices
-     * @return Date_Poll
+     * @param \Bdls\ProjetBundle\Entity\DateChoice $choices
+     * @return DatePoll
      */
-    public function addChoice(\Bdls\ProjetBundle\Entity\Date_Choice $choices)
+    public function addChoice(\Bdls\ProjetBundle\Entity\DateChoice $choices)
     {
         $this->choices[] = $choices;
     
@@ -114,9 +114,9 @@ class Date_Poll
     /**
      * Remove choices
      *
-     * @param \Bdls\ProjetBundle\Entity\Date_Choice $choices
+     * @param \Bdls\ProjetBundle\Entity\DateChoice $choices
      */
-    public function removeChoice(\Bdls\ProjetBundle\Entity\Date_Choice $choices)
+    public function removeChoice(\Bdls\ProjetBundle\Entity\DateChoice $choices)
     {
         $this->choices->removeElement($choices);
     }
@@ -135,7 +135,7 @@ class Date_Poll
      * Set created_by
      *
      * @param \Bdls\ProjetBundle\Entity\User $createdBy
-     * @return Date_Poll
+     * @return DatePoll
      */
     public function setCreatedBy(\Bdls\ProjetBundle\Entity\User $createdBy)
     {
