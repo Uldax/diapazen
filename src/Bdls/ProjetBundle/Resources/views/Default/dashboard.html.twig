@@ -6,6 +6,8 @@
                 <a id="dashboard_form" class="orange_button" href="{{ path('bdls_projet_profil') }}">Modifier mes données personnelles</a>
             </div>
             <h2 class="small_title small_title_dashboard">Vos sondages</h2>
+
+            {# NON fonctionnel, il faut valider le script #}
             {% if (data_updated is defined) and (data_updated is not null) %}
                     {% if data_updated %}
                         <div class="success_message message_dashboard">Le sondage a été clôturé avec succés.</div>
@@ -32,8 +34,8 @@
                                 <td>{{ row.title }}</td>
                                 <td>{{ row.description }}</td>
                                 <td> 
-                                    {# a modifier l'adresse du lien -> bdls_projet_view #}
-                                    <a class="orange_small_button" href="<?php $this->getHomeUrl(); echo '/poll/view/'.$row['url']; ?>">Voir</a>
+                                    {# à modifier l'adresse du lien -> bdls_projet_view #}
+                                    <a class="orange_small_button" href="{{ path('bdls_projet_view',{'id': row.POLL_ID }) }}">Voir</a>
                                     <form action="{{ path('bdls_projet_dashboard') }}" onsubmit="return confirm('Clôturer le sondage ?');" method="post">
                                         <input type="hidden" name="close" value="{{ row.POLL_ID }}"> 
                                         <input type="submit" class="grey_small_button" value="Clôturer">
@@ -48,6 +50,7 @@
                                 <td>{{ row.title }}</td>
                                 <td>{{ row.description }}</td>
                                 <td> 
+                                    {# à modifier l'adresse du lien -> bdls_projet_view #}
                                     <a class="orange_small_button" href="<?php $this->getHomeUrl(); echo '/poll/view/'.$row['url']; ?>">Voir</a> 
                                 </td>
 
