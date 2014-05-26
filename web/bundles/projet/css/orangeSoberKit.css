@@ -171,6 +171,7 @@ tipomatika@gmail.com*/
 
 .bold-xs
 {
+    margin-top: 150px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -387,6 +388,10 @@ tipomatika@gmail.com*/
     width: 530px; 
 }
 
+.div_etape4-xs{
+    width: 370px; 
+}
+
 .styled_select_div{
     /*float: right;
     margin-left: 25%;*/
@@ -399,6 +404,7 @@ tipomatika@gmail.com*/
     /*float: right;
     margin-left: 25%;*/
     //margin-left: 5px;
+    //margin-left: -100px;
     display: inline-block;
 }
 
@@ -492,9 +498,12 @@ tipomatika@gmail.com*/
 }
 
 .div_choix-xs{
-    float: right;
+    //float: right;
     width: 380px;
     padding: 7px 7px;
+    margin-top: 40px;
+    margin-left: -160px;
+    float: left;
 }
 
 .map{
@@ -521,7 +530,15 @@ tipomatika@gmail.com*/
     margin-right: 10px;
 }
 
+.formulaire-xs{
+    margin: 5px;
+    min-width: 325px;
+    max-width: 500px;
+}
 
+.link-xs{
+    margin: 5px;
+}
 
 /*------------FIL D'ARIANE-----------*/
 

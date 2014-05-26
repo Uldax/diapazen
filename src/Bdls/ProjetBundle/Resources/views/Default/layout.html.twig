@@ -33,16 +33,40 @@
 								{% else %}
                                 <div id="connect_box" >
                                     <form action="{{ path('login_check') }}" method="post" class="form-inline">
-											<input type="text" id="username" class="small_text_edit form-control hidden-xs" placeholder="E-mail" name="_username" />
-											<input type="password" class="small_text_edit form-control hidden-xs" id="password" placeholder="Mot de passe" name="_password" />
+                                            <input type="text" id="username" class="small_text_edit form-control hidden-xs" placeholder="E-mail" name="_username" />
+                                            <input type="password" class="small_text_edit form-control hidden-xs" id="password" placeholder="Mot de passe" name="_password" />
                                            <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
                                             <input class="btn btn-default orange_small_button hidden-xs" type="submit" value="Connexion">
-                                            <input class="btn btn-default orange_small_button orange_small_button-xs visible-xs" type="submit" value="Connexion">
                                     </form>
+                                    
+                         <button class="btn btn-default orange_small_button orange_small_button-xs visible-xs" data-toggle="modal" data-target="#myModal">
+                               Connexion
+                         </button>
+                         <!-- Modal -->
+                            <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    ...
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>-->
+                                            
+                                                                                       
                                 </div>
                                 <a class="btn btn-link small_link hidden-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a> 
                          </div>
                          <div class="col-lg-1"></div>
+ 
                        {% endif %}
 				
                     </div>

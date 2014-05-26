@@ -77,43 +77,67 @@ class __TwigTemplate_7f2ca19df52a8a785f8071dbb6b7f739a23d9a5130e1035f26e1c0e0cfd
             // line 35
             echo $this->env->getExtension('routing')->getPath("login_check");
             echo "\" method=\"post\" class=\"form-inline\">
-\t\t\t\t\t\t\t\t\t\t\t<input type=\"text\" id=\"username\" class=\"small_text_edit form-control hidden-xs\" placeholder=\"E-mail\" name=\"_username\" />
-\t\t\t\t\t\t\t\t\t\t\t<input type=\"password\" class=\"small_text_edit form-control hidden-xs\" id=\"password\" placeholder=\"Mot de passe\" name=\"_password\" />
+                                            <input type=\"text\" id=\"username\" class=\"small_text_edit form-control hidden-xs\" placeholder=\"E-mail\" name=\"_username\" />
+                                            <input type=\"password\" class=\"small_text_edit form-control hidden-xs\" id=\"password\" placeholder=\"Mot de passe\" name=\"_password\" />
                                            <input type=\"hidden\" name=\"_target_path\" value=\"";
             // line 38
             echo twig_escape_filter($this->env, ($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "schemeAndHttpHost") . $this->env->getExtension('routing')->getPath($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "attributes"), "get", array(0 => "_route"), "method"))), "html", null, true);
             echo "\" />
                                             <input class=\"btn btn-default orange_small_button hidden-xs\" type=\"submit\" value=\"Connexion\">
-                                            <input class=\"btn btn-default orange_small_button orange_small_button-xs visible-xs\" type=\"submit\" value=\"Connexion\">
                                     </form>
+                                    
+                         <button class=\"btn btn-default orange_small_button orange_small_button-xs visible-xs\" data-toggle=\"modal\" data-target=\"#myModal\">
+                               Connexion
+                         </button>
+                         <!-- Modal -->
+                            <!--<div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
+                              <div class=\"modal-dialog\">
+                                <div class=\"modal-content\">
+                                  <div class=\"modal-header\">
+                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>
+                                    <h4 class=\"modal-title\" id=\"myModalLabel\">Modal title</h4>
+                                  </div>
+                                  <div class=\"modal-body\">
+                                    ...
+                                  </div>
+                                  <div class=\"modal-footer\">
+                                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>
+                                    <button type=\"button\" class=\"btn btn-primary\">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>-->
+                                            
+                                                                                       
                                 </div>
                                 <a class=\"btn btn-link small_link hidden-xs\" href=\"";
-            // line 43
+            // line 66
             echo $this->env->getExtension('routing')->getPath("bdls_projet_forgot");
             echo "\" >Mot de passe oublié ?</a> 
                          </div>
                          <div class=\"col-lg-1\"></div>
+ 
                        ";
         }
-        // line 47
+        // line 71
         echo "\t\t\t\t
                     </div>
 \t\t</header>
 \t\t";
-        // line 50
+        // line 74
         $this->displayBlock('body', $context, $blocks);
-        // line 52
+        // line 76
         echo "\t\t<!--<div class=\"white_bg\">-->
 \t\t";
-        // line 53
+        // line 77
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 62
+        // line 86
         echo "
     
 \t";
-        // line 64
+        // line 88
         $this->displayBlock('footer', $context, $blocks);
-        // line 87
+        // line 111
         echo "\t\t
     </body>
 
@@ -157,61 +181,61 @@ class __TwigTemplate_7f2ca19df52a8a785f8071dbb6b7f739a23d9a5130e1035f26e1c0e0cfd
 \t\t";
     }
 
-    // line 50
+    // line 74
     public function block_body($context, array $blocks = array())
     {
-        // line 51
+        // line 75
         echo "\t\t";
     }
 
-    // line 53
+    // line 77
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 54
+        // line 78
         echo "                    <!-- Création des input date en jquerry necessaire pour tout les sondages -->
                     <script src=\"";
-        // line 55
+        // line 79
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/jquery.js"), "html", null, true);
         echo "\" type=\"text/javascript\"></script>
                     <script src=\"";
-        // line 56
+        // line 80
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/jquery-2.0.2.js"), "html", null, true);
         echo "\" type=\"text/javascript\"></script>
                     <!--Inutilisé il me semble  -->
                      <script src=\"";
-        // line 58
+        // line 82
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/bootstrap.js"), "html", null, true);
         echo "\" type=\"text/javascript\"></script>
                     <script src=";
-        // line 59
+        // line 83
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/js/jquery-ui-1.10.3.custom.js"), "html", null, true);
         echo "></script>
                     <script>datepickerLoader();</script>
                ";
     }
 
-    // line 64
+    // line 88
     public function block_footer($context, array $blocks = array())
     {
-        // line 65
+        // line 89
         echo "\t\t<footer class=\"hidden-xs\">
 \t\t    <ul>
 \t\t        <li><a class=\"btn btn-link btn-lg link\" href=\"";
-        // line 67
+        // line 91
         echo $this->env->getExtension('routing')->getPath("bdls_projet_index");
         echo "\">Accueil</a></li>
 \t\t\t\t<li><a class=\"btn btn-link btn-lg link\" href=\"";
-        // line 68
+        // line 92
         echo $this->env->getExtension('routing')->getPath("bdls_projet_about");
         echo "\">À propos</a></li>
 \t\t        <!-- <li><a class=\"link\" href=\"#\">Contact</a></li> -->
 \t\t    </ul>
 \t\t    <p class=\"text\">© ";
-        // line 71
+        // line 95
         echo twig_escape_filter($this->env, (isset($context["year"]) ? $context["year"] : $this->getContext($context, "year")), "html", null, true);
         echo " Diapazen</p>
 \t\t    <img id=\"logo_isen\" src=\"";
-        // line 72
+        // line 96
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/media/pictures/logo_isen.png"), "html", null, true);
         echo "\" class=\"img-rounded\">
 \t\t</footer>
@@ -220,21 +244,21 @@ class __TwigTemplate_7f2ca19df52a8a785f8071dbb6b7f739a23d9a5130e1035f26e1c0e0cfd
                 <footer class=\"visible-xs footer-xs\">
 \t\t    <ul>
 \t\t        <li><a class=\"btn btn-link btn-lg link\" href=\"";
-        // line 78
+        // line 102
         echo $this->env->getExtension('routing')->getPath("bdls_projet_index");
         echo "\">Accueil</a></li>
 \t\t\t\t<li><a class=\"btn btn-link btn-lg link\" href=\"";
-        // line 79
+        // line 103
         echo $this->env->getExtension('routing')->getPath("bdls_projet_about");
         echo "\">À propos</a></li>
 \t\t        <!-- <li><a class=\"link\" href=\"#\">Contact</a></li> -->
 \t\t    </ul>
 \t\t    <p class=\"text\">© ";
-        // line 82
+        // line 106
         echo twig_escape_filter($this->env, (isset($context["year"]) ? $context["year"] : $this->getContext($context, "year")), "html", null, true);
         echo " Diapazen</p>
 \t\t    <img id=\"logo_isen\" src=\"";
-        // line 83
+        // line 107
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/projet/media/pictures/logo_isen.png"), "html", null, true);
         echo "\">
 
@@ -254,6 +278,6 @@ class __TwigTemplate_7f2ca19df52a8a785f8071dbb6b7f739a23d9a5130e1035f26e1c0e0cfd
 
     public function getDebugInfo()
     {
-        return array (  238 => 83,  234 => 82,  228 => 79,  224 => 78,  215 => 72,  211 => 71,  205 => 68,  201 => 67,  197 => 65,  194 => 64,  187 => 59,  183 => 58,  178 => 56,  174 => 55,  171 => 54,  168 => 53,  164 => 51,  161 => 50,  154 => 12,  150 => 11,  146 => 10,  142 => 9,  138 => 8,  133 => 7,  130 => 6,  124 => 5,  117 => 87,  111 => 62,  109 => 53,  106 => 52,  104 => 50,  99 => 47,  84 => 38,  78 => 35,  75 => 34,  72 => 33,  63 => 31,  61 => 30,  52 => 24,  48 => 23,  34 => 6,  30 => 5,  24 => 1,  144 => 95,  137 => 91,  115 => 64,  105 => 65,  102 => 64,  95 => 58,  92 => 43,  81 => 45,  59 => 26,  49 => 19,  46 => 18,  39 => 12,  36 => 15,  31 => 4,  28 => 3,);
+        return array (  262 => 107,  258 => 106,  252 => 103,  248 => 102,  239 => 96,  235 => 95,  229 => 92,  225 => 91,  221 => 89,  218 => 88,  211 => 83,  207 => 82,  202 => 80,  198 => 79,  195 => 78,  192 => 77,  188 => 75,  185 => 74,  178 => 12,  174 => 11,  170 => 10,  166 => 9,  162 => 8,  157 => 7,  154 => 6,  148 => 5,  141 => 111,  139 => 88,  135 => 86,  133 => 77,  130 => 76,  128 => 74,  123 => 71,  115 => 66,  84 => 38,  78 => 35,  75 => 34,  72 => 33,  63 => 31,  61 => 30,  52 => 24,  48 => 23,  36 => 15,  34 => 6,  30 => 5,  24 => 1,);
     }
 }

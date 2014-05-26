@@ -36,7 +36,7 @@
 				<!-- Formulaire pour le choix de sondage -->
 				<article class="use_description">
 					<div class="icon_article" id="img_quatre">
-						<img class="img_quatre" src="{{ asset('bundles/projet/media/pictures/3_140x140.png') }}" alt="3">
+						<img class="img_quatre img-circle" src="{{ asset('bundles/projet/media/pictures/3_140x140.png') }}" alt="3">
 					</div>
 					<div class="text_article div_etape4">
 						<h2 class="big_title">Choix du type : </h2>
@@ -72,7 +72,36 @@
                       
 
                         <!-- Version modbile -->
+                        
+                        
+                        
                         <div id="content-xs" class="visible-xs">
+                            
+                            <!-- Modal -->
+                              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                 <form action="{{ path('login_check') }}" method="post" class="form-inline">
+                                 <div class="modal-dialog">
+                                   <div class="modal-content">
+                                     <div class="modal-header">
+                                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                       <h4 class="modal-title" id="myModalLabel">Connexion ...</h4>
+                                     </div>
+                                     <div class="modal-body">
+                                        
+                                        <input type="text" id="username" class="small_text_edit form-control formulaire-xs" placeholder="E-mail" name="_username" />
+                                        <input type="password" class="small_text_edit form-control formulaire-xs" id="password" placeholder="Mot de passe" name="_password" />
+                                        <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
+                                        <a class="btn btn-link small_link link-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a>
+                                     </div>
+                                     <div class="modal-footer">
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                       <input class="btn btn-default orange_small_button " type="submit" value="Connexion">
+                                     </div>
+                                   </div>
+                                 </div>
+                                 </form>
+                               </div>
+                         
 				<article class="use_description" >
 					<div class="icon_article" id="img_un">
 						<img class="img_un img-circle" src="{{ asset('bundles/projet/media/pictures/1_140x140.png') }}" alt="1">
@@ -109,15 +138,15 @@
                                 <!-- Formulaire pour le choix de sondage -->
 				<article class="use_description">
 					<div class="icon_article" id="img_quatre">
-						<img class="img_quatre" src="{{ asset('bundles/projet/media/pictures/3_140x140.png') }}" alt="3">
+						<img class="img_quatre img-circle" src="{{ asset('bundles/projet/media/pictures/3_140x140.png') }}" alt="3">
 					</div>
-					<div class="text_article div_etape4">
-						<h2 class="big_title">Choix du type : </h2>
+					<div class="text_article div_etape4 div_etape4-xs">
+						<h2 class="big_title big_title_xs big_title_xss">Choix du type : </h2>
 						<form action="" method="post" {{ form_enctype(form) }}>
 						    {{ form_widget(form) }}                                         
-						    <input type="submit" class=" btn btn-default orange_button styled_a_div orange_big_button" value="C'est parti !" />
-                                                                       <!-- Select -->
-                                                <div class="div_choix-xs">
+						    
+                                                <!-- Select -->
+                                                <div class="div_choix div_choix-xs">
                                                     <div class="btn-group styled_select_div_xs"> 
                                                       <!-- Boutton du Select -->
                                                       <span class="btn btn-default styled_select span_select" data-toggle="dropdown"><img src="{{ asset('bundles/projet/images/pictures/icone_autre.png') }}" class="img_option">Textuel</span>
@@ -132,6 +161,7 @@
                                                         <li onclick="saveState(this);" class="list_option" id="c2" ><img src="{{ asset('bundles/projet/images/pictures/icone_calendrier.png') }}" class="img_option">Date</li>
                                                       </ul>
                                                     </div>
+                                                    <input type="submit" class=" btn btn-default orange_button styled_a_div orange_big_button" value="C'est parti !" />
                                                     <!-- <a id="create_survey" class="btn btn-default orange_button styled_a_div" href="{{ path('bdls_projet_creation') }}">C'est parti !</a> -->
 						</form>                                           
                                                 </div>
