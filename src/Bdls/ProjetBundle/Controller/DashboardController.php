@@ -61,7 +61,11 @@ class DashboardController extends Controller
     */
 	public function indexAction($params = null)
 	{
-		// ATTENTION vérifier la connection avant d'afficher
+		//Authentification
+		// => à faire
+
+		// ATTENTION sans BDD
+		// Si le visiteur n'est identifié, on le redirige vers l'accueil
 		if (! $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
 		{
 			return $this->redirect($this->generateUrl('bdls_projet_index'));
@@ -73,18 +77,22 @@ class DashboardController extends Controller
 		$data_updated = null;
 
 
-		/*
-		// on charge le model
-		$this->loadModel('poll');
-		//*/
 		try
 		{
-			//traitement en cas de réponse
+			//traitement en cas de réponse (cloturer un sondage)
 			$request = $this->get('request');
 		    if ($request->getMethod() == 'POST') {
+		    	//recup de l'id su sondage a cloturer
 		    	$id_closa = $request->get("close");
+
+		    	//traitement de la fermeture du sondage
+		    	// => à faire
+
 		    	$data_updated = false;
 		    }
+
+		    //Récupération des sondages de l'utilisateur
+		    // => à faire
 
 			//si on a fermé un sondage
 			/*if (isset($_POST['close']) && !empty($_POST['close']))
@@ -101,43 +109,38 @@ class DashboardController extends Controller
 				}
 			}
 
-			//test si l'utilisateur est connecté
-			if ($this->isUserConnected())
-			{
-				//récupération de l'id du user et de ses sondages
-				$uid = $this->getUserInfo('id');
-				$polls = $this->getModel()->viewAllPolls($uid);
-				
-				// recherche des sondages expirés
-				foreach ($polls as &$poll)
-				{
-					$exp_date = new DateTime($poll['expiration_date']);
-					$now = new DateTime('now');
-					$interval = $now->diff($exp_date);
-					if($interval->invert && $poll['expiration_date'] != '0000-00-00 00:00:00')
-					{
-						$poll['open'] = false;
-						// On met à jour le sondage dans la bdd
-						try
-						{
-							$this->getModel()->updatePoll($poll['POLL_ID']);
-						}
-						catch (Exception $e)
-						{
-							die("Erreur lors de la mise à jour");
-						}
-					}
-
-				}
+			//récupération de l'id du user et de ses sondages
+			$uid = $this->getUserInfo('id');
+			$polls = $this->getModel()->viewAllPolls($uid);
 			
-				$this->set('pollList', $polls);
-				$this->render('dashboard');
+			// recherche des sondages expirés
+			foreach ($polls as &$poll)
+			{
+				$exp_date = new DateTime($poll['expiration_date']);
+				$now = new DateTime('now');
+				$interval = $now->diff($exp_date);
+				if($interval->invert && $poll['expiration_date'] != '0000-00-00 00:00:00')
+				{
+					$poll['open'] = false;
+					// On met à jour le sondage dans la bdd
+					try
+					{
+						$this->getModel()->updatePoll($poll['POLL_ID']);
+					}
+					catch (Exception $e)
+					{
+						die("Erreur lors de la mise à jour");
+					}
+				}
+
 			}
-			else
+		
+			$this->set('pollList', $polls);
+			$this->render('dashboard');
 			 
 			 //*/
 
-			// donné de test
+			//Donnée de test (sans BDD)
 			$table = array(
 					array(
 						'open' => true,
