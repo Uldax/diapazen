@@ -52,6 +52,8 @@ class ModelController extends Controller
 	
 	public function insertDatePoll()
 	{
+		$table = Doctrine_Core::getTable('dpz_datepoll');
+		$yolo = $table->find($id);
 		$createdOn  = date('Y-m-d H:i:s');
 		$datePoll = new DatePoll();
 		$datePoll->setCreatedOn($createdOn);
