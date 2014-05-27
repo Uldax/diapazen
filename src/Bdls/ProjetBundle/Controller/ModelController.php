@@ -4,27 +4,63 @@ namespace Bdls\ProjetBundle\Controller;
 //use Bdls\ProjetBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Bdls\ProjetBundle\Entity\DateChoice;
+use Bdls\ProjetBundle\Entity\DatePoll;
+use Bdls\ProjetBundle\Entity\DateVote;
+
+use Bdls\ProjetBundle\Entity\PlaceChoice;
+use Bdls\ProjetBundle\Entity\PlacePoll;
+use Bdls\ProjetBundle\Entity\PlaceVote;
+
+use Bdls\ProjetBundle\Entity\TextChoice;
+use Bdls\ProjetBundle\Entity\TextPoll;
+use Bdls\ProjetBundle\Entity\TextVote;
+
 
 class ModelController extends Controller
 {
-	public function insertDateChoice()
+	private $pool;
+	private $doctrineManager;
+	
+	//Couille de constructeur
+	//Constructeur is a lie...
+//	public function __construct()
+//	{
+//		parent::__contruct();
+//		$this->doctrineManager = $this->getDoctrine()->getManager();
+//	}
+	
+	public function insertDateChoice($poolId, $choice)
 	{
-		//$date = 
-		$pool       = $_SESSION['pool'];
+		$dateChoice = new DateChoice();
 		
-		$dateChoice = new  Bdls\ProjetBundle\Controller\Date_Choice();
-		$dateChoice->setDate($pool->poll_expiration_date);
-		$dateChoice->setPoll($pool);
+		$dateChoice->setDate($choice);
+		$dateChoice->setPoll($poolId);
+		
+		$this->doctrineManager->persist($dateChoice);
+	}
+	
+	public function insertDateChoices()
+	{
+		$choices = $this->pool->getPoll_choices();
+		foreach($choices as $choice)
+		{
+			insertDateChoice($_SESSION['currentPollId'], $choice);
+		}
+		$this->doctrineManager->flush();
 	}
 	
 	public function insertDatePoll()
 	{
 		$createdOn  = date('Y-m-d H:i:s');
-		$pool       = $_SESSION['pool'];
-		
-		$datePoll = new Bdls\ProjetBundle\Controller\Date_Poll();
+		$datePoll = new DatePoll();
 		$datePoll->setCreatedOn($createdOn);
-		$datePoll->setName($pool->pollTitle);
+		//echo get_class($this->pool);
+		$datePoll->setName($this->pool->getPollTitle());
+		$this->doctrineManager->persist($datePoll);
+		//pour récupérer la dernière ID...
+		$this->doctrineManager->flush();
+		$_SESSION['currentPollId'] = $datePoll->getId();
 	}
 	
 	public function insertDateVote()
@@ -32,34 +68,45 @@ class ModelController extends Controller
 		$issuedOn  = date('Y-m-d H:i:s');
 		$pool     = $_SESSION['pool'];
 		
-		$dateVote = new Bdls\ProjetBundle\Controller\Date_Vote();
+		$dateVote = new DateVote();
 		$user     = $this->get('security.context')->getToken()->getUser();
-		$textVote->setChoice($pool->getPollId());
-		$dateVote->setIssuedBy($user);
+		$dateVote->setChoice($pool->getPollId());
+		//$dateVote->setIssuedBy($user);
 		$dateVote->setIssuedOn($issuedOn);
 	}
 	//////////////////////////////////////////////////////////////
-	public function insertPlaceChoice()
+	public function insertPlaceChoice($poolId, $choice, $latitude, $longitude)
 	{
-		$latitude   = 0;
-		$longitude  = 0;
-		$pool       = $_SESSION['pool'];
-		
-		$placeChoice = new \Place_Choice();
-		$placeChoice->setDate($pool->poll_expiration_date);
-		$placeChoice->setPoll($pool);
-		// lat et lon ///////////////////////////////////////////
+		$placeChoice = new PlaceChoice();
+		$placeChoice->setDate($choice);
+		$placeChoice->setPoll($poolId);
 		$placeChoice->setLatitude($latitude);
 		$placeChoice->setLongitude($longitude);
+		
+		$this->doctrineManager->persist($placeChoice);
+	}
+	
+	public function insertPlaceChoices()
+	{
+		$choices = $this->pool->getPoll_choices();
+		foreach($choices as $choice)
+		{
+			// INSERTION COORDONEES
+			insertPlaceChoice($_SESSION['currentPollId'], $choice);
+		}
+		$this->doctrineManager->flush();
 	}
 	
 	public function insertPlacePoll()
 	{
 		$createdOn  = date('Y-m-d H:i:s');
-		$pool       = $_SESSION['pool'];
-		$placePoll  = new \Place_Poll();
+		$placePoll  = new PlacePoll();
 		$placePoll->setCreatedOn($createdOn);
-		$placePoll->setName($pool->pollTitle);
+		$placePoll->setName($this->pool->getPollTitle());
+		$this->doctrineManager->persist($placePoll);
+		//pour récupérer la dernière ID...
+		$this->doctrineManager->flush();
+		$_SESSION['currentPollId'] = $placePoll->getId();
 	}
 	
 	public function insertPlaceVote()
@@ -67,31 +114,44 @@ class ModelController extends Controller
 		$issuedOn = date('Y-m-d H:i:s');
 		$pool = $_SESSION['pool'];
 		
-		$placeVote = new \Place_Vote();
+		$placeVote = new PlaceVote();
 		$user      = $this->get('security.context')->getToken()->getUser();
 		$textVote->setChoice($pool->getPollId());
 		$placeVote->setIssuedBy($user);
 		$placeVote->setIssuedOn($issuedOn);
 	}
-	//////////////////////////////////////////////////////////////
-	public function insertTextChoice()
+	//////////////////////////////////////////////////////////////	
+	public function insertTextChoice($poolId, $choice, $text)
 	{
-		$pool       = $_SESSION['pool'];
+		$textChoice = new TextChoice();
+		$textChoice->setDate($choice);
+		$textChoice->setPoll($poolId);
+		$textChoice->setText($text);
 		
-		$textChoice = new \Text_Choice();
-		$textChoice->setDate($pool->poll_expiration_date);
-		$textChoice->setText($pool->pollDescription);
-		$textChoice->setPoll($pool);
+		$this->doctrineManager->persist($textChoice);
+	}
+	
+	public function insertTextChoices()
+	{
+		$choices = $this->pool->getPoll_choices();
+		foreach($choices as $choice)
+		{
+			// INSERTION COORDONEES
+			insertTextChoice($_SESSION['currentPollId'], $choice);
+		}
+		$this->doctrineManager->flush();
 	}
 	
 	public function insertTextPoll()
 	{
 		$createdOn  = date('Y-m-d H:i:s');
-		$pool       = $_SESSION['pool'];
-
-		$textPoll   = new \Text_Poll();
+		$textPoll   = new TextPoll();
 		$textPoll->setCreatedOn($createdOn);
-		$textPoll->setName($pool->pollTitle);
+		$textPoll->setName($this->pool->getPollTitle());
+		$this->doctrineManager->persist($textPoll);
+		//pour récupérer la dernière ID...
+		$this->doctrineManager->flush();
+		$_SESSION['currentPollId'] = $textPoll->getId();
 	}
 	
 	public function insertTextVote()
@@ -99,7 +159,7 @@ class ModelController extends Controller
 		$issuedOn = date('Y-m-d H:i:s');
 		$pool     = $_SESSION['pool'];
 		
-		$textVote = new \Text_Vote();
+		$textVote = new TextVote();
 		$user     = $this->get('security.context')->getToken()->getUser();
 		$textVote->setChoice($pool->getPollId());
 		$textVote->setIssuedBy($user);
@@ -110,5 +170,28 @@ class ModelController extends Controller
 	{
 		
 	}
+	//////////////////////////////////////////////////////////////
+	public function insertionIntoDatabase()
+	{
+		//Don't forget to use it !!!!!!!!!!
+		$this->doctrineManager->flush();
+	}
+	
+	public function getPool()
+	{
+		return $this->pool;
+	}
+
+	public function setPool($pool)
+	{
+		$this->pool = $pool;
+	}
+	
+	public function setDoctrineManager($doctrineManager)
+	{
+		$this->doctrineManager = $doctrineManager;
+	}
+
+
 }
 

@@ -155,23 +155,23 @@ class PollController extends Controller
 		{
 			$type = $request->get("type");
 		
-		switch($type)
-		{
-			case "c1":
-				$pool = new PoolLieux($request);
-				break;
-			case "c2":
-				$pool = new PoolDates($request);
-				break;
-			case "c3":
-				$pool = new PoolText($request);
-				break;
-			default:
-				$pool = new PoolText($request);
-				break;
-		}
-		$_SESSION['pool'] = $pool;
-                }
+			switch($type)
+			{
+				case "c1":
+					$pool = new PoolLieux($request);
+					break;
+				case "c2":
+					$pool = new PoolDates($request);
+					break;
+				case "c3":
+					$pool = new PoolText($request);
+					break;
+				default:
+					$pool = new PoolText($request);
+					break;
+			}
+			$_SESSION['pool'] = $pool;
+        }
 		//récupération des valeurs du fil d'arianne
 		if (isset($_SESSION['show_ariadne']) && isset($_SESSION['width_ariadne']))
 		{
@@ -348,41 +348,47 @@ class PollController extends Controller
 
 		try
 		{
-			
+			$pool = $_SESSION['pool'];
+			//echo get_class($pool);
+			$em = $this->getDoctrine()->getManager();
 			$model = new ModelController();
+			$model->setPool($pool);
+			$model->setDoctrineManager($em);
 			// Lorsque l'utilisateur est connecté
 			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
 			{
-				/*$type = $_SESSION['pool']->getPoll_type();
+				$type = $_SESSION['pool']->getPoll_type();
 				if( isset($type) )
 				{
 					switch($type)
 					{
 						case "c1":
 							//lieux
-							$model->insertPlaceChoice();
 							$model->insertPlacePoll();
-							$model->insertPlaceVote();
+							$model->insertPlaceChoice();
+							$model->insertionIntoDatabase();
+							//$model->insertPlaceVote();
 							break;
 						case "c2":
 							//date
-							$model->insertDateChoice();
+							//$model->insertDateChoice();
 							$model->insertDatePoll();
-							$model->insertDateVote();
+							$model->insertDateChoices();
+							//$model->insertDateVote();
 							break;
 						case "c3":
 							//text
 							$model->insertTextChoice();
 							$model->insertTextPoll();
-							$model->insertTextVote();
+							//$model->insertTextVote();
 							break;
 						default:
 							$model->insertTextChoice();
 							$model->insertTextPoll();
-							$model->insertTextVote();
+							//$model->insertTextVote();
 							break;
 					}
-				}*/
+				}
 				
 				// On créé le sondage
 //					$this->loadModel('poll');
@@ -688,6 +694,13 @@ class PollController extends Controller
 				return $this->render('BdlsProjetBundle:Default:dbError.html.twig', array('title'=>$title, 'year'=>$year));
 			}
 		//}
+	}
+	
+	public function testAction($params = null)
+	{
+		$title='Accueil | Diapazen';
+		$year=date('Y');
+		return $this->render('BdlsProjetBundle:Default:pollView.html.twig', array('title'=>$title, 'year'=>$year));
 	}
 }
 

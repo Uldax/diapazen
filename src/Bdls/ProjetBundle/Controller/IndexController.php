@@ -21,19 +21,18 @@ class IndexController extends Controller
 	 */
 	public function indexAction()
 	{
-		$session = new Session();
-                
+		//$session = new Session();             
 		// On set la variable Ã  afficher sur dans la vue
 		$title='Accueil | Diapazen';
 		$year=date('Y');
 		//$this->set('title', 'Accueil | Diapazen');
 
                 //Si il est connecté, que le retour sur home c'est fait et qu'il existe un sondage dans session  alors on redirige vers share
-                if ($this->isUserConnected() && $session->has('pool'))
+        /*if ($this->isUserConnected() && isset($_SESSION['pool']))
 		{
-                    // On redirige vers le partage
-                    return $this->redirect($this->generateUrl('bdls_projet_share'));
-		}             
+            // On redirige vers le partage
+			return $this->redirect($this->generateUrl('bdls_projet_share'));
+		}    */         
 
 		//Formaulaire nécésaire pour la selection
 		$form = $this->createFormBuilder()

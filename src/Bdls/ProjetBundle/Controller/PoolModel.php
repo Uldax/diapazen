@@ -78,6 +78,11 @@ abstract class PoolModel
 	{
 		return $this->poll_type;
 	}
+	
+	public function  getCurrPoll()
+	{
+		return $this;
+	}
 
 	public function setPoll_type($poll_type)
 	{
@@ -113,6 +118,18 @@ abstract class PoolModel
 	{
 		$this->poll_expiration_date = $poll_expiration_date;
 	}
+	
+	public function getPoll_choices()
+	{
+		return $this->poll_choices;
+	}
+
+	public function setPoll_choices($poll_choices)
+	{
+		$this->poll_choices = $poll_choices;
+	}
+
+
 
 
 }

@@ -2,6 +2,8 @@
 
 namespace Bdls\ProjetBundle\Controller;
 
+//use Bdls\ProjetBundle\Entity
+
 class PoolDates extends PoolModel
 {
 	public function __construct($request)
@@ -13,12 +15,13 @@ class PoolDates extends PoolModel
 				$title       = $request->get("title_input");
 				$description = $request->get("description_input");
 				$date_fin    = $request->get("date_input");
-				$choises     = $request->get("choices[]");
+				$choices     = $request->get("choices[]");
 			}
 			$this->setPollTitle($title);
 			$this->setPollDescription($description);
 			$this->setPoll_expiration_date($date_fin);
 			$this->generatePollUrl();
+			$this->setPoll_choices($choices);
 			$this->setPoll_etat(true);
 			$this->setPoll_type("c2");
 		}

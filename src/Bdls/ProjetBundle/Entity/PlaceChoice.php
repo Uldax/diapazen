@@ -1,4 +1,6 @@
 <?php
+namespace Bdls\ProjetBundle\Entity;
+
 
 namespace Bdls\ProjetBundle\Entity;
 
