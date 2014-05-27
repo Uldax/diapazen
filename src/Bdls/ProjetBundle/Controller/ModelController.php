@@ -1,7 +1,7 @@
 <?php
 
 namespace Bdls\ProjetBundle\Controller;
-//use Bdls\ProjetBundle\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Bdls\ProjetBundle\Entity\DateChoice;
@@ -52,12 +52,11 @@ class ModelController extends Controller
 	
 	public function insertDatePoll()
 	{
-		$table = Doctrine_Core::getTable('dpz_datepoll');
-		$yolo = $table->find($id);
+//		$table = Doctrine_Core::getTable('dpz_datepoll');
+//		$yolo = $table->find($id);
 		$createdOn  = date('Y-m-d H:i:s');
 		$datePoll = new DatePoll();
 		$datePoll->setCreatedOn($createdOn);
-		//echo get_class($this->pool);
 		$datePoll->setName($this->pool->getPollTitle());
 		$this->doctrineManager->persist($datePoll);
 		//pour récupérer la dernière ID...
@@ -67,7 +66,7 @@ class ModelController extends Controller
 	
 	public function insertDateVote()
 	{
-		$issuedOn  = date('Y-m-d H:i:s');
+		$issuedOn = date('Y-m-d H:i:s');
 		$pool     = $_SESSION['pool'];
 		
 		$dateVote = new DateVote();
