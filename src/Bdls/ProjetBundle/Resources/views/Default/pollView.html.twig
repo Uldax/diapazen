@@ -29,9 +29,9 @@
 
 						<tr>
 
-							<?php 
+							{#<?php 
 								if ($openedPoll == true) {       
-							?>
+							?>#}
 
 							<td><input type="checkbox" name="choiceId[]" value="<?php echo $key; ?>"></td>
 
@@ -118,7 +118,7 @@
 					</table>
 				</div>
 				<?php if ($openedPoll) {?>
-				<input type="text" class="small_text_edit" placeholder="Prénom Nom" name="value" value="<?php if ($this->isUserConnected()){ echo $this->getUserInfo('firstname').' '.$this->getUserInfo('lastname'); } ?>">
+				<input type="text" class="small_text_edit" placeholder="Prénom Nom" name="value" value="{{ app.user.username }}">
 				<input type="submit" class="orange_small_button" value="Voter" >
 				<?php } ?>
 				<?php 

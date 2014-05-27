@@ -332,7 +332,7 @@ class PollController extends Controller
 			// Lorsque l'utilisateur est connecté
 			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
 			{
-				/*$type = $_SESSION['pool']->getPoll_type();
+				$type = $_SESSION['pool']->getPoll_type();
 				if( isset($type) )
 				{
 					switch($type)
@@ -361,7 +361,7 @@ class PollController extends Controller
 							$model->insertTextVote();
 							break;
 					}
-				}*/
+				}
 				
 				// On créé le sondage
 //					$this->loadModel('poll');
@@ -667,6 +667,13 @@ class PollController extends Controller
 				return $this->render('BdlsProjetBundle:Default:dbError.html.twig', array('title'=>$title, 'year'=>$year));
 			}
 		//}
+	}
+	
+	public function testAction($params = null)
+	{
+		$title='Accueil | Diapazen';
+		$year=date('Y');
+		return $this->render('BdlsProjetBundle:Default:pollView.html.twig', array('title'=>$title, 'year'=>$year));
 	}
 }
 
