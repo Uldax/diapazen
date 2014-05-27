@@ -61,10 +61,12 @@ function manageChoices(input) {
             input.setAttribute("name", "choices[]");
             input.setAttribute("required", "required");
 
+            // création du label
             var label = document.createElement("label");
             label.setAttribute("for", "");
             label.className = "text lbl_choice";
 
+            //création du bouton pour supprimer un marqueur
             var a = document.createElement("a");
             a.className = "grey_button"
             a.setAttribute("title", "Supprimer");
@@ -72,12 +74,14 @@ function manageChoices(input) {
             a.setAttribute("onclick", "manageChoices(this);");
             a.innerText = " x ";
 
-            //Création du bouton
+            //Création du bouton pour poser un marqueur
             var button = document.createElement("button");
             button.innerText = "V";
             button.className = "valid";
 
             choice.className = 'choice';
+
+            // on ajoute tous les éléments au div qui contiendra tous les input
             choice.appendChild(label);
             choice.appendChild(input);
             choice.appendChild(a);
@@ -95,6 +99,7 @@ function manageChoices(input) {
             if (document.getElementsByName("choices[]").length > 2) {
                 choices = input.parentNode.parentNode;
                 choices.removeChild(input.parentNode);
+                // ici on récupère le numéro de l'input afin de le passer en paramètre de la fonction pour pouvoir supprimer le marqueur correspondant et l'input
                 var numero = input.parentNode.children[1].getAttribute("id");
                 numero = numero.replace("choix", "");
                 numero = parseInt(numero);
@@ -207,7 +212,8 @@ function addMarker(resultat, adresse) {
     }
     if (boolMarker == false) {
         infowindow = new google.maps.InfoWindow({
-            content: resultat[0].formatted_address + '<br />' + resultat[0].geometry.location.A + ';' + resultat[0].geometry.location.k
+            // affichage de l'adresse, puis des coordonnées GPS :(latitude;longitude)
+            content: resultat[0].formatted_address + '<br />' + resultat[0].geometry.location.k + ';' + resultat[0].geometry.location.A
         });
         var marker = new google.maps.Marker({
             position: resultat[0].geometry.location,
@@ -218,6 +224,7 @@ function addMarker(resultat, adresse) {
         posmarkers.push(marker.getPosition());
         zonemarqueurs.extend(marker.getPosition());
         infowindowarray.push(infowindow);
+        // ici, on attribue le click à chaque infowindow
         for (var i = 0; i < infowindowarray.length; i++) {
             marker = markers[i];
             google.maps.event.addListener(marker, 'click', function(marker, i) {
@@ -225,7 +232,6 @@ function addMarker(resultat, adresse) {
                     infowindowarray[i].open(map, marker);
                 }
             }(markers[i], i));
-            alert(posmarkers[i]);
         }
     }
     boolMarker = false;
@@ -256,8 +262,9 @@ function deleteMarkers(numero) {
         for (var i = 0; i < markers.length; i++) {
             zonemarqueurs.extend(markers[i].getPosition());
         }
+        // on défini les limites de la carte en fonction du tableau zonemarqueurs
         map.fitBounds(zonemarqueurs);
-
+        // si le tableau de marqueurs est vide, on réinitialise tout, et on revient sur l'aperçu de la France du début
         if (markers.length == 0) {
             markers = [];
             posmarkers = [];
@@ -266,4 +273,38 @@ function deleteMarkers(numero) {
             map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         }
     }
+}
+
+function creationXHR() {
+    var resultat = null;
+    try { //test pour les navigateurs : Mozilla, Op?, ...
+        resultat = new XMLHttpRequest();
+    } catch (Erreur) {
+        try { //test pour les navigateurs Internet Explorer > 5.0
+            resultat = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (Erreur) {
+            try { //test pour le navigateur Internet Explorer 5.0
+                resultat = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (Erreur) {
+                resultat = null;
+            }
+        }
+    }
+    return resultat;
+}
+
+// fonction qui envoie le tableau de coordonnées GPS à notre fichier PHP pour pouvoir être inséré dans la BDD
+function tableauPosGPS() {
+    xhr = creationXHR();
+    // déclaration d'un FormData pour envoyer un tableau via l'ajax
+    var fd = new FormData();
+    fd.append("position", posmarkers);
+    xhr.open("POST", "result.php", true);
+    xhr.send(fd);
+}
+
+
+function afficheposmarqueur() {
+    for (var i = 0; i < posmarkers.length; i++)
+        alert(posmarkers[i]);
 }
