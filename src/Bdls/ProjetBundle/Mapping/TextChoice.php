@@ -4,22 +4,22 @@ use Doctrine\ORM\Mapping as ORM;
 
 namespace Bdls\ProjetBundle\Entity;
 
-/** @ORM\Entity
-    @ORM\Table(name="dpz_textchoice") */
+/** @Entity
+    @Table(name="dpz_textchoice") */
 class TextChoice
 {
-	/** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
+	/** @Id @Column(type="integer") @GeneratedValue */
 	private $id;
 
-	/** @ORM\Column(type="text") */
+	/** @Column(type="text") */
 	private $text;
 
-	/** @ORM\ManyToOne(targetEntity="TextPoll", inversedBy="choices")
-	    @ORM\JoinColumn(nullable=false)
+	/** @ManyToOne(targetEntity="TextPoll", inversedBy="choices")
+	    @JoinColumn(nullable=false)
 	 */
 	private $poll;
 
-	/** @ORM\OneToMany(targetEntity="TextVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	/** @OneToMany(targetEntity="TextVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
 	private $votes;
 
 

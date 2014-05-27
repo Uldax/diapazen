@@ -5,31 +5,31 @@ use Doctrine\ORM\Mapping as ORM;
 
 namespace Bdls\ProjetBundle\Entity;
 
-/** @ORM\MappedSuperclass */
+/** @MappedSuperclass */
 class Poll
 {
-	/** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
+	/** @Id @Column(type="integer") @GeneratedValue */
 	protected $id;
 
-	/** @ORM\Column(type="datetime") */
+	/** @Column(type="datetime") */
 	protected $created_on;
         
-        /** @ORM\ManyToOne(targetEntity="User")
-	    @ORM\JoinColumn(nullable=false) 
+        /** @ManyToOne(targetEntity="User")
+	    @JoinColumn(nullable=false) 
          */
 	protected $created_by;
 
-        /** @ORM\Column(type="text")*/
+        /** @Column(type="text")*/
 	protected $name;
 }
 
-/** @ORM\Entity
-    @ORM\Table(name="dpz_textpoll")
+/** @Entity
+    @Table(name="dpz_textpoll")
  */
 class TextPoll extends Poll
 {
 	/**
-	  @ORM\OneToMany(targetEntity="TextChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
+	  @OneToMany(targetEntity="TextChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
 	  */
 	private $choices;
 
@@ -40,13 +40,13 @@ class TextPoll extends Poll
 	}
 }
 
-/** @ORM\Entity
-    @ORM\Table(name="dpz_datepoll")
+/** @Entity
+    @Table(name="dpz_datepoll")
  */
 class DatePoll extends Poll
 {
 	/**
-	  @ORM\OneToMany(targetEntity="DateChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
+	  @OneToMany(targetEntity="DateChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
 	  */
 	private $choices;
 
@@ -57,13 +57,13 @@ class DatePoll extends Poll
 	}
 }
 
-/** @ORM\Entity
-    @ORM\Table(name="dpz_placepoll")
+/** @Entity
+    @Table(name="dpz_placepoll")
  */
 class PlacePoll extends Poll
 {
 	/**
-	  @ORM\OneToMany(targetEntity="PlaceChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
+	  @OneToMany(targetEntity="PlaceChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
 	  */
 	private $choices;
 

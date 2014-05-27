@@ -1,5 +1,7 @@
 <?php
 namespace Bdls\ProjetBundle\Entity;
+use Bdls\ProjetBundle\Controller;
+
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -80,7 +82,7 @@ class DateChoice
     {
         $this->poll = $poll;
     
-        return $this;
+       return $this;
     }
 
     /**

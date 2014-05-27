@@ -4,27 +4,27 @@ use Doctrine\ORM\Mapping as ORM;
 
 namespace Bdls\ProjetBundle\Entity;
 
-/** @ORM\MappedSuperclass */
+/** @MappedSuperclass */
 class Vote
 {
-	/** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
+	/** @Id @Column(type="integer") @GeneratedValue */
 	protected $id;
 
-	/** @ORM\Column(type="datetime") */
+	/** @Column(type="datetime") */
 	protected $issued_on;
 
-	/** @ORM\Column(type="text") */
+	/** @Column(type="text") */
 	protected $issued_by;
 }
 
-/** @ORM\Entity
-    @ORM\Table(name="dpz_textvote")
+/** @Entity
+    @Table(name="dpz_textvote")
  */
 class TextVote extends Vote
 {
 	/**
-	  @ORM\ManyToOne(targetEntity="TextChoice", inversedBy="votes")
-	  @ORM\JoinColumn(nullable=false)
+	  @ManyToOne(targetEntity="TextChoice", inversedBy="votes")
+	  @JoinColumn(nullable=false)
 	  */
 	private $choice;
 
@@ -35,14 +35,14 @@ class TextVote extends Vote
 	}
 }
 
-/** @ORM\Entity
-    @ORM\Table(name="dpz_datevote")
+/** @Entity
+    @Table(name="dpz_datevote")
  */
 class DateVote extends Vote
 {
 	/**
-	  @ORM\ManyToOne(targetEntity="DateChoice", inversedBy="votes")
-	  @ORM\JoinColumn(nullable=false)
+	  @ManyToOne(targetEntity="DateChoice", inversedBy="votes")
+	  @JoinColumn(nullable=false)
 	  */
 	private $choice;
 
@@ -53,14 +53,14 @@ class DateVote extends Vote
 	}
 }
 
-/** @ORM\Entity
-    @ORM\Table(name="dpz_placevote")
+/** @Entity
+    @Table(name="dpz_placevote")
  */
 class PlaceVote extends Vote
 {
 	/**
-	  @ORM\ManyToOne(targetEntity="PlaceChoice", inversedBy="votes")
-	  @ORM\JoinColumn(nullable=false)
+	  @ManyToOne(targetEntity="PlaceChoice", inversedBy="votes")
+	  @JoinColumn(nullable=false)
 	  */
 	private $choice;
 
