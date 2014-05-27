@@ -1,23 +1,25 @@
 <?php
 
+use Doctrine\ORM\Mapping as ORM;
+
 namespace Bdls\ProjetBundle\Entity;
 
-/** @Entity
-    @Table(name="dpz_datechoice") */
+/** @ORM\Entity
+    @ORM\Table(name="dpz_datechoice") */
 class DateChoice
 {
-	/** @Id @Column(type="integer") @GeneratedValue */
+	/** @ORM\Id @Column(type="integer") @ORM\GeneratedValue */
 	private $id;
 
-	/** @Column(type="datetime") */
+	/** @ORM\Column(type="datetime") */
 	private $date;
 
-	/** @ManyToOne(targetEntity="DatePoll", inversedBy="choices")
-	    @JoinColumn(nullable=false)
+	/** @ORM\ManyToOne(targetEntity="DatePoll", inversedBy="choices")
+	    @ORM\JoinColumn(nullable=false)
 	 */
 	private $poll;
 
-	/** @OneToMany(targetEntity="DateVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	/** @ORM\OneToMany(targetEntity="DateVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
 	private $votes;
 
 
