@@ -36,7 +36,7 @@
                                 <td>{{ row.description }}</td>
                                 <td> 
                                     {# à modifier l'adresse du lien -> bdls_projet_view #}
-                                    <a class="orange_small_button" href="{{ path('bdls_projet_view',{'id': row.URL }) }}">Voir</a>
+                                    <a class="orange_small_button" href="{#{{ path('bdls_projet_view',{'id': row.URL }) }}#}">Voir</a>
                                     <form action="{{ path('bdls_projet_dashboard') }}" onsubmit="return confirm('Clôturer le sondage ?');" method="post">
                                         <input type="hidden" name="close" value="{{ row.URL }}"> 
                                         <input type="submit" class="grey_small_button" value="Clôturer">
@@ -53,7 +53,7 @@
                                 <td>{{ row.description }}</td>
                                 <td> 
                                     {# à modifier l'adresse du lien -> bdls_projet_view #}
-                                    <a class="orange_small_button" href="<?php $this->getHomeUrl(); echo '/poll/view/'.$row['url']; ?>">Voir</a> 
+                                    <a class="orange_small_button" href="{##}">Voir</a> 
                                 </td>
 
                         {% endif %}

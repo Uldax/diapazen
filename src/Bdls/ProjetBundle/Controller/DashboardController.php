@@ -114,12 +114,13 @@ class DashboardController extends Controller
 
 			foreach ($all_text_poll as $article) {
 				$row = array(
+					'id' => $article->getId(),
 					'open' => $article->getIsOpen(),
 					'type' => 'Textuel',
 					'date_open' =>  $article->getCreatedOn()->format('d/m/Y'),
-					'date_close' => date('d/m/Y'),
+					'date_close' => $article->getClosedOn()->format('d/m/Y'),
 					'title' =>  $article->getName(),
-					'description' => 'euhhh',
+					'description' => $article->getDescription(),
 					'URL' => $article->getUrl());
 				$table[] = $row;
 			}
@@ -141,12 +142,13 @@ class DashboardController extends Controller
 
 			foreach ($all_date_poll as $article) {
 				$row = array(
+					'id' => $article->getId(),
 					'open' => $article->getIsOpen(),
 					'type' => 'Date',
 					'date_open' =>  $article->getCreatedOn()->format('d/m/Y'),
-					'date_close' => date('d/m/Y'),
+					'date_close' => $article->getClosedOn()->format('d/m/Y'),
 					'title' =>  $article->getName(),
-					'description' => 'euhhh',
+					'description' => $article->getDescription(),
 					'URL' => $article->getUrl());
 				$table[] = $row;
 			}
@@ -168,39 +170,16 @@ class DashboardController extends Controller
 
 			foreach ($all_date_poll as $article) {
 				$row = array(
+					'id' => $article->getId(),
 					'open' => $article->getIsOpen(),
 					'type' => 'Lieu',
 					'date_open' =>  $article->getCreatedOn()->format('d/m/Y'),
-					'date_close' => date('d/m/Y'),
+					'date_close' => $article->getClosedOn()->format('d/m/Y'),
 					'title' =>  $article->getName(),
-					'description' => 'euhhh',
+					'description' => $article->getDescription(),
 					'URL' => $article->getUrl());
 				$table[] = $row;
 			}
-
-
-			//Donnée de test (sans BDD)
-			/*$table = array(
-					array(
-						'open' => true,
-						'type' => 'textuel',
-						'date_open' => date('d/m/Y'),
-						'date_close' => date('d/m/Y'),
-						'title' => 'blabla open',
-						'description' => 'euhhh',
-						'URL' => 24),
-					array(
-						'open' => false,
-						'type' => 'textuel',
-						'date_open' => date('d/m/Y'),
-						'date_close' => date('d/m/Y'),
-						'title' => 'blabla close',
-						'description' => 'euhhh',
-						'URL' => 24)
-				);*/
-
-
-
 
 
 			return $this->render('BdlsProjetBundle:Default:dashboard.html.twig',array(
