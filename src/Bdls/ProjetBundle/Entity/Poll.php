@@ -14,6 +14,9 @@ class Poll
 	/** @ORM\Column(type="datetime") */
 	private $created_on;
         
+	/** @ORM\Column(type="datetime") */
+	private $closed_on;
+        
         /** @ORM\ManyToOne(targetEntity="User")
 	    @ORM\JoinColumn(nullable=false) 
          */
@@ -21,6 +24,9 @@ class Poll
 
         /** @ORM\Column(type="text")*/
 	private $name;
+
+        /** @ORM\Column(type="text")*/
+	private $description;
 
 	/** @ORM\Column(type="string") */
 	private $url;
@@ -151,5 +157,51 @@ class Poll
     public function getCreatedBy()
     {
         return $this->created_by;
+    }
+
+    /**
+     * Set closed_on
+     *
+     * @param \DateTime $closedOn
+     * @return Poll
+     */
+    public function setClosedOn($closedOn)
+    {
+        $this->closed_on = $closedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get closed_on
+     *
+     * @return \DateTime 
+     */
+    public function getClosedOn()
+    {
+        return $this->closed_on;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Poll
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
