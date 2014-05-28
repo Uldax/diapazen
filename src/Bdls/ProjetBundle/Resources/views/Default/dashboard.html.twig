@@ -35,8 +35,8 @@
                                 <td>{{ row.title }}</td>
                                 <td>{{ row.description }}</td>
                                 <td> 
-                                    {# à modifier l'adresse du lien -> bdls_projet_view #}
-                                    <a class="orange_small_button" href="{{ path('bdls_projet_view',{'id': row.URL }) }}">Voir</a>
+                                    {# à modifier l'adresse du lien -> bdls_projet_view 
+                                   <a class="orange_small_button" href="{{ path('bdls_projet_view',{'type': row.URL },{url:"zub"} )}}">Voir</a>  #}
                                     <form action="{{ path('bdls_projet_dashboard') }}" onsubmit="return confirm('Clôturer le sondage ?');" method="post">
                                         <input type="hidden" name="close" value="{{ row.URL }}"> 
                                         <input type="submit" class="grey_small_button" value="Clôturer">
