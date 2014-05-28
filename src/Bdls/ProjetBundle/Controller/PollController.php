@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Bdls\ProjetBundle\Entity\TextPoll;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * 
@@ -623,8 +624,8 @@ class PollController extends Controller
 					{
 						// Definition de la date restante 
 						// Si le sondage est expiré
-						$date = new DateTime($myPoll['expiration_date']);
-		            	$now  = new DateTime('now');
+						$date = new \DateTime($myPoll['expiration_date']);
+		            	$now  = new \DateTime('now');
 		            	$int = $now->diff($date);
 		            	//Si la date est dépassé ou si la date d'expiration = 00000000000000
 						if (($int->invert == 1 || !$myPoll['open']) && $myPoll['expiration_date'] != '0000-00-00 00:00:00')
@@ -741,7 +742,7 @@ class PollController extends Controller
 	//Fonction d'insertion de votes 
 	public function inserVotes($poolId,$choice,$name)
 	{
-                $funcname="insert"+ucfirst($type)+"vote";
+        $funcname="insert"+ucfirst($type)+"vote";
 		if (method_exists(get_class($this),$funcname)) {
 			foreach($choices as $choice)
 			{
@@ -803,10 +804,10 @@ class PollController extends Controller
 		{   
 			//Path 
 			$path="BdlsProjetBundle:".ucfirst($type);
-			$entity=$path."Pool";
+			$entity=$path."Poll";
 
 			//Création de la requete
-			$em = $this->getDoctrine()->getEntityManager();
+			$em = $this->getDoctrine()->getManager();
 			$qb = $em->createQueryBuilder();
 			$qb->select('p')
 			   ->from($entity, 'p')
@@ -819,28 +820,34 @@ class PollController extends Controller
 			// On traite le résultat
 			if(!empty($poll))
 			{
-				$poll = $poll[0];
-
+				//Je récupèretout les choix associé a ce sondage
 				$entity=$path."Choice";
 				$qb->select('c')
 				   ->from($entity, 'c')
-				   ->where('c.id = ?1')
-				   ->setParameter(1, $pollId); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
+				   ->where('c.poll = ?1')
+				   ->setParameter(1, $poll[0]->getId()); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
 				// get the Query from the QueryBuilder here ...
 				$query = $qb->getQuery();
-				$poll = $query->getResult();
+				$choices = $query->getResult();
 
+				if(empty($choices))
+					throw new NotFoundHttpException("Sondage defaillant pas de choix pour ce sondage");
+			
+				//Pour chaque choix je regarde les reponsse
+				$count = array();
+				$entity=$path."Vote";
+				foreach ($choices as $choice ) {
+					$qb->select('COUNT(v)')
+					   ->from($entity, 'v')
+					   ->where('v.choice = ?1')
+					   ->setParameter(1, $choice->getId()); 
+					   echo $choice->getId();
+					   echo $qb->getQuery()->getSingleScalarResult();
+					$count[$choice->getId()] = $qb->getQuery()->getSingleScalarResult();
+				}
+				
 
-    			//Type choice
-				// On récupère les informations de chaque choix du sondage de la bdd
-				$choices = $this->selectWhere('CHOICE_ID,value', 'dpz_view_choice', array('POLL_ID' => $pollInfo['POLL_ID']), 'assoc');
-
-				//Type vote
-				// On récupère les informations de chaque résultat des choix du sondage de la bdd
-				$resultats = $this->selectWhere('CHOICE_ID,choice', 'dpz_view_poll', array('POLL_ID' => $pollInfo['POLL_ID']), 'assoc');
-
-
-				// Traitements des résultats
+				// Traitements des résultats : calcule de pourcentage
 				$list = array();
 				$nbTotalVotes = 0;
 				foreach($choices as $choice)
@@ -870,9 +877,9 @@ class PollController extends Controller
 				}
 				
 				// On prépare le tableau de retour
-				$ret = $pollInfo;
-				$ret['nbVotes'] = $nbTotalVotes;
-				$ret['choices'] = $list;
+				$ret = $poll[0];
+				//$ret['nbVotes'] = $nbTotalVotes;
+				//$ret['choices'] = $list;
 				return $ret;
 			}
 
