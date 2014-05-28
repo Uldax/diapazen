@@ -15,7 +15,7 @@ class PoolDates extends PoolModel
 				$title       = $request->get("title_input");
 				$description = $request->get("description_input");
 				$date_fin    = $request->get("date_input");
-				$choices     = $request->get("choices[]");
+				$choices     = $request->get("choices");
 			}
 			$this->setPollTitle($title);
 			$this->setPollDescription($description);
@@ -24,6 +24,8 @@ class PoolDates extends PoolModel
 			$this->setPoll_choices($choices);
 			$this->setPoll_etat(true);
 			$this->setPoll_type("c2");
+			//echo "PoolDates";
+			//echo get_class($choices);
 		}
 		catch (Exception $ex)
 		{

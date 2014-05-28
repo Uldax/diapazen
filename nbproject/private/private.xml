@@ -3,15 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Mapping/DateChoice.php</file>
             <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Controller/PoolDates.php</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Entity/DatePoll.php</file>
+            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Resources/views/Default/pollShare.html.twig</file>
             <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Entity/DateChoice.php</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Entity/DateVote.php</file>
             <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Controller/PollController.php</file>
+            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Controller/SecurityController.php</file>
+            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Controller/IndexController.php</file>
             <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Entity/User.php</file>
             <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Controller/PoolModel.php</file>
-            <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Controller/IndexController.php</file>
             <file>file:/C:/wamp/www/Webdev_CIR3/TP/diapaClone/diapazen/src/Bdls/ProjetBundle/Controller/ModelController.php</file>
         </group>
     </open-files>
