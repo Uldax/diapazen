@@ -14,9 +14,6 @@ class Poll
 	/** @ORM\Column(type="datetime") */
 	private $created_on;
         
-	/** @ORM\Column(type="datetime") */
-	private $closed_on;
-        
         /** @ORM\ManyToOne(targetEntity="User")
 	    @ORM\JoinColumn(nullable=false) 
          */
@@ -24,15 +21,6 @@ class Poll
 
         /** @ORM\Column(type="text")*/
 	private $name;
-
-        /** @ORM\Column(type="text")*/
-	private $description;
-
-	/** @ORM\Column(type="string") */
-	private $url;
-
-	/** @ORM\Column(type="boolean") */
-	private $is_open;
 
     /**
      * Get id
@@ -91,52 +79,6 @@ class Poll
     }
 
     /**
-     * Set url
-     *
-     * @param string $url
-     * @return Poll
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string 
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Set is_open
-     *
-     * @param boolean $isOpen
-     * @return Poll
-     */
-    public function setIsOpen($isOpen)
-    {
-        $this->is_open = $isOpen;
-
-        return $this;
-    }
-
-    /**
-     * Get is_open
-     *
-     * @return boolean 
-     */
-    public function getIsOpen()
-    {
-        return $this->is_open;
-    }
-
-    /**
      * Set created_by
      *
      * @param \Bdls\ProjetBundle\Entity\User $createdBy
@@ -157,51 +99,5 @@ class Poll
     public function getCreatedBy()
     {
         return $this->created_by;
-    }
-
-    /**
-     * Set closed_on
-     *
-     * @param \DateTime $closedOn
-     * @return Poll
-     */
-    public function setClosedOn($closedOn)
-    {
-        $this->closed_on = $closedOn;
-
-        return $this;
-    }
-
-    /**
-     * Get closed_on
-     *
-     * @return \DateTime 
-     */
-    public function getClosedOn()
-    {
-        return $this->closed_on;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Poll
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 }

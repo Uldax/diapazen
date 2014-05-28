@@ -21,12 +21,6 @@ class Poll
 
         /** @ORM\Column(type="text")*/
 	private $name;
-
-	/** @ORM\Column(type="string") */
-	private $url;
-
-	/** @ORM\Column(type="boolean") */
-	private $is_open;
 }
 
 
