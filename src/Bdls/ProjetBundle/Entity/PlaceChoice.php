@@ -1,48 +1,35 @@
 <?php
-namespace Bdls\ProjetBundle\Entity;
-
 
 namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * PlaceChoice
- */
+/** @ORM\Entity
+    @ORM\Table(name="dpz_placechoice") */
 class PlaceChoice
 {
-    /**
-     * @var integer
-     */
-    private $id;
+	/** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
+	private $id;
 
-    /**
-     * @var float
-     */
-    private $latitude;
+	/** @ORM\Column(type="float") */
+	private $latitude;
 
-    /**
-     * @var float
-     */
-    private $longitude;
+	/** @ORM\Column(type="float") */
+	private $longitude;
 
-    /**
-     * @var \Bdls\ProjetBundle\Entity\PlacePoll
-     */
-    private $poll;
+	/** @ORM\ManyToOne(targetEntity="PlacePoll", inversedBy="choices")
+	    @ORM\JoinColumn(nullable=false)
+	 */
+	private $poll;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $votes;
+	/** @ORM\OneToMany(targetEntity="PlaceVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	private $votes;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
+	public function __construct()
+	{
+		$this->votes = new ArrayCollection();
+	}
 
     /**
      * Get id
@@ -63,7 +50,7 @@ class PlaceChoice
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
-    
+
         return $this;
     }
 
@@ -86,7 +73,7 @@ class PlaceChoice
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
-    
+
         return $this;
     }
 
@@ -109,7 +96,7 @@ class PlaceChoice
     public function setPoll(\Bdls\ProjetBundle\Entity\PlacePoll $poll)
     {
         $this->poll = $poll;
-    
+
         return $this;
     }
 
@@ -132,7 +119,7 @@ class PlaceChoice
     public function addVote(\Bdls\ProjetBundle\Entity\PlaceVote $votes)
     {
         $this->votes[] = $votes;
-    
+
         return $this;
     }
 

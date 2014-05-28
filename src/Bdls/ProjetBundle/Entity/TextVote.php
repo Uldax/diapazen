@@ -4,87 +4,22 @@ namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * TextVote
+/** @ORM\Entity
+    @ORM\Table(name="dpz_textvote")
  */
-class TextVote
+class TextVote extends Vote
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
-    /**
-     * @var \DateTime
-     */
-    private $issued_on;
-
-    /**
-     * @var string
-     */
-    private $issued_by;
-
-    /**
-     * @var \Bdls\ProjetBundle\Entity\TextChoice
-     */
-    private $choice;
+	/**
+	  @ORM\ManyToOne(targetEntity="TextChoice", inversedBy="votes")
+	  @ORM\JoinColumn(nullable=false)
+	  */
+	private $choice;
 
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set issued_on
-     *
-     * @param \DateTime $issuedOn
-     * @return TextVote
-     */
-    public function setIssuedOn($issuedOn)
-    {
-        $this->issued_on = $issuedOn;
-    
-        return $this;
-    }
-
-    /**
-     * Get issued_on
-     *
-     * @return \DateTime 
-     */
-    public function getIssuedOn()
-    {
-        return $this->issued_on;
-    }
-
-    /**
-     * Set issued_by
-     *
-     * @param string $issuedBy
-     * @return TextVote
-     */
-    public function setIssuedBy($issuedBy)
-    {
-        $this->issued_by = $issuedBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get issued_by
-     *
-     * @return string 
-     */
-    public function getIssuedBy()
-    {
-        return $this->issued_by;
-    }
+	public function __construct()
+	{
+		$this->choice = new ArrayCollection();
+	}
 
     /**
      * Set choice
@@ -95,7 +30,7 @@ class TextVote
     public function setChoice(\Bdls\ProjetBundle\Entity\TextChoice $choice)
     {
         $this->choice = $choice;
-    
+
         return $this;
     }
 

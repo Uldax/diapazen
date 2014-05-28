@@ -1,25 +1,25 @@
 <?php
 
-use Doctrine\ORM\Mapping as ORM;
-
 namespace Bdls\ProjetBundle\Entity;
 
-/** @Entity
-    @Table(name="dpz_textchoice") */
+use Doctrine\ORM\Mapping as ORM;
+
+/** @ORM\Entity
+    @ORM\Table(name="dpz_textchoice") */
 class TextChoice
 {
-	/** @Id @Column(type="integer") @GeneratedValue */
+	/** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
 	private $id;
 
-	/** @Column(type="text") */
+	/** @ORM\Column(type="text") */
 	private $text;
 
-	/** @ManyToOne(targetEntity="TextPoll", inversedBy="choices")
-	    @JoinColumn(nullable=false)
+	/** @ORM\ManyToOne(targetEntity="TextPoll", inversedBy="choices")
+	    @ORM\JoinColumn(nullable=false)
 	 */
 	private $poll;
 
-	/** @OneToMany(targetEntity="TextVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	/** @ORM\OneToMany(targetEntity="TextVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
 	private $votes;
 
 

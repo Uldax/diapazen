@@ -1,102 +1,24 @@
 <?php
-namespace Bdls\ProjetBundle\Entity;
 
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * DatePoll
+/** @ORM\Entity
+    @ORM\Table(name="dpz_datepoll")
  */
-class DatePoll
+class DatePoll extends Poll
 {
-    /**
-     * @var integer
-     */
-    private $id;
+	/**
+	  @ORM\OneToMany(targetEntity="DateChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})
+	  */
+	private $choices;
 
-    /**
-     * @var \DateTime
-     */
-    private $created_on;
 
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $choices;
-
-    /**
-     * @var \Bdls\ProjetBundle\Entity\User
-     */
-    private $created_by;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->choices = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set created_on
-     *
-     * @param \DateTime $createdOn
-     * @return DatePoll
-     */
-    public function setCreatedOn($createdOn)
-    {
-        $this->created_on = $createdOn;
-    
-        return $this;
-    }
-
-    /**
-     * Get created_on
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedOn()
-    {
-        return $this->created_on;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return DatePoll
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	public function __construct()
+	{
+		$this->choices = new ArrayCollection();
+	}
 
     /**
      * Add choices
@@ -107,7 +29,7 @@ class DatePoll
     public function addChoice(\Bdls\ProjetBundle\Entity\DateChoice $choices)
     {
         $this->choices[] = $choices;
-    
+
         return $this;
     }
 
@@ -129,28 +51,5 @@ class DatePoll
     public function getChoices()
     {
         return $this->choices;
-    }
-
-    /**
-     * Set created_by
-     *
-     * @param \Bdls\ProjetBundle\Entity\User $createdBy
-     * @return DatePoll
-     */
-    public function setCreatedBy(\Bdls\ProjetBundle\Entity\User $createdBy)
-    {
-        $this->created_by = $createdBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get created_by
-     *
-     * @return \Bdls\ProjetBundle\Entity\User 
-     */
-    public function getCreatedBy()
-    {
-        return $this->created_by;
     }
 }

@@ -1,41 +1,32 @@
 <?php
-namespace Bdls\ProjetBundle\Entity;
 
+namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * TextChoice
- */
+/** @ORM\Entity
+    @ORM\Table(name="dpz_textchoice") */
 class TextChoice
 {
-    /**
-     * @var integer
-     */
-    private $id;
+	/** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
+	private $id;
 
-    /**
-     * @var string
-     */
-    private $text;
+	/** @ORM\Column(type="text") */
+	private $text;
 
-    /**
-     * @var \Bdls\ProjetBundle\Entity\TextPoll
-     */
-    private $poll;
+	/** @ORM\ManyToOne(targetEntity="TextPoll", inversedBy="choices")
+	    @ORM\JoinColumn(nullable=false)
+	 */
+	private $poll;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $votes;
+	/** @ORM\OneToMany(targetEntity="TextVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	private $votes;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
+	public function __construct()
+	{
+		$this->votes = new ArrayCollection();
+	}
 
     /**
      * Get id
@@ -56,7 +47,7 @@ class TextChoice
     public function setText($text)
     {
         $this->text = $text;
-    
+
         return $this;
     }
 
@@ -79,7 +70,7 @@ class TextChoice
     public function setPoll(\Bdls\ProjetBundle\Entity\TextPoll $poll)
     {
         $this->poll = $poll;
-    
+
         return $this;
     }
 
@@ -102,7 +93,7 @@ class TextChoice
     public function addVote(\Bdls\ProjetBundle\Entity\TextVote $votes)
     {
         $this->votes[] = $votes;
-    
+
         return $this;
     }
 

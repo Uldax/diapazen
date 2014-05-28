@@ -1,43 +1,32 @@
 <?php
+
 namespace Bdls\ProjetBundle\Entity;
-use Bdls\ProjetBundle\Controller;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
-/**
- * DateChoice
- */
+/** @ORM\Entity
+    @ORM\Table(name="dpz_datechoice") */
 class DateChoice
 {
-    /**
-     * @var integer
-     */
-    private $id;
+	/** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
+	private $id;
 
-    /**
-     * @var \DateTime
-     */
-    private $date;
+	/** @ORM\Column(type="datetime") */
+	private $date;
 
-    /**
-     * @var \Bdls\ProjetBundle\Entity\DatePoll
-     */
-    private $poll;
+	/** @ORM\ManyToOne(targetEntity="DatePoll", inversedBy="choices")
+	    @ORM\JoinColumn(nullable=false)
+	 */
+	private $poll;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $votes;
+	/** @ORM\OneToMany(targetEntity="DateVote", mappedBy="choice", orphanRemoval=true, cascade={"all"}) */
+	private $votes;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
-		
-    }
+
+	public function __construct()
+	{
+		$this->votes = new ArrayCollection();
+	}
 
     /**
      * Get id
@@ -58,7 +47,7 @@ class DateChoice
     public function setDate($date)
     {
         $this->date = $date;
-    
+
         return $this;
     }
 
@@ -81,8 +70,8 @@ class DateChoice
     public function setPoll(\Bdls\ProjetBundle\Entity\DatePoll $poll)
     {
         $this->poll = $poll;
-    
-       return $this;
+
+        return $this;
     }
 
     /**
@@ -104,7 +93,7 @@ class DateChoice
     public function addVote(\Bdls\ProjetBundle\Entity\DateVote $votes)
     {
         $this->votes[] = $votes;
-    
+
         return $this;
     }
 

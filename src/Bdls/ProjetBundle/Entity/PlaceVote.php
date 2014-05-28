@@ -1,89 +1,25 @@
 <?php
+
 namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * PlaceVote
+/** @ORM\Entity
+    @ORM\Table(name="dpz_placevote")
  */
-class PlaceVote
+class PlaceVote extends Vote
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
-    /**
-     * @var \DateTime
-     */
-    private $issued_on;
-
-    /**
-     * @var string
-     */
-    private $issued_by;
-
-    /**
-     * @var \Bdls\ProjetBundle\Entity\PlaceChoice
-     */
-    private $choice;
+	/**
+	  @ORM\ManyToOne(targetEntity="PlaceChoice", inversedBy="votes")
+	  @ORM\JoinColumn(nullable=false)
+	  */
+	private $choice;
 
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set issued_on
-     *
-     * @param \DateTime $issuedOn
-     * @return PlaceVote
-     */
-    public function setIssuedOn($issuedOn)
-    {
-        $this->issued_on = $issuedOn;
-    
-        return $this;
-    }
-
-    /**
-     * Get issued_on
-     *
-     * @return \DateTime 
-     */
-    public function getIssuedOn()
-    {
-        return $this->issued_on;
-    }
-
-    /**
-     * Set issued_by
-     *
-     * @param string $issuedBy
-     * @return PlaceVote
-     */
-    public function setIssuedBy($issuedBy)
-    {
-        $this->issued_by = $issuedBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get issued_by
-     *
-     * @return string 
-     */
-    public function getIssuedBy()
-    {
-        return $this->issued_by;
-    }
+	public function __construct()
+	{
+		$this->choice = new ArrayCollection();
+	}
 
     /**
      * Set choice
@@ -94,7 +30,7 @@ class PlaceVote
     public function setChoice(\Bdls\ProjetBundle\Entity\PlaceChoice $choice)
     {
         $this->choice = $choice;
-    
+
         return $this;
     }
 
