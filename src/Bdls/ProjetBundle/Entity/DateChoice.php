@@ -4,6 +4,8 @@ namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /** @ORM\Entity
     @ORM\Table(name="dpz_datechoice") */
 class DateChoice
@@ -46,8 +48,8 @@ class DateChoice
      */
     public function setDate($date)
     {
-        $this->date = $date;
-
+        $this->date = new \DateTime($date);
+		
         return $this;
     }
 

@@ -1,6 +1,8 @@
 <?php
 namespace Bdls\ProjetBundle\Controller;
 
+use Bdls\ProjetBundle\Entity\User;
+
 use Bdls\ProjetBundle\Classe;
 
 /**
@@ -351,9 +353,13 @@ class PollController extends Controller
 			$pool = $_SESSION['pool'];
 			//echo get_class($pool);
 			$em = $this->getDoctrine()->getManager();
+			//echo $this->getUser()->getUsername();
 			$model = new ModelController();
-			$model->setPool($pool);
+			
 			$model->setDoctrineManager($em);
+			$model->setPool($pool);
+			//$model->insertionIntoDatabase();
+			$model->setUser($_SESSION['currentUser']);
 			// Lorsque l'utilisateur est connecté
 			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
 			{

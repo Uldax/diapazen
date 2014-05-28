@@ -3,11 +3,13 @@
 namespace Bdls\ProjetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\Session;
 
 /** @ORM\Entity
     @ORM\Table(name="dpz_datepoll")
  */
-class DatePoll extends Poll
+class DatePoll extends Poll 
 {
 	/**
 	  @ORM\OneToMany(targetEntity="DateChoice", mappedBy="poll", orphanRemoval=true, cascade={"all"})

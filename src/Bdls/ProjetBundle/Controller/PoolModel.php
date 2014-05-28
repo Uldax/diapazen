@@ -121,6 +121,7 @@ abstract class PoolModel
 	
 	public function getPoll_choices()
 	{
+		//echo $this->poll_choices;
 		return $this->poll_choices;
 	}
 
