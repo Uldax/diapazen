@@ -14,6 +14,9 @@ class Poll
 	/** @ORM\Column(type="datetime") */
 	private $created_on;
         
+	/** @ORM\Column(type="datetime") */
+	private $closed_on;
+        
         /** @ORM\ManyToOne(targetEntity="User")
 	    @ORM\JoinColumn(nullable=false) 
          */
@@ -21,6 +24,12 @@ class Poll
 
         /** @ORM\Column(type="text")*/
 	private $name;
+
+        /** @ORM\Column(type="text")*/
+	private $description;
+
+	/** @ORM\Column(type="boolean")*/
+	private $is_open;
 
     /**
      * Get id
