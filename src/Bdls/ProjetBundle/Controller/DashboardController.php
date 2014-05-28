@@ -79,6 +79,9 @@ class DashboardController extends Controller
 
 		try
 		{
+			
+			$id_user = $this->getUser()->getId();
+
 			//traitement en cas de réponse (cloturer un sondage)
 			$request = $this->get('request');
 		    if ($request->getMethod() == 'POST') {
@@ -91,70 +94,110 @@ class DashboardController extends Controller
 		    	$data_updated = false;
 		    }
 
+		    $table = array();
+
 		    //Récupération des sondages de l'utilisateur
-		    // => à faire
+		    //text
+		    $path="BdlsProjetBundle:".ucfirst("text");
+			$entity=$path."Poll";
 
-			//si on a fermé un sondage
-			/*if (isset($_POST['close']) && !empty($_POST['close']))
-			{
-				if ($this->getModel()->updatePoll($_POST['close']))
-				{
-					// clôture réusie
-					$this->set('data_updated', true);
-				}
-				else
-				{
-					// echec de la clôture
-					$this->set('data_updated', false);
-				}
+		    $em = $this->getDoctrine()->getManager();
+			$qb = $em->createQueryBuilder();
+
+			$qb->select('p')
+			   ->from($entity, 'p')
+			   ->where('p.created_by = ?1')
+			   ->setParameter(1, $id_user);
+			$query = $qb->getQuery();
+			$all_text_poll = $query->getResult();
+
+
+			foreach ($all_text_poll as $article) {
+				$row = array(
+					'open' => $article->getIsOpen(),
+					'type' => 'Textuel',
+					'date_open' =>  $article->getCreatedOn()->format('d/m/Y'),
+					'date_close' => date('d/m/Y'),
+					'title' =>  $article->getName(),
+					'description' => 'euhhh',
+					'URL' => $article->getUrl());
+				$table[] = $row;
 			}
 
-			//récupération de l'id du user et de ses sondages
-			$uid = $this->getUserInfo('id');
-			$polls = $this->getModel()->viewAllPolls($uid);
-			
-			// recherche des sondages expirés
-			foreach ($polls as &$poll)
-			{
-				$exp_date = new DateTime($poll['expiration_date']);
-				$now = new DateTime('now');
-				$interval = $now->diff($exp_date);
-				if($interval->invert && $poll['expiration_date'] != '0000-00-00 00:00:00')
-				{
-					$poll['open'] = false;
-					// On met à jour le sondage dans la bdd
-					try
-					{
-						$this->getModel()->updatePoll($poll['POLL_ID']);
-					}
-					catch (Exception $e)
-					{
-						die("Erreur lors de la mise à jour");
-					}
-				}
+			//date
+			$path="BdlsProjetBundle:".ucfirst("date");
+			$entity=$path."Poll";
 
+		    $em = $this->getDoctrine()->getManager();
+			$qb = $em->createQueryBuilder();
+
+			$qb->select('p')
+			   ->from($entity, 'p')
+			   ->where('p.created_by = ?1')
+			   ->setParameter(1, $id_user);
+			$query = $qb->getQuery();
+			$all_date_poll = $query->getResult();
+
+
+			foreach ($all_date_poll as $article) {
+				$row = array(
+					'open' => $article->getIsOpen(),
+					'type' => 'Date',
+					'date_open' =>  $article->getCreatedOn()->format('d/m/Y'),
+					'date_close' => date('d/m/Y'),
+					'title' =>  $article->getName(),
+					'description' => 'euhhh',
+					'URL' => $article->getUrl());
+				$table[] = $row;
 			}
-		
-			$this->set('pollList', $polls);
-			$this->render('dashboard');
-			 
-			 //*/
+
+			//place
+			$path="BdlsProjetBundle:".ucfirst("place");
+			$entity=$path."Poll";
+
+		    $em = $this->getDoctrine()->getManager();
+			$qb = $em->createQueryBuilder();
+
+			$qb->select('p')
+			   ->from($entity, 'p')
+			   ->where('p.created_by = ?1')
+			   ->setParameter(1, $id_user);
+			$query = $qb->getQuery();
+			$all_date_poll = $query->getResult();
+
+
+			foreach ($all_date_poll as $article) {
+				$row = array(
+					'open' => $article->getIsOpen(),
+					'type' => 'Lieu',
+					'date_open' =>  $article->getCreatedOn()->format('d/m/Y'),
+					'date_close' => date('d/m/Y'),
+					'title' =>  $article->getName(),
+					'description' => 'euhhh',
+					'URL' => $article->getUrl());
+				$table[] = $row;
+			}
+
 
 			//Donnée de test (sans BDD)
-			$table = array(
+			/*$table = array(
 					array(
 						'open' => true,
-						'date' => date('d/m/Y'),
+						'type' => 'textuel',
+						'date_open' => date('d/m/Y'),
+						'date_close' => date('d/m/Y'),
 						'title' => 'blabla open',
 						'description' => 'euhhh',
-						'POLL_ID' => 24),
+						'URL' => 24),
 					array(
 						'open' => false,
-						'date' => date('d/m/Y'),
+						'type' => 'textuel',
+						'date_open' => date('d/m/Y'),
+						'date_close' => date('d/m/Y'),
 						'title' => 'blabla close',
-						'description' => 'nope',
-						'POLL_ID' => 28)
-				);
+						'description' => 'euhhh',
+						'URL' => 24)
+				);*/
 
 
 
