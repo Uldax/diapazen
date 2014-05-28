@@ -109,4 +109,73 @@ class Poll
     {
         return $this->created_by;
     }
+
+    /**
+     * Set closed_on
+     *
+     * @param \DateTime $closedOn
+     * @return Poll
+     */
+    public function setClosedOn($closedOn)
+    {
+        $this->closed_on = $closedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get closed_on
+     *
+     * @return \DateTime 
+     */
+    public function getClosedOn()
+    {
+        return $this->closed_on;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Poll
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set is_open
+     *
+     * @param boolean $isOpen
+     * @return Poll
+     */
+    public function setIsOpen($isOpen)
+    {
+        $this->is_open = $isOpen;
+
+        return $this;
+    }
+
+    /**
+     * Get is_open
+     *
+     * @return boolean 
+     */
+    public function getIsOpen()
+    {
+        return $this->is_open;
+    }
 }
