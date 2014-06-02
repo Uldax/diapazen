@@ -16,10 +16,13 @@ use Bdls\ProjetBundle\Entity\TextChoice;
 use Bdls\ProjetBundle\Entity\TextPoll;
 use Bdls\ProjetBundle\Entity\TextVote;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 class ModelController extends Controller
 {
 	private $pool;
+	private $user;
 	private $doctrineManager;
 	
 	//Couille de constructeur
@@ -30,34 +33,61 @@ class ModelController extends Controller
 //		$this->doctrineManager = $this->getDoctrine()->getManager();
 //	}
 	
-	public function insertDateChoice($poolId, $choice)
-	{
-		$dateChoice = new DateChoice();
-		
-		$dateChoice->setDate($choice);
-		$dateChoice->setPoll($poolId);
-		
-		$this->doctrineManager->persist($dateChoice);
-	}
-	
+//	public function insertDateChoice($poolId, $choice)
+//	{
+//		
+//		
+//		$dateChoice->setDate($choice);
+//		$dateChoice->setPoll($poolId);
+//		
+//		$this->doctrineManager->persist($dateChoice);
+//	}
+//	
 	public function insertDateChoices()
 	{
+		$dateChoice = new DateChoice();
 		$choices = $this->pool->getPoll_choices();
+		//echo get_class($choices);
+//		echo "<pre>";
+//		print_r($choices);
+//		echo "</pre>";
 		foreach($choices as $choice)
 		{
-			insertDateChoice($_SESSION['currentPollId'], $choice);
+			$qb = $this->doctrineManager->createQueryBuilder();
+			$qb->select('d')
+			   ->from("BdlsProjetBundle:DatePoll", 'd')
+			   ->where('d.id = ?1')
+	//////// Récupérer l'id du user.
+			   ->setParameter(1, $_SESSION['currentPollId']); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
+			// get the Query from the QueryBuilder here ...
+			$query = $qb->getQuery();
+			$c = $query->getResult();
+		
+			$dateChoice->setDate($choice);
+			$dateChoice->setPoll($c[0]);
+
+			$this->doctrineManager->persist($dateChoice);
 		}
 		$this->doctrineManager->flush();
 	}
 	
 	public function insertDatePoll()
 	{
-//		$table = Doctrine_Core::getTable('dpz_datepoll');
-//		$yolo = $table->find($id);
-		$createdOn  = date('Y-m-d H:i:s');
+		$qb = $this->doctrineManager->createQueryBuilder();
+		$qb->select('u')
+		   ->from("BdlsProjetBundle:User", 'u')
+		   ->where('u.id = ?1')
+//////// Récupérer l'id du user.
+		   ->setParameter(1, 1); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
+		// get the Query from the QueryBuilder here ...
+		$query = $qb->getQuery();
+		$user = $query->getResult();
+		
+		$createdOn  = new \DateTime("now");
 		$datePoll = new DatePoll();
 		$datePoll->setCreatedOn($createdOn);
 		$datePoll->setName($this->pool->getPollTitle());
+		$datePoll->setCreatedBy($user[0]);
 		$this->doctrineManager->persist($datePoll);
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
@@ -192,7 +222,10 @@ class ModelController extends Controller
 	{
 		$this->doctrineManager = $doctrineManager;
 	}
-
-
+	public function setUser($user)
+	{
+		$this->user = $user;
+	}
+	
 }
 

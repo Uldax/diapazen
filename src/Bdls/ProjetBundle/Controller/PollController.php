@@ -1,11 +1,13 @@
 <?php
 namespace Bdls\ProjetBundle\Controller;
 
+
 use Symfony\Component\HttpFoundation\Response;
 use Bdls\ProjetBundle\Entity\TextPoll;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 /**
  * 
@@ -350,8 +352,17 @@ class PollController extends Controller
 
 		try
 		{
-			
+
+			$pool = $_SESSION['pool'];
+			//echo get_class($pool);
+			$em = $this->getDoctrine()->getManager();
+			//echo $this->getUser()->getUsername();
 			$model = new ModelController();
+			
+			$model->setDoctrineManager($em);
+			$model->setPool($pool);
+			//$model->insertionIntoDatabase();
+			$model->setUser($_SESSION['currentUser']);
 			// Lorsque l'utilisateur est connecté
 			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
 			{

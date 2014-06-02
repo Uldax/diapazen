@@ -39,7 +39,7 @@
                                    <a class="orange_small_button" href="{{ path('bdls_projet_view',{'type': row.URL },{url:"zub"} )}}">Voir</a>  #}
 
                                     <form action="{{ path('bdls_projet_dashboard') }}" onsubmit="return confirm('Clôturer le sondage ?');" method="post">
-                                        <input type="hidden" name="close" value="{{ row.URL }}"> 
+                                        <input type="hidden" name="close" value="{{ row.id }}"> 
                                         <input type="submit" class="grey_small_button" value="Clôturer">
                                     </form>
                                 </td>

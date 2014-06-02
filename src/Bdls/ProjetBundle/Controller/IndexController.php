@@ -28,11 +28,14 @@ class IndexController extends Controller
 		//$this->set('title', 'Accueil | Diapazen');
 
                 //Si il est connecté, que le retour sur home c'est fait et qu'il existe un sondage dans session  alors on redirige vers share
-        /*if ($this->isUserConnected() && isset($_SESSION['pool']))
+        if ($this->isUserConnected() && isset($_SESSION['pool']))
 		{
             // On redirige vers le partage
-			return $this->redirect($this->generateUrl('bdls_projet_share'));
-		}    */         
+			//return $this->redirect($this->generateUrl('bdls_projet_share'));
+			//$em = $this->getDoctrine()->getManager();
+			//$user = new \Bdls\ProjetBundle\Entity\User($em);
+			//$_SESSION['currentUser']=$user;
+		}          
 
 		//Formaulaire nécésaire pour la selection
 		$form = $this->createFormBuilder()

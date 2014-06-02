@@ -86,7 +86,8 @@ class DashboardController extends Controller
 			$request = $this->get('request');
 		    if ($request->getMethod() == 'POST') {
 		    	//recup de l'id su sondage a cloturer
-		    	$id_closa = $request->get("close");
+		    	$id_close = $request->get("close");
+		    	
 
 		    	//traitement de la fermeture du sondage
 		    	// => à faire

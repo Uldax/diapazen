@@ -28,10 +28,7 @@ class Poll
         /** @ORM\Column(type="text")*/
 	private $description;
 
-	/** @ORM\Column(type="string") */
-	private $url;
-
-	/** @ORM\Column(type="boolean") */
+	/** @ORM\Column(type="boolean")*/
 	private $is_open;
 
     /**
@@ -88,52 +85,6 @@ class Poll
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     * @return Poll
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string 
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Set is_open
-     *
-     * @param boolean $isOpen
-     * @return Poll
-     */
-    public function setIsOpen($isOpen)
-    {
-        $this->is_open = $isOpen;
-
-        return $this;
-    }
-
-    /**
-     * Get is_open
-     *
-     * @return boolean 
-     */
-    public function getIsOpen()
-    {
-        return $this->is_open;
     }
 
     /**
@@ -203,5 +154,28 @@ class Poll
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set is_open
+     *
+     * @param boolean $isOpen
+     * @return Poll
+     */
+    public function setIsOpen($isOpen)
+    {
+        $this->is_open = $isOpen;
+
+        return $this;
+    }
+
+    /**
+     * Get is_open
+     *
+     * @return boolean 
+     */
+    public function getIsOpen()
+    {
+        return $this->is_open;
     }
 }
