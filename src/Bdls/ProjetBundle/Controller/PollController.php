@@ -3,10 +3,12 @@ namespace Bdls\ProjetBundle\Controller;
 
 
 use Symfony\Component\HttpFoundation\Response;
-use Bdls\ProjetBundle\Entity\TextPoll;
+//use Bdls\ProjetBundle\Entity\TextVote;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Bdls\ProjetBundle\Entity\TextVote;
 
 
 /**
@@ -570,27 +572,23 @@ class PollController extends Controller
 	public function viewAction($type,$url)
 	{
 		$arrayType= array("text","date","lieu");
-
-	    //Récuperation du manager pour doctrine et du requst
 		$manager = $this->getDoctrine()->getManager();
 		$request = $this->get('request');
 	 	$response = new Response();
-
 	 	$myPoll = $this->viewUniquePoll($type,$url);	
 
 	    //Si le type n'existe pas il y a un soucie d'url    	   
 	    if(!in_array($type,$arrayType)){
 	    	return $this->redirect($this->generateUrl('bdls_projet_index'));
 	    }
-
 		try
 		{
-			// Si on a reçu un/des votes et que le sondage est ouvert !
+			// Si on a reçu un/des votes et que le sondage est ouvert 
 	        $value=$request->get("value");
-			if ($request->getMethod() == 'POST' && isset($value) && $myPoll->getIsOpen() ){
-				
+			if ($request->getMethod() == 'POST' && isset($value) && $myPoll->getIsOpen() ){				
 				//Si j'ai déja voté on redirige sur les stat du votes
 				$cookie=$request->cookies->get($url);
+				var_dump($cookie);
 				if((isset($cookie))){
 					return $this->redirect($this->generateUrl('bdls_projet_view',array('type'=>$type,'url'=>$url)));
 				}
@@ -599,18 +597,16 @@ class PollController extends Controller
 					//Validation de tout les votes
 					foreach($_POST['choiceId'] as $choice)
 					{
+						$choice=$this->getChoicesById($type,$choice);
 						$this->insertVotes($type,$choice,"toto");										
 					}
-						//$this->set('data_updated', false);			
-						//Set du cookie pour être sûr
-						//cookie
+					$response->headers->setCookie(new Cookie($url, 'A voté !'));
 					$data['data_updated']=true;
 				}	
 			}
-
 			//On récupère le sondage associé au sondage + calcule de stat							
 			$myChoice= $this->getAllChoices($type,$myPoll);
-			// Definition de la date restante 
+			// Definition du temps restant
 			$date = $myPoll->getClosedOn();
 		    $now  = new \DateTime('now');
 		    $int = $now->diff($date);
@@ -618,19 +614,16 @@ class PollController extends Controller
 			if ($int->invert == 1)
 			{
 				$data['eventDate'] = "Le sondage est fermé";							
-				//Je cloture le sondage
 				$myPoll->setIsOpen(0);
-				//persist						
+				$manager->persist($myPoll);						
 			}
 			else 
-				$data['eventDate']=$int->format(' | Expire dans: %d jour(s) et %h heure(s).');
+				$data['eventDate']=$int->format(' Expire dans: %d jour(s) et %h heure(s).');
 
 			//On trie les resultat via la fonction de comparaison
 			$votes=$this->getVoteStat($type,$myChoice);				
 			usort($votes, array($this,"cmp"));
-			
-	
-	        //On transforme la description
+
 			// On transforme les liens http(s).. en vrai lien avec des balises
 	        $description = preg_replace("/(^|[\n ])([\w]*?)((ht|f)tp(s)?:\/\/[\w]+[^ \,\"\n\r\t<]*)/is", "$1$2<a class=\"link\" rel=\"nofollow\" href=\"$3\" >$3</a>", $myPoll->getDescription());
 			$description = preg_replace("/(^|[\n ])([\w]*?)((www|ftp)\.[^ \,\"\t\n\r<]*)/is", "$1$2<a class=\"link\" rel=\"nofollow\" href=\"http://$3\" >$3</a>", $myPoll->getDescription());
@@ -641,24 +634,23 @@ class PollController extends Controller
 			//On définit l'afichage de la date en français (optimisation)
 			setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
 			$dateFr=strftime("%A %d %B %Y",$myPoll->getCreatedOn()->getTimestamp()); 
-
 				
-			// on définit toute les variables à envoyer à la vue
+			// On définit toute les variables à envoyer à la vue
 			$data['eventTitle'] = $myPoll->getName();
-			$data['openedPoll']= $this->translateOpened($myPoll->getIsOpen());
-			$data['urlPoll'] = $myPoll->getUrl();
+			//$data['openedPoll']= $this->translateOpened($myPoll->getIsOpen());
+			$data['openedPoll']= $myPoll->getIsOpen();
 			$data['user'] = $myPoll->getCreatedBy();
 			$data['creationDate'] = $dateFr;				
 			$data['eventDescription'] = $description;
+			//Pour le lien de retour
+			$data['urlPoll'] = $myPoll->getUrl();
+			$data['type'] =$type;
+			//Les choix possibles couplé a leurs stat actuel
 			$data['stat']=$votes;
-
-			//Les choix possibles
-			$data['choiceList'] = $myChoice;										
-			$data['title'] = "zub" .' | Diapazen';
-						
-			// On fait le rendu
+			$data['title'] = "zub" .' | Diapazen';					
 			$title='Accueil | Diapazen';
 			$year=date('Y');
+			$manager->flush();
 			return $this->render('BdlsProjetBundle:Default:pollView.html.twig', array('title'=>$title, 'year'=>$year,'data'=>$data));
 		}				
         catch(Exception $e) {
@@ -668,103 +660,35 @@ class PollController extends Controller
 		}
 	}
 	
-
-
-
-	/*
-	Fonction appéler pour gerer l'ensemble des insertions de choix suivant le type
-	 */
-	public function insertChoices($choices,$type,$name){
-		switch($type){
-        	case "lieux":
-                    $this->insertDateVotes($choices,$name);
-		    break;
-		 	case "date": 
-                    $this->insertDateVotes($choices);
-		    break;
-		 	case "text":
-                    $this->insertDateVotes($choices);
-		    break;
-		 default:
-	            throw new Exception("Error Processing insertion", 1);            
-	      }
-	}
-
 	/**
-				 * Fonction interne de comparaison
-				 *
-				 * @param string a paremètres a
-				 * @param string a paremètres a
-				 * @return a ou b.
-				 */		
+	* Fonction interne de comparaison
+	*
+	* @param string a paremètres a
+	* @param string a paremètres a
+	* @return a ou b.
+	*/		
 	function cmp($a, $b){
 					if ($a['percent'] == $b['percent'])
 						return 0;
 					return ($a['percent'] > $b['percent']) ? -1 : 1;
 	}
 
-	function translateOpened($bool)
+	function translateOpened($bool) { return ($bool) ? "ouvert" : "fermé"; }
+
+	//Fonction générique d'insertion de votes 
+	public function insertVotes($type,$choice,$name)
 	{
-		return ($bool) ? "ouvert" : "fermé";
+        $path="Bdls\ProjetBundle\Entity\\".ucfirst($type)."Vote";;
+        $class=  new \ReflectionClass($path);
+        $vote = $class->newInstanceArgs(array());   
+		$vote->setIssuedOn( new \DateTime('now'));
+		$vote->setChoice($choice);	
+		$vote->setIssuedBy($name);
+		$this->getDoctrine()->getManager()->persist($vote);
+		//Pour que le vote sois pris en compte pour les stats
+		$this->getDoctrine()->getManager()->flush();
 	}
 
-
-
-	//Fonction d'insertion de votes 
-	public function insertVotes($type,$choiceId,$name)
-	{
-        //$funcname="insert"+ucfirst($type)+"vote";
-        $clase=ucfirst($type)+"Vote";
-        $vote= new $class();
-		$vote->setDate( new \DateTime('now'));
-		$vote->setPoll($choiceId);	
-		$vote->setName($name);
-		$this->doctrineManager->persist($dateChoice);
-		/*
-		if (method_exists(get_class($this),$funcname)) {
-			foreach($choices as $choice)
-			{
-				$this->$funcname($poolId,$choice,$name);
-			}
-			$this->doctrineManager->flush();
-		}
-		else
-			throw new Exception("Error Type Request $funcname", 1);	
-			*/	
-	}
-
-	/*
-	//Insertion dans la base de type date
-    public function insertDateVote($poolId,$choice,$name)
-	{
-		$dateChoice = new DateVote();		
-		$dateChoice->setDate($choice);
-		$dateChoice->setPoll($poolId);	
-		$dateChoice->setName();
-		$this->doctrineManager->persist($dateChoice);
-	}
-	
-	//Insertion dans la base de type text
-    public function insertTextVote($poolId, $choice,$name)
-	{
-		$TextChoice = new TextVote();		
-		$dateChoice->setText($choice);
-		$dateChoice->setPoll($poolId);	
-		$dateChoice->setName();
-		$this->doctrineManager->persist($dateChoice);
-	}
-
-	//Insertion dans la base de type text
-    public function insertMapVote($poolId, $choice,$name)
-	{
-		$dateChoice = new MapVote();		
-		$dateChoice->setText($choice);
-		$dateChoice->setPoll($poolId);	
-		$dateChoice->setName();
-		$this->doctrineManager->persist($dateChoice);
-	}
-*/
-		
 	/**
 	 * Affichage d'un sondage
 	 *
@@ -809,7 +733,6 @@ class PollController extends Controller
 				$entity=$path."Choice";
 				$em = $this->getDoctrine()->getManager();
 				$qb = $em->createQueryBuilder();
-
 				$qb->select('c')
 				   ->from($entity, 'c')
 				   ->where('c.poll = ?1')
@@ -825,9 +748,27 @@ class PollController extends Controller
 				
 	}
 
+	public function getChoicesById($type,$id){
+			// On traite le résultat
+			$path="BdlsProjetBundle:".ucfirst($type);
+			//Je récupèretout les choix associé au sondage
+			$entity=$path."Choice";
+			$em = $this->getDoctrine()->getManager();
+			$qb = $em->createQueryBuilder();
+			$qb->select('c')
+			   ->from($entity, 'c')
+			   ->where('c.id = ?1')
+			   ->setParameter(1, $id); 
+			$query = $qb->getQuery();
+			return $query->getSingleResult();
+			if(empty($choices))
+				throw new NotFoundHttpException("Erreur ID choice");			
+	}	
+
+
 	public function getVoteStat($type,$choices)
 	{
-		//Pour chaque choix compte le nombre de réponsse
+		//Pour chaque choix compte le nombre de réponse
 		$path="BdlsProjetBundle:".ucfirst($type);
 		$em = $this->getDoctrine()->getManager();
 		$votes = array();
@@ -838,14 +779,14 @@ class PollController extends Controller
 			   ->from($entity, 'v')
 			   ->where('v.choice = ?1')
 			   ->setParameter(1, $choice->getId()); 
-
 			 //Je stock dans le tableau dans la cle 'object' le resultat de la reponse , puis dans count (la somme des elements)
 			$resultat=$qc->getQuery()->getResult();
-            $votes[$choice->getId()] = array('count' => count($resultat),
-            								 'percent' =>0) ;
+            $votes[] = array('id' =>$choice->getId(),
+            				'object'=>$resultat,
+            				'answer' =>$choice->getText(),
+            				'count' => count($resultat),
+            				'percent' =>0) ;
 		}
-
-		//Total de votes :
 		$nbTotalVotes=0;
 		foreach ($votes as $vote) $nbTotalVotes += $vote['count']; 
 		//Calcule du pourcentage
