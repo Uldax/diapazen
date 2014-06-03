@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Bdls\ProjetBundle\Entity\TextVote;
+use Bdls\ProjetBundle\Model\PollModel;
 
 
 /**
@@ -572,15 +572,16 @@ class PollController extends Controller
 	public function viewAction($type,$url)
 	{
 		$arrayType= array("text","date","lieu");
-		$manager = $this->getDoctrine()->getManager();
+		 //On instancie le model si il echoue alors le type n'existe pas  
+		try {
+			$model= new PollModel($this->getDoctrine(),$type);
+		} catch (Exception $e) {
+			return $this->redirect($this->generateUrl('bdls_projet_index'));
+		}
+		$manager=$this->getDoctrine()->getManager();
 		$request = $this->get('request');
 	 	$response = new Response();
-	 	$myPoll = $this->viewUniquePoll($type,$url);	
-
-	    //Si le type n'existe pas il y a un soucie d'url    	   
-	    if(!in_array($type,$arrayType)){
-	    	return $this->redirect($this->generateUrl('bdls_projet_index'));
-	    }
+	 	$myPoll = $model->getUniquePoll($url);	  	   
 		try
 		{
 			// Si on a reçu un/des votes et que le sondage est ouvert 
@@ -597,15 +598,15 @@ class PollController extends Controller
 					//Validation de tout les votes
 					foreach($_POST['choiceId'] as $choice)
 					{
-						$choice=$this->getChoicesById($type,$choice);
-						$this->insertVotes($type,$choice,"toto");										
+						$choice=$model->getChoicesById($choice);
+						$model->insertVotes($choice,"toto");										
 					}
 					$response->headers->setCookie(new Cookie($url, 'A voté !'));
 					$data['data_updated']=true;
 				}	
 			}
 			//On récupère le sondage associé au sondage + calcule de stat							
-			$myChoice= $this->getAllChoices($type,$myPoll);
+			$myChoice= $model->getAllChoices($myPoll);
 			// Definition du temps restant
 			$date = $myPoll->getClosedOn();
 		    $now  = new \DateTime('now');
@@ -621,7 +622,7 @@ class PollController extends Controller
 				$data['eventDate']=$int->format(' Expire dans: %d jour(s) et %h heure(s).');
 
 			//On trie les resultat via la fonction de comparaison
-			$votes=$this->getVoteStat($type,$myChoice);				
+			$votes=$model->getVoteStat($myChoice);				
 			usort($votes, array($this,"cmp"));
 
 			// On transforme les liens http(s).. en vrai lien avec des balises
@@ -651,7 +652,8 @@ class PollController extends Controller
 			$title='Accueil | Diapazen';
 			$year=date('Y');
 			$manager->flush();
-			return $this->render('BdlsProjetBundle:Default:pollView.html.twig', array('title'=>$title, 'year'=>$year,'data'=>$data));
+
+			return $this->render('BdlsProjetBundle:Default/PollView:base.html.twig', array('title'=>$title, 'year'=>$year,'data'=>$data));
 		}				
         catch(Exception $e) {
 			$title='Accueil | Diapazen';
@@ -675,125 +677,5 @@ class PollController extends Controller
 
 	function translateOpened($bool) { return ($bool) ? "ouvert" : "fermé"; }
 
-	//Fonction générique d'insertion de votes 
-	public function insertVotes($type,$choice,$name)
-	{
-        $path="Bdls\ProjetBundle\Entity\\".ucfirst($type)."Vote";;
-        $class=  new \ReflectionClass($path);
-        $vote = $class->newInstanceArgs(array());   
-		$vote->setIssuedOn( new \DateTime('now'));
-		$vote->setChoice($choice);	
-		$vote->setIssuedBy($name);
-		$this->getDoctrine()->getManager()->persist($vote);
-		//Pour que le vote sois pris en compte pour les stats
-		$this->getDoctrine()->getManager()->flush();
-	}
 
-	/**
-	 * Affichage d'un sondage
-	 *
-	 * En récupèrant les informations stockées dans la base de données au moyen
-	 * d’une requête sql Select sur la vue dpz_view_users_join_polls. On traite
-	 * le résultat obtenu en récupérant les informations de chaque choix du
-	 * sondage ainsi que les informations de chaque résultat des choix du
-	 * sondage. Les résultats obtenus sont ensuite transférés dans un tableau
-	 * et on calcule le pourcentage de chaque choix du sondage. Le tableau est
-	 * donc complété avec ces mêmes pourcentages.
-	 * @param type $pollUrl url du sondage
-	 * @return array contenu du sondage
-	 */
-	public function viewUniquePoll($type,$pollUrl)
-	{   
-			//Path 
-			$path="BdlsProjetBundle:".ucfirst($type);
-			$entity=$path."Poll";
-
-			//Création de la requete
-			$em = $this->getDoctrine()->getManager();
-			$qb = $em->createQueryBuilder();
-			$qb->select('p')
-			   ->from($entity, 'p')
-			   ->where('p.url = ?1')
-			   ->setParameter(1, $pollUrl);
-			$query = $qb->getQuery();
-			$poll = $query->getResult();
-			if(!empty($poll))
-				return $poll[0];
-			else
-				throw new NotFoundHttpException("Sondage inexistant");
-	}
-	
-
-	public function getAllChoices($type,$poll){
-			// On traite le résultat
-			$path="BdlsProjetBundle:".ucfirst($type);
-			if(!empty($poll))
-			{
-				//Je récupèretout les choix associé au sondage
-				$entity=$path."Choice";
-				$em = $this->getDoctrine()->getManager();
-				$qb = $em->createQueryBuilder();
-				$qb->select('c')
-				   ->from($entity, 'c')
-				   ->where('c.poll = ?1')
-				   ->setParameter(1, $poll->getId()); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
-				// get the Query from the QueryBuilder here ...
-				$query = $qb->getQuery();
-				return $query->getResult();
-				if(empty($choices))
-					throw new NotFoundHttpException("Sondage defaillant : pas de choix pour ce sondage");
-			}
-			else 
-				throw new NotFoundHttpException("Sondage vide");
-				
-	}
-
-	public function getChoicesById($type,$id){
-			// On traite le résultat
-			$path="BdlsProjetBundle:".ucfirst($type);
-			//Je récupèretout les choix associé au sondage
-			$entity=$path."Choice";
-			$em = $this->getDoctrine()->getManager();
-			$qb = $em->createQueryBuilder();
-			$qb->select('c')
-			   ->from($entity, 'c')
-			   ->where('c.id = ?1')
-			   ->setParameter(1, $id); 
-			$query = $qb->getQuery();
-			return $query->getSingleResult();
-			if(empty($choices))
-				throw new NotFoundHttpException("Erreur ID choice");			
-	}	
-
-
-	public function getVoteStat($type,$choices)
-	{
-		//Pour chaque choix compte le nombre de réponse
-		$path="BdlsProjetBundle:".ucfirst($type);
-		$em = $this->getDoctrine()->getManager();
-		$votes = array();
-		$entity=$path."Vote";
-		foreach ($choices as $choice ) {
-            $qc = $em->createQueryBuilder();
-			$qc->select('v')
-			   ->from($entity, 'v')
-			   ->where('v.choice = ?1')
-			   ->setParameter(1, $choice->getId()); 
-			 //Je stock dans le tableau dans la cle 'object' le resultat de la reponse , puis dans count (la somme des elements)
-			$resultat=$qc->getQuery()->getResult();
-            $votes[] = array('id' =>$choice->getId(),
-            				'object'=>$resultat,
-            				'answer' =>$choice->getText(),
-            				'count' => count($resultat),
-            				'percent' =>0) ;
-		}
-		$nbTotalVotes=0;
-		foreach ($votes as $vote) $nbTotalVotes += $vote['count']; 
-		//Calcule du pourcentage
-		foreach ($votes as $vote => $key) {
-			if($nbTotalVotes!=0)
-				$votes[$vote]['percent'] = (int) round($votes[$vote]['count'] / $nbTotalVotes * 100);
-		}
-		return $votes;
-	} 
 }
