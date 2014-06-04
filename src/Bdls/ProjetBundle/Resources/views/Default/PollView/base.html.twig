@@ -19,9 +19,7 @@
 			{% endif %}
                         
 			{#$this->getHomeUrl(); echo '/poll/view/'.$urlPoll  =>  http://127.0.0.1/poll/view/$urlPoll#}
-			<form onsubmit="return formCheck(this);" method="post" action="{{ data.urlPoll}}">
-				<div id="poll_choices">
-					<table>
+			<form onsubmit="return formCheck(this);" method="post" action="{{ data.urlPoll}}">						
                                             {% if data.type =="text"%}
                                                  {% include 'BdlsProjetBundle:Default/PollView:pollTextView.html.twig' %}
                                             {%elseif data.type =="date"%}
@@ -31,11 +29,10 @@
                                             {%else%}
                                                 Il y a comme un problème ceci est impossible bravo tu as casser le site/les controllers et le model de donné
                                                 <br> Merci de nous envoyer un mail pour nous expliquer ton exploit 
-                                            {%endif%}                           
-					</table>
-				</div>
-				{%if data.openedPoll  %}
-                                    <input type="text" class="small_text_edit" placeholder="Prénom Nom" name="value" value="{{ app.user.username }}">
+                                            {%endif%}                           					
+                                
+				{%if data.openedPoll and not data.message is defined  %}
+                                    <input type="text" class="small_text_edit" placeholder="Prénom Nom" name="name" value="{{ app.user.username }}">
                                     <input type="submit" class="orange_small_button" value="Voter" >
                                     {% if data['data_updated'] is defined %}
                                                     {% if data['data_updated']%} 
@@ -47,8 +44,11 @@
                                                             $('.success_message').delay(4000).slideUp(300);
                                                     </script>
                                    {% endif %}
-                            {% endif %}                  
+                            {% else %}  
+                                   <div  class="success_message message_personal_data">{{data.message}}</div>                 
+                            {%endif%}                    
 			</form>
+                                
 		</div>
 	</div>
 {% endblock %}

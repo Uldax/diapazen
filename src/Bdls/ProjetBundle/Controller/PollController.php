@@ -580,17 +580,16 @@ class PollController extends Controller
 		}
 		$manager=$this->getDoctrine()->getManager();
 		$request = $this->get('request');
-	 	$response = new Response();
-	 	$myPoll = $model->getUniquePoll($url);	  	   
+		$cookies = $request->cookies;
+	 	$myPoll = $model->getUniquePoll($url);	
+
 		try
 		{
 			// Si on a reçu un/des votes et que le sondage est ouvert 
-	        $value=$request->get("value");
-			if ($request->getMethod() == 'POST' && isset($value) && $myPoll->getIsOpen() ){				
+	        $name=$request->get("name");
+			if ($request->getMethod() == 'POST' && !empty($name) && $myPoll->getIsOpen() ){				
 				//Si j'ai déja voté on redirige sur les stat du votes
-				$cookie=$request->cookies->get($url);
-				var_dump($cookie);
-				if((isset($cookie))){
+				if($cookies->has($url)){
 					return $this->redirect($this->generateUrl('bdls_projet_view',array('type'=>$type,'url'=>$url)));
 				}
 				else
@@ -599,9 +598,13 @@ class PollController extends Controller
 					foreach($_POST['choiceId'] as $choice)
 					{
 						$choice=$model->getChoicesById($choice);
-						$model->insertVotes($choice,"toto");										
+						$model->insertVotes($choice,$name);										
 					}
-					$response->headers->setCookie(new Cookie($url, 'A voté !'));
+					//Création d'un cookie pour ne pas revoter en boucle
+					//(Pour ceux qui ne savent pas supprimer manuellement un cookie ...)
+					$response = new Response();
+					$response->headers->setCookie(new Cookie($url, 'A voté !',(time() + 3600 * 24 * 7 * 310), '/'));
+					$response->send();  
 					$data['data_updated']=true;
 				}	
 			}
@@ -648,6 +651,9 @@ class PollController extends Controller
 			$data['type'] =$type;
 			//Les choix possibles couplé a leurs stat actuel
 			$data['stat']=$votes;
+			if($cookies->has($url)) $data['message']="Votre vote à déja été pris en compte";
+			
+
 			$data['title'] = "zub" .' | Diapazen';					
 			$title='Accueil | Diapazen';
 			$year=date('Y');

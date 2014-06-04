@@ -119,7 +119,7 @@ class PollModel
             		$answer=$choice->getDate();
             		break;
             	case 'place':
-            		$answer=array('Lat' =>$choice->getLatitude(),'Long' =>$choice->getLongitude());
+            		$answer=array($choice->getLatitude(),$choice->getLongitude());
             	break;
             	default:
             		throw new \Exception("Type inconu", 1);          						

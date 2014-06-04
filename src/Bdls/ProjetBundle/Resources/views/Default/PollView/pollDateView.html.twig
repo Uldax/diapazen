@@ -1,4 +1,7 @@
-    {% for choice in data.stat %}  
+	<div id="poll_choices">	
+<table>
+ {% for choice in data.stat %}  
+
                                                 <tr>
                                                     {%if data.openedPoll  %}
                                                         <td><input type="checkbox" name="choiceId[]" value=" {{ choice.id }}"></td>
@@ -48,3 +51,5 @@
 						</tr>                                                          
                                                             
                                              {% endfor %}
+</table>
+                </div>
