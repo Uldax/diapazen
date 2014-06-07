@@ -26,20 +26,20 @@ class User extends BaseUser
     private $githubID;
      
 
-//    public function __construct()
-//    {
-//        parent::__construct();
-//        // your own logic
-//		//$this->getDoctrine()->getManager()->flush();;
-//    }
-	
-	public function __construct($em)
+    public function __construct()
     {
         parent::__construct();
         // your own logic
-		$em->persist($this);
-		$em->flush();;
+		
     }
+	
+//	public function __construct($em)
+//    {
+//        parent::__construct();
+//        // your own logic
+//		$em->persist($this);
+//		$em->flush();;
+//    }
     /**
      * Get id
      *

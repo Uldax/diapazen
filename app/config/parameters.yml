@@ -19,4 +19,6 @@ parameters:
     facebook_client_secret: 56f4d32675c0fd39a2986e5a1ac514e9
     google_client_id: 330767389348-acuj6f53cs45k4ge789jce27go8naoi9.apps.googleusercontent.com
     google_client_secret: rIV9URsXROGewOrSbuynMYOS
+    linkedin_client_id: 77l5pyk97k351s
+    linkedin_client_secret: MrnBcTR4qhuw0rvE
 

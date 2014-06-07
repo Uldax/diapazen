@@ -32,7 +32,7 @@
                                             {%endif%}                           					
                                 
 				{%if data.openedPoll and not data.message is defined  %}
-                                    <input type="text" class="small_text_edit" placeholder="Prénom Nom" name="name" value="{{ app.user.username }}">
+                                    <input type="text" class="small_text_edit" placeholder="Prénom Nom" name="name" value=" {% if app.user.username is defined %} {{app.user.username }} {%endif%}">
                                     <input type="submit" class="orange_small_button" value="Voter" >
                                     {% if data['data_updated'] is defined %}
                                                     {% if data['data_updated']%} 

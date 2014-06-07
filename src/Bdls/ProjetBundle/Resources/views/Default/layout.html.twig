@@ -32,7 +32,9 @@
                                  								
                                 <div id="connect_box" >
                                     
-                                    
+                                    {% if error is defined %}
+                                        <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+                                    {% endif %}
                                     <form action="{{ path("fos_user_security_check") }}" method="post" class="form-inline">
                                     <!-- _CSRF du fos user bundle contenu en variable global twig , sécurité des formulaires ) -->
                                     <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />                                  
@@ -40,6 +42,8 @@
                                     <input type="password" class="small_text_edit form-control hidden-xs"  id="password" name="_password" required="required" />               
                                     <input type="submit" class="btn btn-default orange_small_button hidden-xs"  id="_submit" name="_submit" value="Connexion" />                                               
                                     </form>
+                                    
+                                    
                                     
                                    <!-- Connexion via les Api -->
                                    {% block hwi_oauth_content %}

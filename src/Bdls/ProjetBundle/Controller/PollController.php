@@ -218,6 +218,8 @@ class PollController extends Controller
 
 		try
 		{
+			//Gestion de la conexion (ancien systeme)
+			
 			//test si un choix a été fait entre la connection et l'inscription et qu'il y a un email
 			//l'adresse mail n'est elle pas obligatoire ???
 			if (isset($_POST['account']) && isset($_POST['email']))
@@ -238,7 +240,9 @@ class PollController extends Controller
 					$this->loadModel('user'); //charge User.Model.php
 					$connectStatus = $this->getModel()->connectionToApp($mail, $pwd, $ip_addr);
 
-				} //si on a choisi l'inscription et qu'il y a le nom et prenom on l'inscrit
+				} 
+				//Gros probleme -> inscription via fos la 
+				//si on a choisi l'inscription et qu'il y a le nom et prenom on l'inscrit
 				else if($_POST['account'] == 'not_registered' && isset($_POST['firstNameUser']) && isset($_POST['lastNameUser']))
 				{
 					// On teste l'adresse mail

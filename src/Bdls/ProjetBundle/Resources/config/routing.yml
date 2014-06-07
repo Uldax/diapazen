@@ -24,7 +24,7 @@ bdls_projet_login:
     defaults: { _controller: BdlsProjetBundle:User:login }
 
 bdls_projet_connect:
-    pattern: /connect
+    pattern: /connection
     defaults: { _controller: BdlsProjetBundle:Poll:connect }
 
 bdls_projet_share:
