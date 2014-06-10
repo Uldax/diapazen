@@ -33,9 +33,7 @@
                                 <td>{{ row.date_open }}</td>
                                 <td>{{ row.date_close}}</td>
                                 <td>{{ row.title }}</td>
-                                <td>{{ row.description }}
-                                    {{ row.short_type }}
-                                    {{ row.URL}}</td>
+                                <td>{{ row.description }}</td>
                                 <td> 
                                     {# à modifier l'adresse du lien -> bdls_projet_view#}
                                    <a class="orange_small_button" href="{{ path('bdls_projet_view',{'type': row.short_type,'url': row.URL } )}}">Voir</a> 
@@ -54,9 +52,7 @@
                                 <td>{{ row.date_open }}</td>
                                 <td>{{ row.date_close}}</td>
                                 <td>{{ row.title }}</td>
-                                <td>{{ row.description }}
-                                    {{ row.short_type }}
-                                    {{ row.URL}}</td>
+                                <td>{{ row.description }}</td>
                                 <td> 
                                     <a class="orange_small_button" href="{{ path('bdls_projet_view',{'type': row.short_type,'url': row.URL } )}}">Voir</a> 
                                 </td>
