@@ -45,4 +45,6 @@ hwi_google_login:
     pattern: /login/check-google
 hwi_facebook_login:
     pattern: /login/check-facebook
-    pattern: /login/check-facebook
+hwi_linkedin_login:
+    pattern: /login/check-linkedin    
+  

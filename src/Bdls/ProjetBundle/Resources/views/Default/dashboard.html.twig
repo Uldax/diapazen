@@ -2,9 +2,6 @@
 	{% block body %}
         <div id="content">
                 <a href="{{ path('bdls_projet_index') }}" id="new_poll" class="orange_button">Créer un nouvel évènement</a>
-            <div id="float_button_dashboard">
-                <a id="dashboard_form" class="orange_button" href="{{ path('bdls_projet_profil') }}">Modifier mes données personnelles</a>
-            </div>
             <h2 class="small_title small_title_dashboard">Vos sondages</h2>
 
             {# NON fonctionnel, il faut valider le script #}
@@ -35,10 +32,12 @@
                                 <td>{{ row.title }}</td>
                                 <td>{{ row.description }}</td>
                                 <td> 
-                                    {# à modifier l'adresse du lien -> bdls_projet_view #}
-                                    <a class="orange_small_button" href="{#{{ path('bdls_projet_view',{'id': row.URL }) }}#}">Voir</a>
+                                    {# à modifier l'adresse du lien -> bdls_projet_view#}
+                                   <a class="orange_small_button" href="{{ path('bdls_projet_view',{'type': row.short_type,'url': row.URL } )}}">Voir</a> 
+
                                     <form action="{{ path('bdls_projet_dashboard') }}" onsubmit="return confirm('Clôturer le sondage ?');" method="post">
-                                        <input type="hidden" name="close" value="{{ row.id }}"> 
+                                        <input type="hidden" name="close_id" value="{{ row.id }}"> 
+                                        <input type="hidden" name="close_type" value="{{ row.short_type }}"> 
                                         <input type="submit" class="grey_small_button" value="Clôturer">
                                     </form>
                                 </td>
@@ -52,8 +51,7 @@
                                 <td>{{ row.title }}</td>
                                 <td>{{ row.description }}</td>
                                 <td> 
-                                    {# à modifier l'adresse du lien -> bdls_projet_view #}
-                                    <a class="orange_small_button" href="{##}">Voir</a> 
+                                    <a class="orange_small_button" href="{{ path('bdls_projet_view',{'type': row.short_type,'url': row.URL } )}}">Voir</a> 
                                 </td>
 
                         {% endif %}

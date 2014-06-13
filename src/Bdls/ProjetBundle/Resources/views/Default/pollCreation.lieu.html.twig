@@ -56,7 +56,18 @@
 						<a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
 					</form> 
 			</div>
-	
+			{#Rajouté#}
+			<div class="choice">
+					<input class="text_edit input_choice form-control add_choix" id="choix3" type="text" name="choices[]" disabled="true" placeholder="Ajouter un choix" />
+					<a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this);">+</a>
+                        </div>
+		
+                    <!-- Map google -->
+                   <div id="map-canvas" class="map"></div>
+                   
+                   <input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante" />
+              </form>
+	</div>
 
         <!-- Version Mobile -->
         <div id="long_content-xs" class="visible-xs">

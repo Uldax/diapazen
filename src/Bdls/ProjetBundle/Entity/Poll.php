@@ -31,6 +31,10 @@ class Poll
 	/** @ORM\Column(type="boolean")*/
 	private $is_open;
 
+    /** @ORM\Column(type="string") */
+    private $url;
+
+
     /**
      * Get id
      *
@@ -177,5 +181,28 @@ class Poll
     public function getIsOpen()
     {
         return $this->is_open;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Poll
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

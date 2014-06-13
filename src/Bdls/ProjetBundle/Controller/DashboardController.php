@@ -42,6 +42,9 @@ define('BASE_URL', 'http://'.$_SERVER['HTTP_HOST'].$sub_dir);
  * @package		Diapazen
  * @subpackage	Controller
  */
+
+
+
 class DashboardController extends Controller
 {
 
@@ -86,13 +89,38 @@ class DashboardController extends Controller
 			$request = $this->get('request');
 		    if ($request->getMethod() == 'POST') {
 		    	//recup de l'id su sondage a cloturer
-		    	$id_close = $request->get("close");
-		    	
-
-		    	//traitement de la fermeture du sondage
-		    	// => à faire
-
 		    	$data_updated = false;
+		    	try{
+		    		$close_id = $request->get("close_id");
+			    	$close_type = $request->get("close_type");
+			    	
+			    	$path="BdlsProjetBundle:".ucfirst($close_type);
+					$entity=$path."Poll";
+
+				    $em = $this->getDoctrine()->getManager();
+					$qb = $em->createQueryBuilder();
+
+					$qb->select('p')
+					   ->from($entity, 'p')
+					   ->where('p.id = ?1')
+					   ->setParameter(1, $close_id);
+					$query = $qb->getQuery();
+					$all_poll_close = $query->getResult();
+
+					foreach ($all_poll_close as $poll_close) {
+						$poll_close->setIsOpen(0);
+						$now  = new \DateTime('now');
+						$poll_close->setClosedOn($now);
+						$em->persist($poll_close);
+						$em->flush();
+						$data_updated = true;
+					}					
+					
+		    	}
+		    	catch(Exception $e){
+		    		$data_updated = false;
+		    	}
+		    	
 		    }
 
 		    $table = array();
@@ -122,7 +150,8 @@ class DashboardController extends Controller
 					'date_close' => $article->getClosedOn()->format('d/m/Y'),
 					'title' =>  $article->getName(),
 					'description' => $article->getDescription(),
-					'URL' => $article->getUrl());
+					'URL' => $article->getUrl(),
+					'short_type' => 'text');
 				$table[] = $row;
 			}
 
@@ -150,11 +179,12 @@ class DashboardController extends Controller
 					'date_close' => $article->getClosedOn()->format('d/m/Y'),
 					'title' =>  $article->getName(),
 					'description' => $article->getDescription(),
-					'URL' => $article->getUrl());
+					'URL' => $article->getUrl(),
+					'short_type' => 'date');
 				$table[] = $row;
 			}
 
-			//place
+			//lieu
 			$path="BdlsProjetBundle:".ucfirst("place");
 			$entity=$path."Poll";
 
@@ -166,10 +196,10 @@ class DashboardController extends Controller
 			   ->where('p.created_by = ?1')
 			   ->setParameter(1, $id_user);
 			$query = $qb->getQuery();
-			$all_date_poll = $query->getResult();
+			$all_lieu_poll = $query->getResult();
 
 
-			foreach ($all_date_poll as $article) {
+			foreach ($all_lieu_poll as $article) {
 				$row = array(
 					'id' => $article->getId(),
 					'open' => $article->getIsOpen(),
@@ -178,9 +208,13 @@ class DashboardController extends Controller
 					'date_close' => $article->getClosedOn()->format('d/m/Y'),
 					'title' =>  $article->getName(),
 					'description' => $article->getDescription(),
-					'URL' => $article->getUrl());
+					'URL' => $article->getUrl(),
+					'short_type' => 'place');
 				$table[] = $row;
 			}
+
+			$table = array_sort($table, 'open', SORT_DESC);
+			//asort($table);
 
 
 			return $this->render('BdlsProjetBundle:Default:dashboard.html.twig',array(
@@ -199,6 +233,48 @@ class DashboardController extends Controller
 			
 	}
 
+
+}
+
+/*
+* Fonction de tri de tableau
+* Récupèrer sur le site 
+* http://www.php.net/manual/fr/function.sort.php
+*/
+
+function array_sort($array, $on, $order=SORT_ASC)
+{
+    $new_array = array();
+    $sortable_array = array();
+
+    if (count($array) > 0) {
+        foreach ($array as $k => $v) {
+            if (is_array($v)) {
+                foreach ($v as $k2 => $v2) {
+                    if ($k2 == $on) {
+                        $sortable_array[$k] = $v2;
+                    }
+                }
+            } else {
+                $sortable_array[$k] = $v;
+            }
+        }
+
+        switch ($order) {
+            case SORT_ASC:
+                asort($sortable_array);
+            break;
+            case SORT_DESC:
+                arsort($sortable_array);
+            break;
+        }
+
+        foreach ($sortable_array as $k => $v) {
+            $new_array[$k] = $array[$k];
+        }
+    }
+
+    return $new_array;
 }
 
 ?>

@@ -1,0 +1,54 @@
+<div id="poll_choices">	
+<table>
+  {% for choice in data.stat %}  
+                                                <tr>
+                                                    {%if data.openedPoll  %}
+                                                        <td><input type="checkbox" name="choiceId[]" value=" {{ choice.id }}"></td>
+                                                    {%else %}
+                                                         <td class="text">{{ loop.index }}</td>                                                      
+                                                    {%endif %} 
+                                                         
+                                                     <td class="text"> {{ choice.answer }} </td> 
+							<td class="progression_bar">
+								<div class="container">
+									<div class="meter" style="width: {{ choice.percent ~ '%' }} "></div>
+									<p class="small_text">{{ choice.percent }} % </p>
+								</div>
+							</td>   
+							<td class="text">							
+								{% if choice.count == 1 %}
+									{{ choice.object[0].issuedBy }}  à voté;
+		
+								{% elseif choice.count == 2 %}
+									{{ choice.object[0].issuedBy }}  et {{ choice.object[1].issuedBy }}  ont voté;
+                                                                        						
+								{% elseif choice.count > 2 %}
+                       
+									{{ choice.object[0].issuedBy }} et <span id="link_{{ loop.index }}" class="link"> {{ choice.count-1 }}  autres personnes</span> ont voté; 
+                                                                        <div id="vote_list_{{ loop.index }}" class="vote_list">
+                                                                            <ul>
+                                                                                {% for vote in choice.object %}
+                                                                                    <li>{{vote.issuedBy }} </li>
+                                                                                {%endfor%}
+                                                                            </ul>
+                                                                        </div>
+                                                                       <script type="text/javascript">
+                                                                            document.getElementById("link_{{ loop.index }}").addEventListener('mouseover', function(e){
+
+                                                                                    document.getElementById("vote_list_{{ loop.index }}").style.display = "block";
+                                                                            }, false);
+                                                                            document.getElementById("link_{{ loop.index }}").addEventListener('mouseout', function(e){
+
+                                                                                    document.getElementById("vote_list_{{ loop.index }}").style.display = "none";
+                                                                            }, false);
+                                                                        </script>
+                                                                                                                                             
+								{% else %}
+									Aucune personne n'a encore voté
+								{%endif%}                                                                      															
+							</td>
+						</tr>                                                          
+                                                            
+                                             {% endfor %}
+</table>  
+        </div>

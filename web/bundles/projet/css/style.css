@@ -119,6 +119,15 @@
 }
 
 
+#content-xs .text_article-xs
+{
+    padding-left: 100px;
+}
+
+.add_choix{
+    margin-left: 115px;
+}
+
 .text_article
 {
     padding-left: 170px;
