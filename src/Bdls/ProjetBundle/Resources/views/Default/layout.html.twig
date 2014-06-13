@@ -86,8 +86,11 @@
 		<!--<div class="white_bg">-->
 		{% block javascripts %}
                     <!-- Création des input date en jquerry necessaire pour tout les sondages -->
+					<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script> 
                     <script src="{{ asset('bundles/projet/js/jquery.js') }}" type="text/javascript"></script>
                     <script src="{{ asset('bundles/projet/js/jquery-2.0.2.js') }}" type="text/javascript"></script>
+					<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+					<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
                     <!--Inutilisé il me semble  -->
                      <script src="{{ asset('bundles/projet/js/bootstrap.js') }}" type="text/javascript"></script>
                     <script src={{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js')}}></script>

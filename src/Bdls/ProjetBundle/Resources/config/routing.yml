@@ -55,6 +55,12 @@ bdls_projet_profil:
     pattern: /profil
     defaults: { _controller: BdlsProjetBundle:Security:profil }
     
+bdls_test:
+    pattern: /pos/{valeur}
+    defaults: { _controller: BdlsProjetBundle:InitPos:initPos }
+    options:
+        expose: true
+    
 #login_check:
     #pattern: /login_check
     

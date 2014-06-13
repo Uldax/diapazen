@@ -1,58 +1,62 @@
 {#{% include 'BdlsProjetBundle:Default:ariadneThread.html.twig' %}#}
 {% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
 	{% block body %}
-	<div id="content" class="hidden-xs">
-		<div id="ariadne_thread"> 
-		<span class="orange_ariadne" ><span></span><span>Création</span><span></span></span>
-		{#{% if show_ariadne is defined %}
-			{% if show_ariadne == true %}#}
-			<span class="grey_ariadne" ><span></span><span>Connexion</span><span></span></span>
-			{#{% endif %}
-		{% endif %}#}
-		<span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
-		</div>
-
-		
-		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
-			<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
-			<input name="type" type="hidden" value="c1">
-			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
-			<input class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
-			<label for="datepicker" class="text ">Date limite</label>
-			<input class="text_edit datepicker" name="date_input" id="datepicker" readonly/>
-			<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
-			<textarea class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
-			<h1 class="small_title">Propositions de {{ nametype }}</h1>
-			<div id="choices">
-				<div class="choice">
-					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" required="required"/>
-					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix1);">
-                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
-				</div>
-				<div class="choice">
-					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" required="required" />
-					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix2);">
-                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
-				</div>
-				<div class="choice">
-					<label for="choix3" class="text lbl_choice">Choix 3<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice form-control" id="choix3" type="text" name="choices[]" value="" required="required" />
-					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix3);">
-                                        <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
-				</div>
+	<div id="vide">
+		<div id="content" class="hidden-xs">
+			<div id="ariadne_thread"> 
+			<span class="orange_ariadne" ><span></span><span>Création</span><span></span></span>
+			{#{% if show_ariadne is defined %}
+				{% if show_ariadne == true %}#}
+				<span class="grey_ariadne" ><span></span><span>Connexion</span><span></span></span>
+				{#{% endif %}
+			{% endif %}#}
+			<span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
 			</div>
-			
-		
-                    <!-- Map google -->
-                   <div id="map-canvas" class="map"></div>
-                   
-                   <input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante" />
-                   <a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
-                </form> 
-                
-	</div>
+
+
+			<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post"> {#action="connect"{{ path('bdls_test', {valeur:8}) }}#}
+				{#<h1>On te Hais symfony !</h1>#}
+				<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
+				<input name="type" type="hidden" value="c1">
+				<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
+				<input class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
+				<label for="datepicker" class="text ">Date limite</label>
+				<input class="text_edit datepicker" name="date_input" id="datepicker" readonly/>
+				<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
+				<textarea class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
+				<h1 class="small_title">Propositions de {{ nametype }} : </h1>
+				<div id="choices">
+					<div class="choice">
+						<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
+						<input class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" required="required"/>
+						<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix1);">
+											<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+					</div>
+					<div class="choice">
+						<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
+						<input class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" required="required" />
+						<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix2);">
+											<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+					</div>
+					<div class="choice">
+						<label for="choix3" class="text lbl_choice">Choix 3<span class="asterisc"> *</span></label>
+						<input class="text_edit input_choice form-control" id="choix3" type="text" name="choices[]" value="" required="required" />
+						<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix3);">
+											<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+					</div>
+				</div>
+
+
+						<!-- Map google -->
+					   <div id="map-canvas" class="map"></div>
+
+					   <!-- bouton pour appeler l'ajax qui met le tableau posmarkers dans la variable de session 'position' -->
+						<input type="button" value="Ajouter" class="valider" onClick="tableauPosGPS();">
+						<input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante" />
+						<a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
+					</form> 
+			</div>
+	
 
         <!-- Version Mobile -->
         <div id="long_content-xs" class="visible-xs">
@@ -96,11 +100,11 @@
                                         <a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
 				</div>
 			</div>
-                   
-                   <input class="btn btn-default orange_button next_step_map-xs" type="submit" value="Étape suivante" />
+{#                   <input class="btn btn-default orange_button next_step_map-xs" type="submit" onClick="tableauPosGPS();" value="SymfonyOnT'encule"/>#}
+                   <input class="btn btn-default orange_button next_step_map-xs" type="button" onClick="formCheck(this);" value="SymfonyOnT'encule" />
                    <a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
                 </form> 
-                
+               
 	</div>
 
     <!-- Chargement de l'API google map -->
@@ -108,5 +112,7 @@
     <!-- Chargement de place API pour l'autocomplétion de l'input" -->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
     <script src={{ asset('bundles/projet/js/sondage_map.js') }}> </script>
+	<script src={{ asset('bundles/projet/js/formCheck.js') }}> </script>
+</div>
     {% endblock %}     
 

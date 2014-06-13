@@ -19,7 +19,7 @@ class PoolDates extends PoolModel
 			}
 			$this->setPollTitle($title);
 			$this->setPollDescription($description);
-			$this->setPoll_expiration_date($date_fin);
+			$this->setPoll_expiration_date(new \DateTime($date_fin));
 			$this->generatePollUrl();
 			$this->setPoll_choices($choices);
 			$this->setPoll_etat(true);

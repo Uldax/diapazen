@@ -264,4 +264,69 @@ function deleteMarkers(numero) {
     }
 }
 
+function creationXHR() {
+    var resultat = null;
+    try { //test pour les navigateurs : Mozilla, Op?, ...
+        resultat = new XMLHttpRequest();
+    } catch (Erreur) {
+        try { //test pour les navigateurs Internet Explorer > 5.0
+            resultat = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (Erreur) {
+            try { //test pour le navigateur Internet Explorer 5.0
+                resultat = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (Erreur) {
+                resultat = null;
+            }
+        }
+    }
+    return resultat;
+}
+
+// fonction qui envoie le tableau de coordonnées GPS à notre fichier PHP pour pouvoir être inséré dans la BDD
+function tableauPosGPS() {
+    xhr = creationXHR();
+    // déclaration d'un FormData pour envoyer un tableau via l'ajax
+    var fd = new FormData();
+    fd.append("position", posmarkers);
+	
+	var stringAll="";
+	var j = 0;
+	for (var c in posmarkers)
+	{
+		stringAll += posmarkers[j].toString()+"-";
+		stringAll = stringAll.replace("(","");
+		stringAll = stringAll.replace(")","");
+		j++;
+	}
+	
+	var reg=new RegExp("[ ,;]+", "g");
+	
+	var tableau=stringAll.split(reg);
+	
+	x = tableau[0];
+	y = parseFloat(tableau[1].replace(",", "."));
+	$("#poll_creation_form").submit(function(){ 
+		var DATA = 'x=' + tableau[0];
+		var i = 0;
+		var string="";
+		for (var key in tableau){
+			string = string+tableau[i].toString()+"-";
+			i++;
+		 }
+		var url = Routing.generate('bdls_test', { valeur: string });
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: string,
+			cache: false,
+			success: function(data){
+			   $('#vide').html(data);
+			   //window.location.reload();
+			   //$(".loading").hide();
+			}
+		});    
+		return false;
+	});
+}
+
 window.onload=initialize();

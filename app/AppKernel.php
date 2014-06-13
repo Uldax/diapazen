@@ -18,9 +18,10 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             //Bundle pour l'application
             new Bdls\ProjetBundle\BdlsProjetBundle(),
-            new Bdls\UserBundle\userBundle(),
+            new Bdls\userBundle\userBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+			new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
         );
 

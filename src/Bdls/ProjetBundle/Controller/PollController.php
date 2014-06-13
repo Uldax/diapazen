@@ -5,6 +5,7 @@ use Bdls\ProjetBundle\Entity\User;
 
 use Bdls\ProjetBundle\Classe;
 
+//session_start();
 /**
  * 
  * Contrôleur de la page d'un sondage
@@ -146,6 +147,7 @@ class PollController extends Controller
     */
 	public function connectAction($params = null)
 	{
+		
 
 		$this->set('title', 'Création d\'un sondage | Diapazen');
 		$this->set('class_create', 'grey');
@@ -305,6 +307,32 @@ class PollController extends Controller
 					break;
 			}
 		}
+		
+		// Démarrage de la session
+		//session_start();
+		// si le tableau reçu est vide ou n'existe pas, on ne peut pas continuer le sondage
+		// 
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////<--- ICI
+		$pos = $this->getRequest()->query->get('position');
+		$yolo = array(1,1);
+		$_SESSION['position'] = $yolo;
+//		if( isset( $pos ) )
+//		{
+//			if($pos != "")
+//			{
+//				//$_SESSION['position'] =  $pos;
+//				$_SESSION['position'] = $yolo;
+//				//echo (json_encode("etat"=>true));
+//			}
+//			else
+//			{
+//				//echo (json_encode("etat"=>false));
+//			}
+//		}
+//		else
+//		{
+//			//echo (json_encode("etat"=>false));
+//		}
         $title = 'Connexion | Diapazen';
 		$year=date('Y');
 		$error='pas d\'erreur.';
@@ -350,16 +378,8 @@ class PollController extends Controller
 
 		try
 		{
-			$pool = $_SESSION['pool'];
-			//echo get_class($pool);
-			$em = $this->getDoctrine()->getManager();
-			//echo $this->getUser()->getUsername();
-			$model = new ModelController();
-			
-			$model->setDoctrineManager($em);
-			$model->setPool($pool);
 			//$model->insertionIntoDatabase();
-			$model->setUser($_SESSION['currentUser']);
+			//$model->setUser($_SESSION['currentUser']);
 			// Lorsque l'utilisateur est connecté
 			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
 			{
@@ -370,27 +390,63 @@ class PollController extends Controller
 					{
 						case "c1":
 							//lieux
+							$pool = $_SESSION['pool'];
+							//echo get_class($pool);
+							$em = $this->getDoctrine()->getManager();
+							//echo $this->getUser()->getUsername();
+							$model = new ModelController();
+
+							$model->setDoctrineManager($em);
+							$model->setPool($pool);
+							
 							$model->insertPlacePoll();
-							$model->insertPlaceChoice();
-							$model->insertionIntoDatabase();
+							$model->insertPlaceChoices();
+							//$model->insertionIntoDatabase();
 							//$model->insertPlaceVote();
 							break;
 						case "c2":
 							//date
 							//$model->insertDateChoice();
+							$pool = $_SESSION['pool'];
+							//echo get_class($pool);
+							$em = $this->getDoctrine()->getManager();
+							//echo $this->getUser()->getUsername();
+							$model = new ModelController();
+
+							$model->setDoctrineManager($em);
+							$model->setPool($pool);
+							
 							$model->insertDatePoll();
 							$model->insertDateChoices();
 							//$model->insertDateVote();
 							break;
 						case "c3":
 							//text
-							$model->insertTextChoice();
+							$pool = $_SESSION['pool'];
+							//echo get_class($pool);
+							$em = $this->getDoctrine()->getManager();
+							//echo $this->getUser()->getUsername();
+							$model = new ModelController();
+
+							$model->setDoctrineManager($em);
+							$model->setPool($pool);
+			
 							$model->insertTextPoll();
+							$model->insertTextChoices();
 							//$model->insertTextVote();
 							break;
 						default:
-							$model->insertTextChoice();
+							$pool = $_SESSION['pool'];
+							//echo get_class($pool);
+							$em = $this->getDoctrine()->getManager();
+							//echo $this->getUser()->getUsername();
+							$model = new ModelController();
+
+							$model->setDoctrineManager($em);
+							$model->setPool($pool);
+			
 							$model->insertTextPoll();
+							$model->insertTextChoices();
 							//$model->insertTextVote();
 							break;
 					}

@@ -1,4 +1,6 @@
+{% if app.session.get('position') != "Vide"%}
 {% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
+{% endif %}
 	{% block body %}
         <div id="content">
             <div id="ariadne_thread"> 
@@ -25,3 +27,5 @@
 			{#{{ form_end(form) }}#}
         </div>
 	{% endblock %}
+{% block footer %}
+{% endblock %}

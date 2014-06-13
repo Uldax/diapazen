@@ -1,5 +1,4 @@
 <?php
-
 namespace Bdls\ProjetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,57 +17,36 @@ use Bdls\ProjetBundle\Entity\TextVote;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-
+/*
+ * 
+ */
 class ModelController extends Controller
 {
 	private $pool;
 	private $user;
 	private $doctrineManager;
 	
-	//Couille de constructeur
-	//Constructeur is a lie...
-//	public function __construct()
-//	{
-//		parent::__contruct();
-//		$this->doctrineManager = $this->getDoctrine()->getManager();
-//	}
-	
-//	public function insertDateChoice($poolId, $choice)
-//	{
-//		
-//		
-//		$dateChoice->setDate($choice);
-//		$dateChoice->setPoll($poolId);
-//		
-//		$this->doctrineManager->persist($dateChoice);
-//	}
-//	
 	public function insertDateChoices()
 	{
-		$dateChoice = new DateChoice();
 		$choices = $this->pool->getPoll_choices();
-		//echo get_class($choices);
-//		echo "<pre>";
-//		print_r($choices);
-//		echo "</pre>";
+		$qb = $this->doctrineManager->createQueryBuilder();
+		$qb->select('d')
+		   ->from("BdlsProjetBundle:DatePoll", 'd')
+		   ->where('d.id = ?1')
+		   // Récupérer l'id du user.
+		   ->setParameter(1, $_SESSION['currentPollId']); 
+		$query = $qb->getQuery();
+		$c = $query->getResult();
+		
 		foreach($choices as $choice)
 		{
-			$qb = $this->doctrineManager->createQueryBuilder();
-			$qb->select('d')
-			   ->from("BdlsProjetBundle:DatePoll", 'd')
-			   ->where('d.id = ?1')
-	//////// Récupérer l'id du user.
-			   ->setParameter(1, $_SESSION['currentPollId']); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
-			// get the Query from the QueryBuilder here ...
-			$query = $qb->getQuery();
-			$c = $query->getResult();
-		
-			$dateChoice->setDate($choice);
+			$dateChoice = new DateChoice();
 			$dateChoice->setPoll($c[0]);
-
+			$dateChoice->setDate($choice);
+			
 			$this->doctrineManager->persist($dateChoice);
+			$this->doctrineManager->flush();
 		}
-		$this->doctrineManager->flush();
 	}
 	
 	public function insertDatePoll()
@@ -87,6 +65,9 @@ class ModelController extends Controller
 		$datePoll = new DatePoll();
 		$datePoll->setCreatedOn($createdOn);
 		$datePoll->setName($this->pool->getPollTitle());
+		$datePoll->setIsOpen($this->pool->getPoll_etat());
+		$datePoll->setDescription($this->pool->getPollDescription());
+		$datePoll->setClosedOn($this->pool->getPoll_expiration_date());
 		$datePoll->setCreatedBy($user[0]);
 		$this->doctrineManager->persist($datePoll);
 		//pour récupérer la dernière ID...
@@ -106,34 +87,50 @@ class ModelController extends Controller
 		$dateVote->setIssuedOn($issuedOn);
 	}
 	//////////////////////////////////////////////////////////////
-	public function insertPlaceChoice($poolId, $choice, $latitude, $longitude)
-	{
-		$placeChoice = new PlaceChoice();
-		$placeChoice->setDate($choice);
-		$placeChoice->setPoll($poolId);
-		$placeChoice->setLatitude($latitude);
-		$placeChoice->setLongitude($longitude);
-		
-		$this->doctrineManager->persist($placeChoice);
-	}
-	
 	public function insertPlaceChoices()
 	{
-		$choices = $this->pool->getPoll_choices();
-		foreach($choices as $choice)
+		$qb = $this->doctrineManager->createQueryBuilder();
+		$qb->select('d')
+		   ->from("BdlsProjetBundle:PlacePoll", 'd')
+		   ->where('d.id = ?1')
+		   // Récupérer l'id du user.
+		   ->setParameter(1, $_SESSION['currentPollId']); 
+		$query = $qb->getQuery();
+		$c = $query->getResult();
+		
+		$tabChoices = $_SESSION['position'];
+		$length = count($tabChoices);
+		for($i = 0; $i<$length;$i+=2)
 		{
-			// INSERTION COORDONEES
-			insertPlaceChoice($_SESSION['currentPollId'], $choice);
+			$placeChoice = new PlaceChoice();
+			$placeChoice->setPoll($c[0]);
+			$placeChoice->setLatitude($tabChoices[$i]);
+			$placeChoice->setLongitude($tabChoices[$i+1]);
+			$this->doctrineManager->persist($placeChoice);
+			$this->doctrineManager->flush();
 		}
-		$this->doctrineManager->flush();
 	}
 	
 	public function insertPlacePoll()
 	{
-		$createdOn  = date('Y-m-d H:i:s');
-		$placePoll  = new PlacePoll();
+		$qb = $this->doctrineManager->createQueryBuilder();
+		$qb->select('u')
+		   ->from("BdlsProjetBundle:User", 'u')
+		   ->where('u.id = ?1')
+		// Récupérer l'id du user.
+		   ->setParameter(1, 1); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
+		// get the Query from the QueryBuilder here ...
+		$query = $qb->getQuery();
+		$user = $query->getResult();
+		
+		$createdOn  = new \DateTime("now");
+		$placePoll = new PlacePoll();
 		$placePoll->setCreatedOn($createdOn);
 		$placePoll->setName($this->pool->getPollTitle());
+		$placePoll->setIsOpen($this->pool->getPoll_etat());
+		$placePoll->setDescription($this->pool->getPollDescription());
+		$placePoll->setClosedOn($this->pool->getPoll_expiration_date());
+		$placePoll->setCreatedBy($user[0]);
 		$this->doctrineManager->persist($placePoll);
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
@@ -165,24 +162,52 @@ class ModelController extends Controller
 	public function insertTextChoices()
 	{
 		$choices = $this->pool->getPoll_choices();
+		$qb = $this->doctrineManager->createQueryBuilder();
+		$qb->select('d')
+		   ->from("BdlsProjetBundle:TextPoll", 'd')
+		   ->where('d.id = ?1')
+		   // Récupérer l'id du user.
+		   ->setParameter(1, $_SESSION['currentPollId']); 
+		$query = $qb->getQuery();
+		$c = $query->getResult();
+		
 		foreach($choices as $choice)
 		{
-			// INSERTION COORDONEES
-			insertTextChoice($_SESSION['currentPollId'], $choice);
+			$textChoice = new TextChoice();
+			$textChoice->setPoll($c[0]);
+			$textChoice->setText($choice);
+			
+			$this->doctrineManager->persist($textChoice);
+			$this->doctrineManager->flush();
 		}
-		$this->doctrineManager->flush();
 	}
 	
 	public function insertTextPoll()
 	{
-		$createdOn  = date('Y-m-d H:i:s');
+		$qb = $this->doctrineManager->createQueryBuilder();
+		$qb->select('u')
+		   ->from("BdlsProjetBundle:User", 'u')
+		   ->where('u.id = ?1')
+		// Récupérer l'id du user.
+		   ->setParameter(1, 1); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
+		// get the Query from the QueryBuilder here ...
+		$query = $qb->getQuery();
+		$user = $query->getResult();
+		
+		$createdOn  = new \DateTime("now");
 		$textPoll   = new TextPoll();
 		$textPoll->setCreatedOn($createdOn);
 		$textPoll->setName($this->pool->getPollTitle());
+		$textPoll->setIsOpen($this->pool->getPoll_etat());
+		$textPoll->setDescription($this->pool->getPollDescription());
+		$textPoll->setClosedOn($this->pool->getPoll_expiration_date());
+		$textPoll->setCreatedBy($user[0]);
+		
 		$this->doctrineManager->persist($textPoll);
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
 		$_SESSION['currentPollId'] = $textPoll->getId();
+		
 	}
 	
 	public function insertTextVote()
