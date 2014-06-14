@@ -23,10 +23,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ModelController extends Controller
 {
 	private $pool;
-	private $user;
 	private $doctrineManager;
-	
-	public function insertDateChoices()
+        private $userId;
+        
+        public function getUserId() {
+            return $this->userId;
+        }
+
+        public function setUserId($userId) {
+            $this->userId = $userId;
+        }
+
+        
+        public function insertDateChoices()
 	{
 		$choices = $this->pool->getPoll_choices();
 		$qb = $this->doctrineManager->createQueryBuilder();
@@ -56,7 +65,7 @@ class ModelController extends Controller
 		   ->from("BdlsProjetBundle:User", 'u')
 		   ->where('u.id = ?1')
 //////// Récupérer l'id du user.
-		   ->setParameter(1, 1); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
+		   ->setParameter(1, $this->getUserId()); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
 		$query = $qb->getQuery();
 		$user = $query->getResult();
 		
@@ -115,7 +124,7 @@ class ModelController extends Controller
 		   ->from("BdlsProjetBundle:User", 'u')
 		   ->where('u.id = ?1')
 		// Récupérer l'id du user.
-		   ->setParameter(1, 1); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
+		   ->setParameter(1, $this->getUserId()); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
 		// get the Query from the QueryBuilder here ...
 		$query = $qb->getQuery();
 		$user = $query->getResult();
@@ -172,16 +181,16 @@ class ModelController extends Controller
 	
 	public function insertTextPoll()
 	{
+     
 		$qb = $this->doctrineManager->createQueryBuilder();
 		$qb->select('u')
 		   ->from("BdlsProjetBundle:User", 'u')
 		   ->where('u.id = ?1')
 		// Récupérer l'id du user.
-		   ->setParameter(1, 1); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
+		   ->setParameter(1, $this->getUserId()); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
 		// get the Query from the QueryBuilder here ...
 		$query = $qb->getQuery();
-		$user = $query->getResult();
-		
+		$user = $query->getResult();		
 		$createdOn  = new \DateTime("now");
 		$textPoll   = new TextPoll();
 		$textPoll->setCreatedOn($createdOn);
@@ -198,6 +207,10 @@ class ModelController extends Controller
 		
 	}
 	
+        public function getCurrentUserId(){
+             return $this->container->get('security.context')->getToken()->getUser()->getId();
+        }
+        
 
 	//////////////////////////////////////////////////////////////
 	public function insertionIntoDatabase()
@@ -220,10 +233,7 @@ class ModelController extends Controller
 	{
 		$this->doctrineManager = $doctrineManager;
 	}
-	public function setUser($user)
-	{
-		$this->user = $user;
-	}
+
 	
 }
 

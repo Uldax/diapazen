@@ -376,7 +376,7 @@ class PollController extends Controller
 			//$model->insertionIntoDatabase();
 			//$model->setUser($_SESSION['currentUser']);
 			// Lorsque l'utilisateur est connecté
-			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
+			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') &&  isset($_SESSION['pool'])) 
 			{
                                 $pool = $_SESSION['pool'];
 				$type = $_SESSION['pool']->getPoll_type();
@@ -386,47 +386,39 @@ class PollController extends Controller
 					$model = new ModelController();
                                         $model->setDoctrineManager($em);
                                         $this->container->get('request')->getSession()->set('pool', $pool);
+                                        $userId=$this->get('security.context')->getToken()->getUser()->getId();
+                                        $model->setUserId($userId);
                                         $model->setPool($pool);
 					switch($type)
 					{
                                              
-						case "c1":
+						case "place":
 							//lieux                                                     																				
 							$model->insertPlacePoll();
 							$model->insertPlaceChoices();
 							break;
-						case "c2":
+						case "date":
                                                         //Date													
 							$model->insertDatePoll();
                                                         $model->insertDateChoices();
 							break;
-						case "c3":
+						case "text":
 							//text
 							$model->insertTextPoll();
 							$model->insertTextChoices();
 							break;
                                                  //Le default doit renvoyer une exeption normalement
 						default:
-							$pool = $_SESSION['pool'];
-							//echo get_class($pool);
-							$em = $this->getDoctrine()->getManager();
-							//echo $this->getUser()->getUsername();
-							$model = new ModelController();
-
-							$model->setDoctrineManager($em);
-							$model->setPool($pool);
-			
-							$model->insertTextPoll();
-
-							$model->insertTextChoices();
+	
 							//$model->insertTextVote();
                                                         ////Un truc du genre
-                                                       // return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'last_username'));
+                                                        return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'last_username'));
 							break;
 					}
+                                        unset($_SESSION['pool']);
 				}							
 					$year=date('Y');
-					$title = 'Connexion | Diapazen';
+					$title = 'Share | Diapazen';
 					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title, 'year'=>$year));
 			}
 			else
@@ -434,12 +426,12 @@ class PollController extends Controller
 				$year=date('Y');
 				$title = 'Connexion | Diapazen';
 				$error = 'err';
-				return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
+				return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
 			}			
 		}
 		catch(Exception $e)
 		{
-			$title = 'Connexion | Diapazen';
+			$title = 'Erreur | Diapazen';
 			return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'last_username'));
 		}
 
@@ -547,9 +539,8 @@ class PollController extends Controller
 			$data['stat']=$votes;
 			if($cookies->has($url)) $data['message']="Votre vote à déja été pris en compte";
 			
-
-			$data['title'] = "zub" .' | Diapazen';					
-			$title='Accueil | Diapazen';
+					
+			$title='Vote | Diapazen';
 			$year=date('Y');
 			$manager->flush();
 
