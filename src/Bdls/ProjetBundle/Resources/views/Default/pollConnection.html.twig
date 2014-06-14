@@ -3,8 +3,8 @@
 
 		<div id="content">
             {#<?php $this->getAriadneThread(); ?>#}
-                {% if error ==  'err'%}
-                    <div class='error_message bg-danger' >Erreur de connexion, le nom d'utilisateur ou le mot de passe est incorrect.</div><br>
+                {% if error is defined %}
+                    <div class='error_message bg-danger' >Erreur de connexion, le nom d'utilisateur ou le mot de passe est incorrect.</div>
 					{#{% endif %}
 					{% if err == 'registrationError' %}
 						<div class='error_message' >Cette adresse e-mail est déjà utilisée.</div><br>
@@ -12,7 +12,7 @@
 					{% if err == 'mailError' %}
 						<div class='error_message' >L'adresse e-mail est incorrecte.</div><br>
 					{% endif %}#}
-				{% endif %}
+		{% endif %}
 
                 <div id="ariadne_thread"> 
                         <span class="grey_ariadne" ><span></span><span>Création</span><span></span></span>
@@ -20,25 +20,55 @@
                         <span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
 		</div>
 					
-            <form onsubmit="return formCheck(this)" action="share" method="post" class="default_form" id="poll_connection_form">
+          
+                
+            <form onsubmit="return formCheck(this)" action="{{ path("fos_user_security_check") }}" method="post" class="default_form" id="poll_connection_form" >
+                                    <!-- _CSRF du fos user bundle contenu en variable global twig , sécurité des formulaires ) -->
+                                    <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />      
+                                    
+                                                  <label for="email" class="text">E-mail<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control"  name="email" type="mail" id="username" name="_username" value="" required="required">
+                <label for="pwd_user" class="text">Mot de passe<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control"  type="password" id="password" name="_password" required="required">
+                 <input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante"/>
+                
+            
+            </form>
+                
+                 <form  action="share" method="post" class="default_form" id="poll_connection_form">
                 <label for="registered" class="text label_chkbox"><input id="registered" value="registered" type="radio" name="account" checked="checked" onchange="manageConnectionForm(this)">J'ai déjà un compte</label>
                 <label for="not_registered" class="text label_chkbox"><input onchange="manageConnectionForm(this)" id="not_registered" value="not_registered" type="radio" name="account">C'est rapide, je m'inscris</label>
+                
                 <label for="email" class="text">E-mail<span class="asterisc"> *</span></label>
                 <input class="text_edit form-control" id="email" name="email" type="mail" placeholder="" value="">
-                <label for="firstname_user" class="text infos_user">Prénom<span class="asterisc"> *</span></label>
-                <input class="text_edit infos_user form-control" id="firstname_user" name="firstNameUser" type="text">
-                <label for="name_user" class="text infos_user">Nom<span class="asterisc"> *</span></label>
-                <input class="text_edit infos_user form-control" id="lastname_user" name="lastNameUser" type="text">
                 <label for="pwd_user" class="text">Mot de passe<span class="asterisc"> *</span></label>
                 <input class="text_edit form-control" id="pwd_user" type="password" name="password" placeholder="" value="">
+                
+                <label for="firstname_user" class="text infos_user">Prénom<span class="asterisc"> *</span></label>
+                <input class="text_edit infos_user form-control" id="firstname_user" name="firstNameUser" type="text">
+                
+                <label for="name_user" class="text infos_user">Nom<span class="asterisc"> *</span></label>
+                <input class="text_edit infos_user form-control" id="lastname_user" name="lastNameUser" type="text">
+              
                 <p class="orange_text info_box infos_user">Un mot de passe vous sera envoyé à l'adresse e-mail renseignée.</p>
                 <input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante"/>
             </form>
+      
+                    
+            <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+              {{ form_widget(form) }}
+              <div>
+                  <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+              </div>
+            </form>
+                    
+                    
         </div>
 
 	{% block javascripts %}
             <script src="{{ asset('bundles/projet/js/script.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('bundles/projet/js/jquery-ui-1.10.3.custom.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('bundles/projet/js/jquery.js') }}" type="text/javascript"></script>
+			
 		{% endblock %}
 	{% endblock %}
 

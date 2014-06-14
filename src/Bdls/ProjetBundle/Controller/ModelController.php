@@ -57,7 +57,6 @@ class ModelController extends Controller
 		   ->where('u.id = ?1')
 //////// Récupérer l'id du user.
 		   ->setParameter(1, 1); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
-		// get the Query from the QueryBuilder here ...
 		$query = $qb->getQuery();
 		$user = $query->getResult();
 		
@@ -69,23 +68,13 @@ class ModelController extends Controller
 		$datePoll->setDescription($this->pool->getPollDescription());
 		$datePoll->setClosedOn($this->pool->getPoll_expiration_date());
 		$datePoll->setCreatedBy($user[0]);
+		$datePoll->setUrl($this->pool->getPollUrl());
 		$this->doctrineManager->persist($datePoll);
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
 		$_SESSION['currentPollId'] = $datePoll->getId();
 	}
 	
-	public function insertDateVote()
-	{
-		$issuedOn = date('Y-m-d H:i:s');
-		$pool     = $_SESSION['pool'];
-		
-		$dateVote = new DateVote();
-		$user     = $this->get('security.context')->getToken()->getUser();
-		$dateVote->setChoice($pool->getPollId());
-		//$dateVote->setIssuedBy($user);
-		$dateVote->setIssuedOn($issuedOn);
-	}
 	//////////////////////////////////////////////////////////////
 	public function insertPlaceChoices()
 	{
@@ -99,15 +88,23 @@ class ModelController extends Controller
 		$c = $query->getResult();
 		
 		$tabChoices = $_SESSION['position'];
-		$length = count($tabChoices);
-		for($i = 0; $i<$length;$i+=2)
+		//$length = count($tabChoices);
+                $index = 0;
+                foreach($tabChoices as $choices)
 		{
-			$placeChoice = new PlaceChoice();
-			$placeChoice->setPoll($c[0]);
-			$placeChoice->setLatitude($tabChoices[$i]);
-			$placeChoice->setLongitude($tabChoices[$i+1]);
-			$this->doctrineManager->persist($placeChoice);
-			$this->doctrineManager->flush();
+			if($index%2 == 0)
+			{
+				$placeChoice = new PlaceChoice();
+				$placeChoice->setPoll($c[0]);
+				$placeChoice->setLatitude($choices);
+			}
+			else
+			{
+				$placeChoice->setLongitude($choices);
+				$this->doctrineManager->persist($placeChoice);
+				$this->doctrineManager->flush();
+			}
+			$index++;
 		}
 	}
 	
@@ -131,24 +128,15 @@ class ModelController extends Controller
 		$placePoll->setDescription($this->pool->getPollDescription());
 		$placePoll->setClosedOn($this->pool->getPoll_expiration_date());
 		$placePoll->setCreatedBy($user[0]);
+		$placePoll->setUrl($this->pool->getPollUrl());
 		$this->doctrineManager->persist($placePoll);
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
 		$_SESSION['currentPollId'] = $placePoll->getId();
 	}
 	
-	public function insertPlaceVote()
-	{
-		$issuedOn = date('Y-m-d H:i:s');
-		$pool = $_SESSION['pool'];
-		
-		$placeVote = new PlaceVote();
-		$user      = $this->get('security.context')->getToken()->getUser();
-		$textVote->setChoice($pool->getPollId());
-		$placeVote->setIssuedBy($user);
-		$placeVote->setIssuedOn($issuedOn);
-	}
 	//////////////////////////////////////////////////////////////	
+        //J'ai un doute sur son utilité
 	public function insertTextChoice($poolId, $choice, $text)
 	{
 		$textChoice = new TextChoice();
@@ -202,7 +190,7 @@ class ModelController extends Controller
 		$textPoll->setDescription($this->pool->getPollDescription());
 		$textPoll->setClosedOn($this->pool->getPoll_expiration_date());
 		$textPoll->setCreatedBy($user[0]);
-		
+		$textPoll->setUrl($this->pool->getPollUrl());
 		$this->doctrineManager->persist($textPoll);
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
@@ -210,22 +198,7 @@ class ModelController extends Controller
 		
 	}
 	
-	public function insertTextVote()
-	{
-		$issuedOn = date('Y-m-d H:i:s');
-		$pool     = $_SESSION['pool'];
-		
-		$textVote = new TextVote();
-		$user     = $this->get('security.context')->getToken()->getUser();
-		$textVote->setChoice($pool->getPollId());
-		$textVote->setIssuedBy($user);
-		$textVote->setIssuedOn($issuedOn);
-	}
-	//////////////////////////////////////////////////////////////
-	public function insertVote()
-	{
-		
-	}
+
 	//////////////////////////////////////////////////////////////
 	public function insertionIntoDatabase()
 	{

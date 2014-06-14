@@ -56,12 +56,12 @@ class InitPosController extends Controller
 				$maxTab = count($tab);
 				foreach($tab as $elem)
 				{
-					$tab[$i] = trim($tab[$i]);
+					//$tab[$i] = trim($tab[$i]);
 					$tab[$i] =floatval($tab[$i]);
 					$i++;
 				}
-				unset($tab[$maxTab-1]);
-				unset($tab[$maxTab-2]);
+				//unset($tab[$maxTab-1]);
+				//unset($tab[$maxTab-2]);
 //				$type = gettype($maxTab);
 //				array_push($tab, $maxTab);
 				$this->container->get('request')->getSession()->set('position', $tab);

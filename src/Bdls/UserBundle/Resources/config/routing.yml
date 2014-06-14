@@ -27,20 +27,18 @@ fos_user_change_password:
 #This is the url which will be intercepted by the firewall to check authentication.
 hwi_oauth_redirect:
     resource: "routingHWI/redirect.xml"
-    prefix:   /connection
+    prefix:   /connect
 
 hwi_oauth_login:
     resource: "routingHWI/login.xml"
-    prefix:   /connection
+    prefix:   /connect
 
 hwi_oauth_connect:
     resource: "routingHWI/connect.xml"
-    prefix:   /connection
+    prefix:   /connect
 
 #is same as the callback url given during creation of Github application. 
 #This is the url which will be intercepted by the firewall to check authentication.
-hwi_github_login:
-    pattern: /login/check-github
 hwi_google_login:
     pattern: /login/check-google
 hwi_facebook_login:

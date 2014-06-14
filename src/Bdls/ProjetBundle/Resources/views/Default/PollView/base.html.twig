@@ -15,7 +15,13 @@
 			<p class="text" > {{data.eventDescription}} </p>
 			{%if not data.openedPoll  %}
 				{{ data.eventDescription}}               
-                                <h1 class="big_title" id="result">Le choix ayant recueilli le plus de voix est: {{ data.stat[0].answer}}</h1>
+                                <h1 class="big_title" id="result">Le choix ayant recueilli le plus de voix est: 
+                                            {% if data.type =="place" %}
+                                               {{ 'a finir' }}
+                                            {%else%}
+                                                {{data.stat[0].answer}}
+                                            {%endif%}   
+                                </h1>
 			{% endif %}
                         
 			{#$this->getHomeUrl(); echo '/poll/view/'.$urlPoll  =>  http://127.0.0.1/poll/view/$urlPoll#}

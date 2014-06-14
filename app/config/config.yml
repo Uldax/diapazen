@@ -111,11 +111,6 @@ hwi_oauth:
         #registration_form: fos_user.registration.form
 
     resource_owners:
-        github:
-            type:                github
-            client_id:           <client_id>
-            client_secret:       <client_secret>
-            scope:               "user:email"
           
         facebook:
             type: facebook
@@ -155,7 +150,6 @@ hwi_oauth:
 
         # mapping between resource owners (see below) and properties
         properties:
-            github: githubID
             google: githubID
             facebook: githubID
             linkedin: githubID

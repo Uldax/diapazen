@@ -26,19 +26,19 @@ security:
             # OAuth provider
             oauth:
                 #Le failure_path permet la création du compte si il n'existait pas avant donc ne pas modifier
-                failure_path: /connection
-                login_path: /connection
-                check_path: /connection
+                failure_path: /connect
+                login_path: /connect
+                check_path: /connect
                 default_target_path: /home 
                 provider: fos_userbundle
                 resource_owners:
-                    github:           "/login/check-github"
                     facebook:         "/login/check-facebook"                 
                     google:           "/login/check-google"
                     linkedin:         "/login/check-linkedin"
                 # If you want to set it to your custom user provider you have to implement OAuthAwareUserProviderInterface.
                 oauth_user_provider:
                     service: hwi_oauth.user.provider.fosub_bridge
+                    #service: user.oauth.user_provider
 
             anonymous:    true
             logout:

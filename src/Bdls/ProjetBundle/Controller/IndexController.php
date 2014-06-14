@@ -20,21 +20,15 @@ class IndexController extends Controller
 	 * @param type $params null par défaut
 	 */
 	public function indexAction()
-	{
-		//$session = new Session();             
+	{        
 		// On set la variable Ã  afficher sur dans la vue
 		$title='Accueil | Diapazen';
 		$year=date('Y');
-		//$this->set('title', 'Accueil | Diapazen');
-
-                //Si il est connecté, que le retour sur home c'est fait et qu'il existe un sondage dans session  alors on redirige vers share
-        if ($this->isUserConnected() && isset($_SESSION['pool']))
+                //Si l'utilisateur est connécté est connecté, que le retour sur home c'est fait (login) et qu'il existe un sondage dans session  alors on redirige vers share
+                if ($this->isUserConnected() && isset($_SESSION['pool']))
 		{
-            // On redirige vers le partage
-			//return $this->redirect($this->generateUrl('bdls_projet_share'));
-			//$em = $this->getDoctrine()->getManager();
-			//$user = new \Bdls\ProjetBundle\Entity\User($em);
-			//$_SESSION['currentUser']=$user;
+                    // On redirige vers le partage
+		return $this->redirect($this->generateUrl('bdls_projet_share'));
 		}          
 
 		//Formaulaire nécésaire pour la selection
@@ -60,36 +54,17 @@ class IndexController extends Controller
 	}
 
 
+    /* Partage d'un sondage
+    *
+    * Gère  : 
+    * - Met le titre de la page à 'Création d\'un sondage | Diapazen'.
+    * - Renvoi à la page d'accueil si nous ne venons pas créer un sondage
+    * - Envois des mails de partage au mails spécifiés
+    * - Lance le render de la vue 'shareMail' 
+    * - Gère si des erreurs sont survenues
+     */
 	public function mailAction()
 	{
-//		$name = "neo";
-//		$title='E mail | Diapazen';
-//		$year=date('Y');
-//		$transport = Swift_SmtpTransport::newInstance('in.mailjet.com', 587, 'ssl')
-//          ->setUsername('contact.diapazen@gmail.com')
-//          ->setPassword('diapazen2014');    
-//
-//		$mailer = Swift_Mailer::newInstance($transport);
-//	
-//		$message = \Swift_Message::newInstance()
-//				->setSubject('Hello Email')
-//				->setFrom('recifiel83@gmail.com')
-//				->setTo('recifiel83@gmail.com')
-//				->setBody($this->renderView('BdlsProjetBundle:Default:eMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year )))
-//			;
-//			$mailer->get('mailer')->send($message);
-//			
-//			return $this->render('BdlsProjetBundle:Default:eMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year));
-		
-//		$request = $this->get('request');
-//	    if ($request->getMethod() == 'POST') {
-//	    	$form->bind($request);
-//	      	if ($form->isValid()) {
-//	      		$choixtype = $form->get('Type')->getData();
-//	        	return $this->redirect($this->generateUrl('bdls_projet_creation', array('type' => $choixtype )));
-//	      	}
-//	    }
-		// Récupération de l'@ mail
 		$request = $this->get('request');
 		if ($request->getMethod() == 'POST') 
 		{
@@ -108,7 +83,7 @@ class IndexController extends Controller
 		
         // pour envoyer le message en HTML
         //$message->setBody($this->renderView('BdlsProjetBundle:Default:eMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year)));
-		
+	
                 $message->setBody(
 				'<html>' .
 					' <head></head>' .
@@ -122,7 +97,8 @@ class IndexController extends Controller
 				);
 		//envoi du message
 		$this->get('mailer')->send($message);
-
+                //
+                unset($_SESSION['pool']);
 		return $this->render('BdlsProjetBundle:Default:shareMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year));
 	}
 	

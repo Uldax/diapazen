@@ -7,8 +7,10 @@ use Bdls\ProjetBundle\Entity\DateVote;
 use Bdls\ProjetBundle\Entity\PlaceVote;
 
 /**
-* Convention de nomage !
-*/
+ * Description of newPHPClass
+ *
+ * @author Paul
+ */
 class PollModel 
 {
 	private $manager; 
@@ -30,22 +32,21 @@ class PollModel
 	}
 
 	//Fonction d'insertion des votes 
-	//La seul à être modifier si on ajoute un nouveau type !
 	public function insertVotes($choice,$name)
 	{
-        $path="Bdls\ProjetBundle\Entity\\".ucfirst($this->type)."Vote";;
-        $class=  new \ReflectionClass($path);
-        $vote = $class->newInstanceArgs(array());  
-		$vote->setIssuedOn( new \DateTime('now'));
-		$vote->setIssuedBy($name);	
-		$vote->setChoice($choice);	
-		
-		$this->manager->persist($vote);
-		//Pour que le vote sois pris en compte pour les stats
-		$this->manager->flush();
+            $path="Bdls\ProjetBundle\Entity\\".ucfirst($this->type)."Vote";;
+            $class=  new \ReflectionClass($path);
+            $vote = $class->newInstanceArgs(array());  
+            $vote->setIssuedOn( new \DateTime('now'));
+            $vote->setIssuedBy($name);	
+            $vote->setChoice($choice);		
+            $this->manager->persist($vote);
+            //Pour que le vote sois pris en compte pour les stats
+            $this->manager->flush();
 	}
 
 
+         //Retourne le sondage en fonction de l'url
 	public function getUniquePoll($pollUrl)
 	{   
 		$entity=$this->path."Poll";
@@ -63,6 +64,7 @@ class PollModel
 			throw new NotFoundHttpException("Sondage inexistant");
 	}
 	
+        //Récupère tout les choix associé a un sondage
 	public function getAllChoices($poll){
 			if(!empty($poll))
 			{
@@ -82,6 +84,7 @@ class PollModel
 				throw new NotFoundHttpException("Sondage vide");				
 	}
 
+        //Récupère un choix en fonction de son id
 	public function getChoicesById($id){
 			$entity=$this->path."Choice";
 			$qb = $this->manager->createQueryBuilder();
@@ -95,7 +98,7 @@ class PollModel
 				throw new NotFoundHttpException("Erreur ID choice");			
 	}	
 
-
+        // Attention 
 	//Fonction a modifier si nouveau type
 	public function getVoteStat($choices)
 	{
@@ -132,6 +135,7 @@ class PollModel
             				'answer' =>$answer) ;
 		}
 		$nbTotalVotes=0;
+                //Calcul du nombre total de votes
 		foreach ($votes as $vote) $nbTotalVotes += $vote['count']; 
 		//Calcule du pourcentage
 		foreach ($votes as $vote => $key) {

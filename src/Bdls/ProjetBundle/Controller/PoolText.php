@@ -28,7 +28,7 @@ class PoolText extends PoolModel
 			$this->generatePollUrl();
 			$this->setPoll_choices($choices);
 			$this->setPoll_etat(true);
-			$this->setPoll_type("c3");
+			$this->setPoll_type("text");
 		}
 		catch (Exception $ex)
 		{
