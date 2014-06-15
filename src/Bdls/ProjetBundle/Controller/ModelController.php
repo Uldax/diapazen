@@ -82,6 +82,7 @@ class ModelController extends Controller
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
 		$_SESSION['currentPollId'] = $datePoll->getId();
+                $_SESSION['url'] = $this->pool->getPollUrl();
 	}
 	
 	//////////////////////////////////////////////////////////////
@@ -142,6 +143,7 @@ class ModelController extends Controller
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
 		$_SESSION['currentPollId'] = $placePoll->getId();
+                $_SESSION['url'] = $this->pool->getPollUrl();
 	}
 	
 	//////////////////////////////////////////////////////////////	
@@ -204,6 +206,7 @@ class ModelController extends Controller
 		//pour récupérer la dernière ID...
 		$this->doctrineManager->flush();
 		$_SESSION['currentPollId'] = $textPoll->getId();
+                $_SESSION['url'] = $this->pool->getPollUrl();
 		
 	}
 	

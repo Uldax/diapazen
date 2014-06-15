@@ -72,7 +72,6 @@ class IndexController extends Controller
 			$tabMails = $this->sharePoll($mails);
 		}
 		
-		$name = "Neo";
 		$title='E mail | Diapazen';
 		$year=date('Y');
 		
@@ -84,13 +83,15 @@ class IndexController extends Controller
         // pour envoyer le message en HTML
         //$message->setBody($this->renderView('BdlsProjetBundle:Default:eMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year)));
 	
+                $type=$_SESSION['type'];
+                $url=$_SESSION['url'];
                 $message->setBody(
 				'<html>' .
 					' <head></head>' .
 					' <body>' .
 						' <p> Bonjour, <br/>' .
 						' Un sondage a été créé et vous y êtes convié <br/>'.
-						' Lien du sondage </p>' .
+						' www.dipazen.com/'.$type.'/'.$url.' </p>' .
 					' </body>' .
 				'</html>',
 				'text/html' // Mark the content-type as HTML
@@ -99,7 +100,7 @@ class IndexController extends Controller
 		$this->get('mailer')->send($message);
                 //
                 unset($_SESSION['pool']);
-		return $this->render('BdlsProjetBundle:Default:shareMail.html.twig', array('name' => $name,'title'=>$title, 'year'=>$year));
+		return $this->render('BdlsProjetBundle:Default:shareMail.html.twig', array('title'=>$title, 'year'=>$year));
 	}
 	
         

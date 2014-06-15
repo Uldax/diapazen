@@ -372,14 +372,16 @@ class PollController extends Controller
 	public function shareAction($params = null)
 	{
 		try
-		{
+		{       $year=date('Y');
 			//$model->insertionIntoDatabase();
 			//$model->setUser($_SESSION['currentUser']);
 			// Lorsque l'utilisateur est connecté
 			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') &&  isset($_SESSION['pool'])) 
 			{
                                 $pool = $_SESSION['pool'];
+                                var_dump($pool);
 				$type = $_SESSION['pool']->getPoll_type();
+                                $_SESSION['type']=$type;
 				if( isset($pool) && isset($type) )
 				{
                                         $em = $this->getDoctrine()->getManager();
@@ -412,27 +414,29 @@ class PollController extends Controller
 	
 							//$model->insertTextVote();
                                                         ////Un truc du genre
-                                                        return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'last_username'));
+                                                        unset($_SESSION['pool']);
+                                                        $title = 'Erreur | Diapazen';
+                                                        return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'year'=>$year));
 							break;
 					}
                                         unset($_SESSION['pool']);
 				}							
-					$year=date('Y');
+					
 					$title = 'Share | Diapazen';
 					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title, 'year'=>$year));
 			}
 			else
 			{
-				$year=date('Y');
+				
 				$title = 'Connexion | Diapazen';
 				$error = 'err';
-				return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
+				return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
 			}			
 		}
 		catch(Exception $e)
 		{
 			$title = 'Erreur | Diapazen';
-			return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'last_username'));
+			return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'year'=>$year));
 		}
 
 	}

@@ -23,7 +23,7 @@ class PoolDates extends PoolModel
 			$this->generatePollUrl();
 			$this->setPoll_choices($choices);
 			$this->setPoll_etat(true);
-			$this->setPoll_type("c2");
+			$this->setPoll_type("date");
 			//echo "PoolDates";
 			//echo get_class($choices);
 		}
