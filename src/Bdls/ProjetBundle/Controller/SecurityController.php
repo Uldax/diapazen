@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class SecurityController extends Controller{
 
+        //Profil désactivé pour le moment
         public function profilAction()
 	{
 		$title = 'Profil | Diapazen';

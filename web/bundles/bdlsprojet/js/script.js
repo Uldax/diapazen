@@ -37,52 +37,34 @@ function datepickerLoader() {
  *Fonction d'ajout ou suppression de choix lors 
  *de la création d'un sondage
  */
-function manageChoices(input,type)
+function manageChoices(input)
 {
+
 
 	switch(input.className)
 	{
 
-		case 'btn btn-default orange_button add_choice_button':			
+		case 'orange_button':			
 
 			// Ajout d'un champ de choix
-			
+			alert('before');
 			choices = document.getElementById("choices");
 
 			choice = document.createElement("div");
 			choice.className = 'choice';
-			switch(type){
-				case 'c1':
-					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" required="required" type="text" name="choices[]" value="Lieux" /> '
-							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
-					break;
-				case 'c2':
-					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="date" name="choices[]" /> '
-							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
-					break;
-				case 'c3':
-					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="Autres" /> '
-							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
-					break;
-				default:
-					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="" /> '
-							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
-					break;
-			}
+			choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
+								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" /> '
+							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>';
 			
 			choices.appendChild(choice);
 			
 		break;
 
-		case 'btn btn-default grey_button':
-
+		case 'grey_button':
+			alert('before');
 			// Suppression du champ de choix
 			
-			if(document.getElementsByName("choices[]").length > 2)
+			if($('#choices .choice').length > 1)
 			{
 				choices = input.parentNode.parentNode;
 				choices.removeChild(input.parentNode);
@@ -107,14 +89,16 @@ function manageChoices(input,type)
 	   input_choice.item(i-1).setAttribute('id', 'choix'+i);
 	}
 
-	if(document.getElementsByName("choices[]").length === 2)
+	if($('#choices .choice').length == 1)
 	{
-		document.getElementsByName("choices[]").style.cursor =no-drop;
+		$('#choices .choice:first .grey_button').css('cursor', 'no-drop');
 	}
 	else
 	{
-	   document.getElementsByName("choices[]").css('cursor', 'pointer');
+	   $('#choices .choice:first .grey_button').css('cursor', 'pointer');
 	}
+
+
 	initBlur();
 
 }
@@ -125,11 +109,12 @@ function manageChoices(input,type)
  *ne se soit pas connecté, ou n'ait pas de compte
  */
 function manageConnectionForm(radio) {
-
+	alert('before');
 	switch(radio.id) {
 		
 		//Si possède déjà un compte
 		case 'registered':
+			alert(registred);
 			$('.infos_user').css({display:'none'});
 			$('#pwd_user').css({display:'inline-block'});
 			document.getElementById('pwd_user').previousSibling.previousSibling.style.display = 'inline-block';
@@ -137,6 +122,7 @@ function manageConnectionForm(radio) {
 		
 		//Si première utilisation
 		case 'not_registered':
+			alert(not_registred);
 			$('.infos_user').css({display:'inline-block'});
 			$('.info_box').css({display:'block'});
 			$("#pwd_user").css({display:'none'});

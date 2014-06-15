@@ -1,5 +1,5 @@
-	<div id="poll_choices">	
-<table>
+<div id="poll_choices" class="table-responsive">	
+<table class="table">
  {% for choice in data.stat %}  
 
                                                 <tr>
@@ -11,9 +11,10 @@
                                                          
                                                      <td class="text"> {{ choice.answer|date("d/m/Y") }} </td> 
 							<td class="progression_bar">
-								<div class="container">
-									<div class="meter" style="width: {{ choice.percent ~ '%' }} "></div>
-									<p class="small_text">{{ choice.percent }} % </p>
+								<div class="container progress progress-div">
+									<div class="meter progress-bar" role="progressbar" aria-valuenow="{{ choice.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ choice.percent ~ '%' }} ">
+                                                                        {{ choice.percent }} %
+                                                                        </div>
 								</div>
 							</td>   
 							<td class="text">							

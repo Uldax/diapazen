@@ -34,7 +34,7 @@ class PollModel
 	//Fonction d'insertion des votes 
 	public function insertVotes($choice,$name)
 	{
-            $path="Bdls\ProjetBundle\Entity\\".ucfirst($this->type)."Vote";;
+            $path="Bdls\ProjetBundle\Entity\\".ucfirst($this->type)."Vote";
             $class=  new \ReflectionClass($path);
             $vote = $class->newInstanceArgs(array());  
             $vote->setIssuedOn( new \DateTime('now'));

@@ -380,7 +380,7 @@ tipomatika@gmail.com*/
 
 .div_connect{
     display: inline-block;
-    /*width: 800px;*/
+    /*width: 475px;*/
     margin-top: 10px;
 }
 
@@ -494,7 +494,7 @@ tipomatika@gmail.com*/
 }
 
 .orange_small_button-xs{
-    margin-top: 7px;
+    margin-top: -10px;
 }
 
 .div_choix-xs{
@@ -538,6 +538,27 @@ tipomatika@gmail.com*/
 
 .link-xs{
     margin: 5px;
+}
+
+.api{
+    margin-top: 5px;
+    margin-left: 5px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.form-inline{
+    display: inline-block;
+}
+
+.input_vote{
+    width: 150px;
+    display: inline-block;
+}
+
+.progress-div{
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 /*------------FIL D'ARIANE-----------*/

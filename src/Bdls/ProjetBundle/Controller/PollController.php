@@ -379,7 +379,6 @@ class PollController extends Controller
 			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') &&  isset($_SESSION['pool'])) 
 			{
                                 $pool = $_SESSION['pool'];
-                                var_dump($pool);
 				$type = $_SESSION['pool']->getPoll_type();
                                 $_SESSION['type']=$type;
 				if( isset($pool) && isset($type) )
@@ -461,7 +460,6 @@ class PollController extends Controller
     */
 	public function viewAction($type,$url)
 	{
-		$arrayType= array("text","date","lieu");
 		 //On instancie le model si il echoue alors le type n'existe pas  
 		try {
 			$model= new PollModel($this->getDoctrine(),$type);
@@ -553,7 +551,7 @@ class PollController extends Controller
         catch(Exception $e) {
 			$title='Accueil | Diapazen';
 			$year=date('Y');
-			return $this->render('BdlsProjetBundle:Default:dbError.html.twig', array('title'=>$title, 'year'=>$year));
+			return $this->render('BdlsProjetBundle:Default:404.html.twig', array('title'=>$title, 'year'=>$year));
 		}
 	}
 	

@@ -42,22 +42,27 @@
                                     <input type="password" class="small_text_edit form-control hidden-xs"  id="password" name="_password" required="required" />               
                                     <input type="submit" class="btn btn-default orange_small_button hidden-xs"  id="_submit" name="_submit" value="Connexion" />                                               
                                     </form>
-                                    
-                                    
-                                    
-                                   <!-- Connexion via les Api -->
-                                   {% block hwi_oauth_content %}
-                                        {% if error is defined %}
-                                            <span>{{ error }}</span>
-                                        {% endif %}
-                                        {% for owner in hwi_oauth_resource_owners() %}
-                                        <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br />
-                                        {% endfor %}
-                                    {% endblock hwi_oauth_content %}
+                          
                                     
                          <button class="btn btn-default orange_small_button orange_small_button-xs visible-xs" data-toggle="modal" data-target="#myModal">
                                Connexion
                          </button>
+                         
+                         <div class="api hidden-xs">
+                                    <!-- Connexion via les Api -->
+                                    {% block hwi_oauth_content %}
+                                         {%set idImg=1%}
+                                         {% if error is defined %}
+                                             <span>{{ error }}</span>
+                                         {% endif %}
+                                         {% for owner in hwi_oauth_resource_owners() %}
+                                         <a href="{{ hwi_oauth_login_url(owner) }}"><img id="logo" src="{{ asset('bundles/projet/media/pictures/logo'~idImg~'.png') }}" class="img-rounded"></a>
+                                         {%set idImg=idImg+1%}
+                                         {% endfor %}
+                                     {% endblock hwi_oauth_content %}
+                           </div>
+                                        
+                          
                          <!-- Modal -->
                             <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
@@ -79,6 +84,7 @@
 
                                 </div>
                                 <a class="btn btn-link small_link hidden-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a> 
+                                
                          </div>
                          <div class="col-lg-1"></div>
                        {% endif %}
@@ -106,7 +112,7 @@
 		<footer class="hidden-xs">
 		    <ul>
 		        <li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_index') }}">Accueil</a></li>
-				<li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_about') }}">À propos</a></li>
+                        <li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_about') }}">À propos</a></li>
 		        <!-- <li><a class="link" href="#">Contact</a></li> -->
 		    </ul>
 		    <p class="text">© {{ year }} Diapazen</p>
@@ -117,7 +123,7 @@
                 <footer class="visible-xs footer-xs">
 		    <ul>
 		        <li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_index') }}">Accueil</a></li>
-				<li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_about') }}">À propos</a></li>
+                        <li><a class="btn btn-link btn-lg link" href="{{ path('bdls_projet_about') }}">À propos</a></li>
 		        <!-- <li><a class="link" href="#">Contact</a></li> -->
 		    </ul>
 		    <p class="text">© {{ year }} Diapazen</p>

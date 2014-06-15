@@ -190,8 +190,12 @@ function codeAddress(idAddress) {
         if (status == google.maps.GeocoderStatus.OK) {
             addMarker(resultat, address);
             map.fitBounds(zonemarqueurs);
+               document.getElementById(idAddress.id).setAttribute("readonly", "true");
+            document.getElementById(idAddress.id).style.borderLeft = '';
+         
         } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            //alert('Geocode was not successful for the following reason: ' + status);
+            document.getElementById(idAddress.id).style.borderLeft = '2px solid red';
         }
     });
 }

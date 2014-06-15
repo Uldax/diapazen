@@ -147,16 +147,6 @@ class ModelController extends Controller
 	}
 	
 	//////////////////////////////////////////////////////////////	
-        //J'ai un doute sur son utilité
-	public function insertTextChoice($poolId, $choice, $text)
-	{
-		$textChoice = new TextChoice();
-		$textChoice->setDate($choice);
-		$textChoice->setPoll($poolId);
-		$textChoice->setText($text);
-		
-		$this->doctrineManager->persist($textChoice);
-	}
 	
 	public function insertTextChoices()
 	{
@@ -189,8 +179,7 @@ class ModelController extends Controller
 		   ->from("BdlsProjetBundle:User", 'u')
 		   ->where('u.id = ?1')
 		// Récupérer l'id du user.
-		   ->setParameter(1, $this->getUserId()); // Sets ?1 to 100, and thus we will fetch a user with u.id = 100
-		// get the Query from the QueryBuilder here ...
+		   ->setParameter(1, $this->getUserId()); 
 		$query = $qb->getQuery();
 		$user = $query->getResult();		
 		$createdOn  = new \DateTime("now");
@@ -215,12 +204,6 @@ class ModelController extends Controller
         }
         
 
-	//////////////////////////////////////////////////////////////
-	public function insertionIntoDatabase()
-	{
-		//Don't forget to use it !!!!!!!!!!
-		$this->doctrineManager->flush();
-	}
 	
 	public function getPool()
 	{

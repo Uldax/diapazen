@@ -56,8 +56,9 @@
                                                       </ul>
                                                     </div>
                                                     <!-- <a id="create_survey" class="btn btn-default orange_button styled_a_div" href="{{ path('bdls_projet_creation') }}">C'est parti !</a> -->
-						</form>                                           
+						                                          
                                                 </div>
+                                                </form> 
 					</div>
 				</article>
 
@@ -85,6 +86,20 @@
                                         <input type="password" class="small_text_edit form-control formulaire-xs" id="password" placeholder="Mot de passe" name="_password" />
                                         <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
                                         <a class="btn btn-link small_link link-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a>
+                                       
+                                     </div>
+                                       <div class="api">
+                                                <!-- Connexion via les Api -->
+                                                {% block hwi_oauth_content %}
+                                                     {%set idImg=1%}
+                                                     {% if error is defined %}
+                                                         <span>{{ error }}</span>
+                                                     {% endif %}
+                                                     {% for owner in hwi_oauth_resource_owners() %}
+                                                     <a href="{{ hwi_oauth_login_url(owner) }}"><img id="logo" src="{{ asset('bundles/projet/media/pictures/logo'~idImg~'.png') }}" class="img-rounded"></a>
+                                                     {%set idImg=idImg+1%}
+                                                     {% endfor %}
+                                                 {% endblock hwi_oauth_content %}
                                      </div>
                                      <div class="modal-footer">
                                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
@@ -133,7 +148,8 @@
 					<div class="text_article div_etape4 div_etape4-xs text_article-xs">
 						<h2 class="big_title big_title_xs big_title_xss">Choix du type : </h2>
 						<form action="" method="post" {{ form_enctype(form) }}>
-						    {{ form_widget(form) }}                                         
+						    {{ form_widget(form) }}
+                                                    
 						    
                                                 <!-- Select -->
                                                 <div class="div_choix div_choix-xs">
@@ -153,8 +169,9 @@
                                                     </div>
                                                     <input type="submit" class=" btn btn-default orange_button styled_a_div orange_big_button" value="C'est parti !" />
                                                     <!-- <a id="create_survey" class="btn btn-default orange_button styled_a_div" href="{{ path('bdls_projet_creation') }}">C'est parti !</a> -->
+                                                    </div>
 						</form>                                           
-                                                </div>
+                                                
 					</div>
 				</article>                                                         
 				<p id="asterisk" class="bold bold-xs">*Créer un sondage nécessite une inscription, celle-ci peut se faire en même temps que la création de votre sondage</p>                                                       
