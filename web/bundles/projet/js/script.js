@@ -54,17 +54,17 @@ function manageChoices(input,type)
 			switch(type){
 				case 'c1':
 					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" required="required" type="text" name="choices[]" value="Lieux" /> '
+								+' <input class="text_edit input_choice" id="" required="required" type="text" name="choices[]" value="" /> '
 							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
 					break;
 				case 'c2':
 					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="date" name="choices[]" /> '
+								+' <input class="text_edit input_choice" required="required" id="" type="date" name="choices[]" /> '
 							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
 					break;
 				case 'c3':
 					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="Autres" /> '
+								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" required="required" value="" /> '
 							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
 					break;
 				default:

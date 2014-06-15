@@ -16,21 +16,21 @@
 			<h1 class="small_title">Votre sondage</h1>
 			<input name="type" type="hidden" value="c3">
 			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
-			<input class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
+			<input required="required" class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
 			<label for="datepicker" class="text">Date limite</label>
 			<input class="text_edit datepicker" name="date_input" id="datepicker" readonly/>
 			<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
-			<textarea class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
+			<textarea required="required"class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
 			<h1 class="small_title">Propositions</h1>
 			<div id="choices">
 				<div class="choice">
 					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
-				<input class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" />
+				<input required="required" class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" />
 				
 				</div>
 				<div class="choice">
 					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" />
+					<input required="required" class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" />
 				</div>
 			</div>
                         <div id="add_choice" class="choice">
@@ -54,8 +54,8 @@
                        </div>
                        <div class="modal-body">
 
-                          <input type="text" id="username" class="small_text_edit form-control formulaire-xs" placeholder="E-mail" name="_username" />
-                          <input type="password" class="small_text_edit form-control formulaire-xs" id="password" placeholder="Mot de passe" name="_password" />
+                          <input required="required" type="text" id="username" class="small_text_edit form-control formulaire-xs" placeholder="E-mail" name="_username" />
+                          <input required="required" type="password" class="small_text_edit form-control formulaire-xs" id="password" placeholder="Mot de passe" name="_password" />
                           <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
                           <a class="btn btn-link small_link link-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a>
 
@@ -94,20 +94,20 @@
 		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form default_form-xs" action="connection" method="post">
 			<h1 class="small_title">Votre sondage</h1>
 			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
-			<input class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
+			<input required="required" class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
 			<label for="datepicker" class="text">Date limite</label>
 			<input class="text_edit datepicker-xs" name="date_input" id="datepicker" readonly/>
 			<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
-			<textarea class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
+			<textarea required="required" class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
 			<h1 class="small_title">Propositions</h1>
 			<div id="choices">
 				<div class="choice choice-xs">
 					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" />
+					<input required="required" class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" />
 				</div>
 				<div class="choice choice-xs">
 					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" />
+					<input required="required" class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" />
                                        
 				</div>
 			</div>
