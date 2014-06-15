@@ -6,4 +6,9 @@ bdls_projet:
     resource: "@BdlsProjetBundle/Resources/config/routing.yml"
     prefix:   /
 
+bdls_projet:
+    resource: "@BdlsProjetBundle/Resources/config/routing.yml"
+    prefix:   /
 
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

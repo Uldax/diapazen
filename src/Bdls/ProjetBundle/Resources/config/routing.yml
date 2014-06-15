@@ -1,7 +1,4 @@
-bdls_projet_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BdlsProjetBundle:Default:index }
-    
+ 
 bdls_projet_index:
     pattern: /home
     defaults: { _controller: BdlsProjetBundle:Index:index }
@@ -27,7 +24,7 @@ bdls_projet_login:
     defaults: { _controller: BdlsProjetBundle:User:login }
 
 bdls_projet_connect:
-    pattern: /connect
+    pattern: /connection
     defaults: { _controller: BdlsProjetBundle:Poll:connect }
 
 bdls_projet_share:
@@ -39,15 +36,34 @@ bdls_projet_sent:
     defaults: { _controller: BdlsProjetBundle:Poll:sent }
     
 bdls_projet_view:
-    pattern: /view
+    pattern: /view/{type}/{url}
     defaults: {_controller: BdlsProjetBundle:Poll:view }
+    
+bdls_projet_mail:
+    pattern: /mail
+    defaults: {_controller: BdlsProjetBundle:Index:mail }
+    
+test:
+    pattern: /test
+    defaults: {_controller: BdlsProjetBundle:Poll:test }
 
-login:
-    pattern: /login
-    defaults: { _controller: BdlsProjetBundle:Security:login }
+#login:
+    #pattern: /login
+    #defaults: { _controller: BdlsProjetBundle:Security:login }
+
+#bdls_projet_profil:
+#    pattern: /profil
+#    defaults: { _controller: BdlsProjetBundle:Security:profil }
     
-login_check:
-    pattern: /login_check
+bdls_test:
+    pattern: /pos/{valeur}
+    defaults: { _controller: BdlsProjetBundle:InitPos:initPos }
+    options:
+        expose: true
     
-logout:
-    pattern: /logout
+#login_check:
+    #pattern: /login_check
+    
+#logout:
+   # pattern: /logout
+

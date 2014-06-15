@@ -171,6 +171,7 @@ tipomatika@gmail.com*/
 
 .bold-xs
 {
+    margin-top: 150px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -273,6 +274,12 @@ tipomatika@gmail.com*/
     cursor: pointer;
 }
 
+.green_button
+{
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
 .orange_button, .orange_small_button, .orange_big_button
 {
     /*border: 1px solid #ED2C00;*/
@@ -289,7 +296,15 @@ tipomatika@gmail.com*/
     color: #3c2f20;
 }
 
-.orange_button, .grey_button
+.green_button
+{
+    border: 1px solid #4cae4c;
+    background-color: #5cb85c;
+    box-shadow: 2px 2px 2px #919191;
+    color: #ffffff;
+}
+
+.orange_button, .grey_button, .green_button
 {
     font-size: 1.4em;
     line-height: 1.3em;
@@ -316,8 +331,16 @@ tipomatika@gmail.com*/
     border-color: #FF3E13;
 }
 
+.green_button:hover
+{
+    opacity: 0.75;
+    color: #FFFFFF;
+    background-color: #47a447;
+    border-color: #398439;
+}
+
 .orange_button:active, .orange_small_button:active, .orange_big_button:active, 
-.grey_button:active, .grey_small_button:active, .grey_big_button:active
+.grey_button:active, .grey_small_button:active, .grey_big_button:active, .green_button:active
 {
     position: relative;
     left: 1px;
@@ -332,6 +355,10 @@ tipomatika@gmail.com*/
 .grey_button:active, .grey_small_button:active, .grey_big_button:active
 {
     box-shadow: 1px 1px 2px #919191;
+}
+
+.green_button:active{
+    box-shadow: 1px 1px 2px #47a447;
 }
 
 .long_text-xs{
@@ -353,27 +380,37 @@ tipomatika@gmail.com*/
 
 .div_connect{
     display: inline-block;
-    /*width: 800px;*/
+    /*width: 475px;*/
     margin-top: 10px;
+}
+
+.div_etape4{
+    width: 530px; 
+}
+
+.div_etape4-xs{
+    width: 370px; 
 }
 
 .styled_select_div{
     /*float: right;
-    margin-left: 25%;*/
-    margin-top: 3px;
-    margin-left: 220px;
+    margin-left: 25%;
+    margin-left: 5px;
+    margin-left: 520px;*/
     display: inline-block;
 }
 
 .styled_select_div_xs{
     /*float: right;
-    margin-left: 25%;*/
-    margin-top: 3px;
+    margin-left: 25%;
+    //margin-left: 5px;
+    //margin-left: -100px;*/
     display: inline-block;
 }
 
 .styled_a_div{
     display: inline-block;
+    float: right;
 }
 
 .styled_select{
@@ -457,13 +494,71 @@ tipomatika@gmail.com*/
 }
 
 .orange_small_button-xs{
-    margin-top: 7px;
+    margin-top: -10px;
 }
 
 .div_choix-xs{
-    float: right;
+    /*float: right;*/
     width: 380px;
     padding: 7px 7px;
+    margin-top: 40px;
+    margin-left: -90px;
+    float: left;
+}
+
+.map{
+    margin-left: 160px;
+    height: 400px;
+    width: 400px;
+}
+
+.map-xs{
+    height: 200px;
+    width: 200px;
+}
+
+.choice_map-xs{
+    margin-left: -25px;
+}
+
+#poll_creation_form  .date-xs{
+    width: 210px;
+}
+
+#poll_creation_form  .lbl_choice{
+    width: 100px;
+    margin-right: 10px;
+}
+
+.formulaire-xs{
+    margin: 5px;
+    min-width: 325px;
+    max-width: 500px;
+}
+
+.link-xs{
+    margin: 5px;
+}
+
+.api{
+    margin-top: 5px;
+    margin-left: 5px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.form-inline{
+    display: inline-block;
+}
+
+.input_vote{
+    width: 150px;
+    display: inline-block;
+}
+
+.progress-div{
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 /*------------FIL D'ARIANE-----------*/

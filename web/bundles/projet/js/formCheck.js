@@ -1,23 +1,26 @@
 /*
  *Expressions régulières utlisées
  */
-var strRegexp = {
-                    "default"       :   /^(.|\n){3,}$/,
-                    "choice"         :   /^.{1,}$/,
-                    "date_input"    :   /^.{0}|[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-                    "firstname"    :   /^[a-zA-Z\çéèêï]+[-]?[a-zA-Z\çéèêï]+$/,
-                    "lastname"    :   /^[a-zA-Z\çéèêï]+[-\'\s]?[a-zA-Z\çéèêï]+$/,
-                    "email"         :   /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/
-                };
-
-
-$(document).ready(function() {
-    initBlur();
-});
+//var strRegexp = {
+//                    "default"       :   /^(.|\n){3,}$/,
+//                    "choice"         :   /^.{1,}$/,
+//                    "date_input"    :   /^.{0}|[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+//                    "firstname"    :   /^[a-zA-Z\çéèêï]+[-]?[a-zA-Z\çéèêï]+$/,
+//                    "lastname"    :   /^[a-zA-Z\çéèêï]+[-\'\s]?[a-zA-Z\çéèêï]+$/,
+//                    "email"         :   /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/
+//                };
+//
+//
+//$(document).ready(function() {
+//    initBlur();
+//});
 
 /*
  *Fonction de vérification des champs
  */
+
+
+
 function initBlur()
 {
     var fields = $("#content form input, textarea");
@@ -68,7 +71,7 @@ function initBlur()
  *Lors du clic sur le bouton submit
  */
 function formCheck(form) {
-
+	//alert("formCheck");
     var i;
     var j;
     var valReturn = true;
@@ -106,7 +109,7 @@ function formCheck(form) {
             }            
         }
     }
-
+	tableauPosGPS();
     return valReturn;
 }
 

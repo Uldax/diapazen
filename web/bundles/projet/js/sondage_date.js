@@ -7,7 +7,7 @@ function manageChoices(input) {
 
     switch (input.className) {
 
-        case 'orange_button':
+        case 'btn btn-default orange_button add_choice_button':
 
             // Ajout d'un champ de choix
 
@@ -18,6 +18,8 @@ function manageChoices(input) {
             //Création de l'input
             var input = document.createElement("input");
             input.className = " text_edit input_choice datepicker";
+            input.setAttribute("pattern","[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])");
+            input.setAttribute("required", "required");
             input.setAttribute("readonly", "true");
             input.setAttribute("name", "choices[]");
 
@@ -26,7 +28,7 @@ function manageChoices(input) {
             label.className = " text lbl_choice datepick";
 
             var a = document.createElement("a");
-            a.className = "grey_button";
+            a.className = "btn btn-default grey_button";
             a.setAttribute("title", "Supprimer");
             a.setAttribute("type", "button");
             a.setAttribute("onclick", "manageChoices(this);");
@@ -41,8 +43,8 @@ function manageChoices(input) {
             choices.appendChild(choice);
 
             break;
+        case 'btn btn-default grey_button':
 
-        case 'grey_button':
         
             // Suppression du champ de choix
             if (document.getElementsByName("choices[]").length > 2) {

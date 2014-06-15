@@ -1,3 +1,6 @@
+imports:
+   - { resource: "@userBundle/Resources/config/security.yml" }
+
 security:
     encoders:
 #        Bdls\ProjetBundle\Controller\UserClassController:
@@ -5,38 +8,31 @@ security:
 #            encode_as_base64: false
 #            iterations:		  1
         Symfony\Component\Security\Core\User\User: plaintext
+        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
+        
+        
     providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+            
         in_memory:
             memory:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
-    firewalls:
-        admin_area:
-            pattern:    ^/admin
-            http_basic: ~
-            
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        main:
-            pattern:   ^/
-            anonymous: ~
-            provider:  in_memory
-            form_login:
-                login_path: /login
-                check_path: /login_check
-            logout:
-                path:   logout
-                target: /home
-
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+         #Filtre par adresse
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #Protection (gerer par synfony pas par fos)
+       # - { path: ^/, roles: ROLE_USER }
+
+        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

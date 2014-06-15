@@ -1,0 +1,112 @@
+{% extends 'BdlsProjetBundle:Default:layout.html.twig' %}   
+{% block body %}
+	<div id="content" class="hidden-xs">
+		<div id ="poll">
+			<div id="back_button_dashboard">
+                            <a class="btn btn-default orange_small_button" href="{{ path('bdls_projet_index') }}" >Retour</a>
+			</div>
+			<div id="poll_title_box" >
+				<h1 class="title" > {{ data.eventTitle }} </h1>
+                                <p class="text">Créé le {{ data.creationDate }} | Par {{ data.user }} <br> {{data.eventDate }}</p>
+			</div>
+			
+			<p class="text" > {{data.eventDescription}} </p>
+			{%if not data.openedPoll  %}         
+                                <h1 class="big_title" id="result">Le choix ayant recueilli le plus de voix est: 
+                                            {% if data.type =="place" %}
+                                               {{ 'TO DO: appeler le JS pour récupérer l adresse' }}
+                                            {%elseif data.type =="date"%}
+                                                 {{data.stat[0].answer|date("d/m/Y") }}                                        
+                                            {%else %}
+                                                  {{data.stat[0].answer}}
+                                            {%endif%}   
+                                </h1>
+			{% endif %}
+                        
+			<form onsubmit="return formCheck(this);" method="post" action="{{ data.urlPoll}}">						
+                                            {% if data.type =="text"%}
+                                                 {% include 'BdlsProjetBundle:Default/PollView:pollTextView.html.twig' %}
+                                            {%elseif data.type =="date"%}
+                                                 {% include 'BdlsProjetBundle:Default/PollView:pollDateView.html.twig' %}
+                                            {%elseif data.type =="place"%}
+                                                 {% include 'BdlsProjetBundle:Default/PollView:pollPlaceView.html.twig' %}
+                                            {%else%}
+                                                Il y a comme un problème ceci est impossible bravo tu as casser le site/les controllers et le model de donné
+                                                <br> Merci de nous envoyer un mail pour nous expliquer ton exploit 
+                                            {%endif%}                           					
+                                
+				{%if data.openedPoll and not data.message is defined  %}
+                                    <input type="text" class="small_text_edit" placeholder="Prénom Nom" name="name" value=" {% if app.user.username is defined %} {{app.user.username }} {%endif%}">
+                                    <input type="submit" class="orange_small_button" value="Voter" >
+                                    {% if data['data_updated'] is defined %}
+                                                    {% if data['data_updated']%} 
+                                                            <div style="float: right;" class="success_message message_personal_data">Votre vote a bien été pris en compte.</div>
+                                                    {% else %}
+                                                            <div style="float: right;" class="error_message message_personal_data">Erreur, vérifiez les données saisies.</div>
+                                                    {% endif %}
+                                                    <script>
+                                                            $('.success_message').delay(4000).slideUp(300);
+                                                    </script>
+                                   {% endif %}
+                            {% else %}  
+                                     {%if  data.message is defined  %}                  
+                                   <div  class="success_message message_personal_data">{{data.message}}</div> 
+                                    {%endif%}   
+                            {%endif%}                    
+			</form>
+                                
+		</div>
+	</div>
+ <!-- Version Mobile -->
+        <div id="content_mobile" class="visible-xs">
+		<div id ="poll">
+			<div id="back_button_dashboard">
+				<a class="btn btn-default orange_small_button" href="{{ path('bdls_projet_index') }}" >Retour</a>
+			</div>
+			<div id="poll_title_box" >
+				{#$eventTitle#}
+				<h1 class="title" > {{ data.eventTitle }} </h1>
+				{#$creationDate, $userFName, $userLName, $eventDate#}
+                                <p class="text">Créé le {{ data.creationDate }} | Par {{ data.user }} <br> {{data.eventDate }}</p>
+			</div>
+			
+			<p class="text" > {{data.eventDescription}} </p>
+			{%if not data.openedPoll  %}
+				{{ data.eventDescription}}               
+                                <h1 class="big_title" id="result">Le choix ayant recueilli le plus de voix est:</h1>
+			{% endif %}
+                        
+			{#$this->getHomeUrl(); echo '/poll/view/'.$urlPoll  =>  http://127.0.0.1/poll/view/$urlPoll#}
+			<form onsubmit="return formCheck(this);" method="post" action="{{ data.urlPoll}}">						
+                                            {% if data.type =="text"%}
+                                                 {% include 'BdlsProjetBundle:Default/PollView:pollTextView.html.twig' %}
+                                            {%elseif data.type =="date"%}
+                                                 {% include 'BdlsProjetBundle:Default/PollView:pollDateView.html.twig' %}
+                                            {%elseif data.type =="place"%}
+                                                 {% include 'BdlsProjetBundle:Default/PollView:pollPlaceView.html.twig' %}
+                                            {%else%}
+                                                Il y a comme un problème ceci est impossible bravo tu as casser le site/les controllers et le model de donné
+                                                <br> Merci de nous envoyer un mail pour nous expliquer ton exploit 
+                                            {%endif%}                           					
+                                
+				{%if data.openedPoll and not data.message is defined  %}
+                                    <input type="text" class="form-control small_text_edit input_vote" placeholder="Prénom Nom" name="name" value=" {% if app.user.username is defined %} {{app.user.username }} {%endif%}">
+                                    <input type="submit" class="btn btn-default orange_small_button" value="Voter" >
+                                    {% if data['data_updated'] is defined %}
+                                                    {% if data['data_updated']%} 
+                                                            <div style="float: right;" class="success_message message_personal_data">Votre vote a bien été pris en compte.</div>
+                                                    {% else %}
+                                                            <div style="float: right;" class="error_message message_personal_data">Erreur, vérifiez les données saisies.</div>
+                                                    {% endif %}
+                                                    <script>
+                                                            $('.success_message').delay(4000).slideUp(300);
+                                                    </script>
+                                   {% endif %}
+                            {% elseif data.message is defined %}  
+                                   <div  class="success_message message_personal_data">{{data.message}}</div>               
+                            {%endif%}                    
+			</form>
+                                
+		</div>
+	</div>
+{% endblock %}

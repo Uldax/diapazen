@@ -3,7 +3,7 @@
 		<div id="content">
                 <h2 class="title">Confirmation de l'envoi</h2>
                 <br>
-                <?php
+                {#<?php
                 if(isset($sent))
             	{
             		switch($sent)
@@ -17,10 +17,11 @@
             				break;
             		}
             	}
-                ?>
+                ?>#}
+				<div class='success_message' >Votre sondage a bien été envoyé !</div>
                 <br>
                 <div style="text-align: center;">
-                    <a class="orange_button" href="<?php echo $pollUrl; ?>">Retour vers le sondage</a>
+                    <a class="orange_button" href="{{ path('bdls_projet_index')}} "> Retour vers le sondage</a>
                 </div>
             </form>
         </div>

@@ -1,6 +1,17 @@
 <?php
 namespace Bdls\ProjetBundle\Controller;
 
+
+use Symfony\Component\HttpFoundation\Response;
+//use Bdls\ProjetBundle\Entity\TextVote;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Bdls\ProjetBundle\Model\PollModel;
+
+
+//session_start();
 /**
  * 
  * Contrôleur de la page d'un sondage
@@ -26,8 +37,6 @@ namespace Bdls\ProjetBundle\Controller;
  */
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 /**
  * PollController
  * Contrôleur de la page d'un sondage
@@ -48,7 +57,7 @@ class PollController extends Controller
     */
 	public function isUserConnected()
 	{
-		return (isset($_SESSION['connected']) && $_SESSION['connected'] == true) ? true : false;
+                return ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'));
 	}
 	
 	protected function set($key, $value)
@@ -61,6 +70,8 @@ class PollController extends Controller
 		$this->create($params);
 
 	}
+	
+	
 
 	/**
     * Création d'un sondage
@@ -100,7 +111,6 @@ class PollController extends Controller
 		$year=date('Y');
 		//récupèration variable get
 		$type = $this->getRequest()->query->get('type') ;
-
 		switch ($type) {
 			case 'c1':
 				$nametype = 'lieux';
@@ -142,12 +152,35 @@ class PollController extends Controller
     */
 	public function connectAction($params = null)
 	{
+		
 
 		$this->set('title', 'Création d\'un sondage | Diapazen');
 		$this->set('class_create', 'grey');
 		$this->set('class_connect', 'orange');
 		$this->set('class_share', 'grey');
-
+		
+		$request = $this->get('request');
+		if ($request->getMethod() == 'POST') 
+		{
+			$type = $request->get("type");
+		
+		switch($type)
+		{
+			case "c1":
+				$pool = new PoolLieux($request);
+				break;
+			case "c2":
+				$pool = new PoolDates($request);
+				break;
+			case "c3":
+				$pool = new PoolText($request);
+				break;
+			default:
+				$pool = new PoolText($request);
+				break;
+		}
+		$_SESSION['pool'] = $pool;
+                }
 		//récupération des valeurs du fil d'arianne
 		if (isset($_SESSION['show_ariadne']) && isset($_SESSION['width_ariadne']))
 		{
@@ -167,27 +200,18 @@ class PollController extends Controller
 			$_SESSION['poll_title'] = $_POST['title_input'];
 			$_SESSION['poll_description'] = $_POST['description_input'];
 			$_SESSION['poll_choices'] = $_POST['choices'];
-			
-
-			/*if(isset($_POST['date_input']) && TestForm::testRegexp('expirationDate', $_POST['date_input']))
-			{
-				$_SESSION['poll_date'] = $_POST['date_input'];
-			}
-			else
-			{
-				$_SESSION['poll_date'] = null;
-			}*/
-
 		}
 
 		// Si l'utilisateur est déja connecté, on le redirige vers le partage
-		if ($this->isUserConnected())
-		{	// path ou render ??
-			header('Location: ' . BASE_URL. '/poll/share');
+		if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
+		{	
+			return $this->redirect($this->generateUrl('bdls_projet_share'));
 		}
 
 		try
 		{
+			//Gestion de la conexion (ancien systeme)
+			
 			//test si un choix a été fait entre la connection et l'inscription et qu'il y a un email
 			//l'adresse mail n'est elle pas obligatoire ???
 			if (isset($_POST['account']) && isset($_POST['email']))
@@ -208,7 +232,9 @@ class PollController extends Controller
 					$this->loadModel('user'); //charge User.Model.php
 					$connectStatus = $this->getModel()->connectionToApp($mail, $pwd, $ip_addr);
 
-				} //si on a choisi l'inscription et qu'il y a le nom et prenom on l'inscrit
+				} 
+				//Gros probleme -> inscription via fos la 
+				//si on a choisi l'inscription et qu'il y a le nom et prenom on l'inscrit
 				else if($_POST['account'] == 'not_registered' && isset($_POST['firstNameUser']) && isset($_POST['lastNameUser']))
 				{
 					// On teste l'adresse mail
@@ -279,11 +305,53 @@ class PollController extends Controller
 					break;
 			}
 		}
-        $title = 'Connexion | Diapazen';
+		
+		// Démarrage de la session
+		//session_start();
+		// si le tableau reçu est vide ou n'existe pas, on ne peut pas continuer le sondage
+		// 
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////<--- ICI
+		/*$pos = $this->getRequest()->query->get('position');
+		$yolo = array(1,1);
+		$_SESSION['position'] = $yolo;*/
+//		if( isset( $pos ) )
+//		{
+//			if($pos != "")
+//			{
+//				//$_SESSION['position'] =  $pos;
+//				$_SESSION['position'] = $yolo;
+//				//echo (json_encode("etat"=>true));
+//			}
+//			else
+//			{
+//				//echo (json_encode("etat"=>false));
+//			}
+//		}
+//		else
+//		{
+//			//echo (json_encode("etat"=>false));
+//		}
+                            
+               //Formaulaire nécésaire pour la création de compte
+                //Manque le csrf pour qu'il fonctionne...
+                $form = $this->container->get('form.factory')
+                ->createNamedBuilder(null, 'form', null, array('csrf_protection' => false))
+                ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
+                ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
+                ->add('plainPassword', 'repeated', array(
+                    'type' => 'password',
+                    'options' => array('translation_domain' => 'FOSUserBundle'),
+                    'first_options' => array('label' => 'form.password'),
+                    'second_options' => array('label' => 'form.password_confirmation'),
+                    'invalid_message' => 'fos_user.password.mismatch',))
+                ->getForm();
+            
+          
+                $title = 'Connexion | Diapazen';
 		$year=date('Y');
-		$error='pas d\'erreur.';
-		return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
+		return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title,'year'=>$year,'form'=>$form->createView()));
 
+    
 		
 	}
 
@@ -303,174 +371,78 @@ class PollController extends Controller
     */
 	public function shareAction($params = null)
 	{
-		/*if (isset($_SESSION['show_ariadne']) && isset($_SESSION['width_ariadne']))
-		{
-			$this->set('show_ariadne', $_SESSION['show_ariadne']);
-			$this->set('width_ariadne', $_SESSION['width_ariadne']);
-		}
-		else
-		{
-			// renvoyer a Poll create ces variable devrais etre initialisées
-			header('Location: ' . BASE_URL. '/poll/create');
-		}
-
-		// On choisi le rendu par default
-		$this->set('title', 'Création d\'un sondage | Diapazen');
-		$this->set('class_create', 'grey');
-		$this->set('class_connect', 'orange');
-		$this->set('class_share', 'grey');
-		*/
 		try
-		{
-			
-
+		{       $year=date('Y');
+			//$model->insertionIntoDatabase();
+			//$model->setUser($_SESSION['currentUser']);
 			// Lorsque l'utilisateur est connecté
-			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) 
+			if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') &&  isset($_SESSION['pool'])) 
 			{
-				// On créé le sondage
-//					$this->loadModel('poll');
-//					$this->getModel()->addPoll($_SESSION['user_infos']['id'], $_SESSION['poll_title'], $_SESSION['poll_description'], $_SESSION['poll_date'].' 23:59:59');
-//					$pollId = $this->getModel()->getPollId();
-
-//					$_SESSION['poll_url'] = $this->getModel()->getPollUrl();
-//					$_SESSION['poll_tittle'] = $this->getModel()->getPollTitle();
-//
-//					$this->set('pollUrl', $_SESSION['poll_url']);
-
-					// Insertion des choix
-//					$this->loadModel('choice');
-//					foreach ($_SESSION['poll_choices'] as $choice) {
-//						if(!empty($choice))
-//						$this->getModel()->addChoice($choice, $pollId);
-//					}
-//
-//					unset($_SESSION['poll_title']);
-//					unset($_SESSION['poll_description']);
-//					unset($_SESSION['poll_choices']);
-//					unset($_SESSION['poll_date']);
-//
-//					// On choisit le rendu
-//					$this->set('class_connect', 'grey');
-//					$this->set('class_share', 'orange');
-					$year=date('Y');
-					$title = 'Connexion | Diapazen';
+                                $pool = $_SESSION['pool'];
+				$type = $_SESSION['pool']->getPoll_type();
+                                $_SESSION['type']=$type;
+				if( isset($pool) && isset($type) )
+				{
+                                        $em = $this->getDoctrine()->getManager();
+					$model = new ModelController();
+                                        $model->setDoctrineManager($em);
+                                        $this->container->get('request')->getSession()->set('pool', $pool);
+                                        $userId=$this->get('security.context')->getToken()->getUser()->getId();
+                                        $model->setUserId($userId);
+                                        $model->setPool($pool);
+					switch($type)
+					{
+                                             
+						case "place":
+							//lieux                                                     																				
+							$model->insertPlacePoll();
+							$model->insertPlaceChoices();
+							break;
+						case "date":
+                                                        //Date													
+							$model->insertDatePoll();
+                                                        $model->insertDateChoices();
+							break;
+						case "text":
+							//text
+							$model->insertTextPoll();
+							$model->insertTextChoices();
+							break;
+                                                 //Le default doit renvoyer une exeption normalement
+						default:
+	
+							//$model->insertTextVote();
+                                                        ////Un truc du genre
+                                                        unset($_SESSION['pool']);
+                                                        $title = 'Erreur | Diapazen';
+                                                        return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'year'=>$year));
+							break;
+					}
+                                        unset($_SESSION['pool']);
+				}							
+					
+					$title = 'Share | Diapazen';
 					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title, 'year'=>$year));
 			}
 			else
 			{
-				$year=date('Y');
+				
 				$title = 'Connexion | Diapazen';
 				$error = 'err';
-				return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
-			}
-//			if ($this->isUserConnected())
-//			{
-//				if (isset($_SESSION['poll_title']) && isset($_SESSION['poll_description']) && isset($_SESSION['poll_choices']))
-//				{
-//					// On créé le sondage
-//					$this->loadModel('poll');
-//					$this->getModel()->addPoll($_SESSION['user_infos']['id'], $_SESSION['poll_title'], $_SESSION['poll_description'], $_SESSION['poll_date'].' 23:59:59');
-//					$pollId = $this->getModel()->getPollId();
-//
-//					$_SESSION['poll_url'] = $this->getModel()->getPollUrl();
-//					$_SESSION['poll_tittle'] = $this->getModel()->getPollTitle();
-//
-//					$this->set('pollUrl', $_SESSION['poll_url']);
-//
-//					// Insertion des choix
-//					$this->loadModel('choice');
-//					foreach ($_SESSION['poll_choices'] as $choice) {
-//						if(!empty($choice))
-//						$this->getModel()->addChoice($choice, $pollId);
-//					}
-//
-//					unset($_SESSION['poll_title']);
-//					unset($_SESSION['poll_description']);
-//					unset($_SESSION['poll_choices']);
-//					unset($_SESSION['poll_date']);
-//					
-//					// On choisit le rendu
-//					$this->set('class_connect', 'grey');
-//					$this->set('class_share', 'orange');
-//					$title = 'Connexion | Diapazen';
-//					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title));
-//				}
-//				else
-//				{
-//					// renvoyer a Poll create avec un message disant champs inexistants
-//					header('Location: ' . BASE_URL. '/poll/create');
-//				}
-//			}
+				return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
+			}			
 		}
 		catch(Exception $e)
 		{
-			$title = 'Connexion | Diapazen';
-			return $this->render('BdlsProjetBundle:Default:bdError.html.twig',array('title'=>$title, 'last_username'));
+			$title = 'Erreur | Diapazen';
+			return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'year'=>$year));
 		}
 
 	}
 
+
 	/**
-    * Partage d'un sondage
-    *
-    * Gère  : 
-    * - Met le titre de la page à 'Création d\'un sondage | Diapazen'.
-    * - Renvoi à la page d'accueil si nous ne venons pas créer un sondage
-    * - Envois des mails de partage au mails spécifiés
-    * - Lance le render de la vue 'shareMail' 
-    * - Gère si des erreurs sont survenues
-    *
-    * @param type $params null par défaut
-    *
-    */
-	public function sentAction($params = null)
-	{
-
-		$this->set('title', 'Partager le sondage | Diapazen');
-
-		if (isset($_POST['mails']) && isset($_SESSION['poll_tittle']) && isset($_SESSION['poll_url']) && TestForm::testRegexp('pollUrl', $_SESSION['poll_url']))
-		{
-			try
-			{
-				$this->loadModel('poll');
-				$lien = BASE_URL.'/p/'.$_SESSION['poll_url'];
-				$from = $this->getUserInfo('firstname').' '.$this->getUserInfo('lastname');
-				$mailSend = $this->getModel()->sharePoll($_POST['mails']);
-				$mailSend = implode(', ', $mailSend);
-			}
-			catch(Exception $e)
-			{
-				die($this->render('dbError'));
-			}
-			
-
-			$subject = "Invitation à un sondage";
-			$message = new Message();
-			$message->setMessage('share');
-			$tabParamMessage = array('user' => $from, 'pollTitle' => $_SESSION['poll_tittle'], 'linkPoll' => $lien);
-			$message->setParams($tabParamMessage);
-			$messageMail = $message->getMessage();
-
-			$mailer = new MailUtil();
-			$res = $mailer->sendMail($mailSend,$subject,$messageMail);
-
-			unset($_SESSION['poll_url']);
-			unset($_SESSION['poll_tittle']);
-
-			$this->set('pollUrl', $lien);
-			$this->set('sent', $res ? 'success' : 'fail');
-			$this->render('shareMail');
-			
-		}
-		else
-		{
-			// renvoyer a Poll share avec un message disant pas de mails
-			header('Location: ' . BASE_URL);
-		}
-	}
-	
-	/**
-    * Visualisation d'un sondage
+    * Visualisation d'un sondage (partie reponse)
     *
     * Gère  : 
     * - Met le titre de la page à 'Création d\'un sondage | Diapazen'.
@@ -486,151 +458,117 @@ class PollController extends Controller
     * @param type $params null par défaut
     *
     */
-	public function viewAction($params = null)
+	public function viewAction($type,$url)
 	{
-		
-		// L'url du sondage doit être spécifiée
-		if (!$params)
-			header('Location: ' . BASE_URL);
-
-		// On charge le modèle des sondages
-		$this->loadModel('poll');
-
-		// test pour empecher le revote par f5/rafraichir la page
-		if (isset($_POST['choiceId']) && isset($_POST['value']) && isset($_SESSION['voteChoiceId']) && (count(array_diff($_SESSION['voteChoiceId'], $_POST['choiceId'])) == 0) && isset($_SESSION['voteName']) && ($_SESSION['voteName'] == $_POST['value']) )
-		{
-			header('Location: ' . BASE_URL . '/poll/view/' . $params[0]);
+		 //On instancie le model si il echoue alors le type n'existe pas  
+		try {
+			$model= new PollModel($this->getDoctrine(),$type);
+		} catch (Exception $e) {
+			return $this->redirect($this->generateUrl('bdls_projet_index'));
 		}
-		else
+		$manager=$this->getDoctrine()->getManager();
+		$request = $this->get('request');
+		$cookies = $request->cookies;
+	 	$myPoll = $model->getUniquePoll($url);	
+
+		try
 		{
-
-			try
-			{
-				// Ajout d'un vote
-				if (isset($_POST['value']))
-				{
-					if (TestForm::testRegexp('voteName', $_POST['value']) && isset($_POST['choiceId']))
-					{
-						foreach($_POST['choiceId'] as $choice)
-						{
-							if ($this->getModel()->votePoll($choice, $_POST['value']))
-							{
-								// vote pris en compte
-								$this->set('data_updated', true);
-							}
-							else
-							{
-								// echec du vote
-								$this->set('data_updated', false);
-							}
-						}
-						$_SESSION['voteChoiceId'] = $_POST['choiceId'];
-						$_SESSION['voteName'] = $_POST['value'];
-					}
-					else
-					{
-						//echec du vote
-						$this->set('data_updated', false);
-					}	
+			// Si on a reçu un/des votes et que le sondage est ouvert 
+	        $name=$request->get("name");
+			if ($request->getMethod() == 'POST' && !empty($name) && $myPoll->getIsOpen() ){				
+				//Si j'ai déja voté on redirige sur les stat du votes
+				if($cookies->has($url)){
+					return $this->redirect($this->generateUrl('bdls_projet_view',array('type'=>$type,'url'=>$url)));
 				}
-
-				// On récupère les choix et résultats
-				$res = $this->getModel()->viewPoll($params[0]);
-
-				// Si le sondage n'a pas été trouvé
-				if (!$res)
-					$this->e404();
 				else
 				{
-					// Si le sondage est expiré
-					$date = new DateTime($res['expiration_date']);
-	            	$now  = new DateTime('now');
-	            	$int = $now->diff($date);
-					if (($int->invert == 1 || !$res['open']) && $res['expiration_date'] != '0000-00-00 00:00:00')
+					//Validation de tout les votes
+					foreach($_POST['choiceId'] as $choice)
 					{
-						$res['open'] = false;
-						$this->set('eventDate', ' | Le sondage est fermé.');
-						try
-						{
-							$this->getModel()->updatePoll($res['POLL_ID']);
-						}
-						catch(Exception $e)
-						{
-							die("erreur de mise à jour");
-						}
+						$choice=$model->getChoicesById($choice);
+						$model->insertVotes($choice,$name);										
 					}
-					else if($res['expiration_date'] != '0000-00-00 00:00:00')
-						$this->set('eventDate', $int->format(' | Expire dans: %d jour(s) et %h heure(s).'));
-					else
-						$this->set('eventDate', $int->format(''));
-
-
-					// Si le sondage est fermé, on trie les résultats
-					// du meilleur au moins bon.
-					if (!$res['open'])
-					{
-						/**
-						 * Fonction interne de comparaison
-						 *
-						 * @param string a paremètres a
-						 * @param string a paremètres a
-						 * @return a ou b.
-						 */
-						function cmp($a, $b)
-						{
-							if ($a['percent'] == $b['percent'])
-								return 0;
-							return ($a['percent'] > $b['percent']) ? -1 : 1;
-						}
-						usort($res['choices'], 'cmp');
-					}
-
-					// On transforme les liens http(s).. en vrai lien avec des balises
-					$res['description'] = preg_replace("/(^|[\n ])([\w]*?)((ht|f)tp(s)?:\/\/[\w]+[^ \,\"\n\r\t<]*)/is", "$1$2<a class=\"link\" rel=\"nofollow\" href=\"$3\" >$3</a>", $res['description']);
-				    $res['description'] = preg_replace("/(^|[\n ])([\w]*?)((www|ftp)\.[^ \,\"\t\n\r<]*)/is", "$1$2<a class=\"link\" rel=\"nofollow\" href=\"http://$3\" >$3</a>", $res['description']);
-				    $res['description'] = preg_replace("/(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+)+)/i", "$1<a class=\"link\" rel=\"nofollow\" href=\"mailto:$2@$3\">$2@$3</a>", $res['description']);
-
-				    // On transforme les retours à la ligne en balise html
-				    $res['description'] = str_replace("\n", "<br>", $res['description']);
-
-				    // Tableau pour stocker les jours de la semaine
-					$jour = array("lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"); 
-					$mois = array("","janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"); 
-					
-					// on définit les variables à envoyer à la vue
-					$this->set('openedPoll', $res['open']);
-					$this->set('urlPoll', $res['url']);
-					$this->set('userFName', $res['firstname']);
-					$this->set('userLName', $res['lastname']);
-					$this->set('eventTitle', $res['title']);
-					$this->set('eventDescription', $res['description']);
-					$this->set('choiceList', $res['choices']);
-
-					// Traduction de la date
-					$week	= $jour[date('w', strtotime($res['creation_date']))];
-					$day	= date('d', strtotime($res['creation_date'])); 
-					$month	= $mois[date('n', strtotime($res['creation_date']))];
-					$year	= date('Y', strtotime($res['creation_date']));
-					$dateFr	= sprintf('%s %s %s %s', $week, $day, $month, $year);
-					$this->set('creationDate', $dateFr);
-					
-
-					$this->set('title', $res['title'] .' | Diapazen');
-					
-					// On fait le rendu
-					$title='Accueil | Diapazen';
-					$year=date('Y');
-					return $this->render('BdlsProjetBundle:Default:pollView.html.twig', array('title'=>$title, 'year'=>$year));
-				}
+					//Création d'un cookie pour ne pas revoter en boucle
+					//(Pour ceux qui ne savent pas supprimer manuellement un cookie ...)
+					$response = new Response();
+					$response->headers->setCookie(new Cookie($url, 'A voté !',(time() + 3600 * 24 * 7 * 310), '/'));
+					$response->send();  
+					$data['data_updated']=true;
+				}	
 			}
-			catch(Exception $e)
+			//On récupère le sondage associé au sondage + calcule de stat							
+			$myChoice= $model->getAllChoices($myPoll);
+			// Definition du temps restant
+			$date = $myPoll->getClosedOn();
+		    $now  = new \DateTime('now');
+		    $int = $now->diff($date);
+		    //Si la date est dépassé ou si la date d'expiration = 00000000000000
+			if ($int->invert == 1)
 			{
-				$title='Accueil | Diapazen';
-				$year=date('Y');
-				return $this->render('BdlsProjetBundle:Default:dbError.html.twig', array('title'=>$title, 'year'=>$year));
+				$data['eventDate'] = "Le sondage est fermé";							
+				$myPoll->setIsOpen(0);
+				$manager->persist($myPoll);						
 			}
+			else 
+				$data['eventDate']=$int->format(' Expire dans: %d jour(s) et %h heure(s).');
+
+			//On trie les resultat via la fonction de comparaison
+			$votes=$model->getVoteStat($myChoice);				
+			usort($votes, array($this,"cmp"));
+
+			// On transforme les liens http(s).. en vrai lien avec des balises
+	        $description = preg_replace("/(^|[\n ])([\w]*?)((ht|f)tp(s)?:\/\/[\w]+[^ \,\"\n\r\t<]*)/is", "$1$2<a class=\"link\" rel=\"nofollow\" href=\"$3\" >$3</a>", $myPoll->getDescription());
+			$description = preg_replace("/(^|[\n ])([\w]*?)((www|ftp)\.[^ \,\"\t\n\r<]*)/is", "$1$2<a class=\"link\" rel=\"nofollow\" href=\"http://$3\" >$3</a>", $myPoll->getDescription());
+			$description = preg_replace("/(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+)+)/i", "$1<a class=\"link\" rel=\"nofollow\" href=\"mailto:$2@$3\">$2@$3</a>", $myPoll->getDescription());
+			// On transforme les retours à la ligne en balise html
+			$description = str_replace("\n", "<br>", $description);
+
+			//On définit l'afichage de la date en français (optimisation)
+			setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+			$dateFr=strftime("%A %d %B %Y",$myPoll->getCreatedOn()->getTimestamp()); 
+				
+			// On définit toute les variables à envoyer à la vue
+			$data['eventTitle'] = $myPoll->getName();
+			//$data['openedPoll']= $this->translateOpened($myPoll->getIsOpen());
+			$data['openedPoll']= $myPoll->getIsOpen();
+			$data['user'] = $myPoll->getCreatedBy();
+			$data['creationDate'] = $dateFr;				
+			$data['eventDescription'] = $description;
+			//Pour le lien de retour
+			$data['urlPoll'] = $myPoll->getUrl();
+			$data['type'] =$type;
+			//Les choix possibles couplé a leurs stat actuel
+			$data['stat']=$votes;
+			if($cookies->has($url)) $data['message']="Votre vote à déja été pris en compte";
+			
+					
+			$title='Vote | Diapazen';
+			$year=date('Y');
+			$manager->flush();
+
+			return $this->render('BdlsProjetBundle:Default/PollView:base.html.twig', array('title'=>$title, 'year'=>$year,'data'=>$data));
+		}				
+        catch(Exception $e) {
+			$title='Accueil | Diapazen';
+			$year=date('Y');
+			return $this->render('BdlsProjetBundle:Default:404.html.twig', array('title'=>$title, 'year'=>$year));
 		}
 	}
-}
+	
+	/**
+	* Fonction interne de comparaison
+	*
+	* @param string a paremètres a
+	* @param string a paremètres a
+	* @return a ou b.
+	*/		
+	function cmp($a, $b){
+					if ($a['percent'] == $b['percent'])
+						return 0;
+					return ($a['percent'] > $b['percent']) ? -1 : 1;
+	}
 
-?>
+	function translateOpened($bool) { return ($bool) ? "ouvert" : "fermé"; }
+
+
+}

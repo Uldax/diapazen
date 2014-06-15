@@ -40,11 +40,10 @@ function datepickerLoader() {
 function manageChoices(input,type)
 {
 
-
 	switch(input.className)
 	{
 
-		case 'orange_button':			
+		case 'btn btn-default orange_button add_choice_button':			
 
 			// Ajout d'un champ de choix
 			
@@ -55,23 +54,23 @@ function manageChoices(input,type)
 			switch(type){
 				case 'c1':
 					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="Lieux" /> '
-							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
+								+' <input class="text_edit input_choice" id="" required="required" type="text" name="choices[]" value="Lieux" /> '
+							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
 					break;
 				case 'c2':
 					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
 								+' <input class="text_edit input_choice" id="" type="date" name="choices[]" /> '
-							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
+							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
 					break;
 				case 'c3':
 					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
 								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="Autres" /> '
-							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
+							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
 					break;
 				default:
 					choice.innerHTML =	'<label for="" class="lbl_choice text" ></label>' 
-								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="????" /> '
-							  +	'<a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
+								+' <input class="text_edit input_choice" id="" type="text" name="choices[]" value="" /> '
+							  +	'<a class="btn btn-default grey_button" title="Supprimer" type="button" onclick="manageChoices(this,\''+type+'\');">x</a>';
 					break;
 			}
 			
@@ -79,7 +78,7 @@ function manageChoices(input,type)
 			
 		break;
 
-		case 'grey_button':
+		case 'btn btn-default grey_button':
 
 			// Suppression du champ de choix
 			
@@ -116,8 +115,6 @@ function manageChoices(input,type)
 	{
 	   document.getElementsByName("choices[]").css('cursor', 'pointer');
 	}
-
-
 	initBlur();
 
 }

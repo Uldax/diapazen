@@ -153,6 +153,7 @@ function manageChoices(input,type)
  *Lors de la création d'un sondage et que le créateur
  *ne se soit pas connecté, ou n'ait pas de compte
  */
+
 function manageConnectionForm(radio) {
 
 	switch(radio.id) {

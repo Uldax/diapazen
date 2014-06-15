@@ -1,54 +1,142 @@
 {#{% include 'BdlsProjetBundle:Default:ariadneThread.html.twig' %}#}
 {% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
 	{% block body %}
-	<div id="content">
-		<div style="width: 2000px;" id="ariadne_thread"> 
-		<span class="orange_ariadne" ><span></span><span>Création</span><span></span></span>
+	<div id="vide" class="hidden-xs">
+		<div id="content" class="hidden-xs">
+			<div id="ariadne_thread"> 
+			<span class="orange_ariadne" ><span></span><span>Création</span><span></span></span>
+			{#{% if show_ariadne is defined %}
+				{% if show_ariadne == true %}#}
+				<span class="grey_ariadne" ><span></span><span>Connexion</span><span></span></span>
+				{#{% endif %}
+			{% endif %}#}
+			<span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
+			</div>
+
+
+			<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connection" method="post"> {#action="connect"{{ path('bdls_test', {valeur:8}) }}#}
+				{#<h1>On te Hais symfony !</h1>#}
+				<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
+				<input name="type" type="hidden" value="c1">
+				<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
+				<input class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
+				<label for="datepicker" class="text ">Date limite</label>
+				<input class="text_edit datepicker" name="date_input" id="datepicker" readonly/>
+				<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
+				<textarea class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
+				<h1 class="small_title">Propositions de {{ nametype }} : </h1>
+				<div id="choices">
+					<div class="choice">
+						<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
+						<input class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" required="required"/>
+						<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix1);">
+					</div>
+					<div class="choice">
+						<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
+						<input class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" required="required" />
+						<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix2);">
+					</div>
+					
+				</div>
+                                <div id="add_choice" class="choice">
+                                    <input class="text_edit input_choice form-control add_choix" id="choix3" type="text" name="choices[]" disabled="true" placeholder="Ajouter un choix" />
+                                    <a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
+                                </div>
+
+						<!-- Map google -->
+					   <div id="map-canvas" class="map"></div>
+
+					   <!-- bouton pour appeler l'ajax qui met le tableau posmarkers dans la variable de session 'position' -->
+						<input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante" onClick="tableauPosGPS();" />
+					</form> 
+			</div>
+		
+                    <!-- Map google -->
+                   <div id="map-canvas" class="map"></div>
+                   
+                   <input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante" />
+              </form>
+	</div>
+
+        <!-- Version Mobile -->
+        <div id="content_mobile" class="visible-xs">
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <form action="{{ path('fos_user_security_check') }}" method="post" class="form-inline">
+                   <div class="modal-dialog">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                         <h4 class="modal-title" id="myModalLabel">Connexion ...</h4>
+                       </div>
+                       <div class="modal-body">
+
+                          <input type="text" id="username" class="small_text_edit form-control formulaire-xs" placeholder="E-mail" name="_username" />
+                          <input type="password" class="small_text_edit form-control formulaire-xs" id="password" placeholder="Mot de passe" name="_password" />
+                          <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
+                          <a class="btn btn-link small_link link-xs" href="{{ path('bdls_projet_forgot') }}" >Mot de passe oublié ?</a>
+
+                       </div>
+                         <div class="api">
+                                  <!-- Connexion via les Api -->
+                                  {% block hwi_oauth_content %}
+                                       {%set idImg=1%}
+                                       {% if error is defined %}
+                                           <span>{{ error }}</span>
+                                       {% endif %}
+                                       {% for owner in hwi_oauth_resource_owners() %}
+                                       <a href="{{ hwi_oauth_login_url(owner) }}"><img id="logo" src="{{ asset('bundles/projet/media/pictures/logo'~idImg~'.png') }}" class="img-rounded"></a>
+                                       {%set idImg=idImg+1%}
+                                       {% endfor %}
+                                   {% endblock hwi_oauth_content %}
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                         <input class="btn btn-default orange_small_button " type="submit" value="Connexion">
+                       </div>
+                     </div>
+                   </div>
+                   </form>
+                 </div>
+		<div id="ariadne_thread-xs"> 
+		<span class="orange_ariadne orange_ariadne-xs" ><span></span><span>Création</span><span></span></span>
 		{#{% if show_ariadne is defined %}
 			{% if show_ariadne == true %}#}
-			<span class="grey_ariadne" ><span></span><span>Connexion</span><span></span></span>
+			<span class="grey_ariadne grey_ariadne-xs" ><span></span><span>Connexion</span><span></span></span>
 			{#{% endif %}
 		{% endif %}#}
-		<span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
+		<span class="grey_ariadne grey_ariadne-xs" ><span></span><span>Partage</span><span></span></span>
 		</div>
 
 		
-		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form" action="connect" method="post">
+		<form onsubmit="return formCheck(this);" id="poll_creation_form" class="default_form default_form-xs" action="connection" method="post">
 			<h1 class="small_title">Votre sondage de type {{ nametype }}</h1>
 			<label for="id_title_input" class="text">Titre<span class="asterisc"> *</span></label>
-			<input class="text_edit" id="id_title_input" name="title_input" type="text" value="">
+			<input class="text_edit form-control" id="id_title_input" name="title_input" type="text" value="">
 			<label for="datepicker" class="text ">Date limite</label>
-			<input class="text_edit datepicker" name="date_input" id="datepicker" readonly/>
+			<input class="datepicker text_edit datepicker-xs" name="date_input" id="datepicker" readonly/>
 			<label for="id_description_input" class="text lbl_textarea">Description<span class="asterisc"> *</span></label>
-			<textarea class="small_text_edit" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
+			<textarea class="small_text_edit form-control" id="id_description_input" maxlength="1000" placeholder="1000 carac. maximum." name="description_input"></textarea>
 			<h1 class="small_title">Propositions de {{ nametype }}</h1>
-			<div id="choices">
-				<div class="choice">
+			<div id="choices" class="choice_map">
+				<div class="choice choice-xs choice_map-xs">
 					<label for="choix1" class="text lbl_choice">Choix 1<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix1" type="text" name="choices[]" value="" />
-					<input type="button" value="V" class="valid" onClick="codeAddress(choix1);">
-                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+					<input class="text_edit input_choice form-control" id="choix1" type="text" name="choices[]" value="" />
+					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix1);">
 				</div>
-				<div class="choice">
+				<div class="choice choice-xs choice_map-xs">
 					<label for="choix2" class="text lbl_choice">Choix 2<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix2" type="text" name="choices[]" value="" />
-					 <input type="button" value="V" class="valid" onClick="codeAddress(choix2);">
-                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
-				</div>
-				<div class="choice">
-					<label for="choix3" class="text lbl_choice">Choix 3<span class="asterisc"> *</span></label>
-					<input class="text_edit input_choice" id="choix3" type="text" name="choices[]" value="" />
-					<input type="button" value="V" class="valid" onClick="codeAddress(choix3);">
-                                        <a class="grey_button" title="Supprimer" type="button" onclick="manageChoices(this);">x</a>
+					<input class="text_edit input_choice form-control" id="choix2" type="text" name="choices[]" value="" />
+					<input type="button" value="V" class="valid btn btn-default green_button" onClick="codeAddress(choix2);">
 				</div>
 			</div>
-			<input class="orange_button" type="submit" value="Étape suivante" />
-			<a class="orange_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
-		
-                    <!-- Map google -->
-                   <div id="map-canvas"></div>
+                        <div class="choice choice-xs choice_map-xs">
+                            <input class="text_edit input_choice form-control add_choix" id="choix3" type="text" name="choices[]" disabled="true" placeholder="Ajouter un choix" />
+                            <a class="btn btn-default orange_button add_choice_button" title="Ajouter un champ" id="add_choice_button" type="button" onclick="manageChoices(this,'{{ type }}');">+</a>
+                        </div>
+                   <input class="btn btn-default orange_button next_step_map-xs" type="button" onClick="formCheck(this);" value="Étape suivante" />
                 </form> 
-                
+               
 	</div>
 
     <!-- Chargement de l'API google map -->
@@ -56,5 +144,7 @@
     <!-- Chargement de place API pour l'autocomplétion de l'input" -->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
     <script src={{ asset('bundles/projet/js/sondage_map.js') }}> </script>
+	<script src={{ asset('bundles/projet/js/formCheck.js') }}> </script>
+</div>
     {% endblock %}     
 
