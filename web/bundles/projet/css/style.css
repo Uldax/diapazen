@@ -568,6 +568,23 @@ h1#result
 	width: 215px;
 }
 
+#poll_connection_form .next_step-xs
+{
+        margin-left: 112px;
+	width: 215px;
+}
+
+#poll_connection_form .choice_connect
+{
+        margin-left: 100px;
+	width: 215px;
+}
+
+#share_form .link_connect{
+    width: 350px;
+    margin-left: 184px;
+}
+
 #poll_creation_form .next_step_map-xs
 {
         margin-left: 88px;
