@@ -40,3 +40,4 @@ app/logs/*
 /composer.phar
 vendor/autoload.php
 vendor/composer/autoload_psr4.php
+symfony
