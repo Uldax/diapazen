@@ -1,0 +1,44 @@
+{% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
+	{% block body %}
+		<div id="content">
+				{% if (data_updated is defined) and (data_updated is not null) %}
+					{% if data_updated %}
+						<div class="success_message message_personal_data">Vos données personelles ont été mises à jour avec succés.</div>
+					{% else %}
+						<div class="error_message message_personal_data">Erreur, vérifiez les données saisies.</div>
+					{% endif %}
+				{% endif %}
+
+
+			<?php?>
+			<form onsubmit="return formCheck(this)" id="personal_data_form" class="default_form" action="{{ path('bdls_projet_profil') }}" method="post">
+				<p class="big_title" id="title_personnal_data">Informations du compte</p>
+				<label class="text" for="user_username">Username :</label>
+				<input type="text" id="user_username" class="text_edit" value="{{ username_user }}" name="UsernameUser" disabled><br/>
+
+				<label class="text" for="user_mail">E-mail :</label>
+				<input type="text" id="user_mail"  class="text_edit" value="{{ mail_user }}" name="emailUser" disabled><br/>
+
+				<label class="text" for="user_compte">Type de compte :</label>
+				<input type="text" id="user_compte" class="text_edit" value="{{ compte_user }}" name="compteUser" disabled><br/>
+
+				
+									
+				<p class="big_title" id="title_personnal_data">Modification du mot de passe</p>
+
+				<label class="text" for="new_pwd">Nouveau mot de passe</label>
+				<input type="password" id="new_pwd" class="text_edit" placeholder="3 carac. minimum" name="newPassword">
+				<label class="text" for="new_pwd_confirm">Confirmation</label>
+				<input type="password" id="new_pwd_confirm" class="text_edit" value="" name="passwordConfirm">
+				<label class="text" for="pwd_user">Mot de passe actuel<span class="asterisc"> *</span></label>
+				<input type="password" id="pwd_user" class="text_edit" value="" name="password">
+				<br/>
+				<p class="orange_text info_box">Pour confirmer la modification, entrez votre mot de passe actuel.</p>
+
+				<a class="grey_button" href="{{ path('bdls_projet_dashboard') }}" >Annuler</a>
+				<input class="orange_button" type="submit" value="Modifier">
+
+
+			</form>    
+		</div>
+	{% endblock %}

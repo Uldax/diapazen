@@ -1,0 +1,69 @@
+
+bdls_projet_index:
+    pattern: /
+    defaults: { _controller: BdlsProjetBundle:Index:index }
+
+bdls_projet_dashboard:
+    pattern: /dash
+    defaults: { _controller: BdlsProjetBundle:Dashboard:index }
+
+bdls_projet_about:
+    pattern: /about
+    defaults: { _controller: BdlsProjetBundle:About:index }
+
+bdls_projet_forgot:
+    pattern: /forgot
+    defaults: { _controller: BdlsProjetBundle:Index:forgot }
+
+bdls_projet_creation:
+    pattern: /creation
+    defaults: { _controller: BdlsProjetBundle:Poll:create }
+
+bdls_projet_login:
+    pattern: /log
+    defaults: { _controller: BdlsProjetBundle:User:login }
+
+bdls_projet_connect:
+    pattern: /connection
+    defaults: { _controller: BdlsProjetBundle:Poll:connect }
+
+bdls_projet_share:
+    pattern: /share
+    defaults: { _controller: BdlsProjetBundle:Poll:share }
+
+bdls_projet_sent:
+    pattern: /sent
+    defaults: { _controller: BdlsProjetBundle:Poll:sent }
+
+bdls_projet_view:
+    pattern: /view/{type}/{url}
+    defaults: {_controller: BdlsProjetBundle:Poll:view }
+
+bdls_projet_mail:
+    pattern: /mail
+    defaults: {_controller: BdlsProjetBundle:Index:mail }
+
+test:
+    pattern: /test
+    defaults: {_controller: BdlsProjetBundle:Poll:test }
+
+#login:
+    #pattern: /login
+    #defaults: { _controller: BdlsProjetBundle:Security:login }
+
+#bdls_projet_profil:
+#    pattern: /profil
+#    defaults: { _controller: BdlsProjetBundle:Security:profil }
+
+bdls_test:
+    pattern: /pos/{valeur}
+    defaults: { _controller: BdlsProjetBundle:InitPos:initPos }
+    options:
+        expose: true
+
+#login_check:
+    #pattern: /login_check
+
+#logout:
+   # pattern: /logout
+

@@ -1,0 +1,18 @@
+{% extends 'BdlsProjetBundle:Default:layout.html.twig' %}
+	{% block body %}
+		<div id="content">
+			<img class="img_un" src="" alt="1">
+			<img id="broken_diapason" src="{{ asset('bundles/projet/images/pictures/diapason_broken.png') }}" alt="diapason broken" >
+			<div id="text_404">
+
+				<p class="big_title" >Erreur 404</p>
+				<p class="title" >La page demandée n'existe pas.</p>
+				<a class="link" href="{{ path('bdls_projet_index') }}">Retour à la page d'accueil</a>
+
+			</div>
+		</div>
+	{% endblock %}
+	{% block javascripts %}{% endblock %}       
+        
+
+        
