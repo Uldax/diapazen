@@ -100,11 +100,11 @@ class UserController extends Controller
 			header('Location: ' . BASE_URL. '/dashboard');
 		}
 
-		if (	isset($_POST['email'])		&& !empty($_POST['email'])
+		if (	isset($_POST['Email'])		&& !empty($_POST['Email'])
 			&&	isset($_POST['password'])	&& !empty($_POST['password']))
 		{
 
-			$email	 	= $_POST['email'];
+			$email	 	= $_POST['Email'];
 			$passwd 	= $_POST['password'];
 			$ip_addr 	= $_SERVER['REMOTE_ADDR'];
 
@@ -187,7 +187,7 @@ class UserController extends Controller
 				//Partie: Modifications des donnÃ©es utilisateur
 				if (	isset($_POST['lastNameUser']) && !empty($_POST['lastNameUser'])
 					&&	isset($_POST['firstNameUser']) && !empty($_POST['firstNameUser'])
-					&&	isset($_POST['email']) && !empty($_POST['email']) )
+					&&	isset($_POST['Email']) && !empty($_POST['Email']) )
 				{
 					// On teste le mot de passe de confirmation
 					if (isset($_POST['password']) && !empty($_POST['password'])
@@ -195,12 +195,12 @@ class UserController extends Controller
 					{
 
 						// met a jour la bdd
-						$res = $this->getModel()->changeUser($this->getUserInfo('id'), $_POST['firstNameUser'], $_POST['lastNameUser'], $_POST['email']);
+						$res = $this->getModel()->changeUser($this->getUserInfo('id'), $_POST['firstNameUser'], $_POST['lastNameUser'], $_POST['Email']);
 
 						//met a jour la session
 						$this->setUserInfo('firstname', $_POST['firstNameUser']);
 						$this->setUserInfo('lastname', $_POST['lastNameUser']);
-						$this->setUserInfo('email', $_POST['email']);
+						$this->setUserInfo('Email', $_POST['Email']);
 
 						// On informe l'utilisateur de la rÃ©ussite
 						$this->set('data_updated', true);
@@ -223,7 +223,7 @@ class UserController extends Controller
 					{
 						if ($_POST['newPassword'] == $_POST['passwordConfirm'])
 						{
-							$res = $this->getModel()->changePassword($this->getUserInfo('email'), $_POST['newPassword']);
+							$res = $this->getModel()->changePassword($this->getUserInfo('Email'), $_POST['newPassword']);
 
 							// RÃ©ussite de la modification du mot de passe
 							$this->set('data_updated', true);
@@ -255,7 +255,7 @@ class UserController extends Controller
 				{
 					$this->set('firstname', $user['firstname']);
 					$this->set('lastname', $user['lastname']);
-					$this->set('email', $user['email']);
+					$this->set('Email', $user['Email']);
 				}
 
 				//  Rendu de la page
@@ -275,7 +275,7 @@ class UserController extends Controller
 	 *
 	 * on verifie que l'utilisateur est déconnecter, si ce n'est pas le cas
      * alors on redirige vers la page home. Si il est déconnecter on le
-     * dirige vers la page du mot de passe oublié. Si l'email est présent
+     * dirige vers la page du mot de passe oublié. Si l'Email est présent
      * différent de vide et est présent dans la base de données, alors on
      * créer un nouveau mot de passe et on l'affecte comme nouveau mot de
      * passe de l'utilisateur. On le lui envoi par mail et on lui notifit la
@@ -298,18 +298,18 @@ class UserController extends Controller
 
 		try
 		{
-			// l'email est prÃ©sent
-			if (isset($_POST['email']))
+			// l'Email est prÃ©sent
+			if (isset($_POST['Email']))
 			{
 				// diffÃ©rent de vide
-				if(!empty($_POST['email']))
+				if(!empty($_POST['Email']))
 				{
 					// prÃ©sent dans la bdd
-					if ($this->getModel()->isEmailRegistred($_POST['email']))
+					if ($this->getModel()->isEmailRegistred($_POST['Email']))
 					{
 						$password = $this->getModel()->generatorPsw();
 
-						$this->getModel()->changePassword($_POST['email'], $password);
+						$this->getModel()->changePassword($_POST['Email'], $password);
 
 
 						$objMail = new MailUtil();
@@ -318,7 +318,7 @@ class UserController extends Controller
 						$message->setParams(array('password'=>$password));
 						$subject = 'RÃ©initialisation de votre mot de passe';
 						$messageMail = $message->getMessage();
-						$result = $objMail->sendMail($_POST['email'], $subject, $messageMail);
+						$result = $objMail->sendMail($_POST['Email'], $subject, $messageMail);
 						$this->set('infoLogin',$result ? 'sendPassword' : 'sendFailPassword');
 						$this->render('login');
 

@@ -77,7 +77,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: secure_area
-    user_class: PollBundle\Entity\User
+    user_class: UserBundle\Entity\DiapazenUser
     registration:
         confirmation:
             enabled:    false
@@ -104,10 +104,10 @@ hwi_oauth:
             type: facebook
             client_id: %facebook_client_id%
             client_secret: %facebook_client_secret%
-            scope: email
-            infos_url:     "https://graph.facebook.com/me?fields=username,name,email,picture.type(large)"
+            scope: Email
+            infos_url:     "https://graph.facebook.com/me?fields=username,name,Email,picture.type(large)"
             paths:
-                email:          email
+                email:          Email
                 profilepicture: picture.data.url
             options:
                 #dialog is optimized for popup window
@@ -117,9 +117,9 @@ hwi_oauth:
             type: google
             client_id: %google_client_id%
             client_secret: %google_client_secret%
-            scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+            scope: "https://www.googleapis.com/auth/userinfo.Email https://www.googleapis.com/auth/userinfo.profile"
             paths:
-                email:           email
+                email:           Email
                 profilepicture:  picture
 
         linkedin:
@@ -128,7 +128,7 @@ hwi_oauth:
             client_secret: %linkedin_client_secret%
             scope: r_fullprofile
             paths:
-                email:           email
+                email:           Email
                 profilepicture:  picture
 
      #Since FOSUserBundle were used as user provider, fosub section were added.

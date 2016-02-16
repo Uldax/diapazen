@@ -212,18 +212,18 @@ class PollController extends Controller
 		{
 			//Gestion de la conexion (ancien systeme)
 
-			//test si un choix a été fait entre la connection et l'inscription et qu'il y a un email
+			//test si un choix a été fait entre la connection et l'inscription et qu'il y a un Email
 			//l'adresse mail n'est elle pas obligatoire ???
-			if (isset($_POST['account']) && isset($_POST['email']))
+			if (isset($_POST['account']) && isset($_POST['Email']))
 			{
-				$mail = $_POST['email'];
+				$mail = $_POST['Email'];
 				$ip_addr = $_SERVER['REMOTE_ADDR'];
 
 				//si on a choisi la connection et qu'il y a le mdp on tente de se connecter
 				if($_POST['account'] == 'registered' && isset($_POST['password']))
 				{
 					// On teste l'adresse mail
-					if (!TestForm::testRegexp('email', $mail))
+					if (!TestForm::testRegexp('Email', $mail))
 						throw new Exception('error_mail');
 
 					$pwd = $_POST['password'];
@@ -238,7 +238,7 @@ class PollController extends Controller
 				else if($_POST['account'] == 'not_registered' && isset($_POST['firstNameUser']) && isset($_POST['lastNameUser']))
 				{
 					// On teste l'adresse mail
-					if (!TestForm::testRegexp('email', $mail))
+					if (!TestForm::testRegexp('Email', $mail))
 						throw new Exception('error_mail');
 
 					$firstname = $_POST['firstNameUser'];
@@ -337,7 +337,7 @@ class PollController extends Controller
                 $form = $this->container->get('form.factory')
                 ->createNamedBuilder(null, 'form', null, array('csrf_protection' => false))
                 ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
-                ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
+                ->add('Email', 'Email', array('label' => 'form.Email', 'translation_domain' => 'FOSUserBundle'))
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'FOSUserBundle'),

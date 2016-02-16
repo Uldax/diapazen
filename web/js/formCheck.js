@@ -7,7 +7,7 @@
 //                    "date_input"    :   /^.{0}|[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
 //                    "firstname"    :   /^[a-zA-Z\çéèêï]+[-]?[a-zA-Z\çéèêï]+$/,
 //                    "lastname"    :   /^[a-zA-Z\çéèêï]+[-\'\s]?[a-zA-Z\çéèêï]+$/,
-//                    "email"         :   /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/
+//                    "Email"         :   /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/
 //                };
 //
 //
@@ -140,8 +140,8 @@ function getRegexp(element, call)
             return strRegexp['choice'];
         break;
 
-        case 'email':	//Adresse mail
-            return strRegexp['email'];
+        case 'Email':	//Adresse mail
+            return strRegexp['Email'];
         break;
 
         case 'mails':
@@ -163,7 +163,7 @@ function getRegexp(element, call)
                 for (j=0; j<emails.length; j++)
                 {
                     
-                    if(!emails[j].match(strRegexp['email']))
+                    if(!emails[j].match(strRegexp['Email']))
                     {   
                         element.style.borderLeft = '2px solid red';
                         return false;

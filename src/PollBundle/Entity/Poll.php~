@@ -17,7 +17,7 @@ class Poll
 	/** @ORM\Column(type="datetime") */
 	private $closed_on;
 
-        /** @ORM\ManyToOne(targetEntity="\UserBundle\Entity\DiapazenUser")
+        /** @ORM\ManyToOne(targetEntity="User")
 	    @ORM\JoinColumn(nullable=false)
          */
 	private $created_by;
