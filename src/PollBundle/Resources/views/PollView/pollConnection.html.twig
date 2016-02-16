@@ -1,0 +1,177 @@
+{% extends 'DiapazenPollBundle:layout.html.twig' %}
+	{% block body %}
+
+		<div id="content" class="hidden-xs">
+            {#<?php $this->getAriadneThread(); ?>#}
+                {% if error is defined %}
+                    <div class='error_message bg-danger' >Erreur de connexion, le nom d'utilisateur ou le mot de passe est incorrect.</div>
+					{#{% endif %}
+					{% if err == 'registrationError' %}
+						<div class='error_message' >Cette adresse e-mail est déjà utilisée.</div><br>
+					{% endif %}
+					{% if err == 'mailError' %}
+						<div class='error_message' >L'adresse e-mail est incorrecte.</div><br>
+					{% endif %}#}
+		{% endif %}
+
+                <div id="ariadne_thread"> 
+                        <span class="grey_ariadne" ><span></span><span>Création</span><span></span></span>
+                        <span class="orange_ariadne" ><span></span><span>Connexion</span><span></span></span>
+                        <span class="grey_ariadne" ><span></span><span>Partage</span><span></span></span>
+		</div>
+					
+          
+                
+            <form onsubmit="return formCheck(this)" action="{{ path("fos_user_security_check") }}" method="post" class="default_form" id="poll_connection_form" >
+                                    <!-- _CSRF du fos user bundle contenu en variable global twig , sécurité des formulaires ) -->
+                                    <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />      
+                                    
+                                                  <label for="email" class="text">E-mail<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control"  name="email" type="mail" id="username" name="_username" value="" required="required">
+                <label for="pwd_user" class="text">Mot de passe<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control"  type="password" id="password" name="_password" required="required">
+                 <input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante"/>
+                
+            
+            </form>
+                
+                 <form  action="share" method="post" class="default_form" id="poll_connection_form">
+                <label for="registered" class="text label_chkbox"><input id="registered" value="registered" type="radio" name="account" checked="checked" onchange="manageConnectionForm(this)">J'ai déjà un compte</label>
+                <label for="not_registered" class="text label_chkbox"><input onchange="manageConnectionForm(this)" id="not_registered" value="not_registered" type="radio" name="account">C'est rapide, je m'inscris</label>
+                
+                <label for="email" class="text">E-mail<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control" id="email" name="email" type="mail" placeholder="" value="">
+                <label for="pwd_user" class="text">Mot de passe<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control" id="pwd_user" type="password" name="password" placeholder="" value="">
+                
+                <label for="firstname_user" class="text infos_user">Prénom<span class="asterisc"> *</span></label>
+                <input class="text_edit infos_user form-control" id="firstname_user" name="firstNameUser" type="text">
+                
+                <label for="name_user" class="text infos_user">Nom<span class="asterisc"> *</span></label>
+                <input class="text_edit infos_user form-control" id="lastname_user" name="lastNameUser" type="text">
+              
+                <p class="orange_text info_box infos_user">Un mot de passe vous sera envoyé à l'adresse e-mail renseignée.</p>
+                <input class="btn btn-default orange_button next_step" type="submit" value="Étape suivante"/>
+            </form>
+      
+                    
+            {# <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+              {{ form_widget(form) }}
+              <div>
+                  <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+              </div>
+            </form>"}}#}
+                    
+                    
+        </div>
+        
+        <!-- version Mobile -->
+        <div id="content_mobile" class="visible-xs">
+            
+            {#<?php $this->getAriadneThread(); ?>#}
+                {% if error is defined %}
+                    <div class='error_message bg-danger' >Erreur de connexion, le nom d'utilisateur ou le mot de passe est incorrect.</div>
+					{#{% endif %}
+					{% if err == 'registrationError' %}
+						<div class='error_message' >Cette adresse e-mail est déjà utilisée.</div><br>
+					{% endif %}
+					{% if err == 'mailError' %}
+						<div class='error_message' >L'adresse e-mail est incorrecte.</div><br>
+					{% endif %}#}
+		{% endif %}
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <form action="{{ path('fos_user_security_check') }}" method="post" class="form-inline">
+                   <div class="modal-dialog">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                         <h4 class="modal-title" id="myModalLabel">Connexion ...</h4>
+                       </div>
+                       <div class="modal-body">
+
+                          <input required="required" type="text" id="username" class="small_text_edit form-control formulaire-xs" placeholder="E-mail" name="_username" />
+                          <input required="required" type="password" class="small_text_edit form-control formulaire-xs" id="password" placeholder="Mot de passe" name="_password" />
+                          <input type="hidden" name="_target_path" value="{{ app.request.schemeAndHttpHost~path(app.request.attributes.get('_route')) }}" />
+                          <a class="btn btn-link small_link link-xs" href="{{ path('poll_forgot') }}" >Mot de passe oublié ?</a>
+
+                       </div>
+                         <div class="api">
+                                  <!-- Connexion via les Api -->
+                                  {% block hwi_oauth_content %}
+                                       {%set idImg=1%}
+                                       {% if error is defined %}
+                                           <span>{{ error }}</span>
+                                       {% endif %}
+                                       {% for owner in hwi_oauth_resource_owners() %}
+                                       <a href="{{ hwi_oauth_login_url(owner) }}"><img id="logo" src="{{ asset('bundles/projet/media/pictures/logo'~idImg~'.png') }}" class="img-rounded"></a>
+                                       {%set idImg=idImg+1%}
+                                       {% endfor %}
+                                   {% endblock hwi_oauth_content %}
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                         <input class="btn btn-default orange_small_button" type="submit" value="Connexion">
+                       </div>
+                     </div>
+                   </div>
+                   </form>
+                 </div>
+                <div id="ariadne_thread_mobile"> 
+                    <span class="grey_ariadne grey_ariadne-xs" ><span></span><span>Création</span><span></span></span>
+                    <span class="orange_ariadne orange_ariadne-xs" ><span></span><span>Connexion</span><span></span></span>
+                    <span class="grey_ariadne grey_ariadne-xs" ><span></span><span>Partage</span><span></span></span>
+		</div>
+					
+          
+                
+            <form onsubmit="return formCheck(this)" action="{{ path("fos_user_security_check") }}" method="post" class="default_form default_form-xs" id="poll_connection_form" >
+                                    <!-- _CSRF du fos user bundle contenu en variable global twig , sécurité des formulaires ) -->
+                                    <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />      
+                                    
+                                                  <label for="email" class="text">E-mail<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control"  name="email" type="mail" id="username" name="_username" value="" required="required">
+                <label for="pwd_user" class="text">Mot de passe<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control"  type="password" id="password" name="_password" required="required">
+                 <input class="btn btn-default orange_button next_step-xs" type="submit" value="Étape suivante"/>
+                
+            
+            </form>
+                
+                 <form  action="share" method="post" class="default_form default_form-xs" id="poll_connection_form2">
+                <label for="registered" class="text label_chkbox choice_connect"><input id="registered" value="registered" type="radio" name="account" checked="checked" onchange="manageConnectionForm(this)">J'ai déjà un compte</label>
+                <label for="not_registered" class="text label_chkbox choice_connect"><input onchange="manageConnectionForm(this)" id="not_registered" value="not_registered" type="radio" name="account">C'est rapide, je m'inscris</label>
+                
+                <label for="email" class="text">E-mail<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control" id="email" name="email" type="mail" placeholder="" value="">
+                <label for="pwd_user" class="text">Mot de passe<span class="asterisc"> *</span></label>
+                <input class="text_edit form-control" id="pwd_user" type="password" name="password" placeholder="" value="">
+                
+                <label for="firstname_user" class="text infos_user">Prénom<span class="asterisc"> *</span></label>
+                <input class="text_edit infos_user form-control" id="firstname_user" name="firstNameUser" type="text">
+                
+                <label for="name_user" class="text infos_user">Nom<span class="asterisc"> *</span></label>
+                <input class="text_edit infos_user form-control" id="lastname_user" name="lastNameUser" type="text">
+              
+                <p class="orange_text info_box infos_user">Un mot de passe vous sera envoyé à l'adresse e-mail renseignée.</p>
+                <input class="btn btn-default orange_button next_step-xs" type="submit" value="Étape suivante"/>
+            </form>
+      
+                    
+            {# <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+              {{ form_widget(form) }}
+              <div>
+                  <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+              </div>
+            </form>"}}#}
+                    
+                    
+        </div>
+
+	{% block javascripts %}
+            <script src="{{ asset('bundles/projet/js/script.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('bundles/projet/js/jquery.js') }}" type="text/javascript"></script>
+			
+		{% endblock %}
+	{% endblock %}
+

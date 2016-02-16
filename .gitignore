@@ -4,6 +4,13 @@ app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+
 # Cache and logs (Symfony3)
 /var/cache/*
 /var/logs/*

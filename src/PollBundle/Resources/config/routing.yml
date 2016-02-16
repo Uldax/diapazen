@@ -1,0 +1,69 @@
+
+poll_index:
+    pattern: /
+    defaults: { _controller: PollBundle:Index:index }
+
+poll_dashboard:
+    pattern: /dash
+    defaults: { _controller: PollBundle:Dashboard:index }
+
+poll_about:
+    pattern: /about
+    defaults: { _controller: PollBundle:About:index }
+
+poll_forgot:
+    pattern: /forgot
+    defaults: { _controller: PollBundle:Index:forgot }
+
+poll_creation:
+    pattern: /creation
+    defaults: { _controller: PollBundle:Poll:create }
+
+poll_login:
+    pattern: /log
+    defaults: { _controller: PollBundle:User:login }
+
+poll_connect:
+    pattern: /connection
+    defaults: { _controller: PollBundle:Poll:connect }
+
+poll_share:
+    pattern: /share
+    defaults: { _controller: PollBundle:Poll:share }
+
+poll_sent:
+    pattern: /sent
+    defaults: { _controller: PollBundle:Poll:sent }
+
+poll_view:
+    pattern: /view/{type}/{url}
+    defaults: {_controller: PollBundle:Poll:view }
+
+poll_mail:
+    pattern: /mail
+    defaults: {_controller: PollBundle:Index:mail }
+
+test:
+    pattern: /test
+    defaults: {_controller: PollBundle:Poll:test }
+
+#login:
+    #pattern: /login
+    #defaults: { _controller: PollBundle:Security:login }
+
+#poll_profil:
+#    pattern: /profil
+#    defaults: { _controller: PollBundle:Security:profil }
+
+bdls_test:
+    pattern: /pos/{valeur}
+    defaults: { _controller: PollBundle:InitPos:initPos }
+    options:
+        expose: true
+
+#login_check:
+    #pattern: /login_check
+
+#logout:
+   # pattern: /logout
+
