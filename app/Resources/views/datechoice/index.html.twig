@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>DateChoice list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dateChoice in dateChoices %}
+            <tr>
+                <td><a href="{{ path('datechoice_show', { 'id': dateChoice.id }) }}">{{ dateChoice.id }}</a></td>
+                <td>{% if dateChoice.date %}{{ dateChoice.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('datechoice_show', { 'id': dateChoice.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('datechoice_edit', { 'id': dateChoice.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('datechoice_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

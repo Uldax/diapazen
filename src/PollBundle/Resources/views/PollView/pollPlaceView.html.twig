@@ -2,77 +2,80 @@
 On peut faire plus propre mais pas le temps -->
 <script>
     posGPS = new Array();
-    function addPos(lat,lng,i){
-        var coordo= [lat,lng];
+    function addPos(lat, lng, i) {
+        var coordo = [lat, lng];
         posGPS.push(coordo);
-   }
- </script> 
-<div id="poll_choices" class="table-responsive">	
-<table class="table">
-{% for choice in data.stat %}  
-                                                <tr>
-                                                    {%if data.openedPoll  %}
-                                                        <td><input type="checkbox" name="choiceId[]" value=" {{ choice.id }}"></td>
-                                                    {%else %}
-                                                         <td class="text">{{ loop.index }}</td>                                                      
-                                                    {%endif %} 
-                                                         
-                                                     <td class="text" id="answer_{{ loop.index0 }}">Chargement des données GPS en cour </td> 
-                                                        <script type="text/javascript">
-                                                            {# placeUniqueMarkeur({{ choice.answer.0 }},{{ choice.answer.1}},{{ loop.index }} );#}
-                                                                addPos({{ choice.answer.0 }},{{ choice.answer.1}},{{ loop.index }});
-                                                        </script>
-							<td class="progression_bar">
-								<div class="container progress progress-div">
-									<div class="meter progress-bar" role="progressbar" aria-valuenow="{{ choice.percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ choice.percent ~ '%' }} ">
-                                                                        {{ choice.percent }} %
-                                                                        </div>
-								</div>
-							</td>   
-							<td class="text">							
-								{% if choice.count == 1 %}
-									{{ choice.object[0].issuedBy }}  à voté;
-		
-								{% elseif choice.count == 2 %}
-									{{ choice.object[0].issuedBy }}  et {{ choice.object[1].issuedBy }}  ont voté;
-                                                                        						
-								{% elseif choice.count > 2 %}
-                       
-									{{ choice.object[0].issuedBy }} et <span id="link_{{ loop.index }}" class="link"> {{ choice.count-1 }}  autres personnes</span> ont voté; 
-                                                                        <div id="vote_list_{{ loop.index }}" class="vote_list">
-                                                                            <ul>
-                                                                                {% for vote in choice.object %}
-                                                                                    <li>{{vote.issuedBy }} </li>
-                                                                                {%endfor%}
-                                                                            </ul>
-                                                                        </div>
-                                                                       <script type="text/javascript">
-                                                                            document.getElementById("link_{{ loop.index }}").addEventListener('mouseover', function(e){
+    }
+</script>
+<div id="poll_choices" class="table-responsive">
+    <table class="table">
+        {% for choice in data.stat %}
+            <tr>
+                {% if data.openedPoll %}
+                    <td><input type="checkbox" name="choiceId[]" value=" {{ choice.id }}"></td>
+                {% else %}
+                    <td class="text">{{ loop.index }}</td>
+                {% endif %}
 
-                                                                                    document.getElementById("vote_list_{{ loop.index }}").style.display = "block";
-                                                                            }, false);
-                                                                            document.getElementById("link_{{ loop.index }}").addEventListener('mouseout', function(e){
+                <td class="text" id="answer_{{ loop.index0 }}">Chargement des données GPS en cour</td>
+                <script type="text/javascript">
+                    {# placeUniqueMarkeur({{ choice.answer.0 }},{{ choice.answer.1}},{{ loop.index }} );#}
+                    addPos({{ choice.answer.0 }},{{ choice.answer.1 }},{{ loop.index }});
+                </script>
+                <td class="progression_bar">
+                    <div class="container progress progress-div">
+                        <div class="meter progress-bar" role="progressbar" aria-valuenow="{{ choice.percent }}"
+                             aria-valuemin="0" aria-valuemax="100" style="width: {{ choice.percent ~ '%' }} ">
+                            {{ choice.percent }} %
+                        </div>
+                    </div>
+                </td>
+                <td class="text">
+                    {% if choice.count == 1 %}
+                        {{ choice.object[0].issuedBy }}  à voté;
 
-                                                                                    document.getElementById("vote_list_{{ loop.index }}").style.display = "none";
-                                                                            }, false);
-                                                                        </script>
-                                                                                                                                             
-								{% else %}
-									Aucune personne n'a encore voté
-								{%endif%}                                                                      															
-							</td>
-						</tr>                                                                                                          
-                                             {% endfor %} 
-                                                        </table> 
+                    {% elseif choice.count == 2 %}
+                        {{ choice.object[0].issuedBy }}  et {{ choice.object[1].issuedBy }}  ont voté;
+
+                    {% elseif choice.count > 2 %}
+
+                        {{ choice.object[0].issuedBy }} et <span id="link_{{ loop.index }}"
+                                                                 class="link"> {{ choice.count-1 }}
+                        autres personnes</span> ont voté;
+                        <div id="vote_list_{{ loop.index }}" class="vote_list">
+                            <ul>
+                                {% for vote in choice.object %}
+                                    <li>{{ vote.issuedBy }} </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <script type="text/javascript">
+                            document.getElementById("link_{{ loop.index }}").addEventListener('mouseover', function (e) {
+
+                                document.getElementById("vote_list_{{ loop.index }}").style.display = "block";
+                            }, false);
+                            document.getElementById("link_{{ loop.index }}").addEventListener('mouseout', function (e) {
+
+                                document.getElementById("vote_list_{{ loop.index }}").style.display = "none";
+                            }, false);
+                        </script>
+
+                    {% else %}
+                        Aucune personne n'a encore voté
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
-           <!-- Map google -->
-            <div id="map-canvas" class="map"></div>
-                                                                   
-    <!-- Chargement de l'API google map  -->
-       <!-- Chargement de l'API google map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNOpHpuGzB9PguOdh3naoMxPzBhOonyo4&v=3.exp&sensor=false"></script>
-    <!-- Chargement de place API pour l'autocomplétion de l'input" -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
-    <script src="{{ asset('bundles/projet/js/jquery.js') }}" type="text/javascript"></script>    
-    <script  src={{ asset('bundles/projet/js/pollPlace.js') }}></script>    
+<!-- Map google -->
+<div id="map-canvas" class="map"></div>
+
+<!-- Chargement de l'API google map  -->
+<!-- Chargement de l'API google map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNOpHpuGzB9PguOdh3naoMxPzBhOonyo4&v=3.exp&sensor=false"></script>
+<!-- Chargement de place API pour l'autocomplétion de l'input" -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
+<script src="{{ asset('bundles/projet/js/jquery.js') }}" type="text/javascript"></script>
+<script src={{ asset('bundles/projet/js/pollPlace.js') }}></script>
                      

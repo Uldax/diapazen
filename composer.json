@@ -22,7 +22,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "v1.3.2",
-        "hwi/oauth-bundle": "0.3.*@dev",
+        "hwi/oauth-bundle": "0.4.*",
         "friendsofsymfony/jsrouting-bundle": "@stable"
     },
     "require-dev": {

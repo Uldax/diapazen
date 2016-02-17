@@ -1,7 +1,7 @@
 
 poll_index:
     pattern: /
-    defaults: { _controller: PollBundle:Index:index }
+    defaults: { _controller: PollBundle:Base:home }
 
 poll_dashboard:
     pattern: /dash
@@ -9,7 +9,7 @@ poll_dashboard:
 
 poll_about:
     pattern: /about
-    defaults: { _controller: PollBundle:About:index }
+    defaults: { _controller: PollBundle:Base:about }
 
 poll_forgot:
     pattern: /forgot

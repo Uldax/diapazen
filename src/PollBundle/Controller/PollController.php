@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Request;
 
 use PollBundle\Model\PollModel;
 
@@ -57,7 +58,7 @@ class PollController extends Controller
     */
 	public function isUserConnected()
 	{
-                return ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'));
+		return ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'));
 	}
 
 	protected function set($key, $value)
@@ -65,11 +66,8 @@ class PollController extends Controller
 		$this->mVars[$key] = $value;
 	}
 
-	public function indexAction($params)
-	{
-		$this->create($params);
 
-	}
+
 
 
 
@@ -84,51 +82,35 @@ class PollController extends Controller
     * @param type $params null par défaut
     *
     */
-	public function createAction($params=null)
+	public function createAction(Request $request)
 	{
-		//si l'utilisateur est deja connecter alors on affiche pas le le bouton connexion dans le fil d'arianne
-		$_SESSION['show_ariadne'] = $this->isUserConnected() ? false : true;
-		$_SESSION['width_ariadne'] = $this->isUserConnected() ? '525' : '788';
-		$this->set('width_ariadne', $_SESSION['width_ariadne']);
-		$this->set('show_ariadne', $_SESSION['show_ariadne']);
+		//File d'ariane
+		$session = $request->getSession();
+		$session->set('breadcrumb_create', 'orange_ariadne');
+		$session->set('breadcrumb_connect', 'grey_ariadne');
+		$session->set('breadcrumb_share', 'grey_ariadne');
 
-		$this->set('class_create', 'orange');
-		$this->set('class_connect', 'grey');
-		$this->set('class_share', 'grey');
-		// on a fait précédent, on affiche les valeurs déjà renseignées
-		if(isset($_SESSION['poll_title']) && isset($_SESSION['poll_description']) && isset($_SESSION['poll_choices']) && isset($_SESSION['poll_date']))
-		{
-			$this->set('poll_title', $_SESSION['poll_title']);
-			$this->set('poll_description', $_SESSION['poll_description']);
-			$this->set('poll_choices', $_SESSION['poll_choices']);
-			$this->set('poll_date', $_SESSION['poll_date']);
-			// modifier la vue pour qu'elle affiche les choix (le navigateur web le gère automatiquement)
-		}
-
-		/* temporaire, ensuite on mettra le titre de la page*/
 		$title='Création d\'un sondage | Diapazen';
-
 		$year=date('Y');
-		//récupèration variable get
-		$type = $this->getRequest()->query->get('type') ;
+		$type = $request->query->get('type');
 		switch ($type) {
 			case 'c1':
 				$nametype = 'lieux';
-				return $this->render('BdlsProjetBundle:Default:pollCreation.lieu.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				return $this->render('PollBundle:PollView:pollCreation.lieu.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
 				break;
 			case 'c2':
 				$nametype = 'dates';
-				return $this->render('BdlsProjetBundle:Default:pollCreation.date.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				return $this->render('PollBundle:PollView:pollCreation.date.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
 				break;
 			case 'c3':
-				$nametype = 'dates';
-				return $this->render('BdlsProjetBundle:Default:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				$nametype = 'choix';
+				return $this->render('PollBundle:PollView:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
 				break;
 
 			default:
-				$nametype = 'default';
+				$nametype = 'choix';
 				$type = 'c3';
-				return $this->render('BdlsProjetBundle:Default:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
+				return $this->render('PollBundle:PollView:pollCreation.def.html.twig', array('title'=>$title, 'year'=>$year, 'nametype'=>$nametype, 'type'=>$type ));
 				break;
 		}
 
@@ -150,10 +132,15 @@ class PollController extends Controller
     * @param type $params null par défaut
     *
     */
-	public function connectAction($params = null)
+	public function connectAction(Request $request)
 	{
+		//File d'ariane
+		$session = $request->getSession();
+		$session->set('breadcrumb_create', 'grey_ariadne');
+		$session->set('breadcrumb_connect', 'orange_ariadne');
+		$session->set('breadcrumb_share', 'grey_ariadne');
 
-
+		$title='Création d\'un sondage | Diapazen';
 		$this->set('title', 'Création d\'un sondage | Diapazen');
 		$this->set('class_create', 'grey');
 		$this->set('class_connect', 'orange');
@@ -349,7 +336,7 @@ class PollController extends Controller
 
                 $title = 'Connexion | Diapazen';
 		$year=date('Y');
-		return $this->render('BdlsProjetBundle:Default:pollConnection.html.twig',array('title'=>$title,'year'=>$year,'form'=>$form->createView()));
+		return $this->render('PollBundle:Base:pollConnection.html.twig',array('title'=>$title,'year'=>$year,'form'=>$form->createView()));
 
 
 
@@ -415,27 +402,27 @@ class PollController extends Controller
                                                         ////Un truc du genre
                                                         unset($_SESSION['pool']);
                                                         $title = 'Erreur | Diapazen';
-                                                        return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'year'=>$year));
+                                                        return $this->render('PollBundle:Base:404.html.twig',array('title'=>$title, 'year'=>$year));
 							break;
 					}
                                         unset($_SESSION['pool']);
 				}
 
 					$title = 'Share | Diapazen';
-					return $this->render('BdlsProjetBundle:Default:pollShare.html.twig',array('title'=>$title, 'year'=>$year));
+					return $this->render('PollBundle:Base:pollShare.html.twig',array('title'=>$title, 'year'=>$year));
 			}
 			else
 			{
 
 				$title = 'Connexion | Diapazen';
 				$error = 'err';
-				return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
+				return $this->render('PollBundle:Base:404.html.twig',array('title'=>$title, 'error'=>$error, 'year'=>$year));
 			}
 		}
 		catch(Exception $e)
 		{
 			$title = 'Erreur | Diapazen';
-			return $this->render('BdlsProjetBundle:Default:404.html.twig',array('title'=>$title, 'year'=>$year));
+			return $this->render('PollBundle:Base:404.html.twig',array('title'=>$title, 'year'=>$year));
 		}
 
 	}
@@ -546,12 +533,12 @@ class PollController extends Controller
 			$year=date('Y');
 			$manager->flush();
 
-			return $this->render('BdlsProjetBundle:Default/PollView:base.html.twig', array('title'=>$title, 'year'=>$year,'data'=>$data));
+			return $this->render('PollBundle:Base/PollView:base.html.twig', array('title'=>$title, 'year'=>$year,'data'=>$data));
 		}
         catch(Exception $e) {
 			$title='Accueil | Diapazen';
 			$year=date('Y');
-			return $this->render('BdlsProjetBundle:Default:404.html.twig', array('title'=>$title, 'year'=>$year));
+			return $this->render('PollBundle:Base:404.html.twig', array('title'=>$title, 'year'=>$year));
 		}
 	}
 

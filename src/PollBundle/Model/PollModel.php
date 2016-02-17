@@ -1,5 +1,5 @@
 <?php
-namespace ollBundle\Model;
+namespace PollBundle\Model;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use ollBundle\Entity\TextVote;

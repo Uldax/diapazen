@@ -1,0 +1,84 @@
+<!-- Version modbile -->
+<div id="content-xs" class="visible-xs">
+    <article class="use_description">
+        <div class="icon_article" id="img_un">
+            <img class="img_un img-circle" src="{{ asset('media/pictures/1_140x140.png') }}" alt="1">
+        </div>
+
+        <div class="text_article">
+            <h2 class="big_title_xs">Créez votre sondage</h2>
+        </div>
+        <p class="big_text text-xs">Un dîner entre amis à organiser ? Un avis à demander ? Créez votre sondage en un
+            rien de temps selon vos envies.</p>
+    </article>
+
+
+    <article class="use_description">
+        <div class="icon_article" id="img_deux">
+            <img class="img_deux img-circle" src="{{ asset('media/pictures/2_140x140.png') }}" alt="2">
+        </div>
+        <div class="text_article">
+            <h2 class="big_title_xs">Ajoutez des propositions</h2>
+        </div>
+        <p class="big_text text-xs">Votre sondage peut comporter le nombre de propositions que vous souhaitez,
+            ajoutez-en ou supprimez-en dynamiquement.</p>
+    </article>
+
+
+    <article class="use_description">
+        <div class="icon_article" id="img_trois">
+            <img class="img_trois img-circle" src="{{ asset('media/pictures/3_140x140.png') }}" alt="3">
+        </div>
+        <div class="text_article">
+            <h2 class="big_title_xs big_title_xss">Partagez-le !</h2>
+        </div>
+        <p class="big_text big_text-xs">Invitez les personnes susceptibles de venir répondre à votre sondage. Après
+            votre inscription, un mail leur sera envoyé pour qu'ils puissent venir faire leur choix.</p>
+    </article>
+
+    <!-- Formulaire pour le choix de sondage -->
+    <article class="use_description">
+        <div class="text_article div_etape4 div_etape4-xs text_article-xs">
+            <h2 class="big_title big_title_xs big_title_xss">Choix du type : </h2>
+            <form action="" method="post" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+
+                <!-- Select -->
+                <div class="div_choix div_choix-xs">
+                    <div class="btn-group styled_select_div_xs">
+                        <!-- Boutton du Select -->
+                        <span class="btn btn-default styled_select span_select" data-toggle="dropdown"><img
+                                    src="{{ asset('media/pictures/icone_autre.png') }}"
+                                    class="img_option">Textuel</span>
+                        <button type="button" class="btn btn-default dropdown-toggle styled_select_button"
+                                data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <!-- Liste des éléments -->
+                        <ul class="dropdown-menu list_select" role="menu">
+                            <li onclick="saveState(this);" class="list_option" id="c3"><img
+                                        src="{{ asset('media/pictures/icone_autre.png') }}" class="img_option">Textuel
+                            </li>
+                            <li onclick="saveState(this);" class="list_option" id="c1"><img
+                                        src="{{ asset('media/pictures/icone_map.png') }}" class="img_option">Lieux
+                            </li>
+                            <li onclick="saveState(this);" class="list_option" id="c2"><img
+                                        src="{{ asset('media/pictures/icone_calendrier.png') }}" class="img_option">Date
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="submit" class=" btn btn-default orange_button styled_a_div orange_big_button"
+                           value="C'est parti !"/>
+                    <!-- <a id="create_survey" class="btn btn-default orange_button styled_a_div" href="{{ path('poll_creation') }}">C'est parti !</a> -->
+                </div>
+            </form>
+
+        </div>
+    </article>
+    <p id="asterisk" class="bold bold-xs">*Créer un sondage nécessite une inscription, celle-ci peut se faire en même
+        temps que la création de votre sondage</p>
+</div>
+
+{% include 'PollBundle:Base:authModale.html.twig' %}
+

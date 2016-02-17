@@ -19,39 +19,7 @@ class IndexController extends Controller
 	 *
 	 * @param type $params null par défaut
 	 */
-	public function indexAction()
-	{
-		// On set la variable Ã  afficher sur dans la vue
-		$title='Accueil | Diapazen';
-		$year=date('Y');
-                //Si l'utilisateur est connécté est connecté, que le retour sur home c'est fait (login) et qu'il existe un sondage dans session  alors on redirige vers share
-                if ($this->isUserConnected() && isset($_SESSION['pool']))
-		{
-                    // On redirige vers le partage
-		return $this->redirect($this->generateUrl('poll_share'));
-		}
 
-		//Formaulaire nécésaire pour la selection
-		$form = $this->createFormBuilder()
-			->add('Type', 'hidden', array('data' => 'c3' , ))
-			->getForm();
-
-		// Récupération requête pour passer à la création poll
-                $request = $this->get('request');
-                 if ($request->getMethod() == 'POST') {
-                    $form->bind($request);
-                    if($form->isValid()) {
-                           $choixtype = $form->get('Type')->getData();
-                           return $this->redirect($this->generateUrl('poll_creation', array('type' => $choixtype )));
-                   }
-                }
-                else
-		{
-                    // On fait de rendu de la vue home.php
-                    return $this->render('PollBundle:Default:home.html.twig', array('title'=>$title, 'year'=>$year, 'form'=>$form->createView()
-                    ));
-		}
-	}
 
 
     /* Partage d'un sondage
@@ -136,7 +104,7 @@ class IndexController extends Controller
 	{
 		$title='Accueil | Diapazen';
 		$year=date('Y');
-		return $this->render('PollBundle:Default:forgot.html.twig', array('title'=>$title, 'year'=>$year, 'last_username'));
+		return $this->render('PollBundle:Base:forgot.html.twig', array('title'=>$title, 'year'=>$year, 'last_username'));
 	}
 
 
